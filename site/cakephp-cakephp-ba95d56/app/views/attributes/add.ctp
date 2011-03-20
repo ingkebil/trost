@@ -4,6 +4,7 @@
  		<legend><?php __('Add Attribute'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
+		echo $this->Form->input('state');
 		echo $this->Form->input('Phenotype');
 	?>
 	</fieldset>

@@ -11,6 +11,11 @@
 			<?php echo $attribute['Attribute']['name']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('State'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $attribute['Attribute']['state']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

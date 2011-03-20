@@ -4,6 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
+			<th><?php echo $this->Paginator->sort('state');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -17,6 +18,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $attribute['Attribute']['id']; ?>&nbsp;</td>
 		<td><?php echo $attribute['Attribute']['name']; ?>&nbsp;</td>
+		<td><?php echo $attribute['Attribute']['state']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $attribute['Attribute']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $attribute['Attribute']['id'])); ?>
