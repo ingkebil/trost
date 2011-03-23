@@ -1,6 +1,7 @@
 <?php
 class Entity extends AppModel {
 	var $name = 'Entity';
+    var $actsAs = array('Translate' => 'name');
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(

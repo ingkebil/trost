@@ -3,6 +3,7 @@ class EntitiesController extends AppController {
 
 	var $name = 'Entities';
     var $uses = array('Entity');
+    var $components = array('P28n');
 
     function upload() {
 		if (!empty($this->data)) {
@@ -18,11 +19,19 @@ class EntitiesController extends AppController {
                         $line_part = preg_replace('/^"|"$/', '', $line_part);
                     }
                     list($id, $name, $name_dt, $one, $two, $three, $four, $PO, $definition) = $line_parts;
+                    $this->Entity->locale = 'en_us';
                     $this->Entity->create();
                     if ($this->Entity->save(array('Entity' => compact('id', 'name', 'PO', 'definition')))) {
-                        # look up if this entry exists as German
-                        # TODO add i18n
-                        #$i18n = $this->
+                        # now save in German
+                        $this->Entity->locale = 'de_de';
+                        $this->Entity->create();
+                        if ($name_dt) {
+                            $name = $name_dt;
+                        }
+                        if ( ! $this->Entity->save(array('Entity' => compact('id', 'name', 'PO', 'definition')))) {
+                            $saved = false;
+                            break;
+                        }
                     } else {
                         $saved = false;
                         break;

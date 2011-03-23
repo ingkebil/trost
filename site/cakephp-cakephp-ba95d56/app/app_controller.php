@@ -31,4 +31,15 @@
  * @subpackage    cake.app
  */
 class AppController extends Controller {
+
+    var $components = array('Session');
+    
+    function beforeFilter() {        
+        if($this->Session->check('Config.language')) {
+            Configure::write('Config.language', $this->Session->read('Config.language'));
+        } else {
+            $this->Session->write('Config.language', Configure::read('Config.language'));
+        } 
+    } 
+
 }

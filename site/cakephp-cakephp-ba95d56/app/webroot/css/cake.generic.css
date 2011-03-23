@@ -77,6 +77,11 @@ ul, li {
 #header{
 	padding: 10px 20px;
 }
+#header span {
+    padding: 5px;
+    background-color: #336f7f;
+    float: right;
+}
 #header h1 {
 	line-height:20px;
 	background: #003d4c url('../img/cake.icon.png') no-repeat left;
