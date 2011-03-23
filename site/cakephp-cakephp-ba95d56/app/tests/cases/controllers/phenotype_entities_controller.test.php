@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeEntities Test cases generated on: 2011-03-18 17:11:28 : 1300464688*/
+/* PhenotypeEntities Test cases generated on: 2011-03-22 17:23:20 : 1300811000*/
 App::import('Controller', 'PhenotypeEntities');
 
 class TestPhenotypeEntitiesController extends PhenotypeEntitiesController {

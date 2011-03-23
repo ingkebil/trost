@@ -1,5 +1,5 @@
 <?php
-/* Bbch Fixture generated on: 2011-03-18 17:11:07 : 1300464667 */
+/* Bbch Fixture generated on: 2011-03-22 17:22:46 : 1300810966 */
 class BbchFixture extends CakeTestFixture {
 	var $name = 'Bbch';
 

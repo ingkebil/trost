@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeEntity Fixture generated on: 2011-03-18 17:11:27 : 1300464687 */
+/* PhenotypeEntity Fixture generated on: 2011-03-22 17:23:16 : 1300810996 */
 class PhenotypeEntityFixture extends CakeTestFixture {
 	var $name = 'PhenotypeEntity';
 

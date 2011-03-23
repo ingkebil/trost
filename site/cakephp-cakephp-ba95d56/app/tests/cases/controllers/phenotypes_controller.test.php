@@ -1,5 +1,5 @@
 <?php
-/* Phenotypes Test cases generated on: 2011-03-18 17:11:39 : 1300464699*/
+/* Phenotypes Test cases generated on: 2011-03-22 17:23:39 : 1300811019*/
 App::import('Controller', 'Phenotypes');
 
 class TestPhenotypesController extends PhenotypesController {
@@ -11,7 +11,7 @@ class TestPhenotypesController extends PhenotypesController {
 }
 
 class PhenotypesControllerTestCase extends CakeTestCase {
-	var $fixtures = array('app.phenotype', 'app.program', 'app.plant', 'app.phenotype_attribute', 'app.attribute', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw');
+	var $fixtures = array('app.phenotype', 'app.program', 'app.plant', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw', 'app.phenotype_value', 'app.value');
 
 	function startTest() {
 		$this->Phenotypes =& new TestPhenotypesController();

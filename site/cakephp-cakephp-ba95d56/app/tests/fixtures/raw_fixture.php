@@ -1,5 +1,5 @@
 <?php
-/* Raw Fixture generated on: 2011-03-18 17:11:51 : 1300464711 */
+/* Raw Fixture generated on: 2011-03-22 17:23:49 : 1300811029 */
 class RawFixture extends CakeTestFixture {
 	var $name = 'Raw';
 

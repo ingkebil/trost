@@ -1,5 +1,5 @@
 <?php
-/* Entities Test cases generated on: 2011-03-18 17:10:56 : 1300464656*/
+/* Entities Test cases generated on: 2011-03-22 17:23:00 : 1300810980*/
 App::import('Controller', 'Entities');
 
 class TestEntitiesController extends EntitiesController {

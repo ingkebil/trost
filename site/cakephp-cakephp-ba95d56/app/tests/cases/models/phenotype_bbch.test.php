@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeBbch Test cases generated on: 2011-03-18 17:11:23 : 1300464683*/
+/* PhenotypeBbch Test cases generated on: 2011-03-22 17:23:13 : 1300810993*/
 App::import('Model', 'PhenotypeBbch');
 
 class PhenotypeBbchTestCase extends CakeTestCase {

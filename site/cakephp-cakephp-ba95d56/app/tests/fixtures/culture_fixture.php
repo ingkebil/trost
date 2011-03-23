@@ -1,5 +1,5 @@
 <?php
-/* Culture Fixture generated on: 2011-03-18 17:11:11 : 1300464671 */
+/* Culture Fixture generated on: 2011-03-22 17:22:51 : 1300810971 */
 class CultureFixture extends CakeTestFixture {
 	var $name = 'Culture';
 
@@ -19,7 +19,7 @@ class CultureFixture extends CakeTestFixture {
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'condition' => 'Lorem ipsum dolor sit amet',
-			'created' => '2011-03-18 17:11:11',
+			'created' => '2011-03-22 17:22:51',
 			'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
 			'experiment_id' => 1
 		),

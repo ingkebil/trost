@@ -1,5 +1,5 @@
 <?php
-/* Bbches Test cases generated on: 2011-03-18 17:11:08 : 1300464668*/
+/* Bbches Test cases generated on: 2011-03-22 17:22:47 : 1300810967*/
 App::import('Controller', 'Bbches');
 
 class TestBbchesController extends BbchesController {

@@ -55,9 +55,8 @@ class PhenotypesController extends AppController {
                     }
 
                     # TODO maybe it could be easier to create the correct array to save instead of saving each model individually
-                    # insert the plant info # TODO we prolly need to check if the plant exists in LIMS
 
-                    # look up plant
+                    # insert the plant info # TODO we prolly need to check if the plant exists in LIMS
                     $plant = $this->Phenotype->Plant->find('first', array('conditions' => array('aliquot' => $plant_id)));
                     if (empty($plant)) {
                         $this->Phenotype->Plant->create();

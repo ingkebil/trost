@@ -1,5 +1,5 @@
 <?php
-/* Plant Fixture generated on: 2011-03-18 17:11:42 : 1300464702 */
+/* Plant Fixture generated on: 2011-03-22 17:23:42 : 1300811022 */
 class PlantFixture extends CakeTestFixture {
 	var $name = 'Plant';
 
@@ -20,7 +20,7 @@ class PlantFixture extends CakeTestFixture {
 			'name' => 'Lorem ipsum dolor sit amet',
 			'aliquot' => 'Lorem ipsum dolor sit amet',
 			'culture_id' => 1,
-			'created' => '2011-03-18 17:11:42',
+			'created' => '2011-03-22 17:23:42',
 			'sample_id' => 1
 		),
 	);

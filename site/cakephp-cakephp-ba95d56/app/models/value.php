@@ -1,8 +1,8 @@
 <?php
-class Attribute extends AppModel {
-	var $name = 'Attribute';
+class Value extends AppModel {
+	var $name = 'Value';
 	var $validate = array(
-		'name' => array(
+		'attribute' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -12,7 +12,7 @@ class Attribute extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'state' => array(
+		'value' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -28,8 +28,8 @@ class Attribute extends AppModel {
 	var $hasAndBelongsToMany = array(
 		'Phenotype' => array(
 			'className' => 'Phenotype',
-			'joinTable' => 'phenotype_attributes',
-			'foreignKey' => 'attribute_id',
+			'joinTable' => 'phenotype_values',
+			'foreignKey' => 'value_id',
 			'associationForeignKey' => 'phenotype_id',
 			'unique' => true,
 			'conditions' => '',

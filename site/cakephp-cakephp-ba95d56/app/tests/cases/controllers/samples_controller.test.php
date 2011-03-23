@@ -1,5 +1,5 @@
 <?php
-/* Samples Test cases generated on: 2011-03-18 17:11:57 : 1300464717*/
+/* Samples Test cases generated on: 2011-03-22 17:23:54 : 1300811034*/
 App::import('Controller', 'Samples');
 
 class TestSamplesController extends SamplesController {
@@ -11,7 +11,7 @@ class TestSamplesController extends SamplesController {
 }
 
 class SamplesControllerTestCase extends CakeTestCase {
-	var $fixtures = array('app.sample', 'app.plant', 'app.culture', 'app.experiment', 'app.phenotype', 'app.program', 'app.phenotype_attribute', 'app.attribute', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw');
+	var $fixtures = array('app.sample', 'app.plant', 'app.culture', 'app.experiment', 'app.phenotype', 'app.program', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw', 'app.phenotype_value', 'app.value');
 
 	function startTest() {
 		$this->Samples =& new TestSamplesController();

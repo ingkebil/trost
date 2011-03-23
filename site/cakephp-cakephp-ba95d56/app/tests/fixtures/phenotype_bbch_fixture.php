@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeBbch Fixture generated on: 2011-03-18 17:11:23 : 1300464683 */
+/* PhenotypeBbch Fixture generated on: 2011-03-22 17:23:13 : 1300810993 */
 class PhenotypeBbchFixture extends CakeTestFixture {
 	var $name = 'PhenotypeBbch';
 

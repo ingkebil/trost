@@ -49,55 +49,15 @@
 		<li><?php echo $this->Html->link(__('New Program', true), array('controller' => 'programs', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Plants', true), array('controller' => 'plants', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Plant', true), array('controller' => 'plants', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Phenotype Attributes', true), array('controller' => 'phenotype_attributes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Phenotype Attribute', true), array('controller' => 'phenotype_attributes', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Phenotype Bbches', true), array('controller' => 'phenotype_bbches', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype Bbch', true), array('controller' => 'phenotype_bbches', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Phenotype Entities', true), array('controller' => 'phenotype_entities', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype Entity', true), array('controller' => 'phenotype_entities', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Phenotype Raws', true), array('controller' => 'phenotype_raws', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype Raw', true), array('controller' => 'phenotype_raws', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Phenotype Values', true), array('controller' => 'phenotype_values', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Phenotype Value', true), array('controller' => 'phenotype_values', 'action' => 'add')); ?> </li>
 	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Phenotype Attributes');?></h3>
-	<?php if (!empty($phenotype['PhenotypeAttribute'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Attribute Id'); ?></th>
-		<th><?php __('Phenotype Id'); ?></th>
-		<th><?php __('Value'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($phenotype['PhenotypeAttribute'] as $phenotypeAttribute):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $phenotypeAttribute['id'];?></td>
-			<td><?php echo $phenotypeAttribute['attribute_id'];?></td>
-			<td><?php echo $phenotypeAttribute['phenotype_id'];?></td>
-			<td><?php echo $phenotypeAttribute['value'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_attributes', 'action' => 'view', $phenotypeAttribute['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_attributes', 'action' => 'edit', $phenotypeAttribute['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_attributes', 'action' => 'delete', $phenotypeAttribute['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeAttribute['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Phenotype Attribute', true), array('controller' => 'phenotype_attributes', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
 </div>
 <div class="related">
 	<h3><?php __('Related Phenotype Bbches');?></h3>
@@ -183,6 +143,7 @@
 		<th><?php __('Id'); ?></th>
 		<th><?php __('Phenotype Id'); ?></th>
 		<th><?php __('Raw Id'); ?></th>
+		<th><?php __('Line Nr'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -197,6 +158,7 @@
 			<td><?php echo $phenotypeRaw['id'];?></td>
 			<td><?php echo $phenotypeRaw['phenotype_id'];?></td>
 			<td><?php echo $phenotypeRaw['raw_id'];?></td>
+			<td><?php echo $phenotypeRaw['line_nr'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_raws', 'action' => 'view', $phenotypeRaw['id'])); ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_raws', 'action' => 'edit', $phenotypeRaw['id'])); ?>
@@ -210,6 +172,46 @@
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Phenotype Raw', true), array('controller' => 'phenotype_raws', 'action' => 'add'));?> </li>
+		</ul>
+	</div>
+</div>
+<div class="related">
+	<h3><?php __('Related Phenotype Values');?></h3>
+	<?php if (!empty($phenotype['PhenotypeValue'])):?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php __('Id'); ?></th>
+		<th><?php __('Value Id'); ?></th>
+		<th><?php __('Phenotype Id'); ?></th>
+		<th><?php __('Number'); ?></th>
+		<th class="actions"><?php __('Actions');?></th>
+	</tr>
+	<?php
+		$i = 0;
+		foreach ($phenotype['PhenotypeValue'] as $phenotypeValue):
+			$class = null;
+			if ($i++ % 2 == 0) {
+				$class = ' class="altrow"';
+			}
+		?>
+		<tr<?php echo $class;?>>
+			<td><?php echo $phenotypeValue['id'];?></td>
+			<td><?php echo $phenotypeValue['value_id'];?></td>
+			<td><?php echo $phenotypeValue['phenotype_id'];?></td>
+			<td><?php echo $phenotypeValue['number'];?></td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_values', 'action' => 'view', $phenotypeValue['id'])); ?>
+				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_values', 'action' => 'edit', $phenotypeValue['id'])); ?>
+				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_values', 'action' => 'delete', $phenotypeValue['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeValue['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+<?php endif; ?>
+
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('New Phenotype Value', true), array('controller' => 'phenotype_values', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <?php
-/* Entity Test cases generated on: 2011-03-18 17:10:56 : 1300464656*/
+/* Entity Test cases generated on: 2011-03-22 17:23:00 : 1300810980*/
 App::import('Model', 'Entity');
 
 class EntityTestCase extends CakeTestCase {

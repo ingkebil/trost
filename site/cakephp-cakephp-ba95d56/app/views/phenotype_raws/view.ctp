@@ -16,6 +16,11 @@
 			<?php echo $this->Html->link($phenotypeRaw['Raw']['id'], array('controller' => 'raws', 'action' => 'view', $phenotypeRaw['Raw']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Line Nr'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $phenotypeRaw['PhenotypeRaw']['line_nr']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

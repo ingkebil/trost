@@ -43,19 +43,6 @@ class Phenotype extends AppModel {
 	);
 
 	var $hasMany = array(
-		'PhenotypeAttribute' => array(
-			'className' => 'PhenotypeAttribute',
-			'foreignKey' => 'phenotype_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'PhenotypeBbch' => array(
 			'className' => 'PhenotypeBbch',
 			'foreignKey' => 'phenotype_id',
@@ -84,6 +71,19 @@ class Phenotype extends AppModel {
 		),
 		'PhenotypeRaw' => array(
 			'className' => 'PhenotypeRaw',
+			'foreignKey' => 'phenotype_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'PhenotypeValue' => array(
+			'className' => 'PhenotypeValue',
 			'foreignKey' => 'phenotype_id',
 			'dependent' => false,
 			'conditions' => '',

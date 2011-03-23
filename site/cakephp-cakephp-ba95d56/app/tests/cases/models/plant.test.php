@@ -1,9 +1,9 @@
 <?php
-/* Plant Test cases generated on: 2011-03-18 17:11:42 : 1300464702*/
+/* Plant Test cases generated on: 2011-03-22 17:23:42 : 1300811022*/
 App::import('Model', 'Plant');
 
 class PlantTestCase extends CakeTestCase {
-	var $fixtures = array('app.plant', 'app.culture', 'app.experiment', 'app.sample', 'app.phenotype', 'app.program', 'app.phenotype_attribute', 'app.attribute', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw');
+	var $fixtures = array('app.plant', 'app.culture', 'app.experiment', 'app.sample', 'app.phenotype', 'app.program', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw', 'app.phenotype_value', 'app.value');
 
 	function startTest() {
 		$this->Plant =& ClassRegistry::init('Plant');

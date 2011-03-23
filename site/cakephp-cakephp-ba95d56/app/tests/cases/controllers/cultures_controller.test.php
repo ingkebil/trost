@@ -1,5 +1,5 @@
 <?php
-/* Cultures Test cases generated on: 2011-03-18 17:11:12 : 1300464672*/
+/* Cultures Test cases generated on: 2011-03-22 17:22:51 : 1300810971*/
 App::import('Controller', 'Cultures');
 
 class TestCulturesController extends CulturesController {

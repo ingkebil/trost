@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('phenotype_id');
 		echo $this->Form->input('raw_id');
+		echo $this->Form->input('line_nr');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

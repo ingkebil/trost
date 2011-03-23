@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeRaws Test cases generated on: 2011-03-18 17:11:35 : 1300464695*/
+/* PhenotypeRaws Test cases generated on: 2011-03-22 17:23:34 : 1300811014*/
 App::import('Controller', 'PhenotypeRaws');
 
 class TestPhenotypeRawsController extends PhenotypeRawsController {

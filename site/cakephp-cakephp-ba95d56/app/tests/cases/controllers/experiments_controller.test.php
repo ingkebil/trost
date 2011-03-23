@@ -1,5 +1,5 @@
 <?php
-/* Experiments Test cases generated on: 2011-03-18 17:11:03 : 1300464663*/
+/* Experiments Test cases generated on: 2011-03-22 17:23:10 : 1300810990*/
 App::import('Controller', 'Experiments');
 
 class TestExperimentsController extends ExperimentsController {
@@ -11,7 +11,7 @@ class TestExperimentsController extends ExperimentsController {
 }
 
 class ExperimentsControllerTestCase extends CakeTestCase {
-	var $fixtures = array('app.experiment', 'app.culture');
+	var $fixtures = array('app.experiment', 'app.culture', 'app.plant');
 
 	function startTest() {
 		$this->Experiments =& new TestExperimentsController();

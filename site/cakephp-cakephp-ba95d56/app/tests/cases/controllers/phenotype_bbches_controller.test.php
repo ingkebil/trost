@@ -1,5 +1,5 @@
 <?php
-/* PhenotypeBbches Test cases generated on: 2011-03-18 17:11:23 : 1300464683*/
+/* PhenotypeBbches Test cases generated on: 2011-03-22 17:23:14 : 1300810994*/
 App::import('Controller', 'PhenotypeBbches');
 
 class TestPhenotypeBbchesController extends PhenotypeBbchesController {

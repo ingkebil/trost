@@ -1,5 +1,5 @@
 <?php
-/* Programs Test cases generated on: 2011-03-18 17:11:46 : 1300464706*/
+/* Programs Test cases generated on: 2011-03-22 17:23:46 : 1300811026*/
 App::import('Controller', 'Programs');
 
 class TestProgramsController extends ProgramsController {
@@ -11,7 +11,7 @@ class TestProgramsController extends ProgramsController {
 }
 
 class ProgramsControllerTestCase extends CakeTestCase {
-	var $fixtures = array('app.program', 'app.phenotype', 'app.plant', 'app.culture', 'app.experiment', 'app.sample', 'app.phenotype_attribute', 'app.attribute', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw');
+	var $fixtures = array('app.program', 'app.phenotype', 'app.plant', 'app.culture', 'app.experiment', 'app.sample', 'app.phenotype_bbch', 'app.bbch', 'app.species', 'app.phenotype_entity', 'app.entity', 'app.phenotype_raw', 'app.raw', 'app.phenotype_value', 'app.value');
 
 	function startTest() {
 		$this->Programs =& new TestProgramsController();

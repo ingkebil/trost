@@ -1,5 +1,5 @@
 <?php
-/* Phenotype Fixture generated on: 2011-03-18 17:11:39 : 1300464699 */
+/* Phenotype Fixture generated on: 2011-03-22 17:23:39 : 1300811019 */
 class PhenotypeFixture extends CakeTestFixture {
 	var $name = 'Phenotype';
 
@@ -21,8 +21,8 @@ class PhenotypeFixture extends CakeTestFixture {
 			'version' => 'Lorem ipsum dolor sit amet',
 			'object' => 'Lorem ipsum dolor sit amet',
 			'program_id' => 1,
-			'date' => '2011-03-18',
-			'time' => '17:11:39',
+			'date' => '2011-03-22',
+			'time' => '17:23:39',
 			'plant_id' => 1
 		),
 	);

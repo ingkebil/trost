@@ -1,5 +1,5 @@
 <?php
-/* Culture Test cases generated on: 2011-03-18 17:11:11 : 1300464671*/
+/* Culture Test cases generated on: 2011-03-22 17:22:51 : 1300810971*/
 App::import('Model', 'Culture');
 
 class CultureTestCase extends CakeTestCase {

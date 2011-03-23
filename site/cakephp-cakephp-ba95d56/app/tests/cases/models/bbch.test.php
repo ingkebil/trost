@@ -1,5 +1,5 @@
 <?php
-/* Bbch Test cases generated on: 2011-03-18 17:11:07 : 1300464667*/
+/* Bbch Test cases generated on: 2011-03-22 17:22:46 : 1300810966*/
 App::import('Model', 'Bbch');
 
 class BbchTestCase extends CakeTestCase {

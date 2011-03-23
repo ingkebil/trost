@@ -1,5 +1,5 @@
 <?php
-/* Sample Fixture generated on: 2011-03-18 17:11:56 : 1300464716 */
+/* Sample Fixture generated on: 2011-03-22 17:23:53 : 1300811033 */
 class SampleFixture extends CakeTestFixture {
 	var $name = 'Sample';
 
@@ -21,7 +21,7 @@ class SampleFixture extends CakeTestFixture {
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
 			'supplier' => 'Lorem ipsum dolor sit amet',
-			'created' => '2011-03-18 17:11:56',
+			'created' => '2011-03-22 17:23:53',
 			'created_by' => 'Lorem ipsum dolor sit amet',
 			'mag' => 'Lorem ipsum dolor sit amet',
 			'alias' => 'Lorem ipsum dolor sit amet',

@@ -1,8 +1,8 @@
 <?php
-class PhenotypeAttribute extends AppModel {
-	var $name = 'PhenotypeAttribute';
+class PhenotypeValue extends AppModel {
+	var $name = 'PhenotypeValue';
 	var $validate = array(
-		'attribute_id' => array(
+		'value_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -26,9 +26,9 @@ class PhenotypeAttribute extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Attribute' => array(
-			'className' => 'Attribute',
-			'foreignKey' => 'attribute_id',
+		'Value' => array(
+			'className' => 'Value',
+			'foreignKey' => 'value_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
