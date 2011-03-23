@@ -1,6 +1,9 @@
 <?php
 class Bbch extends AppModel {
 	var $name = 'Bbch';
+
+    var $actsAs = array('Containable');
+
 	var $validate = array(
 		'species_id' => array(
 			'numeric' => array(
