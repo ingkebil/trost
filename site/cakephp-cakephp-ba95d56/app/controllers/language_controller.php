@@ -22,8 +22,8 @@ class LanguageController extends AppController {
 
         # change it application wide
         $this->params['lang'] = $lang;
-        $this->Session->write('Languages.default', $this->params['lang']);
-        Configure::write('Languages.default', $this->params['lang']);
+        $this->Session->write('Config.language', $this->params['lang']);
+        Configure::write('Config.language', $this->params['lang']);
         $this->redirect('/' . $lang . '/' . $this->referer());
         #$this->redirect($this->referer(), null, true);
     }

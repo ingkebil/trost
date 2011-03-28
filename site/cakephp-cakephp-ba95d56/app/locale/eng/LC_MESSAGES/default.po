@@ -1,5 +1,5 @@
 # LANGUAGE translation of CakePHP Application
-# Copyright 2011 Kenny Billiau <billiau@mpimp-golm.mpg.de>
+# Copyright YEAR NAME <EMAIL@ADDRESS>
 #
 #, fuzzy
 msgid ""
@@ -17,111 +17,111 @@ msgstr ""
 #: /app_controller.php:51;51;51
 #: /controllers/language_controller.php:19;34;19;34;19;34
 msgid "Whoops, not a valid language."
-msgstr "Ah nein! Das ist keine gültige Sprache"
+msgstr ""
 
 #: /controllers/bbches_controller.php:41;41;41
 msgid "The BBCH codes have been saved"
-msgstr "Die BBCH Kodes sind gespeichert"
+msgstr ""
 
 #: /controllers/bbches_controller.php:47;47;47
 msgid "The BBCH codes could not be saved. Please, try again."
-msgstr "Die BBCH Kodes könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/bbches_controller.php:60;83;60;83;60;83
 msgid "Invalid bbch"
-msgstr "Ungültiger BBCH Kode"
+msgstr ""
 
 #: /controllers/bbches_controller.php:70;88;70;88;70;88
 msgid "The bbch has been saved"
-msgstr "Der BBCH Kode ist gespeichert"
+msgstr ""
 
 #: /controllers/bbches_controller.php:73;91;73;91;73;91
 msgid "The bbch could not be saved. Please, try again."
-msgstr "Die BBCH Kodes könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/bbches_controller.php:104;104;104
 msgid "Invalid id for bbch"
-msgstr "Ungültiger BBCH Kode"
+msgstr ""
 
 #: /controllers/bbches_controller.php:108;108;108
 msgid "Bbch deleted"
-msgstr "Der BBCH Kode ist gelöscht"
+msgstr ""
 
 #: /controllers/bbches_controller.php:111;111;111
 msgid "Bbch was not deleted"
-msgstr "Der BBCH Kode ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/cultures_controller.php:13;35;13;35;13;35
 msgid "Invalid culture"
-msgstr "Ungültige Kultur"
+msgstr ""
 
 #: /controllers/cultures_controller.php:23;40;23;40;23;40
 msgid "The culture has been saved"
-msgstr "Die Kultur ist gespeichert"
+msgstr ""
 
 #: /controllers/cultures_controller.php:26;43;26;43;26;43
 msgid "The culture could not be saved. Please, try again."
-msgstr "Die Kultur könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/cultures_controller.php:55;55;55
 msgid "Invalid id for culture"
-msgstr "Ungültige ID der Kultur"
+msgstr ""
 
 #: /controllers/cultures_controller.php:59;59;59
 msgid "Culture deleted"
-msgstr "Die Kultur ist gelöscht"
+msgstr ""
 
 #: /controllers/cultures_controller.php:62;62;62
 msgid "Culture was not deleted"
-msgstr "Die Kultur ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/entities_controller.php:41;69;86;41;69;86;41;69;86
 msgid "The entity has been saved"
-msgstr "Die Entität ist gespeichert"
+msgstr ""
 
 #: /controllers/entities_controller.php:47;72;89;47;72;89;47;72;89
 msgid "The entity could not be saved. Please, try again."
-msgstr "Die Entität könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/entities_controller.php:59;81;59;81;59;81
 msgid "Invalid entity"
-msgstr "Ungültige Entität"
+msgstr ""
 
 #: /controllers/entities_controller.php:101;101;101
 msgid "Invalid id for entity"
-msgstr "Ungültiger ID der Entität"
+msgstr ""
 
 #: /controllers/entities_controller.php:105;105;105
 msgid "Entity deleted"
-msgstr "Die Entität ist gelöscht"
+msgstr ""
 
 #: /controllers/entities_controller.php:108;108;108
 msgid "Entity was not deleted"
-msgstr "Die Entität ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/experiments_controller.php:13;33;13;33;13;33
 msgid "Invalid experiment"
-msgstr "Ungültiges Experiment"
+msgstr ""
 
 #: /controllers/experiments_controller.php:23;38;23;38;23;38
 msgid "The experiment has been saved"
-msgstr "Das Experiment ist gespeichert"
+msgstr ""
 
 #: /controllers/experiments_controller.php:26;41;26;41;26;41
 msgid "The experiment could not be saved. Please, try again."
-msgstr "Das Experiment könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/experiments_controller.php:51;51;51
 msgid "Invalid id for experiment"
-msgstr "Ungültiger ID des Experimentes"
+msgstr ""
 
 #: /controllers/experiments_controller.php:55;55;55
 msgid "Experiment deleted"
-msgstr "Das Experiment ist gelöscht"
+msgstr ""
 
 #: /controllers/experiments_controller.php:58;58;58
 msgid "Experiment was not deleted"
-msgstr "Das Experiment ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/phenotype_bbches_controller.php:13;36;13;36;13;36
 msgid "Invalid phenotype bbch"
@@ -221,75 +221,75 @@ msgstr ""
 
 #: /controllers/phenotypes_controller.php:133;183;201;133;183;201;133;183;201
 msgid "The phenotype has been saved"
-msgstr "Der Phänotyp ist gespeichert"
+msgstr ""
 
 #: /controllers/phenotypes_controller.php:136;186;204;136;186;204;136;186;204
 msgid "The phenotype could not be saved. Please, try again."
-msgstr "Der Phänotyp könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/phenotypes_controller.php:173;196;173;196;173;196
 msgid "Invalid phenotype"
-msgstr "Ungültiger Phänotyp"
+msgstr ""
 
 #: /controllers/phenotypes_controller.php:217;217;217
 msgid "Invalid id for phenotype"
-msgstr "Ungültiger ID des Phänotypes"
+msgstr ""
 
 #: /controllers/phenotypes_controller.php:221;221;221
 msgid "Phenotype deleted"
-msgstr "Der Phänotyp ist gelöscht"
+msgstr ""
 
 #: /controllers/phenotypes_controller.php:224;224;224
 msgid "Phenotype was not deleted"
-msgstr "Der Phänotyp ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/plants_controller.php:13;36;13;36;13;36
 msgid "Invalid plant"
-msgstr "Ungültige Pflanze"
+msgstr ""
 
 #: /controllers/plants_controller.php:23;41;23;41;23;41
 msgid "The plant has been saved"
-msgstr "Die Pflanze ist gespeichert"
+msgstr ""
 
 #: /controllers/plants_controller.php:26;44;26;44;26;44
 msgid "The plant could not be saved. Please, try again."
-msgstr "Die Pflanze könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/plants_controller.php:57;57;57
 msgid "Invalid id for plant"
-msgstr "Ungültiger ID der Pflanze"
+msgstr ""
 
 #: /controllers/plants_controller.php:61;61;61
 msgid "Plant deleted"
-msgstr "Die Pflanze ist gelöscht"
+msgstr ""
 
 #: /controllers/plants_controller.php:64;64;64
 msgid "Plant was not deleted"
-msgstr "Die Pflanze ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/programs_controller.php:13;33;13;33;13;33
 msgid "Invalid program"
-msgstr "Ungültiges Programm"
+msgstr ""
 
 #: /controllers/programs_controller.php:23;38;23;38;23;38
 msgid "The program has been saved"
-msgstr "Das Programm ist gespeichert"
+msgstr ""
 
 #: /controllers/programs_controller.php:26;41;26;41;26;41
 msgid "The program could not be saved. Please, try again."
-msgstr "Das Programm könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/programs_controller.php:51;51;51
 msgid "Invalid id for program"
-msgstr "Ungültiger ID des Programm"
+msgstr ""
 
 #: /controllers/programs_controller.php:55;55;55
 msgid "Program deleted"
-msgstr "Das Programm ist gelöscht"
+msgstr ""
 
 #: /controllers/programs_controller.php:58;58;58
 msgid "Program was not deleted"
-msgstr "Das Programm ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/raws_controller.php:13;35;13;35;13;35
 msgid "Invalid raw"
@@ -317,87 +317,87 @@ msgstr ""
 
 #: /controllers/samples_controller.php:13;33;13;33;13;33
 msgid "Invalid sample"
-msgstr "Ungültige Probe"
+msgstr ""
 
 #: /controllers/samples_controller.php:23;38;23;38;23;38
 msgid "The sample has been saved"
-msgstr "Die Probe ist gespeichert"
+msgstr ""
 
 #: /controllers/samples_controller.php:26;41;26;41;26;41
 msgid "The sample could not be saved. Please, try again."
-msgstr "Die Probe könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/samples_controller.php:51;51;51
 msgid "Invalid id for sample"
-msgstr "Ungültiger ID der Probe"
+msgstr ""
 
 #: /controllers/samples_controller.php:55;55;55
 msgid "Sample deleted"
-msgstr "Die Probe ist gelöscht"
+msgstr ""
 
 #: /controllers/samples_controller.php:58;58;58
 msgid "Sample was not deleted"
-msgstr "Die Probe ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/species_controller.php:13;33;13;33;13;33
 msgid "Invalid species"
-msgstr "Ungültige Sorte"
+msgstr ""
 
 #: /controllers/species_controller.php:23;38;23;38;23;38
 msgid "The species has been saved"
-msgstr "Die Sorte ist gespeichert"
+msgstr ""
 
 #: /controllers/species_controller.php:26;41;26;41;26;41
 msgid "The species could not be saved. Please, try again."
-msgstr "Die Sorte könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/species_controller.php:51;51;51
 msgid "Invalid id for species"
-msgstr "Ungültiger ID der Sorte"
+msgstr ""
 
 #: /controllers/species_controller.php:55;55;55
 msgid "Species deleted"
-msgstr "Die Sorte ist gelöscht"
+msgstr ""
 
 #: /controllers/species_controller.php:58;58;58
 msgid "Species was not deleted"
-msgstr "Die Sorte ist nicht gelöscht"
+msgstr ""
 
 #: /controllers/values_controller.php:32;32;32
 msgid "The values have been saved"
-msgstr "Die Werte sind gespeichert"
+msgstr ""
 
 #: /controllers/values_controller.php:38;38;38
 msgid "The values could not be saved. Please, try again."
-msgstr "Die Werte könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/values_controller.php:50;72;50;72;50;72
 msgid "Invalid value"
-msgstr "Ungültiger Wert"
+msgstr ""
 
 #: /controllers/values_controller.php:60;77;60;77;60;77
 msgid "The value has been saved"
-msgstr "Der Wert ist gespeichert"
+msgstr ""
 
 #: /controllers/values_controller.php:63;80;63;80;63;80
 msgid "The value could not be saved. Please, try again."
-msgstr "Der Wert könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr ""
 
 #: /controllers/values_controller.php:92;92;92
 msgid "Invalid id for value"
-msgstr "Ungültiger ID des Werts"
+msgstr ""
 
 #: /controllers/values_controller.php:96;96;96
 msgid "Value deleted"
-msgstr "Der Wert ist gelöscht"
+msgstr ""
 
 #: /controllers/values_controller.php:99;99;99
 msgid "Value was not deleted"
-msgstr "Der Wert ist nicht gelöscht"
+msgstr ""
 
 #: /views/bbches/add.ctp:4;4;4
 msgid "Add Bbch"
-msgstr "BBCH Kode zufügen"
+msgstr ""
 
 #: /views/bbches/add.ctp:12;12;12
 #: /views/bbches/edit.ctp:13;13;13
@@ -436,7 +436,7 @@ msgstr "BBCH Kode zufügen"
 #: cake/libs/view/helpers/form.php:368;1313
 #: cake/libs/view/scaffolds/edit.ctp:24
 msgid "Submit"
-msgstr "Absenden"
+msgstr ""
 
 #: /views/bbches/add.ctp:15;15;15
 #: /views/bbches/edit.ctp:16;16;16
@@ -506,7 +506,7 @@ msgstr "Absenden"
 #: cake/libs/view/scaffolds/index.ctp:27;77
 #: cake/libs/view/scaffolds/view.ctp:50
 msgid "Actions"
-msgstr "Actionen"
+msgstr ""
 
 #: /views/bbches/add.ctp:18;18;18
 #: /views/bbches/edit.ctp:20;20;20
@@ -521,7 +521,7 @@ msgstr "Actionen"
 #: /views/species/index.ctp:46;46;46
 #: /views/species/view.ctp:23;23;23
 msgid "List Bbches"
-msgstr "BBCH Kodes auflisten"
+msgstr ""
 
 #: /views/bbches/add.ctp:19;19;19
 #: /views/bbches/edit.ctp:21;21;21
@@ -532,7 +532,7 @@ msgstr "BBCH Kodes auflisten"
 #: /views/species/edit.ctp:17;17;17
 #: /views/species/view.ctp:21;21;21
 msgid "List Species"
-msgstr "Sorte auflisten"
+msgstr ""
 
 #: /views/bbches/add.ctp:20;20;20
 #: /views/bbches/edit.ctp:22;22;22
@@ -542,7 +542,7 @@ msgstr "Sorte auflisten"
 #: /views/species/index.ctp:45;45;45
 #: /views/species/view.ctp:22;22;22
 msgid "New Species"
-msgstr "Neue Sorte zufügen"
+msgstr ""
 
 #: /views/bbches/add.ctp:21;21;21
 #: /views/bbches/edit.ctp:23;23;23
@@ -593,7 +593,7 @@ msgstr "Neue Sorte zufügen"
 #: /views/values/upload.ctp:15;15;15
 #: /views/values/view.ctp:28;28;28
 msgid "List Phenotypes"
-msgstr "Phänotypen auflisten"
+msgstr ""
 
 #: /views/bbches/add.ctp:22;22;22
 #: /views/bbches/edit.ctp:24;24;24
@@ -640,12 +640,12 @@ msgstr "Phänotypen auflisten"
 #: /views/values/upload.ctp:16;16;16
 #: /views/values/view.ctp:29;74;29;74;29;74
 msgid "New Phenotype"
-msgstr "Phänotyp zufügen"
+msgstr ""
 
 #: /views/bbches/edit.ctp:4;4;4
 #: /views/bbches/view.ctp:29;29;29
 msgid "Edit Bbch"
-msgstr "BBCH Kode bearbeiten"
+msgstr ""
 
 #: /views/bbches/edit.ctp:19;19;19
 #: /views/bbches/index.ctp:29;29;29
@@ -692,7 +692,7 @@ msgstr "BBCH Kode bearbeiten"
 #: cake/libs/view/scaffolds/index.ctp:57
 #: cake/libs/view/scaffolds/view.ctp:146
 msgid "Delete"
-msgstr "Löschen"
+msgstr ""
 
 #: /views/bbches/edit.ctp:19;19;19
 #: /views/bbches/index.ctp:29;29;29
@@ -740,11 +740,11 @@ msgstr "Löschen"
 #: /views/values/index.ctp:25;25;25
 #: /views/values/view.ctp:25;65;25;65;25;65
 msgid "Are you sure you want to delete # %s?"
-msgstr "Sind Sie sicher dass Sie # %s löschen wollen?"
+msgstr ""
 
 #: /views/bbches/index.ctp:2;2;2
 msgid "Bbches"
-msgstr "BBCH Kodes"
+msgstr ""
 
 #: /views/bbches/index.ctp:27;27;27
 #: /views/bbches/view.ctp:70;70;70
@@ -775,7 +775,7 @@ msgstr "BBCH Kodes"
 #: cake/libs/view/scaffolds/index.ctp:55
 #: cake/libs/view/scaffolds/view.ctp:144
 msgid "View"
-msgstr "Schau"
+msgstr ""
 
 #: /views/bbches/index.ctp:28;28;28
 #: /views/bbches/view.ctp:71;71;71
@@ -806,7 +806,7 @@ msgstr "Schau"
 #: cake/libs/view/scaffolds/index.ctp:56
 #: cake/libs/view/scaffolds/view.ctp:145
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr ""
 
 #: /views/bbches/index.ctp:37;37;37
 #: /views/cultures/index.ctp:41;41;41
@@ -825,7 +825,7 @@ msgstr "Bearbeiten"
 #: /views/values/index.ctp:33;33;33
 #: cake/libs/view/scaffolds/index.ctp:67
 msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
-msgstr "Seite %page% von %pages% Seiten, angezeigt werden %current% von %count% Einträgen, Start bei Eintrag %start%, Ende bei Eintrag %end%"
+msgstr ""
 
 #: /views/bbches/index.ctp:42;42;42
 #: /views/cultures/index.ctp:46;46;46
@@ -844,7 +844,7 @@ msgstr "Seite %page% von %pages% Seiten, angezeigt werden %current% von %count% 
 #: /views/values/index.ctp:38;38;38
 #: cake/libs/view/scaffolds/index.ctp:71
 msgid "previous"
-msgstr "Zurück"
+msgstr ""
 
 #: /views/bbches/index.ctp:45;45;45
 #: /views/cultures/index.ctp:49;49;49
@@ -863,7 +863,7 @@ msgstr "Zurück"
 #: /views/values/index.ctp:41;41;41
 #: cake/libs/view/scaffolds/index.ctp:73
 msgid "next"
-msgstr "Weiter"
+msgstr ""
 
 #: /views/bbches/index.ctp:51;51;51
 #: /views/bbches/view.ctp:32;32;32
@@ -876,17 +876,17 @@ msgstr "Weiter"
 #: /views/species/index.ctp:47;47;47
 #: /views/species/view.ctp:24;63;24;63;24;63
 msgid "New Bbch"
-msgstr "Neuer BBCH Kode zufügen"
+msgstr ""
 
 #: /views/bbches/upload.ctp:4;4;4
 msgid "Add BBCH codes"
-msgstr "Neue BBCH Kodes zufügen"
+msgstr ""
 
 #: /views/bbches/view.ctp:2;9;2;9;2;9
 #: /views/phenotype_bbches/view.ctp:14;14;14
 #: /views/species/view.ctp:33;33;33
 msgid "Bbch"
-msgstr "BBCH Kode"
+msgstr ""
 
 #: /views/bbches/view.ctp:4;44;4;44;4;44
 #: /views/cultures/view.ctp:4;54;4;54;4;54
@@ -904,7 +904,7 @@ msgstr "BBCH Kode"
 #: /views/species/view.ctp:4;32;4;32;4;32
 #: /views/values/view.ctp:4;37;4;37;4;37
 msgid "Id"
-msgstr "ID"
+msgstr ""
 
 #: /views/bbches/view.ctp:14;14;14
 #: /views/cultures/view.ctp:9;55;9;55;9;55
@@ -915,17 +915,17 @@ msgstr "ID"
 #: /views/samples/view.ctp:9;63;9;63;9;63
 #: /views/species/view.ctp:9;34;9;34;9;34
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: /views/bbches/view.ctp:19;19;19
 #: /views/species/index.ctp:2;2;2
 #: /views/species/view.ctp:2;2;2
 msgid "Species"
-msgstr "Sorte"
+msgstr ""
 
 #: /views/bbches/view.ctp:30;30;30
 msgid "Delete Bbch"
-msgstr "BBCH Kode Löschen"
+msgstr ""
 
 #: /views/bbches/view.ctp:40;40;40
 #: /views/entities/view.ctp:38;38;38
@@ -934,7 +934,7 @@ msgstr "BBCH Kode Löschen"
 #: /views/raws/view.ctp:28;28;28
 #: /views/values/view.ctp:33;33;33
 msgid "Related Phenotypes"
-msgstr "Änliche Phänotypen"
+msgstr ""
 
 #: /views/bbches/view.ctp:45;45;45
 #: /views/entities/view.ctp:43;43;43
@@ -944,7 +944,7 @@ msgstr "Änliche Phänotypen"
 #: /views/raws/view.ctp:33;33;33
 #: /views/values/view.ctp:38;38;38
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: /views/bbches/view.ctp:46;46;46
 #: /views/entities/view.ctp:44;44;44
@@ -954,7 +954,7 @@ msgstr "Version"
 #: /views/raws/view.ctp:34;34;34
 #: /views/values/view.ctp:39;39;39
 msgid "Object"
-msgstr "Object"
+msgstr ""
 
 #: /views/bbches/view.ctp:47;47;47
 #: /views/entities/view.ctp:45;45;45
@@ -963,7 +963,7 @@ msgstr "Object"
 #: /views/raws/view.ctp:35;35;35
 #: /views/values/view.ctp:40;40;40
 msgid "Program Id"
-msgstr "Programm ID"
+msgstr ""
 
 #: /views/bbches/view.ctp:48;48;48
 #: /views/entities/view.ctp:46;46;46
@@ -973,7 +973,7 @@ msgstr "Programm ID"
 #: /views/raws/view.ctp:36;36;36
 #: /views/values/view.ctp:41;41;41
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #: /views/bbches/view.ctp:49;49;49
 #: /views/entities/view.ctp:47;47;47
@@ -983,7 +983,7 @@ msgstr "Date"
 #: /views/raws/view.ctp:37;37;37
 #: /views/values/view.ctp:42;42;42
 msgid "Time"
-msgstr "Zeit"
+msgstr ""
 
 #: /views/bbches/view.ctp:50;50;50
 #: /views/entities/view.ctp:48;48;48
@@ -992,11 +992,11 @@ msgstr "Zeit"
 #: /views/raws/view.ctp:38;38;38
 #: /views/values/view.ctp:43;43;43
 msgid "Plant Id"
-msgstr "Pflanze ID"
+msgstr ""
 
 #: /views/cultures/add.ctp:4;4;4
 msgid "Add Culture"
-msgstr "Kultur zufügen"
+msgstr ""
 
 #: /views/cultures/add.ctp:18;18;18
 #: /views/cultures/edit.ctp:20;20;20
@@ -1010,7 +1010,7 @@ msgstr "Kultur zufügen"
 #: /views/plants/index.ctp:58;58;58
 #: /views/plants/view.ctp:43;43;43
 msgid "List Cultures"
-msgstr "Kulturen auflisten"
+msgstr ""
 
 #: /views/cultures/add.ctp:19;19;19
 #: /views/cultures/edit.ctp:21;21;21
@@ -1020,7 +1020,7 @@ msgstr "Kulturen auflisten"
 #: /views/experiments/edit.ctp:21;21;21
 #: /views/experiments/view.ctp:41;41;41
 msgid "List Experiments"
-msgstr "Experimenten auflisten"
+msgstr ""
 
 #: /views/cultures/add.ctp:20;20;20
 #: /views/cultures/edit.ctp:22;22;22
@@ -1029,7 +1029,7 @@ msgstr "Experimenten auflisten"
 #: /views/experiments/index.ctp:53;53;53
 #: /views/experiments/view.ctp:42;42;42
 msgid "New Experiment"
-msgstr "Neues Experiment Zufügen"
+msgstr ""
 
 #: /views/cultures/add.ctp:21;21;21
 #: /views/cultures/edit.ctp:23;23;23
@@ -1046,7 +1046,7 @@ msgstr "Neues Experiment Zufügen"
 #: /views/samples/index.ctp:58;58;58
 #: /views/samples/view.ctp:53;53;53
 msgid "List Plants"
-msgstr "Pflanzen auflisten"
+msgstr ""
 
 #: /views/cultures/add.ctp:22;22;22
 #: /views/cultures/edit.ctp:24;24;24
@@ -1062,16 +1062,16 @@ msgstr "Pflanzen auflisten"
 #: /views/samples/index.ctp:59;59;59
 #: /views/samples/view.ctp:54;97;54;97;54;97
 msgid "New Plant"
-msgstr "Neue Pflanze zufügen"
+msgstr ""
 
 #: /views/cultures/edit.ctp:4;4;4
 #: /views/cultures/view.ctp:39;39;39
 msgid "Edit Culture"
-msgstr "Kultur bearbeiten"
+msgstr ""
 
 #: /views/cultures/index.ctp:2;2;2
 msgid "Cultures"
-msgstr "Kulturen"
+msgstr ""
 
 #: /views/cultures/index.ctp:55;55;55
 #: /views/cultures/view.ctp:42;42;42
@@ -1084,64 +1084,64 @@ msgstr "Kulturen"
 #: /views/plants/index.ctp:59;59;59
 #: /views/plants/view.ctp:44;44;44
 msgid "New Culture"
-msgstr "Neue Kultur"
+msgstr ""
 
 #: /views/cultures/view.ctp:2;2;2
 #: /views/plants/view.ctp:19;19;19
 msgid "Culture"
-msgstr "Kultur"
+msgstr ""
 
 #: /views/cultures/view.ctp:14;14;14
 #: /views/experiments/view.ctp:54;54;54
 msgid "Condition"
-msgstr "Bedingung"
+msgstr ""
 
 #: /views/cultures/view.ctp:19;58;19;58;19;58
 #: /views/experiments/view.ctp:55;55;55
 #: /views/plants/view.ctp:24;24;24
 #: /views/samples/view.ctp:19;66;19;66;19;66
 msgid "Created"
-msgstr "Herstellt"
+msgstr ""
 
 #: /views/cultures/view.ctp:24;24;24
 #: /views/experiments/view.ctp:56;56;56
 #: /views/samples/view.ctp:39;39;39
 msgid "Description"
-msgstr "Beschreibung"
+msgstr ""
 
 #: /views/cultures/view.ctp:29;29;29
 #: /views/experiments/view.ctp:2;2;2
 msgid "Experiment"
-msgstr "Experiment"
+msgstr ""
 
 #: /views/cultures/view.ctp:40;40;40
 msgid "Delete Culture"
-msgstr "Kultur löschen"
+msgstr ""
 
 #: /views/cultures/view.ctp:50;50;50
 #: /views/samples/view.ctp:58;58;58
 msgid "Related Plants"
-msgstr "Ähnliche Pflanze"
+msgstr ""
 
 #: /views/cultures/view.ctp:56;56;56
 #: /views/plants/view.ctp:14;14;14
 #: /views/samples/view.ctp:64;64;64
 msgid "Aliquot"
-msgstr "Aliquot"
+msgstr ""
 
 #: /views/cultures/view.ctp:57;57;57
 #: /views/samples/view.ctp:65;65;65
 msgid "Culture Id"
-msgstr "Kultur ID"
+msgstr ""
 
 #: /views/cultures/view.ctp:59;59;59
 #: /views/samples/view.ctp:67;67;67
 msgid "Sample Id"
-msgstr "Probe ID"
+msgstr ""
 
 #: /views/entities/add.ctp:4;4;4
 msgid "Add Entity"
-msgstr "Entität zufügen"
+msgstr ""
 
 #: /views/entities/add.ctp:18;18;18
 #: /views/entities/edit.ctp:20;20;20
@@ -1152,16 +1152,16 @@ msgstr "Entität zufügen"
 #: /views/phenotype_entities/index.ctp:54;54;54
 #: /views/phenotype_entities/view.ctp:30;30;30
 msgid "List Entities"
-msgstr "Entitäten auflisten"
+msgstr ""
 
 #: /views/entities/edit.ctp:4;4;4
 #: /views/entities/view.ctp:29;29;29
 msgid "Edit Entity"
-msgstr "Entität bearbeiten"
+msgstr ""
 
 #: /views/entities/index.ctp:2;2;2
 msgid "Entities"
-msgstr "Entitäten"
+msgstr ""
 
 #: /views/entities/index.ctp:49;49;49
 #: /views/entities/view.ctp:32;32;32
@@ -1170,77 +1170,77 @@ msgstr "Entitäten"
 #: /views/phenotype_entities/index.ctp:55;55;55
 #: /views/phenotype_entities/view.ctp:31;31;31
 msgid "New Entity"
-msgstr "Neue Entität"
+msgstr ""
 
 #: /views/entities/upload.ctp:4;4;4
 msgid "Add Entities"
-msgstr "Entitäten zufügen"
+msgstr ""
 
 #: /views/entities/view.ctp:2;2;2
 #: /views/phenotype_entities/view.ctp:14;14;14
 msgid "Entity"
-msgstr "Entität"
+msgstr ""
 
 #: /views/entities/view.ctp:14;14;14
 msgid "PO"
-msgstr "PO"
+msgstr ""
 
 #: /views/entities/view.ctp:19;19;19
 msgid "Definition"
-msgstr "Definition"
+msgstr ""
 
 #: /views/entities/view.ctp:30;30;30
 msgid "Delete Entity"
-msgstr "Entität löschen"
+msgstr ""
 
 #: /views/experiments/add.ctp:4;4;4
 msgid "Add Experiment"
-msgstr "Experiment zufügen"
+msgstr ""
 
 #: /views/experiments/edit.ctp:4;4;4
 #: /views/experiments/view.ctp:39;39;39
 msgid "Edit Experiment"
-msgstr "Experiment bearbeiten"
+msgstr ""
 
 #: /views/experiments/index.ctp:2;2;2
 msgid "Experiments"
-msgstr "Experimente"
+msgstr ""
 
 #: /views/experiments/view.ctp:14;14;14
 msgid "Startdate"
-msgstr "Anfangsdatum"
+msgstr ""
 
 #: /views/experiments/view.ctp:19;19;19
 msgid "Project"
-msgstr "Projekt"
+msgstr ""
 
 #: /views/experiments/view.ctp:24;24;24
 msgid "Study"
-msgstr "Versuch"
+msgstr ""
 
 #: /views/experiments/view.ctp:29;29;29
 msgid "Protocol"
-msgstr "Protokol"
+msgstr ""
 
 #: /views/experiments/view.ctp:40;40;40
 msgid "Delete Experiment"
-msgstr "Experiment löschen"
+msgstr ""
 
 #: /views/experiments/view.ctp:48;48;48
 msgid "Related Cultures"
-msgstr "Ähnliche Kulturen"
+msgstr ""
 
 #: /views/experiments/view.ctp:57;57;57
 msgid "Experiment Id"
-msgstr "Experiment ID"
+msgstr ""
 
 #: /views/layouts/default.ctp:25;25;25
 msgid "TROST"
-msgstr "TROST"
+msgstr ""
 
 #: /views/layouts/default.ctp:39;39;39
 msgid "TROST: Trockentoleranz von Stärkekartoffelsorten"
-msgstr "TROST: Trockentoleranz von Stärkekartoffelsorten"
+msgstr ""
 
 #: /views/layouts/default.ctp:61;61;61
 #: cake/console/templates/skel/views/layouts/default.ctp:39;50
@@ -1422,7 +1422,7 @@ msgstr ""
 #: /views/values/upload.ctp:14;14;14
 #: /views/values/view.ctp:26;26;26
 msgid "List Values"
-msgstr "Werte auflisten"
+msgstr ""
 
 #: /views/phenotype_values/add.ctp:19;19;19
 #: /views/phenotype_values/edit.ctp:21;21;21
@@ -1431,7 +1431,7 @@ msgstr "Werte auflisten"
 #: /views/values/index.ctp:47;47;47
 #: /views/values/view.ctp:27;27;27
 msgid "New Value"
-msgstr "Neuer Wert"
+msgstr ""
 
 #: /views/phenotype_values/edit.ctp:4;4;4
 #: /views/phenotype_values/view.ctp:29;29;29
@@ -1457,12 +1457,12 @@ msgstr ""
 #: /views/phenotype_values/view.ctp:9;9;9
 #: /views/values/view.ctp:2;14;2;14;2;14
 msgid "Value"
-msgstr "Wert"
+msgstr ""
 
 #: /views/phenotype_values/view.ctp:19;19;19
 #: /views/phenotypes/view.ctp:186;186;186
 msgid "Number"
-msgstr "Nummer"
+msgstr ""
 
 #: /views/phenotype_values/view.ctp:30;30;30
 msgid "Delete Phenotype Value"
@@ -1470,7 +1470,7 @@ msgstr ""
 
 #: /views/phenotypes/add.ctp:4;4;4
 msgid "Add Phenotype"
-msgstr "Phänotyp zufügen"
+msgstr ""
 
 #: /views/phenotypes/add.ctp:21;21;21
 #: /views/phenotypes/edit.ctp:23;23;23
@@ -1479,7 +1479,7 @@ msgstr "Phänotyp zufügen"
 #: /views/programs/edit.ctp:17;17;17
 #: /views/programs/view.ctp:21;21;21
 msgid "List Programs"
-msgstr "Programme auflisten"
+msgstr ""
 
 #: /views/phenotypes/add.ctp:22;22;22
 #: /views/phenotypes/edit.ctp:24;24;24
@@ -1487,39 +1487,39 @@ msgstr "Programme auflisten"
 #: /views/programs/index.ctp:45;45;45
 #: /views/programs/view.ctp:22;22;22
 msgid "New Program"
-msgstr "Neues Programm"
+msgstr ""
 
 #: /views/phenotypes/edit.ctp:4;4;4
 #: /views/phenotypes/view.ctp:44;44;44
 msgid "Edit Phenotype"
-msgstr "Phänotyp bearbeiten"
+msgstr ""
 
 #: /views/phenotypes/index.ctp:2;2;2
 msgid "Phenotypes"
-msgstr "Phänotypen"
+msgstr ""
 
 #: /views/phenotypes/index.ctp:59;59;59
 #: /views/phenotypes/upload.ctp:25;25;25
 msgid "Upload Scanner File"
-msgstr "Scanner Datei hochladen"
+msgstr ""
 
 #: /views/phenotypes/upload.ctp:5;5;5
 msgid "Upload scanner file"
-msgstr "Scanner Datei hochladen"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:19;19;19
 #: /views/programs/view.ctp:2;2;2
 msgid "Program"
-msgstr "Programm"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:34;34;34
 #: /views/plants/view.ctp:2;2;2
 msgid "Plant"
-msgstr "Pflanze"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:45;45;45
 msgid "Delete Phenotype"
-msgstr "Phänotyp löschen"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:63;63;63
 msgid "Related Phenotype Bbches"
@@ -1527,11 +1527,11 @@ msgstr ""
 
 #: /views/phenotypes/view.ctp:68;106;144;185;68;106;144;185;68;106;144;185
 msgid "Phenotype Id"
-msgstr "Phänotyp ID"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:69;69;69
 msgid "Bbch Id"
-msgstr "BBCH Kode ID"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:101;101;101
 msgid "Related Phenotype Entities"
@@ -1539,7 +1539,7 @@ msgstr ""
 
 #: /views/phenotypes/view.ctp:107;107;107
 msgid "Entity Id"
-msgstr "Entität ID"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:139;139;139
 msgid "Related Phenotype Raws"
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: /views/phenotypes/view.ctp:145;145;145
 msgid "Raw Id"
-msgstr "Rohdaten ID"
+msgstr ""
 
 #: /views/phenotypes/view.ctp:179;179;179
 msgid "Related Phenotype Values"
@@ -1555,11 +1555,11 @@ msgstr ""
 
 #: /views/phenotypes/view.ctp:184;184;184
 msgid "Value Id"
-msgstr "Wert ID"
+msgstr ""
 
 #: /views/plants/add.ctp:4;4;4
 msgid "Add Plant"
-msgstr "Pflanze zufügen"
+msgstr ""
 
 #: /views/plants/add.ctp:21;21;21
 #: /views/plants/edit.ctp:23;23;23
@@ -1569,7 +1569,7 @@ msgstr "Pflanze zufügen"
 #: /views/samples/edit.ctp:22;22;22
 #: /views/samples/view.ctp:51;51;51
 msgid "List Samples"
-msgstr "Proben auflisten"
+msgstr ""
 
 #: /views/plants/add.ctp:22;22;22
 #: /views/plants/edit.ctp:24;24;24
@@ -1578,149 +1578,147 @@ msgstr "Proben auflisten"
 #: /views/samples/index.ctp:57;57;57
 #: /views/samples/view.ctp:52;52;52
 msgid "New Sample"
-msgstr "Neue Probe"
+msgstr ""
 
 #: /views/plants/edit.ctp:4;4;4
 #: /views/plants/view.ctp:39;39;39
 msgid "Edit Plant"
-msgstr "Pflanze bearbeiten"
+msgstr ""
 
 #: /views/plants/index.ctp:2;2;2
 msgid "Plants"
-msgstr "Pflanzen"
+msgstr ""
 
 #: /views/plants/view.ctp:29;29;29
 #: /views/samples/view.ctp:2;2;2
 msgid "Sample"
-msgstr "Probe"
+msgstr ""
 
 #: /views/plants/view.ctp:40;40;40
 msgid "Delete Plant"
-msgstr "Pflanze löschen"
+msgstr ""
 
 #: /views/programs/add.ctp:4;4;4
 msgid "Add Program"
-msgstr "Programm zufügen"
+msgstr ""
 
 #: /views/programs/edit.ctp:4;4;4
 #: /views/programs/view.ctp:19;19;19
 msgid "Edit Program"
-msgstr "Programm bearbeiten"
+msgstr ""
 
 #: /views/programs/index.ctp:2;2;2
 msgid "Programs"
-msgstr "Programme"
+msgstr ""
 
 #: /views/programs/view.ctp:20;20;20
 msgid "Delete Program"
-msgstr "Programm löschen"
+msgstr ""
 
 #: /views/raws/add.ctp:4;4;4
 msgid "Add Raw"
-msgstr "Rohdaten zufügen"
+msgstr ""
 
 #: /views/raws/edit.ctp:4;4;4
 #: /views/raws/view.ctp:19;19;19
 msgid "Edit Raw"
-msgstr "Rohdaten bearbeiten"
+msgstr ""
 
 #: /views/raws/index.ctp:2;2;2
 msgid "Raws"
-msgstr "Rohdaten"
+msgstr ""
 
 #: /views/raws/view.ctp:9;9;9
 msgid "Data"
-msgstr "Data"
+msgstr ""
 
 #: /views/raws/view.ctp:20;20;20
 msgid "Delete Raw"
-msgstr "Rohdaten löschen"
+msgstr ""
 
 #: /views/samples/add.ctp:4;4;4
 msgid "Add Sample"
-msgstr "Probe zufügen"
+msgstr ""
 
 #: /views/samples/edit.ctp:4;4;4
 #: /views/samples/view.ctp:49;49;49
 msgid "Edit Sample"
-msgstr "Probe bearbeiten"
+msgstr ""
 
 #: /views/samples/index.ctp:2;2;2
 msgid "Samples"
-msgstr "Proben"
+msgstr ""
 
 #: /views/samples/view.ctp:14;14;14
 msgid "Supplier"
-msgstr "Lieferer"
+msgstr ""
 
 #: /views/samples/view.ctp:24;24;24
 msgid "Created By"
-msgstr "Hersteller"
+msgstr ""
 
 #: /views/samples/view.ctp:29;29;29
 msgid "Mag"
-msgstr "Mag"
+msgstr ""
 
 #: /views/samples/view.ctp:34;34;34
 msgid "Alias"
-msgstr "Alias"
+msgstr ""
 
 #: /views/samples/view.ctp:50;50;50
 msgid "Delete Sample"
-msgstr "Probe löschen"
+msgstr ""
 
 #: /views/species/add.ctp:4;4;4
 msgid "Add Species"
-msgstr "Sorte zufügen"
+msgstr ""
 
 #: /views/species/edit.ctp:4;4;4
 #: /views/species/view.ctp:19;19;19
 msgid "Edit Species"
-msgstr "Sorte bearbeiten"
+msgstr ""
 
 #: /views/species/view.ctp:20;20;20
 msgid "Delete Species"
-msgstr "Sorte löschen"
+msgstr ""
 
 #: /views/species/view.ctp:28;28;28
 msgid "Related Bbches"
-msgstr "Ähnliche BBCH Kodes"
+msgstr ""
 
 #: /views/species/view.ctp:35;35;35
 msgid "Species Id"
-msgstr "Sorte ID"
+msgstr ""
 
 #: /views/values/add.ctp:4;4;4
 msgid "Add Value"
-msgstr "Wert zufügen"
+msgstr ""
 
 #: /views/values/edit.ctp:4;4;4
 #: /views/values/view.ctp:24;24;24
 msgid "Edit Value"
-msgstr "Wert bearbeiten"
+msgstr ""
 
 #: /views/values/index.ctp:2;2;2
 msgid "Values"
-msgstr "Werte"
+msgstr ""
 
 #: /views/values/upload.ctp:4;4;4
 msgid "Add Values"
-msgstr "Werte zufügen"
+msgstr ""
 
 #: /views/values/view.ctp:9;9;9
 msgid "Attribute"
-msgstr "Attribut"
+msgstr ""
 
 #: /views/values/view.ctp:25;25;25
 msgid "Delete Value"
-msgstr "Wert löschen"
+msgstr ""
 
 #: /webroot/test.php:88;88;88
 #: cake/console/templates/skel/webroot/test.php:88
 msgid "Debug setting does not allow access to this url."
 msgstr ""
-
-
 
 #: cake/console/cake.php:329
 msgid "Error: Class %s could not be loaded."
