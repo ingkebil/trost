@@ -1,0 +1,4408 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2011-03-23 17:15+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /controllers/bbches_controller.php:41;41
+msgid "The BBCH codes have been saved"
+msgstr "Die BBCH codes sind gespeichert"
+
+#: /controllers/bbches_controller.php:47;47
+msgid "The BBCH codes could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/bbches_controller.php:60;83;60;83
+msgid "Invalid bbch"
+msgstr ""
+
+#: /controllers/bbches_controller.php:70;88;70;88
+msgid "The bbch has been saved"
+msgstr ""
+
+#: /controllers/bbches_controller.php:73;91;73;91
+msgid "The bbch could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/bbches_controller.php:104;104
+msgid "Invalid id for bbch"
+msgstr ""
+
+#: /controllers/bbches_controller.php:108;108
+msgid "Bbch deleted"
+msgstr ""
+
+#: /controllers/bbches_controller.php:111;111
+msgid "Bbch was not deleted"
+msgstr ""
+
+#: /controllers/cultures_controller.php:13;35;13;35
+msgid "Invalid culture"
+msgstr ""
+
+#: /controllers/cultures_controller.php:23;40;23;40
+msgid "The culture has been saved"
+msgstr ""
+
+#: /controllers/cultures_controller.php:26;43;26;43
+msgid "The culture could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/cultures_controller.php:55;55
+msgid "Invalid id for culture"
+msgstr ""
+
+#: /controllers/cultures_controller.php:59;59
+msgid "Culture deleted"
+msgstr ""
+
+#: /controllers/cultures_controller.php:62;62
+msgid "Culture was not deleted"
+msgstr ""
+
+#: /controllers/entities_controller.php:42;70;87;42;70;87
+msgid "The entity has been saved"
+msgstr ""
+
+#: /controllers/entities_controller.php:48;73;90;48;73;90
+msgid "The entity could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/entities_controller.php:60;82;60;82
+msgid "Invalid entity"
+msgstr ""
+
+#: /controllers/entities_controller.php:102;102
+msgid "Invalid id for entity"
+msgstr ""
+
+#: /controllers/entities_controller.php:106;106
+msgid "Entity deleted"
+msgstr ""
+
+#: /controllers/entities_controller.php:109;109
+msgid "Entity was not deleted"
+msgstr ""
+
+#: /controllers/experiments_controller.php:13;33;13;33
+msgid "Invalid experiment"
+msgstr ""
+
+#: /controllers/experiments_controller.php:23;38;23;38
+msgid "The experiment has been saved"
+msgstr ""
+
+#: /controllers/experiments_controller.php:26;41;26;41
+msgid "The experiment could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/experiments_controller.php:51;51
+msgid "Invalid id for experiment"
+msgstr ""
+
+#: /controllers/experiments_controller.php:55;55
+msgid "Experiment deleted"
+msgstr ""
+
+#: /controllers/experiments_controller.php:58;58
+msgid "Experiment was not deleted"
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:13;36;13;36
+msgid "Invalid phenotype bbch"
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:23;41;23;41
+msgid "The phenotype bbch has been saved"
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:26;44;26;44
+msgid "The phenotype bbch could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:57;57
+msgid "Invalid id for phenotype bbch"
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:61;61
+msgid "Phenotype bbch deleted"
+msgstr ""
+
+#: /controllers/phenotype_bbches_controller.php:64;64
+msgid "Phenotype bbch was not deleted"
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:13;36;13;36
+msgid "Invalid phenotype entity"
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:23;41;23;41
+msgid "The phenotype entity has been saved"
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:26;44;26;44
+msgid "The phenotype entity could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:57;57
+msgid "Invalid id for phenotype entity"
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:61;61
+msgid "Phenotype entity deleted"
+msgstr ""
+
+#: /controllers/phenotype_entities_controller.php:64;64
+msgid "Phenotype entity was not deleted"
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:13;36;13;36
+msgid "Invalid phenotype raw"
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:23;41;23;41
+msgid "The phenotype raw has been saved"
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:26;44;26;44
+msgid "The phenotype raw could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:57;57
+msgid "Invalid id for phenotype raw"
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:61;61
+msgid "Phenotype raw deleted"
+msgstr ""
+
+#: /controllers/phenotype_raws_controller.php:64;64
+msgid "Phenotype raw was not deleted"
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:13;36;13;36
+msgid "Invalid phenotype value"
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:23;41;23;41
+msgid "The phenotype value has been saved"
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:26;44;26;44
+msgid "The phenotype value could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:57;57
+msgid "Invalid id for phenotype value"
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:61;61
+msgid "Phenotype value deleted"
+msgstr ""
+
+#: /controllers/phenotype_values_controller.php:64;64
+msgid "Phenotype value was not deleted"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:133;183;201;133;183;201
+msgid "The phenotype has been saved"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:136;186;204;136;186;204
+msgid "The phenotype could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:173;196;173;196
+msgid "Invalid phenotype"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:217;217
+msgid "Invalid id for phenotype"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:221;221
+msgid "Phenotype deleted"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:224;224
+msgid "Phenotype was not deleted"
+msgstr ""
+
+#: /controllers/plants_controller.php:13;36;13;36
+msgid "Invalid plant"
+msgstr ""
+
+#: /controllers/plants_controller.php:23;41;23;41
+msgid "The plant has been saved"
+msgstr ""
+
+#: /controllers/plants_controller.php:26;44;26;44
+msgid "The plant could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/plants_controller.php:57;57
+msgid "Invalid id for plant"
+msgstr ""
+
+#: /controllers/plants_controller.php:61;61
+msgid "Plant deleted"
+msgstr ""
+
+#: /controllers/plants_controller.php:64;64
+msgid "Plant was not deleted"
+msgstr ""
+
+#: /controllers/programs_controller.php:13;33;13;33
+msgid "Invalid program"
+msgstr ""
+
+#: /controllers/programs_controller.php:23;38;23;38
+msgid "The program has been saved"
+msgstr ""
+
+#: /controllers/programs_controller.php:26;41;26;41
+msgid "The program could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/programs_controller.php:51;51
+msgid "Invalid id for program"
+msgstr ""
+
+#: /controllers/programs_controller.php:55;55
+msgid "Program deleted"
+msgstr ""
+
+#: /controllers/programs_controller.php:58;58
+msgid "Program was not deleted"
+msgstr ""
+
+#: /controllers/raws_controller.php:13;35;13;35
+msgid "Invalid raw"
+msgstr ""
+
+#: /controllers/raws_controller.php:23;40;23;40
+msgid "The raw has been saved"
+msgstr ""
+
+#: /controllers/raws_controller.php:26;43;26;43
+msgid "The raw could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/raws_controller.php:55;55
+msgid "Invalid id for raw"
+msgstr ""
+
+#: /controllers/raws_controller.php:59;59
+msgid "Raw deleted"
+msgstr ""
+
+#: /controllers/raws_controller.php:62;62
+msgid "Raw was not deleted"
+msgstr ""
+
+#: /controllers/samples_controller.php:13;33;13;33
+msgid "Invalid sample"
+msgstr ""
+
+#: /controllers/samples_controller.php:23;38;23;38
+msgid "The sample has been saved"
+msgstr ""
+
+#: /controllers/samples_controller.php:26;41;26;41
+msgid "The sample could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/samples_controller.php:51;51
+msgid "Invalid id for sample"
+msgstr ""
+
+#: /controllers/samples_controller.php:55;55
+msgid "Sample deleted"
+msgstr ""
+
+#: /controllers/samples_controller.php:58;58
+msgid "Sample was not deleted"
+msgstr ""
+
+#: /controllers/species_controller.php:13;33;13;33
+msgid "Invalid species"
+msgstr ""
+
+#: /controllers/species_controller.php:23;38;23;38
+msgid "The species has been saved"
+msgstr ""
+
+#: /controllers/species_controller.php:26;41;26;41
+msgid "The species could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/species_controller.php:51;51
+msgid "Invalid id for species"
+msgstr ""
+
+#: /controllers/species_controller.php:55;55
+msgid "Species deleted"
+msgstr ""
+
+#: /controllers/species_controller.php:58;58
+msgid "Species was not deleted"
+msgstr ""
+
+#: /controllers/values_controller.php:32;32
+msgid "The values have been saved"
+msgstr ""
+
+#: /controllers/values_controller.php:38;38
+msgid "The values could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/values_controller.php:50;72;50;72
+msgid "Invalid value"
+msgstr ""
+
+#: /controllers/values_controller.php:60;77;60;77
+msgid "The value has been saved"
+msgstr ""
+
+#: /controllers/values_controller.php:63;80;63;80
+msgid "The value could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/values_controller.php:92;92
+msgid "Invalid id for value"
+msgstr ""
+
+#: /controllers/values_controller.php:96;96
+msgid "Value deleted"
+msgstr ""
+
+#: /controllers/values_controller.php:99;99
+msgid "Value was not deleted"
+msgstr ""
+
+#: /views/bbches/add.ctp:4;4
+msgid "Add Bbch"
+msgstr ""
+
+#: /views/bbches/add.ctp:12;12
+#: /views/bbches/edit.ctp:13;13
+#: /views/bbches/upload.ctp:10;10
+#: /views/cultures/add.ctp:12;12
+#: /views/cultures/edit.ctp:13;13
+#: /views/entities/add.ctp:12;12
+#: /views/entities/edit.ctp:13;13
+#: /views/entities/upload.ctp:9;9
+#: /views/experiments/add.ctp:13;13
+#: /views/experiments/edit.ctp:14;14
+#: /views/phenotype_bbches/add.ctp:10;10
+#: /views/phenotype_bbches/edit.ctp:11;11
+#: /views/phenotype_entities/add.ctp:10;10
+#: /views/phenotype_entities/edit.ctp:11;11
+#: /views/phenotype_raws/add.ctp:11;11
+#: /views/phenotype_raws/edit.ctp:12;12
+#: /views/phenotype_values/add.ctp:11;11
+#: /views/phenotype_values/edit.ctp:12;12
+#: /views/phenotypes/add.ctp:14;14
+#: /views/phenotypes/edit.ctp:15;15
+#: /views/phenotypes/upload.ctp:20;20
+#: /views/plants/add.ctp:12;12
+#: /views/plants/edit.ctp:13;13
+#: /views/programs/add.ctp:9;9
+#: /views/programs/edit.ctp:10;10
+#: /views/raws/add.ctp:10;10
+#: /views/raws/edit.ctp:11;11
+#: /views/samples/add.ctp:14;14
+#: /views/samples/edit.ctp:15;15
+#: /views/species/add.ctp:9;9
+#: /views/species/edit.ctp:10;10
+#: /views/values/add.ctp:11;11
+#: /views/values/edit.ctp:12;12
+#: /views/values/upload.ctp:9;9
+#: cake/libs/view/helpers/form.php:368;1313
+#: cake/libs/view/scaffolds/edit.ctp:24
+msgid "Submit"
+msgstr ""
+
+#: /views/bbches/add.ctp:15;15
+#: /views/bbches/edit.ctp:16;16
+#: /views/bbches/index.ctp:9;49;9;49
+#: /views/bbches/upload.ctp:13;13
+#: /views/bbches/view.ctp:27;51;27;51
+#: /views/cultures/add.ctp:15;15
+#: /views/cultures/edit.ctp:16;16
+#: /views/cultures/index.ctp:11;53;11;53
+#: /views/cultures/view.ctp:37;60;37;60
+#: /views/entities/add.ctp:15;15
+#: /views/entities/edit.ctp:16;16
+#: /views/entities/index.ctp:9;47;9;47
+#: /views/entities/upload.ctp:12;12
+#: /views/entities/view.ctp:27;49;27;49
+#: /views/experiments/add.ctp:16;16
+#: /views/experiments/edit.ctp:17;17
+#: /views/experiments/index.ctp:11;51;11;51
+#: /views/experiments/view.ctp:37;58;37;58
+#: /views/phenotype_bbches/add.ctp:13;13
+#: /views/phenotype_bbches/edit.ctp:14;14
+#: /views/phenotype_bbches/index.ctp:8;49;8;49
+#: /views/phenotype_bbches/view.ctp:22;22
+#: /views/phenotype_entities/add.ctp:13;13
+#: /views/phenotype_entities/edit.ctp:14;14
+#: /views/phenotype_entities/index.ctp:8;49;8;49
+#: /views/phenotype_entities/view.ctp:22;22
+#: /views/phenotype_raws/add.ctp:14;14
+#: /views/phenotype_raws/edit.ctp:15;15
+#: /views/phenotype_raws/index.ctp:9;51;9;51
+#: /views/phenotype_raws/view.ctp:27;27
+#: /views/phenotype_values/add.ctp:14;14
+#: /views/phenotype_values/edit.ctp:15;15
+#: /views/phenotype_values/index.ctp:9;51;9;51
+#: /views/phenotype_values/view.ctp:27;27
+#: /views/phenotypes/add.ctp:17;17
+#: /views/phenotypes/edit.ctp:18;18
+#: /views/phenotypes/index.ctp:12;57;12;57
+#: /views/phenotypes/upload.ctp:23;23
+#: /views/phenotypes/view.ctp:42;70;108;147;187;42;70;108;147;187
+#: /views/plants/add.ctp:15;15
+#: /views/plants/edit.ctp:16;16
+#: /views/plants/index.ctp:11;55;11;55
+#: /views/plants/view.ctp:37;63;37;63
+#: /views/programs/add.ctp:12;12
+#: /views/programs/edit.ctp:13;13
+#: /views/programs/index.ctp:7;43;7;43
+#: /views/programs/view.ctp:17;39;17;39
+#: /views/raws/add.ctp:13;13
+#: /views/raws/edit.ctp:14;14
+#: /views/raws/index.ctp:7;43;7;43
+#: /views/raws/view.ctp:17;39;17;39
+#: /views/samples/add.ctp:17;17
+#: /views/samples/edit.ctp:18;18
+#: /views/samples/index.ctp:13;55;13;55
+#: /views/samples/view.ctp:47;68;47;68
+#: /views/species/add.ctp:12;12
+#: /views/species/edit.ctp:13;13
+#: /views/species/index.ctp:7;43;7;43
+#: /views/species/view.ctp:17;36;17;36
+#: /views/values/add.ctp:14;14
+#: /views/values/edit.ctp:15;15
+#: /views/values/index.ctp:8;45;8;45
+#: /views/values/upload.ctp:12;12
+#: /views/values/view.ctp:22;44;22;44
+#: cake/libs/view/scaffolds/edit.ctp:28
+#: cake/libs/view/scaffolds/index.ctp:27;77
+#: cake/libs/view/scaffolds/view.ctp:50
+msgid "Actions"
+msgstr ""
+
+#: /views/bbches/add.ctp:18;18
+#: /views/bbches/edit.ctp:20;20
+#: /views/bbches/upload.ctp:15;15
+#: /views/bbches/view.ctp:31;31
+#: /views/phenotype_bbches/add.ctp:19;19
+#: /views/phenotype_bbches/edit.ctp:21;21
+#: /views/phenotype_bbches/index.ctp:54;54
+#: /views/phenotype_bbches/view.ctp:30;30
+#: /views/species/add.ctp:16;16
+#: /views/species/edit.ctp:18;18
+#: /views/species/index.ctp:46;46
+#: /views/species/view.ctp:23;23
+msgid "List Bbches"
+msgstr "Alle BBCH codes anzeigen"
+
+#: /views/bbches/add.ctp:19;19
+#: /views/bbches/edit.ctp:21;21
+#: /views/bbches/index.ctp:52;52
+#: /views/bbches/upload.ctp:16;16
+#: /views/bbches/view.ctp:33;33
+#: /views/species/add.ctp:15;15
+#: /views/species/edit.ctp:17;17
+#: /views/species/view.ctp:21;21
+msgid "List Species"
+msgstr ""
+
+#: /views/bbches/add.ctp:20;20
+#: /views/bbches/edit.ctp:22;22
+#: /views/bbches/index.ctp:53;53
+#: /views/bbches/upload.ctp:17;17
+#: /views/bbches/view.ctp:34;34
+#: /views/species/index.ctp:45;45
+#: /views/species/view.ctp:22;22
+msgid "New Species"
+msgstr ""
+
+#: /views/bbches/add.ctp:21;21
+#: /views/bbches/edit.ctp:23;23
+#: /views/bbches/index.ctp:54;54
+#: /views/bbches/upload.ctp:18;18
+#: /views/bbches/view.ctp:35;35
+#: /views/entities/add.ctp:19;19
+#: /views/entities/edit.ctp:21;21
+#: /views/entities/index.ctp:50;50
+#: /views/entities/upload.ctp:16;16
+#: /views/entities/view.ctp:33;33
+#: /views/phenotype_bbches/add.ctp:17;17
+#: /views/phenotype_bbches/edit.ctp:19;19
+#: /views/phenotype_bbches/index.ctp:52;52
+#: /views/phenotype_bbches/view.ctp:28;28
+#: /views/phenotype_entities/add.ctp:17;17
+#: /views/phenotype_entities/edit.ctp:19;19
+#: /views/phenotype_entities/index.ctp:52;52
+#: /views/phenotype_entities/view.ctp:28;28
+#: /views/phenotype_raws/add.ctp:18;18
+#: /views/phenotype_raws/edit.ctp:20;20
+#: /views/phenotype_raws/index.ctp:54;54
+#: /views/phenotype_raws/view.ctp:33;33
+#: /views/phenotype_values/add.ctp:20;20
+#: /views/phenotype_values/edit.ctp:22;22
+#: /views/phenotype_values/index.ctp:56;56
+#: /views/phenotype_values/view.ctp:35;35
+#: /views/phenotypes/add.ctp:20;20
+#: /views/phenotypes/edit.ctp:22;22
+#: /views/phenotypes/upload.ctp:26;26
+#: /views/phenotypes/view.ctp:46;46
+#: /views/plants/add.ctp:23;23
+#: /views/plants/edit.ctp:25;25
+#: /views/plants/index.ctp:62;62
+#: /views/plants/view.ctp:47;47
+#: /views/programs/add.ctp:16;16
+#: /views/programs/edit.ctp:18;18
+#: /views/programs/index.ctp:46;46
+#: /views/programs/view.ctp:23;23
+#: /views/raws/add.ctp:17;17
+#: /views/raws/edit.ctp:19;19
+#: /views/raws/index.ctp:46;46
+#: /views/raws/view.ctp:23;23
+#: /views/values/add.ctp:18;18
+#: /views/values/edit.ctp:20;20
+#: /views/values/index.ctp:48;48
+#: /views/values/upload.ctp:15;15
+#: /views/values/view.ctp:28;28
+msgid "List Phenotypes"
+msgstr ""
+
+#: /views/bbches/add.ctp:22;22
+#: /views/bbches/edit.ctp:24;24
+#: /views/bbches/index.ctp:55;55
+#: /views/bbches/upload.ctp:19;19
+#: /views/bbches/view.ctp:36;81;36;81
+#: /views/entities/add.ctp:20;20
+#: /views/entities/edit.ctp:22;22
+#: /views/entities/index.ctp:51;51
+#: /views/entities/upload.ctp:17;17
+#: /views/entities/view.ctp:34;79;34;79
+#: /views/phenotype_bbches/add.ctp:18;18
+#: /views/phenotype_bbches/edit.ctp:20;20
+#: /views/phenotype_bbches/index.ctp:53;53
+#: /views/phenotype_bbches/view.ctp:29;29
+#: /views/phenotype_entities/add.ctp:18;18
+#: /views/phenotype_entities/edit.ctp:20;20
+#: /views/phenotype_entities/index.ctp:53;53
+#: /views/phenotype_entities/view.ctp:29;29
+#: /views/phenotype_raws/add.ctp:19;19
+#: /views/phenotype_raws/edit.ctp:21;21
+#: /views/phenotype_raws/index.ctp:55;55
+#: /views/phenotype_raws/view.ctp:34;34
+#: /views/phenotype_values/add.ctp:21;21
+#: /views/phenotype_values/edit.ctp:23;23
+#: /views/phenotype_values/index.ctp:57;57
+#: /views/phenotype_values/view.ctp:36;36
+#: /views/phenotypes/index.ctp:59;59
+#: /views/phenotypes/view.ctp:47;47
+#: /views/plants/add.ctp:24;24
+#: /views/plants/edit.ctp:26;26
+#: /views/plants/index.ctp:63;63
+#: /views/plants/view.ctp:48;93;48;93
+#: /views/programs/add.ctp:17;17
+#: /views/programs/edit.ctp:19;19
+#: /views/programs/index.ctp:47;47
+#: /views/programs/view.ctp:24;69;24;69
+#: /views/raws/add.ctp:18;18
+#: /views/raws/edit.ctp:20;20
+#: /views/raws/index.ctp:47;47
+#: /views/raws/view.ctp:24;69;24;69
+#: /views/values/add.ctp:19;19
+#: /views/values/edit.ctp:21;21
+#: /views/values/index.ctp:49;49
+#: /views/values/upload.ctp:16;16
+#: /views/values/view.ctp:29;74;29;74
+msgid "New Phenotype"
+msgstr ""
+
+#: /views/bbches/edit.ctp:4;4
+#: /views/bbches/view.ctp:29;29
+msgid "Edit Bbch"
+msgstr ""
+
+#: /views/bbches/edit.ctp:19;19
+#: /views/bbches/index.ctp:29;29
+#: /views/bbches/view.ctp:72;72
+#: /views/cultures/edit.ctp:19;19
+#: /views/cultures/index.ctp:33;33
+#: /views/cultures/view.ctp:80;80
+#: /views/entities/edit.ctp:19;19
+#: /views/entities/index.ctp:27;27
+#: /views/entities/view.ctp:70;70
+#: /views/experiments/edit.ctp:20;20
+#: /views/experiments/index.ctp:31;31
+#: /views/experiments/view.ctp:78;78
+#: /views/phenotype_bbches/edit.ctp:17;17
+#: /views/phenotype_bbches/index.ctp:29;29
+#: /views/phenotype_entities/edit.ctp:17;17
+#: /views/phenotype_entities/index.ctp:29;29
+#: /views/phenotype_raws/edit.ctp:18;18
+#: /views/phenotype_raws/index.ctp:31;31
+#: /views/phenotype_values/edit.ctp:18;18
+#: /views/phenotype_values/index.ctp:31;31
+#: /views/phenotypes/edit.ctp:21;21
+#: /views/phenotypes/index.ctp:37;37
+#: /views/phenotypes/view.ctp:87;125;165;205;87;125;165;205
+#: /views/plants/edit.ctp:19;19
+#: /views/plants/index.ctp:35;35
+#: /views/plants/view.ctp:84;84
+#: /views/programs/edit.ctp:16;16
+#: /views/programs/index.ctp:23;23
+#: /views/programs/view.ctp:60;60
+#: /views/raws/edit.ctp:17;17
+#: /views/raws/index.ctp:23;23
+#: /views/raws/view.ctp:60;60
+#: /views/samples/edit.ctp:21;21
+#: /views/samples/index.ctp:35;35
+#: /views/samples/view.ctp:88;88
+#: /views/species/edit.ctp:16;16
+#: /views/species/index.ctp:23;23
+#: /views/species/view.ctp:54;54
+#: /views/values/edit.ctp:18;18
+#: /views/values/index.ctp:25;25
+#: /views/values/view.ctp:65;65
+#: cake/libs/view/scaffolds/edit.ctp:31
+#: cake/libs/view/scaffolds/index.ctp:57
+#: cake/libs/view/scaffolds/view.ctp:146
+msgid "Delete"
+msgstr ""
+
+#: /views/bbches/edit.ctp:19;19
+#: /views/bbches/index.ctp:29;29
+#: /views/bbches/view.ctp:30;72;30;72
+#: /views/cultures/edit.ctp:19;19
+#: /views/cultures/index.ctp:33;33
+#: /views/cultures/view.ctp:40;80;40;80
+#: /views/entities/edit.ctp:19;19
+#: /views/entities/index.ctp:27;27
+#: /views/entities/view.ctp:30;70;30;70
+#: /views/experiments/edit.ctp:20;20
+#: /views/experiments/index.ctp:31;31
+#: /views/experiments/view.ctp:40;78;40;78
+#: /views/phenotype_bbches/edit.ctp:17;17
+#: /views/phenotype_bbches/index.ctp:29;29
+#: /views/phenotype_bbches/view.ctp:25;25
+#: /views/phenotype_entities/edit.ctp:17;17
+#: /views/phenotype_entities/index.ctp:29;29
+#: /views/phenotype_entities/view.ctp:25;25
+#: /views/phenotype_raws/edit.ctp:18;18
+#: /views/phenotype_raws/index.ctp:31;31
+#: /views/phenotype_raws/view.ctp:30;30
+#: /views/phenotype_values/edit.ctp:18;18
+#: /views/phenotype_values/index.ctp:31;31
+#: /views/phenotype_values/view.ctp:30;30
+#: /views/phenotypes/edit.ctp:21;21
+#: /views/phenotypes/index.ctp:37;37
+#: /views/phenotypes/view.ctp:45;87;125;165;205;45;87;125;165;205
+#: /views/plants/edit.ctp:19;19
+#: /views/plants/index.ctp:35;35
+#: /views/plants/view.ctp:40;84;40;84
+#: /views/programs/edit.ctp:16;16
+#: /views/programs/index.ctp:23;23
+#: /views/programs/view.ctp:20;60;20;60
+#: /views/raws/edit.ctp:17;17
+#: /views/raws/index.ctp:23;23
+#: /views/raws/view.ctp:20;60;20;60
+#: /views/samples/edit.ctp:21;21
+#: /views/samples/index.ctp:35;35
+#: /views/samples/view.ctp:50;88;50;88
+#: /views/species/edit.ctp:16;16
+#: /views/species/index.ctp:23;23
+#: /views/species/view.ctp:20;54;20;54
+#: /views/values/edit.ctp:18;18
+#: /views/values/index.ctp:25;25
+#: /views/values/view.ctp:25;65;25;65
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: /views/bbches/index.ctp:2;2
+msgid "Bbches"
+msgstr ""
+
+#: /views/bbches/index.ctp:27;27
+#: /views/bbches/view.ctp:70;70
+#: /views/cultures/index.ctp:31;31
+#: /views/cultures/view.ctp:78;78
+#: /views/entities/index.ctp:25;25
+#: /views/entities/view.ctp:68;68
+#: /views/experiments/index.ctp:29;29
+#: /views/experiments/view.ctp:76;76
+#: /views/phenotype_bbches/index.ctp:27;27
+#: /views/phenotype_entities/index.ctp:27;27
+#: /views/phenotype_raws/index.ctp:29;29
+#: /views/phenotype_values/index.ctp:29;29
+#: /views/phenotypes/index.ctp:35;35
+#: /views/phenotypes/view.ctp:85;123;163;203;85;123;163;203
+#: /views/plants/index.ctp:33;33
+#: /views/plants/view.ctp:82;82
+#: /views/programs/index.ctp:21;21
+#: /views/programs/view.ctp:58;58
+#: /views/raws/index.ctp:21;21
+#: /views/raws/view.ctp:58;58
+#: /views/samples/index.ctp:33;33
+#: /views/samples/view.ctp:86;86
+#: /views/species/index.ctp:21;21
+#: /views/species/view.ctp:52;52
+#: /views/values/index.ctp:23;23
+#: /views/values/view.ctp:63;63
+#: cake/libs/view/scaffolds/index.ctp:55
+#: cake/libs/view/scaffolds/view.ctp:144
+msgid "View"
+msgstr ""
+
+#: /views/bbches/index.ctp:28;28
+#: /views/bbches/view.ctp:71;71
+#: /views/cultures/index.ctp:32;32
+#: /views/cultures/view.ctp:79;79
+#: /views/entities/index.ctp:26;26
+#: /views/entities/view.ctp:69;69
+#: /views/experiments/index.ctp:30;30
+#: /views/experiments/view.ctp:77;77
+#: /views/phenotype_bbches/index.ctp:28;28
+#: /views/phenotype_entities/index.ctp:28;28
+#: /views/phenotype_raws/index.ctp:30;30
+#: /views/phenotype_values/index.ctp:30;30
+#: /views/phenotypes/index.ctp:36;36
+#: /views/phenotypes/view.ctp:86;124;164;204;86;124;164;204
+#: /views/plants/index.ctp:34;34
+#: /views/plants/view.ctp:83;83
+#: /views/programs/index.ctp:22;22
+#: /views/programs/view.ctp:59;59
+#: /views/raws/index.ctp:22;22
+#: /views/raws/view.ctp:59;59
+#: /views/samples/index.ctp:34;34
+#: /views/samples/view.ctp:87;87
+#: /views/species/index.ctp:22;22
+#: /views/species/view.ctp:53;53
+#: /views/values/index.ctp:24;24
+#: /views/values/view.ctp:64;64
+#: cake/libs/view/scaffolds/index.ctp:56
+#: cake/libs/view/scaffolds/view.ctp:145
+msgid "Edit"
+msgstr ""
+
+#: /views/bbches/index.ctp:37;37
+#: /views/cultures/index.ctp:41;41
+#: /views/entities/index.ctp:35;35
+#: /views/experiments/index.ctp:39;39
+#: /views/phenotype_bbches/index.ctp:37;37
+#: /views/phenotype_entities/index.ctp:37;37
+#: /views/phenotype_raws/index.ctp:39;39
+#: /views/phenotype_values/index.ctp:39;39
+#: /views/phenotypes/index.ctp:45;45
+#: /views/plants/index.ctp:43;43
+#: /views/programs/index.ctp:31;31
+#: /views/raws/index.ctp:31;31
+#: /views/samples/index.ctp:43;43
+#: /views/species/index.ctp:31;31
+#: /views/values/index.ctp:33;33
+#: cake/libs/view/scaffolds/index.ctp:67
+msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
+msgstr ""
+
+#: /views/bbches/index.ctp:42;42
+#: /views/cultures/index.ctp:46;46
+#: /views/entities/index.ctp:40;40
+#: /views/experiments/index.ctp:44;44
+#: /views/phenotype_bbches/index.ctp:42;42
+#: /views/phenotype_entities/index.ctp:42;42
+#: /views/phenotype_raws/index.ctp:44;44
+#: /views/phenotype_values/index.ctp:44;44
+#: /views/phenotypes/index.ctp:50;50
+#: /views/plants/index.ctp:48;48
+#: /views/programs/index.ctp:36;36
+#: /views/raws/index.ctp:36;36
+#: /views/samples/index.ctp:48;48
+#: /views/species/index.ctp:36;36
+#: /views/values/index.ctp:38;38
+#: cake/libs/view/scaffolds/index.ctp:71
+msgid "previous"
+msgstr ""
+
+#: /views/bbches/index.ctp:45;45
+#: /views/cultures/index.ctp:49;49
+#: /views/entities/index.ctp:43;43
+#: /views/experiments/index.ctp:47;47
+#: /views/phenotype_bbches/index.ctp:45;45
+#: /views/phenotype_entities/index.ctp:45;45
+#: /views/phenotype_raws/index.ctp:47;47
+#: /views/phenotype_values/index.ctp:47;47
+#: /views/phenotypes/index.ctp:53;53
+#: /views/plants/index.ctp:51;51
+#: /views/programs/index.ctp:39;39
+#: /views/raws/index.ctp:39;39
+#: /views/samples/index.ctp:51;51
+#: /views/species/index.ctp:39;39
+#: /views/values/index.ctp:41;41
+#: cake/libs/view/scaffolds/index.ctp:73
+msgid "next"
+msgstr ""
+
+#: /views/bbches/index.ctp:51;51
+#: /views/bbches/view.ctp:32;32
+#: /views/phenotype_bbches/add.ctp:20;20
+#: /views/phenotype_bbches/edit.ctp:22;22
+#: /views/phenotype_bbches/index.ctp:55;55
+#: /views/phenotype_bbches/view.ctp:31;31
+#: /views/species/add.ctp:17;17
+#: /views/species/edit.ctp:19;19
+#: /views/species/index.ctp:47;47
+#: /views/species/view.ctp:24;63;24;63
+msgid "New Bbch"
+msgstr ""
+
+#: /views/bbches/upload.ctp:4;4
+msgid "Add BBCH codes"
+msgstr "BBCH codes zufügen"
+
+#: /views/bbches/view.ctp:2;9;2;9
+#: /views/phenotype_bbches/view.ctp:14;14
+#: /views/species/view.ctp:33;33
+msgid "Bbch"
+msgstr ""
+
+#: /views/bbches/view.ctp:4;44;4;44
+#: /views/cultures/view.ctp:4;54;4;54
+#: /views/entities/view.ctp:4;42;4;42
+#: /views/experiments/view.ctp:4;52;4;52
+#: /views/phenotype_bbches/view.ctp:4;4
+#: /views/phenotype_entities/view.ctp:4;4
+#: /views/phenotype_raws/view.ctp:4;4
+#: /views/phenotype_values/view.ctp:4;4
+#: /views/phenotypes/view.ctp:4;67;105;143;183;4;67;105;143;183
+#: /views/plants/view.ctp:4;56;4;56
+#: /views/programs/view.ctp:4;32;4;32
+#: /views/raws/view.ctp:4;32;4;32
+#: /views/samples/view.ctp:4;62;4;62
+#: /views/species/view.ctp:4;32;4;32
+#: /views/values/view.ctp:4;37;4;37
+msgid "Id"
+msgstr ""
+
+#: /views/bbches/view.ctp:14;14
+#: /views/cultures/view.ctp:9;55;9;55
+#: /views/entities/view.ctp:9;9
+#: /views/experiments/view.ctp:9;53;9;53
+#: /views/plants/view.ctp:9;9
+#: /views/programs/view.ctp:9;9
+#: /views/samples/view.ctp:9;63;9;63
+#: /views/species/view.ctp:9;34;9;34
+msgid "Name"
+msgstr ""
+
+#: /views/bbches/view.ctp:19;19
+#: /views/species/index.ctp:2;2
+#: /views/species/view.ctp:2;2
+msgid "Species"
+msgstr ""
+
+#: /views/bbches/view.ctp:30;30
+msgid "Delete Bbch"
+msgstr ""
+
+#: /views/bbches/view.ctp:40;40
+#: /views/entities/view.ctp:38;38
+#: /views/plants/view.ctp:52;52
+#: /views/programs/view.ctp:28;28
+#: /views/raws/view.ctp:28;28
+#: /views/values/view.ctp:33;33
+msgid "Related Phenotypes"
+msgstr ""
+
+#: /views/bbches/view.ctp:45;45
+#: /views/entities/view.ctp:43;43
+#: /views/phenotypes/view.ctp:9;9
+#: /views/plants/view.ctp:57;57
+#: /views/programs/view.ctp:33;33
+#: /views/raws/view.ctp:33;33
+#: /views/values/view.ctp:38;38
+msgid "Version"
+msgstr ""
+
+#: /views/bbches/view.ctp:46;46
+#: /views/entities/view.ctp:44;44
+#: /views/phenotypes/view.ctp:14;14
+#: /views/plants/view.ctp:58;58
+#: /views/programs/view.ctp:34;34
+#: /views/raws/view.ctp:34;34
+#: /views/values/view.ctp:39;39
+msgid "Object"
+msgstr ""
+
+#: /views/bbches/view.ctp:47;47
+#: /views/entities/view.ctp:45;45
+#: /views/plants/view.ctp:59;59
+#: /views/programs/view.ctp:35;35
+#: /views/raws/view.ctp:35;35
+#: /views/values/view.ctp:40;40
+msgid "Program Id"
+msgstr ""
+
+#: /views/bbches/view.ctp:48;48
+#: /views/entities/view.ctp:46;46
+#: /views/phenotypes/view.ctp:24;24
+#: /views/plants/view.ctp:60;60
+#: /views/programs/view.ctp:36;36
+#: /views/raws/view.ctp:36;36
+#: /views/values/view.ctp:41;41
+msgid "Date"
+msgstr ""
+
+#: /views/bbches/view.ctp:49;49
+#: /views/entities/view.ctp:47;47
+#: /views/phenotypes/view.ctp:29;29
+#: /views/plants/view.ctp:61;61
+#: /views/programs/view.ctp:37;37
+#: /views/raws/view.ctp:37;37
+#: /views/values/view.ctp:42;42
+msgid "Time"
+msgstr ""
+
+#: /views/bbches/view.ctp:50;50
+#: /views/entities/view.ctp:48;48
+#: /views/plants/view.ctp:62;62
+#: /views/programs/view.ctp:38;38
+#: /views/raws/view.ctp:38;38
+#: /views/values/view.ctp:43;43
+msgid "Plant Id"
+msgstr ""
+
+#: /views/cultures/add.ctp:4;4
+msgid "Add Culture"
+msgstr ""
+
+#: /views/cultures/add.ctp:18;18
+#: /views/cultures/edit.ctp:20;20
+#: /views/cultures/view.ctp:41;41
+#: /views/experiments/add.ctp:20;20
+#: /views/experiments/edit.ctp:22;22
+#: /views/experiments/index.ctp:54;54
+#: /views/experiments/view.ctp:43;43
+#: /views/plants/add.ctp:19;19
+#: /views/plants/edit.ctp:21;21
+#: /views/plants/index.ctp:58;58
+#: /views/plants/view.ctp:43;43
+msgid "List Cultures"
+msgstr ""
+
+#: /views/cultures/add.ctp:19;19
+#: /views/cultures/edit.ctp:21;21
+#: /views/cultures/index.ctp:56;56
+#: /views/cultures/view.ctp:43;43
+#: /views/experiments/add.ctp:19;19
+#: /views/experiments/edit.ctp:21;21
+#: /views/experiments/view.ctp:41;41
+msgid "List Experiments"
+msgstr ""
+
+#: /views/cultures/add.ctp:20;20
+#: /views/cultures/edit.ctp:22;22
+#: /views/cultures/index.ctp:57;57
+#: /views/cultures/view.ctp:44;44
+#: /views/experiments/index.ctp:53;53
+#: /views/experiments/view.ctp:42;42
+msgid "New Experiment"
+msgstr ""
+
+#: /views/cultures/add.ctp:21;21
+#: /views/cultures/edit.ctp:23;23
+#: /views/cultures/index.ctp:58;58
+#: /views/cultures/view.ctp:45;45
+#: /views/phenotypes/add.ctp:23;23
+#: /views/phenotypes/edit.ctp:25;25
+#: /views/phenotypes/index.ctp:62;62
+#: /views/phenotypes/upload.ctp:29;29
+#: /views/phenotypes/view.ctp:50;50
+#: /views/plants/add.ctp:18;18
+#: /views/plants/edit.ctp:20;20
+#: /views/plants/view.ctp:41;41
+#: /views/samples/add.ctp:21;21
+#: /views/samples/edit.ctp:23;23
+#: /views/samples/index.ctp:58;58
+#: /views/samples/view.ctp:53;53
+msgid "List Plants"
+msgstr ""
+
+#: /views/cultures/add.ctp:22;22
+#: /views/cultures/edit.ctp:24;24
+#: /views/cultures/index.ctp:59;59
+#: /views/cultures/view.ctp:46;89;46;89
+#: /views/phenotypes/add.ctp:24;24
+#: /views/phenotypes/edit.ctp:26;26
+#: /views/phenotypes/index.ctp:63;63
+#: /views/phenotypes/upload.ctp:30;30
+#: /views/phenotypes/view.ctp:51;51
+#: /views/plants/index.ctp:57;57
+#: /views/plants/view.ctp:42;42
+#: /views/samples/add.ctp:22;22
+#: /views/samples/edit.ctp:24;24
+#: /views/samples/index.ctp:59;59
+#: /views/samples/view.ctp:54;97;54;97
+msgid "New Plant"
+msgstr ""
+
+#: /views/cultures/edit.ctp:4;4
+#: /views/cultures/view.ctp:39;39
+msgid "Edit Culture"
+msgstr ""
+
+#: /views/cultures/index.ctp:2;2
+msgid "Cultures"
+msgstr ""
+
+#: /views/cultures/index.ctp:55;55
+#: /views/cultures/view.ctp:42;42
+#: /views/experiments/add.ctp:21;21
+#: /views/experiments/edit.ctp:23;23
+#: /views/experiments/index.ctp:55;55
+#: /views/experiments/view.ctp:44;87;44;87
+#: /views/plants/add.ctp:20;20
+#: /views/plants/edit.ctp:22;22
+#: /views/plants/index.ctp:59;59
+#: /views/plants/view.ctp:44;44
+msgid "New Culture"
+msgstr ""
+
+#: /views/cultures/view.ctp:2;2
+#: /views/plants/view.ctp:19;19
+msgid "Culture"
+msgstr ""
+
+#: /views/cultures/view.ctp:14;14
+#: /views/experiments/view.ctp:54;54
+msgid "Condition"
+msgstr ""
+
+#: /views/cultures/view.ctp:19;58;19;58
+#: /views/experiments/view.ctp:55;55
+#: /views/plants/view.ctp:24;24
+#: /views/samples/view.ctp:19;66;19;66
+msgid "Created"
+msgstr ""
+
+#: /views/cultures/view.ctp:24;24
+#: /views/experiments/view.ctp:56;56
+#: /views/samples/view.ctp:39;39
+msgid "Description"
+msgstr ""
+
+#: /views/cultures/view.ctp:29;29
+#: /views/experiments/view.ctp:2;2
+msgid "Experiment"
+msgstr ""
+
+#: /views/cultures/view.ctp:40;40
+msgid "Delete Culture"
+msgstr ""
+
+#: /views/cultures/view.ctp:50;50
+#: /views/samples/view.ctp:58;58
+msgid "Related Plants"
+msgstr ""
+
+#: /views/cultures/view.ctp:56;56
+#: /views/plants/view.ctp:14;14
+#: /views/samples/view.ctp:64;64
+msgid "Aliquot"
+msgstr ""
+
+#: /views/cultures/view.ctp:57;57
+#: /views/samples/view.ctp:65;65
+msgid "Culture Id"
+msgstr ""
+
+#: /views/cultures/view.ctp:59;59
+#: /views/samples/view.ctp:67;67
+msgid "Sample Id"
+msgstr ""
+
+#: /views/entities/add.ctp:4;4
+msgid "Add Entity"
+msgstr ""
+
+#: /views/entities/add.ctp:18;18
+#: /views/entities/edit.ctp:20;20
+#: /views/entities/upload.ctp:15;15
+#: /views/entities/view.ctp:31;31
+#: /views/phenotype_entities/add.ctp:19;19
+#: /views/phenotype_entities/edit.ctp:21;21
+#: /views/phenotype_entities/index.ctp:54;54
+#: /views/phenotype_entities/view.ctp:30;30
+msgid "List Entities"
+msgstr ""
+
+#: /views/entities/edit.ctp:4;4
+#: /views/entities/view.ctp:29;29
+msgid "Edit Entity"
+msgstr ""
+
+#: /views/entities/index.ctp:2;2
+msgid "Entities"
+msgstr ""
+
+#: /views/entities/index.ctp:49;49
+#: /views/entities/view.ctp:32;32
+#: /views/phenotype_entities/add.ctp:20;20
+#: /views/phenotype_entities/edit.ctp:22;22
+#: /views/phenotype_entities/index.ctp:55;55
+#: /views/phenotype_entities/view.ctp:31;31
+msgid "New Entity"
+msgstr ""
+
+#: /views/entities/upload.ctp:4;4
+msgid "Add Entities"
+msgstr ""
+
+#: /views/entities/view.ctp:2;2
+#: /views/phenotype_entities/view.ctp:14;14
+msgid "Entity"
+msgstr ""
+
+#: /views/entities/view.ctp:14;14
+msgid "PO"
+msgstr ""
+
+#: /views/entities/view.ctp:19;19
+msgid "Definition"
+msgstr ""
+
+#: /views/entities/view.ctp:30;30
+msgid "Delete Entity"
+msgstr ""
+
+#: /views/experiments/add.ctp:4;4
+msgid "Add Experiment"
+msgstr ""
+
+#: /views/experiments/edit.ctp:4;4
+#: /views/experiments/view.ctp:39;39
+msgid "Edit Experiment"
+msgstr ""
+
+#: /views/experiments/index.ctp:2;2
+msgid "Experiments"
+msgstr ""
+
+#: /views/experiments/view.ctp:14;14
+msgid "Startdate"
+msgstr ""
+
+#: /views/experiments/view.ctp:19;19
+msgid "Project"
+msgstr ""
+
+#: /views/experiments/view.ctp:24;24
+msgid "Study"
+msgstr ""
+
+#: /views/experiments/view.ctp:29;29
+msgid "Protocol"
+msgstr ""
+
+#: /views/experiments/view.ctp:40;40
+msgid "Delete Experiment"
+msgstr ""
+
+#: /views/experiments/view.ctp:48;48
+msgid "Related Cultures"
+msgstr ""
+
+#: /views/experiments/view.ctp:57;57
+msgid "Experiment Id"
+msgstr ""
+
+#: /views/layouts/default.ctp:25;25
+msgid "TROST"
+msgstr ""
+
+#: /views/layouts/default.ctp:39;39
+msgid "TROST: Trockentoleranz von Stärkekartoffelsorten"
+msgstr ""
+
+#: /views/layouts/default.ctp:54;54
+#: cake/console/templates/skel/views/layouts/default.ctp:39;50
+#: cake/libs/view/layouts/default.ctp:39;50
+#: cake/tests/test_app/views/layouts/default.ctp:37;48
+msgid "CakePHP: the rapid development php framework"
+msgstr ""
+
+#: /views/phenotype_bbches/add.ctp:4;4
+msgid "Add Phenotype Bbch"
+msgstr ""
+
+#: /views/phenotype_bbches/add.ctp:16;16
+#: /views/phenotype_bbches/edit.ctp:18;18
+#: /views/phenotype_bbches/view.ctp:26;26
+#: /views/phenotypes/add.ctp:25;25
+#: /views/phenotypes/edit.ctp:27;27
+#: /views/phenotypes/index.ctp:64;64
+#: /views/phenotypes/upload.ctp:33;33
+#: /views/phenotypes/view.ctp:52;52
+msgid "List Phenotype Bbches"
+msgstr ""
+
+#: /views/phenotype_bbches/edit.ctp:4;4
+#: /views/phenotype_bbches/view.ctp:24;24
+msgid "Edit Phenotype Bbch"
+msgstr ""
+
+#: /views/phenotype_bbches/index.ctp:2;2
+msgid "Phenotype Bbches"
+msgstr ""
+
+#: /views/phenotype_bbches/index.ctp:51;51
+#: /views/phenotype_bbches/view.ctp:27;27
+#: /views/phenotypes/add.ctp:26;26
+#: /views/phenotypes/edit.ctp:28;28
+#: /views/phenotypes/index.ctp:65;65
+#: /views/phenotypes/upload.ctp:34;34
+#: /views/phenotypes/view.ctp:53;96;53;96
+msgid "New Phenotype Bbch"
+msgstr ""
+
+#: /views/phenotype_bbches/view.ctp:2;2
+msgid "Phenotype Bbch"
+msgstr ""
+
+#: /views/phenotype_bbches/view.ctp:9;9
+#: /views/phenotype_entities/view.ctp:9;9
+#: /views/phenotype_raws/view.ctp:9;9
+#: /views/phenotype_values/view.ctp:14;14
+#: /views/phenotypes/view.ctp:2;2
+msgid "Phenotype"
+msgstr ""
+
+#: /views/phenotype_bbches/view.ctp:25;25
+msgid "Delete Phenotype Bbch"
+msgstr ""
+
+#: /views/phenotype_entities/add.ctp:4;4
+msgid "Add Phenotype Entity"
+msgstr ""
+
+#: /views/phenotype_entities/add.ctp:16;16
+#: /views/phenotype_entities/edit.ctp:18;18
+#: /views/phenotype_entities/view.ctp:26;26
+#: /views/phenotypes/add.ctp:27;27
+#: /views/phenotypes/edit.ctp:29;29
+#: /views/phenotypes/index.ctp:66;66
+#: /views/phenotypes/upload.ctp:35;35
+#: /views/phenotypes/view.ctp:54;54
+msgid "List Phenotype Entities"
+msgstr ""
+
+#: /views/phenotype_entities/edit.ctp:4;4
+#: /views/phenotype_entities/view.ctp:24;24
+msgid "Edit Phenotype Entity"
+msgstr ""
+
+#: /views/phenotype_entities/index.ctp:2;2
+msgid "Phenotype Entities"
+msgstr ""
+
+#: /views/phenotype_entities/index.ctp:51;51
+#: /views/phenotype_entities/view.ctp:27;27
+#: /views/phenotypes/add.ctp:28;28
+#: /views/phenotypes/edit.ctp:30;30
+#: /views/phenotypes/index.ctp:67;67
+#: /views/phenotypes/upload.ctp:36;36
+#: /views/phenotypes/view.ctp:55;134;55;134
+msgid "New Phenotype Entity"
+msgstr ""
+
+#: /views/phenotype_entities/view.ctp:2;2
+msgid "Phenotype Entity"
+msgstr ""
+
+#: /views/phenotype_entities/view.ctp:25;25
+msgid "Delete Phenotype Entity"
+msgstr ""
+
+#: /views/phenotype_raws/add.ctp:4;4
+msgid "Add Phenotype Raw"
+msgstr ""
+
+#: /views/phenotype_raws/add.ctp:17;17
+#: /views/phenotype_raws/edit.ctp:19;19
+#: /views/phenotype_raws/view.ctp:31;31
+#: /views/phenotypes/add.ctp:29;29
+#: /views/phenotypes/edit.ctp:31;31
+#: /views/phenotypes/index.ctp:68;68
+#: /views/phenotypes/upload.ctp:37;37
+#: /views/phenotypes/view.ctp:56;56
+msgid "List Phenotype Raws"
+msgstr ""
+
+#: /views/phenotype_raws/add.ctp:20;20
+#: /views/phenotype_raws/edit.ctp:22;22
+#: /views/phenotype_raws/index.ctp:56;56
+#: /views/phenotype_raws/view.ctp:35;35
+#: /views/raws/add.ctp:16;16
+#: /views/raws/edit.ctp:18;18
+#: /views/raws/view.ctp:21;21
+msgid "List Raws"
+msgstr ""
+
+#: /views/phenotype_raws/add.ctp:21;21
+#: /views/phenotype_raws/edit.ctp:23;23
+#: /views/phenotype_raws/index.ctp:57;57
+#: /views/phenotype_raws/view.ctp:36;36
+#: /views/raws/index.ctp:45;45
+#: /views/raws/view.ctp:22;22
+msgid "New Raw"
+msgstr ""
+
+#: /views/phenotype_raws/edit.ctp:4;4
+#: /views/phenotype_raws/view.ctp:29;29
+msgid "Edit Phenotype Raw"
+msgstr ""
+
+#: /views/phenotype_raws/index.ctp:2;2
+msgid "Phenotype Raws"
+msgstr ""
+
+#: /views/phenotype_raws/index.ctp:53;53
+#: /views/phenotype_raws/view.ctp:32;32
+#: /views/phenotypes/add.ctp:30;30
+#: /views/phenotypes/edit.ctp:32;32
+#: /views/phenotypes/index.ctp:69;69
+#: /views/phenotypes/upload.ctp:38;38
+#: /views/phenotypes/view.ctp:57;174;57;174
+msgid "New Phenotype Raw"
+msgstr ""
+
+#: /views/phenotype_raws/view.ctp:2;2
+msgid "Phenotype Raw"
+msgstr ""
+
+#: /views/phenotype_raws/view.ctp:14;14
+#: /views/raws/view.ctp:2;2
+msgid "Raw"
+msgstr ""
+
+#: /views/phenotype_raws/view.ctp:19;19
+#: /views/phenotypes/view.ctp:146;146
+msgid "Line Nr"
+msgstr ""
+
+#: /views/phenotype_raws/view.ctp:30;30
+msgid "Delete Phenotype Raw"
+msgstr ""
+
+#: /views/phenotype_values/add.ctp:4;4
+msgid "Add Phenotype Value"
+msgstr ""
+
+#: /views/phenotype_values/add.ctp:17;17
+#: /views/phenotype_values/edit.ctp:19;19
+#: /views/phenotype_values/view.ctp:31;31
+#: /views/phenotypes/add.ctp:31;31
+#: /views/phenotypes/edit.ctp:33;33
+#: /views/phenotypes/index.ctp:70;70
+#: /views/phenotypes/view.ctp:58;58
+msgid "List Phenotype Values"
+msgstr ""
+
+#: /views/phenotype_values/add.ctp:18;18
+#: /views/phenotype_values/edit.ctp:20;20
+#: /views/phenotype_values/index.ctp:54;54
+#: /views/phenotype_values/view.ctp:33;33
+#: /views/values/add.ctp:17;17
+#: /views/values/edit.ctp:19;19
+#: /views/values/upload.ctp:14;14
+#: /views/values/view.ctp:26;26
+msgid "List Values"
+msgstr ""
+
+#: /views/phenotype_values/add.ctp:19;19
+#: /views/phenotype_values/edit.ctp:21;21
+#: /views/phenotype_values/index.ctp:55;55
+#: /views/phenotype_values/view.ctp:34;34
+#: /views/values/index.ctp:47;47
+#: /views/values/view.ctp:27;27
+msgid "New Value"
+msgstr ""
+
+#: /views/phenotype_values/edit.ctp:4;4
+#: /views/phenotype_values/view.ctp:29;29
+msgid "Edit Phenotype Value"
+msgstr ""
+
+#: /views/phenotype_values/index.ctp:2;2
+msgid "Phenotype Values"
+msgstr ""
+
+#: /views/phenotype_values/index.ctp:53;53
+#: /views/phenotype_values/view.ctp:32;32
+#: /views/phenotypes/add.ctp:32;32
+#: /views/phenotypes/edit.ctp:34;34
+#: /views/phenotypes/index.ctp:71;71
+#: /views/phenotypes/view.ctp:59;214;59;214
+msgid "New Phenotype Value"
+msgstr ""
+
+#: /views/phenotype_values/view.ctp:2;2
+msgid "Phenotype Value"
+msgstr ""
+
+#: /views/phenotype_values/view.ctp:9;9
+#: /views/values/view.ctp:2;14;2;14
+msgid "Value"
+msgstr ""
+
+#: /views/phenotype_values/view.ctp:19;19
+#: /views/phenotypes/view.ctp:186;186
+msgid "Number"
+msgstr ""
+
+#: /views/phenotype_values/view.ctp:30;30
+msgid "Delete Phenotype Value"
+msgstr ""
+
+#: /views/phenotypes/add.ctp:4;4
+#: /views/phenotypes/upload.ctp:5;5
+msgid "Add Phenotype"
+msgstr ""
+
+#: /views/phenotypes/add.ctp:21;21
+#: /views/phenotypes/edit.ctp:23;23
+#: /views/phenotypes/index.ctp:60;60
+#: /views/phenotypes/upload.ctp:27;27
+#: /views/phenotypes/view.ctp:48;48
+#: /views/programs/add.ctp:15;15
+#: /views/programs/edit.ctp:17;17
+#: /views/programs/view.ctp:21;21
+msgid "List Programs"
+msgstr ""
+
+#: /views/phenotypes/add.ctp:22;22
+#: /views/phenotypes/edit.ctp:24;24
+#: /views/phenotypes/index.ctp:61;61
+#: /views/phenotypes/upload.ctp:28;28
+#: /views/phenotypes/view.ctp:49;49
+#: /views/programs/index.ctp:45;45
+#: /views/programs/view.ctp:22;22
+msgid "New Program"
+msgstr ""
+
+#: /views/phenotypes/edit.ctp:4;4
+#: /views/phenotypes/view.ctp:44;44
+msgid "Edit Phenotype"
+msgstr ""
+
+#: /views/phenotypes/index.ctp:2;2
+msgid "Phenotypes"
+msgstr ""
+
+#: /views/phenotypes/upload.ctp:31;31
+msgid "List Phenotype Attributes"
+msgstr ""
+
+#: /views/phenotypes/upload.ctp:32;32
+msgid "New Phenotype Attribute"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:19;19
+#: /views/programs/view.ctp:2;2
+msgid "Program"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:34;34
+#: /views/plants/view.ctp:2;2
+msgid "Plant"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:45;45
+msgid "Delete Phenotype"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:63;63
+msgid "Related Phenotype Bbches"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:68;106;144;185;68;106;144;185
+msgid "Phenotype Id"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:69;69
+msgid "Bbch Id"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:101;101
+msgid "Related Phenotype Entities"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:107;107
+msgid "Entity Id"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:139;139
+msgid "Related Phenotype Raws"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:145;145
+msgid "Raw Id"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:179;179
+msgid "Related Phenotype Values"
+msgstr ""
+
+#: /views/phenotypes/view.ctp:184;184
+msgid "Value Id"
+msgstr ""
+
+#: /views/plants/add.ctp:4;4
+msgid "Add Plant"
+msgstr ""
+
+#: /views/plants/add.ctp:21;21
+#: /views/plants/edit.ctp:23;23
+#: /views/plants/index.ctp:60;60
+#: /views/plants/view.ctp:45;45
+#: /views/samples/add.ctp:20;20
+#: /views/samples/edit.ctp:22;22
+#: /views/samples/view.ctp:51;51
+msgid "List Samples"
+msgstr ""
+
+#: /views/plants/add.ctp:22;22
+#: /views/plants/edit.ctp:24;24
+#: /views/plants/index.ctp:61;61
+#: /views/plants/view.ctp:46;46
+#: /views/samples/index.ctp:57;57
+#: /views/samples/view.ctp:52;52
+msgid "New Sample"
+msgstr ""
+
+#: /views/plants/edit.ctp:4;4
+#: /views/plants/view.ctp:39;39
+msgid "Edit Plant"
+msgstr ""
+
+#: /views/plants/index.ctp:2;2
+msgid "Plants"
+msgstr ""
+
+#: /views/plants/view.ctp:29;29
+#: /views/samples/view.ctp:2;2
+msgid "Sample"
+msgstr ""
+
+#: /views/plants/view.ctp:40;40
+msgid "Delete Plant"
+msgstr ""
+
+#: /views/programs/add.ctp:4;4
+msgid "Add Program"
+msgstr ""
+
+#: /views/programs/edit.ctp:4;4
+#: /views/programs/view.ctp:19;19
+msgid "Edit Program"
+msgstr ""
+
+#: /views/programs/index.ctp:2;2
+msgid "Programs"
+msgstr ""
+
+#: /views/programs/view.ctp:20;20
+msgid "Delete Program"
+msgstr ""
+
+#: /views/raws/add.ctp:4;4
+msgid "Add Raw"
+msgstr ""
+
+#: /views/raws/edit.ctp:4;4
+#: /views/raws/view.ctp:19;19
+msgid "Edit Raw"
+msgstr ""
+
+#: /views/raws/index.ctp:2;2
+msgid "Raws"
+msgstr ""
+
+#: /views/raws/view.ctp:9;9
+msgid "Data"
+msgstr ""
+
+#: /views/raws/view.ctp:20;20
+msgid "Delete Raw"
+msgstr ""
+
+#: /views/samples/add.ctp:4;4
+msgid "Add Sample"
+msgstr ""
+
+#: /views/samples/edit.ctp:4;4
+#: /views/samples/view.ctp:49;49
+msgid "Edit Sample"
+msgstr ""
+
+#: /views/samples/index.ctp:2;2
+msgid "Samples"
+msgstr ""
+
+#: /views/samples/view.ctp:14;14
+msgid "Supplier"
+msgstr ""
+
+#: /views/samples/view.ctp:24;24
+msgid "Created By"
+msgstr ""
+
+#: /views/samples/view.ctp:29;29
+msgid "Mag"
+msgstr ""
+
+#: /views/samples/view.ctp:34;34
+msgid "Alias"
+msgstr ""
+
+#: /views/samples/view.ctp:50;50
+msgid "Delete Sample"
+msgstr ""
+
+#: /views/species/add.ctp:4;4
+msgid "Add Species"
+msgstr ""
+
+#: /views/species/edit.ctp:4;4
+#: /views/species/view.ctp:19;19
+msgid "Edit Species"
+msgstr ""
+
+#: /views/species/view.ctp:20;20
+msgid "Delete Species"
+msgstr ""
+
+#: /views/species/view.ctp:28;28
+msgid "Related Bbches"
+msgstr ""
+
+#: /views/species/view.ctp:35;35
+msgid "Species Id"
+msgstr ""
+
+#: /views/values/add.ctp:4;4
+msgid "Add Value"
+msgstr ""
+
+#: /views/values/edit.ctp:4;4
+#: /views/values/view.ctp:24;24
+msgid "Edit Value"
+msgstr ""
+
+#: /views/values/index.ctp:2;2
+msgid "Values"
+msgstr ""
+
+#: /views/values/upload.ctp:4;4
+msgid "Add Values"
+msgstr ""
+
+#: /views/values/view.ctp:9;9
+msgid "Attribute"
+msgstr ""
+
+#: /views/values/view.ctp:25;25
+msgid "Delete Value"
+msgstr ""
+
+#: /webroot/test.php:88;88
+#: cake/console/templates/skel/webroot/test.php:88
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
+#: cake/console/cake.php:329
+msgid "Error: Class %s could not be loaded."
+msgstr ""
+
+#: cake/console/cake.php:381
+msgid "Error: Unknown %1$s command %2$s."
+msgstr ""
+
+#: cake/console/cake.php:382
+msgid "For usage try `cake %s help`"
+msgstr ""
+
+#: cake/console/error.php:80
+#: cake/libs/view/errors/error404.ctp:23
+msgid "The requested address %s was not found on this server."
+msgstr ""
+
+#: cake/console/error.php:94
+msgid "Missing Controller '%s'"
+msgstr ""
+
+#: cake/console/error.php:106
+msgid "Missing Method '%s' in '%s'"
+msgstr ""
+
+#: cake/console/error.php:118
+msgid "Trying to access private method '%s' in '%s'"
+msgstr ""
+
+#: cake/console/error.php:130
+msgid "Missing database table '%s' for model '%s'"
+msgstr ""
+
+#: cake/console/error.php:141
+msgid "Missing Database"
+msgstr ""
+
+#: cake/console/error.php:153
+msgid "Missing View '%s' for '%s' in '%s'"
+msgstr ""
+
+#: cake/console/error.php:165
+msgid "Missing Layout '%s'"
+msgstr ""
+
+#: cake/console/error.php:177
+msgid "Missing Database Connection. Try 'cake bake'"
+msgstr ""
+
+#: cake/console/error.php:189
+msgid "Missing Helper file '%s' for '%s'"
+msgstr ""
+
+#: cake/console/error.php:201
+msgid "Missing Helper class '%s' in '%s'"
+msgstr ""
+
+#: cake/console/error.php:213
+msgid "Missing Component file '%s' for '%s'"
+msgstr ""
+
+#: cake/console/error.php:225
+msgid "Missing Component class '%s' in '%s'"
+msgstr ""
+
+#: cake/console/error.php:237
+msgid "Missing model '%s'"
+msgstr ""
+
+#: cake/console/libs/acl.php:76
+msgid "Error: Your current Cake configuration is set to"
+msgstr ""
+
+#: cake/console/libs/acl.php:77
+msgid "an ACL implementation other than DB. Please change"
+msgstr ""
+
+#: cake/console/libs/acl.php:78
+msgid "your core config to reflect your decision to use"
+msgstr ""
+
+#: cake/console/libs/acl.php:79
+msgid "DbAcl before attempting to use this script"
+msgstr ""
+
+#: cake/console/libs/acl.php:81
+msgid "Current ACL Classname: %s"
+msgstr ""
+
+#: cake/console/libs/acl.php:89
+#: cake/console/libs/bake.php:81
+#: cake/console/libs/i18n.php:58
+msgid "Your database configuration was not found. Take a moment to create one."
+msgstr ""
+
+#: cake/console/libs/acl.php:109
+msgid "Available ACL commands:"
+msgstr ""
+
+#: cake/console/libs/acl.php:121
+msgid "For help, run the 'help' command.  For help on a specific command, run 'help <command>'"
+msgstr ""
+
+#: cake/console/libs/acl.php:148
+msgid "/ can not be used as an alias!"
+msgstr ""
+
+#: cake/console/libs/acl.php:148
+msgid "\t/ is the root, please supply a sub alias"
+msgstr ""
+
+#: cake/console/libs/acl.php:154
+msgid "New %s '%s' created.\n"
+msgstr ""
+
+#: cake/console/libs/acl.php:156
+msgid "There was a problem creating a new %s '%s'."
+msgstr ""
+
+#: cake/console/libs/acl.php:174
+msgid "Node Not Deleted"
+msgstr ""
+
+#: cake/console/libs/acl.php:174
+msgid "There was an error deleting the %s. Check that the node exists"
+msgstr ""
+
+#: cake/console/libs/acl.php:176
+msgid "%s deleted"
+msgstr ""
+
+#: cake/console/libs/acl.php:199
+msgid "Error in setting new parent. Please make sure the parent node exists, and is not a descendant of the node specified."
+msgstr ""
+
+#: cake/console/libs/acl.php:201
+msgid "Node parent set to %s"
+msgstr ""
+
+#: cake/console/libs/acl.php:221
+msgid "Supplied Node '%s' not found"
+msgstr ""
+
+#: cake/console/libs/acl.php:222;345;347;514
+msgid "No tree returned."
+msgstr ""
+
+#: cake/console/libs/acl.php:225
+msgid "Path:"
+msgstr ""
+
+#: cake/console/libs/acl.php:261
+msgid "%s is allowed."
+msgstr ""
+
+#: cake/console/libs/acl.php:263
+msgid "%s is not allowed."
+msgstr ""
+
+#: cake/console/libs/acl.php:277
+msgid "Permission granted."
+msgstr ""
+
+#: cake/console/libs/acl.php:279
+msgid "Permission was not granted."
+msgstr ""
+
+#: cake/console/libs/acl.php:293
+msgid "Permission denied."
+msgstr ""
+
+#: cake/console/libs/acl.php:295
+msgid "Permission was not denied."
+msgstr ""
+
+#: cake/console/libs/acl.php:309
+msgid "Permission inherited."
+msgstr ""
+
+#: cake/console/libs/acl.php:311
+msgid "Permission was not inherited."
+msgstr ""
+
+#: cake/console/libs/acl.php:345;347;514
+#: cake/console/libs/api.php:92
+#: cake/console/libs/testsuite.php:232
+#: cake/libs/folder.php:629
+msgid "%s not found"
+msgstr ""
+
+#: cake/console/libs/acl.php:394
+msgid "Usage: cake acl <command> <arg1> <arg2>..."
+msgstr ""
+
+#: cake/console/libs/acl.php:396
+#: cake/console/libs/tasks/extract.php:209
+msgid "Commands:"
+msgstr ""
+
+#: cake/console/libs/acl.php:400
+msgid "Creates a new ACL object <node> under the parent"
+msgstr ""
+
+#: cake/console/libs/acl.php:401
+msgid "specified by <parent>, an id/alias."
+msgstr ""
+
+#: cake/console/libs/acl.php:402
+msgid "The <parent> and <node> references can be"
+msgstr ""
+
+#: cake/console/libs/acl.php:403
+msgid "in one of the following formats:"
+msgstr ""
+
+#: cake/console/libs/acl.php:404
+msgid "<model>.<id> - The node will be bound to a"
+msgstr ""
+
+#: cake/console/libs/acl.php:405
+msgid "specific record of the given model."
+msgstr ""
+
+#: cake/console/libs/acl.php:406
+msgid "<alias> - The node will be given a string alias,"
+msgstr ""
+
+#: cake/console/libs/acl.php:407
+msgid " (or path, in the case of <parent>)"
+msgstr ""
+
+#: cake/console/libs/acl.php:408
+msgid "i.e. 'John'.  When used with <parent>,"
+msgstr ""
+
+#: cake/console/libs/acl.php:409
+msgid "this takes the form of an alias path,"
+msgstr ""
+
+#: cake/console/libs/acl.php:410
+msgid "i.e. <group>/<subgroup>/<parent>."
+msgstr ""
+
+#: cake/console/libs/acl.php:411
+msgid "To add a node at the root level,"
+msgstr ""
+
+#: cake/console/libs/acl.php:412
+msgid "enter 'root' or '/' as the <parent> parameter."
+msgstr ""
+
+#: cake/console/libs/acl.php:415
+msgid "Deletes the ACL object with the given <node> reference"
+msgstr ""
+
+#: cake/console/libs/acl.php:416;422;429;434;441;448;454;461
+msgid "For more detailed parameter usage info,"
+msgstr ""
+
+#: cake/console/libs/acl.php:417;423;430;435;442;449;455;462
+msgid "see help for the 'create' command."
+msgstr ""
+
+#: cake/console/libs/acl.php:420
+msgid "Moves the ACL object specified by <node> beneath"
+msgstr ""
+
+#: cake/console/libs/acl.php:421
+msgid "the parent ACL object specified by <parent>."
+msgstr ""
+
+#: cake/console/libs/acl.php:426
+msgid "Returns the path to the ACL object specified by <node>. This command"
+msgstr ""
+
+#: cake/console/libs/acl.php:427
+msgid "is useful in determining the inhertiance of permissions for a certain"
+msgstr ""
+
+#: cake/console/libs/acl.php:428
+msgid "object in the tree."
+msgstr ""
+
+#: cake/console/libs/acl.php:432;437;444;451
+msgid "or"
+msgstr ""
+
+#: cake/console/libs/acl.php:433
+msgid "Use this command to check ACL permissions."
+msgstr ""
+
+#: cake/console/libs/acl.php:438
+msgid "Use this command to grant ACL permissions. Once executed, the ARO"
+msgstr ""
+
+#: cake/console/libs/acl.php:439
+msgid "specified (and its children, if any) will have ALLOW access to the"
+msgstr ""
+
+#: cake/console/libs/acl.php:440;447
+msgid "specified ACO action (and the ACO's children, if any)."
+msgstr ""
+
+#: cake/console/libs/acl.php:445
+msgid "Use this command to deny ACL permissions. Once executed, the ARO"
+msgstr ""
+
+#: cake/console/libs/acl.php:446
+msgid "specified (and its children, if any) will have DENY access to the"
+msgstr ""
+
+#: cake/console/libs/acl.php:452
+msgid "Use this command to force a child ARO object to inherit its"
+msgstr ""
+
+#: cake/console/libs/acl.php:453
+msgid "permissions settings from its parent."
+msgstr ""
+
+#: cake/console/libs/acl.php:458
+msgid "The view command will return the ARO or ACO tree."
+msgstr ""
+
+#: cake/console/libs/acl.php:459
+msgid "The optional node parameter allows you to return"
+msgstr ""
+
+#: cake/console/libs/acl.php:460
+msgid "only a portion of the requested tree."
+msgstr ""
+
+#: cake/console/libs/acl.php:465
+msgid "Uses this command : cake schema run create DbAcl"
+msgstr ""
+
+#: cake/console/libs/acl.php:468
+msgid "Displays this help message, or a message on a specific command."
+msgstr ""
+
+#: cake/console/libs/acl.php:479
+msgid "Command '%s' not found"
+msgstr ""
+
+#: cake/console/libs/acl.php:493
+msgid "Missing/Unknown node type: '%s'"
+msgstr ""
+
+#: cake/console/libs/acl.php:493
+msgid "Please specify which ACL object type you wish to create. Either \"aro\" or \"aco\""
+msgstr ""
+
+#: cake/console/libs/acl.php:550
+msgid "Could not find node using reference \"%s\""
+msgstr ""
+
+#: cake/console/libs/api.php:101
+msgid "%s::%s() could not be found"
+msgstr ""
+
+#: cake/console/libs/api.php:118
+msgid "Select a number to see the more information about a specific method. q to quit. l to list."
+msgstr ""
+
+#: cake/console/libs/api.php:120
+msgid "Done"
+msgstr ""
+
+#: cake/console/libs/api.php:191
+msgid "%s could not be found"
+msgstr ""
+
+#: cake/console/libs/bake.php:96
+msgid "What would you like to Bake?"
+msgstr ""
+
+#: cake/console/libs/bake.php:123
+msgid "You have made an invalid selection. Please choose a type of class to Bake by entering D, M, V, F, T, or C."
+msgstr ""
+
+#: cake/console/libs/bake.php:170
+msgid "%s Model was baked."
+msgstr ""
+
+#: cake/console/libs/bake.php:181
+msgid "%s Controller was baked."
+msgstr ""
+
+#: cake/console/libs/bake.php:189
+msgid "%s Views were baked."
+msgstr ""
+
+#: cake/console/libs/bake.php:191
+msgid "Bake All complete"
+msgstr ""
+
+#: cake/console/libs/bake.php:194
+msgid "Bake All could not continue without a valid model"
+msgstr ""
+
+#: cake/console/libs/i18n.php:70
+msgid "I18n Shell"
+msgstr ""
+
+#: cake/console/libs/i18n.php:72
+msgid "[E]xtract POT file from sources"
+msgstr ""
+
+#: cake/console/libs/i18n.php:73
+msgid "[I]nitialize i18n database table"
+msgstr ""
+
+#: cake/console/libs/i18n.php:74
+msgid "[H]elp"
+msgstr ""
+
+#: cake/console/libs/i18n.php:75
+msgid "[Q]uit"
+msgstr ""
+
+#: cake/console/libs/i18n.php:77
+msgid "What would you like to do?"
+msgstr ""
+
+#: cake/console/libs/i18n.php:92
+msgid "You have made an invalid selection. Please choose a command to execute by entering E, I, H, or Q."
+msgstr ""
+
+#: cake/console/libs/i18n.php:115
+msgid "I18n Shell:"
+msgstr ""
+
+#: cake/console/libs/i18n.php:117
+msgid "I18n Shell initializes i18n database table for your application"
+msgstr ""
+
+#: cake/console/libs/i18n.php:118
+msgid "and generates .pot file(s) with translations."
+msgstr ""
+
+#: cake/console/libs/i18n.php:120
+msgid "usage:"
+msgstr ""
+
+#: cake/console/libs/schema.php:122
+msgid "Schema file (%s) could not be found."
+msgstr ""
+
+#: cake/console/libs/schema.php:134
+msgid "Generating Schema..."
+msgstr ""
+
+#: cake/console/libs/schema.php:188;191
+msgid "Schema file: %s generated"
+msgstr ""
+
+#: cake/console/libs/schema.php:209
+msgid "Schema could not be loaded"
+msgstr ""
+
+#: cake/console/libs/schema.php:234
+msgid "SQL dump file created in %s"
+msgstr ""
+
+#: cake/console/libs/schema.php:237
+msgid "SQL dump could not be created"
+msgstr ""
+
+#: cake/console/libs/schema.php:281
+msgid "Performing a dry run."
+msgstr ""
+
+#: cake/console/libs/schema.php:293
+msgid "%s could not be loaded"
+msgstr ""
+
+#: cake/console/libs/schema.php:324;374
+msgid "Schema is up to date."
+msgstr ""
+
+#: cake/console/libs/schema.php:328
+msgid "The following table(s) will be dropped."
+msgstr ""
+
+#: cake/console/libs/schema.php:331
+msgid "Are you sure you want to drop the table(s)?"
+msgstr ""
+
+#: cake/console/libs/schema.php:332
+msgid "Dropping table(s)."
+msgstr ""
+
+#: cake/console/libs/schema.php:336
+msgid "The following table(s) will be created."
+msgstr ""
+
+#: cake/console/libs/schema.php:339
+msgid "Are you sure you want to create the table(s)?"
+msgstr ""
+
+#: cake/console/libs/schema.php:340
+msgid "Creating table(s)."
+msgstr ""
+
+#: cake/console/libs/schema.php:343
+msgid "End create."
+msgstr ""
+
+#: cake/console/libs/schema.php:355
+msgid "Comparing Database to Schema..."
+msgstr ""
+
+#: cake/console/libs/schema.php:378
+msgid "The following statements will run."
+msgstr ""
+
+#: cake/console/libs/schema.php:380
+msgid "Are you sure you want to alter the tables?"
+msgstr ""
+
+#: cake/console/libs/schema.php:382
+msgid "Updating Database..."
+msgstr ""
+
+#: cake/console/libs/schema.php:386
+msgid "End update."
+msgstr ""
+
+#: cake/console/libs/schema.php:396
+msgid "Sql could not be run"
+msgstr ""
+
+#: cake/console/libs/schema.php:404
+msgid "%s is up to date."
+msgstr ""
+
+#: cake/console/libs/schema.php:407
+msgid "Dry run for %s :"
+msgstr ""
+
+#: cake/console/libs/schema.php:423
+msgid "%s updated."
+msgstr ""
+
+#: cake/console/libs/shell.php:422
+msgid "Error: %s"
+msgstr ""
+
+#: cake/console/libs/shell.php:462
+msgid "Creating file %s"
+msgstr ""
+
+#: cake/console/libs/shell.php:465
+msgid "File `%s` exists, overwrite?"
+msgstr ""
+
+#: cake/console/libs/shell.php:469
+msgid "Quitting."
+msgstr ""
+
+#: cake/console/libs/shell.php:472
+msgid "Skip `%s`"
+msgstr ""
+
+#: cake/console/libs/shell.php:483
+msgid "Wrote `%s`"
+msgstr ""
+
+#: cake/console/libs/shell.php:486
+msgid "Could not write to `%s`."
+msgstr ""
+
+#: cake/console/libs/testsuite.php:152
+msgid "CakePHP Test Shell"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:156
+msgid "Sorry, you did not pass any arguments!"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:160
+msgid "Running %s %s %s"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:169
+msgid "Sorry, the tests could not be found."
+msgstr ""
+
+#: cake/console/libs/testsuite.php:223
+msgid "%s is an invalid test category (either \"app\", \"core\" or name of a plugin)"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:237
+msgid "%s is invalid. Should be case, group or all"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:247
+msgid "%s %s %s is an invalid test identifier"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:273
+msgid "You must install Xdebug to use the CakePHP(tm) Code Coverage Analyzation. Download it from http://www.xdebug.org/docs/install"
+msgstr ""
+
+#: cake/console/libs/testsuite.php:366
+msgid "Sorry, Simpletest could not be found. Download it from http://simpletest.org and install it to your vendors directory."
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:77
+msgid "Baking basic crud methods for "
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:82;90
+msgid "Adding %s methods"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:134
+msgid "Bake Controller\nPath: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:143
+msgid "Baking %sController"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:155
+msgid "Would you like to build your controller interactively?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:157
+msgid "Warning: Choosing no will overwrite the %sController."
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:164
+msgid "Would you like to use dynamic scaffolding?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:177
+msgid "Would you like to use Session flash messages?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:195
+#: cake/console/libs/tasks/model.php:241
+#: cake/console/libs/tasks/plugin.php:134
+#: cake/console/libs/tasks/project.php:152
+#: cake/console/libs/tasks/view.php:348
+msgid "Look okay?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:220
+msgid "The following controller will be created:"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:222
+msgid "Controller Name:\n\t%s"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:229
+msgid "Helpers:"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:230
+msgid "Components:"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:257
+msgid "Would you like to create some basic class methods \n(index(), add(), view(), edit())?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:261
+msgid "Would you like to create the basic class methods for admin routing?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:283
+msgid "You must have a model for this class to build basic methods. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:347
+msgid "Would you like this controller to use other helpers\nbesides HtmlHelper and FormHelper?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:348
+msgid "Please provide a comma separated list of the other\nhelper names you'd like to use.\nExample: 'Ajax, Javascript, Time'"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:359
+msgid "Would you like this controller to use any components?"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:360
+msgid "Please provide a comma separated list of the component names you'd like to use.\nExample: 'Acl, Security, RequestHandler'"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:397
+msgid "Possible Controllers based on your current database:"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:421
+msgid "Enter a number from the list above,\ntype in the name of another controller, or 'q' to exit"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:424
+#: cake/console/libs/tasks/model.php:869
+msgid "Exit"
+msgstr ""
+
+#: cake/console/libs/tasks/controller.php:429
+msgid "The Controller name you supplied was empty,\nor the number you selected was not an option. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/db_config.php:364
+msgid "Use Database Config"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:107
+msgid "What is the full path you would like to extract?\nExample: %s\n[Q]uit [D]one"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:111;133
+msgid "Extract Aborted"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:120;139
+msgid "The directory path you supplied was not found. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:129
+msgid "What is the full path you would like to output?\nExample: %s\n[Q]uit"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:149
+msgid "Would you like to merge all domains strings into the default.pot file?"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:168
+msgid "Extracting..."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:170
+msgid "Paths:"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:174
+msgid "Output Directory: "
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:182
+msgid "Done."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:192
+msgid "CakePHP Language String Extraction:"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:194
+msgid "The Extract script generates .pot file(s) with translations"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:195
+msgid "By default the .pot file(s) will be place in the locale directory of -app"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:196
+msgid "By default -app is ROOT/app"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:198
+msgid "Usage: cake i18n extract <command> <param1> <param2>..."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:200
+msgid "Params:"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:201
+msgid "   -app [path...]: directory where your application is located"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:202
+msgid "   -root [path...]: path to install"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:203
+msgid "   -core [path...]: path to cake directory"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:204
+msgid "   -paths [comma separated list of paths, full path is needed]"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:205
+msgid "   -merge [yes|no]: Merge all domains strings into the default.pot file"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:206
+msgid "   -output [path...]: Full path to output directory"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:207
+msgid "   -files: [comma separated list of files, full path to file is needed]"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:210
+msgid "   cake i18n extract help: Shows this help message."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:223
+msgid "Processing %s..."
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:386
+msgid "Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:390
+msgid "What would you like to name this file?\nExample: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/extract.php:458
+msgid "Invalid marker content in %s:%s\n* %s("
+msgstr ""
+
+#: cake/console/libs/tasks/fixture.php:133
+msgid "Would you like to import schema for this fixture?"
+msgstr ""
+
+#: cake/console/libs/tasks/fixture.php:137
+msgid "Would you like to use record importing for this fixture?"
+msgstr ""
+
+#: cake/console/libs/tasks/fixture.php:142
+msgid "Would you like to build this fixture with data from %s's table?"
+msgstr ""
+
+#: cake/console/libs/tasks/fixture.php:371
+msgid "Please provide a SQL fragment to use as conditions\nExample: WHERE 1=1 LIMIT 10"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:115
+msgid "Baking %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:154
+msgid "Make a selection from the choices above"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:193
+msgid "Table %s does not exist, cannot bake a model without a table."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:202
+msgid "Would you like to supply validation criteria \nfor the fields in your model?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:208
+msgid "Would you like to define model associations\n(hasMany, hasOne, belongsTo, etc.)?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:216
+msgid "The following Model will be created:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:221
+msgid "DB Config:  %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:224
+msgid "DB Table:   %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:227
+msgid "Primary Key: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:230
+msgid "Validation: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:233
+msgid "Associations:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:288
+msgid "What is the primaryKey?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:299
+msgid "A displayField could not be automatically detected\nwould you like to choose one?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:304
+msgid "Choose a field from the options above:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:375
+msgid "Field: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:376
+msgid "Type: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:378
+msgid "Please select one of the following validation options:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:386
+msgid "%s - Do not do any validation on this field.\n"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:387
+msgid "... or enter in a valid regex validation string.\n"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:410
+msgid "You have already chosen that validation rule,\nplease choose again"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:414
+msgid "Please make a valid selection."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:436
+msgid "Would you like to add another validation rule?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:456
+msgid "One moment while the associations are detected."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:484
+msgid "None found."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:486
+msgid "Please confirm the following associations:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:643
+msgid "Would you like to define some additional model associations?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:648
+msgid "What is the association type?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:649
+msgid "Enter a number"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:651
+msgid "For the following options be very careful to match your setup exactly.\nAny spelling mistakes will cause errors."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:654
+msgid "What is the alias for this association?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:655
+msgid "What className will %s use?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:670
+msgid "What is the table for this model?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:676
+msgid "A helpful List of possible keys"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:677
+msgid "What is the foreignKey?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:681
+msgid "What is the foreignKey? Specify your own."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:684
+msgid "What is the associationForeignKey?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:685
+msgid "What is the joinTable?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:697
+msgid "Define another association?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:781
+msgid "Possible Models based on your current database:"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:812
+msgid "Given your model named '%s',\nCake would expect a database table named '%s'"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:813
+msgid "Do you want to use this table?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:816
+msgid "What is the name of the table?"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:848
+msgid "Your database does not have any tables."
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:866
+msgid "Enter a number from the list above,\ntype in the name of another model, or 'q' to exit"
+msgstr ""
+
+#: cake/console/libs/tasks/model.php:874
+msgid "The model name you supplied was empty,\nor the number you selected was not an option. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:71
+msgid "Plugin: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:72
+#: cake/console/libs/tasks/test.php:95
+msgid "Path: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:74
+msgid "%s in path %s not found."
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:91
+msgid "%s directory could not be found.\nBe sure you have created %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:107
+msgid "Enter the name of the plugin in CamelCase format"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:111
+msgid "An error occured trying to bake: %s in %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:130
+msgid "Plugin Name: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:131
+msgid "Plugin Directory: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:137
+#: cake/console/libs/tasks/project.php:155
+msgid "Do you want verbose output?"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:193
+#: cake/console/libs/tasks/project.php:163
+msgid "Created: %s in %s"
+msgstr ""
+
+#: cake/console/libs/tasks/plugin.php:212
+msgid "Choose a plugin path from the paths above."
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:63
+msgid "What is the full path for this app including the app directory name?\n Example:"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:71
+msgid "A project already exists in this location: %s Overwrite?"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:82
+msgid "Welcome page created"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:84
+msgid "The Welcome page was NOT created"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:88
+msgid "Random hash key created for 'Security.salt'"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:90
+msgid "Unable to generate random hash for 'Security.salt', you should change it in %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:94
+msgid "Random seed created for 'Security.cipherSeed'"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:96
+msgid "Unable to generate random seed for 'Security.cipherSeed', you should change it in %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:101
+msgid "CAKE_CORE_INCLUDE_PATH set to %s in webroot/index.php"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:102
+msgid "CAKE_CORE_INCLUDE_PATH set to %s in webroot/test.php"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:103
+msgid "Remember to check these value after moving to production server"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:105
+msgid "Unable to set CAKE_CORE_INCLUDE_PATH, you should change it in %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:109
+msgid "Could not set permissions on %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:110
+msgid "chmod -R 0777 %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:135
+msgid "What is the path to the directory layout you wish to copy?\nExample: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:137
+msgid "The directory path you supplied was empty. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:140
+msgid "Directory path does not exist please choose another:"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:147
+msgid "Bake Project"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:148
+msgid "Skel Directory: "
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:149
+msgid "Will be copied to: "
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:166
+msgid " '%s' could not be created properly"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:178
+#: cake/console/libs/tasks/view.php:353
+msgid "Bake Aborted."
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:322
+msgid "You have more than one routing prefix configured"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:331
+msgid "Please choose a prefix to bake with."
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:337
+msgid "What would you like the prefix route to be?"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:338
+msgid "Example: www.example.com/admin/controller"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:340
+msgid "Enter a routing prefix:"
+msgstr ""
+
+#: cake/console/libs/tasks/project.php:343
+msgid "Unable to write to /app/config/core.php."
+msgstr ""
+
+#: cake/console/libs/tasks/template.php:168
+msgid "You have more than one set of templates installed."
+msgstr ""
+
+#: cake/console/libs/tasks/template.php:169
+msgid "Please choose the template set you wish to use:"
+msgstr ""
+
+#: cake/console/libs/tasks/template.php:179
+msgid "Which bake theme would you like to use?"
+msgstr ""
+
+#: cake/console/libs/tasks/template.php:206
+msgid "Could not find template for %s"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:94
+msgid "Bake Tests"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:119
+msgid "Bake is detecting possible fixtures.."
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:160
+msgid "Select an object type:"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:169
+msgid "Enter the type of object to bake a test for or (q)uit"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:198
+msgid "Choose a %s class"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:204
+msgid "Choose an existing class, or enter the name of a class that does not exist"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:382
+msgid "Bake could not detect fixtures, would you like to add some?"
+msgstr ""
+
+#: cake/console/libs/tasks/test.php:385
+msgid "Please provide a comma separated list of the fixtures names you'd like to use.\nExample: 'app.comment, app.post, plugin.forums.post'"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:226
+msgid "Would you like bake to build your views interactively?\nWarning: Choosing no will overwrite %s views if it exist."
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:233
+msgid "Would you like to create some CRUD views\n(index, add, view, edit) for this controller?\nNOTE: Before doing so, you'll need to create your controller\nand model classes (including associated models)."
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:236
+msgid "Would you like to create the views for admin routing?"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:255
+msgid "View Scaffolding Complete.\n"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:273
+msgid "Controller not found"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:283
+msgid "The file '%s' could not be found.\nIn order to bake a view, you'll need to first create the controller."
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:335
+msgid "Action Name? (use lowercase_underscored function name)"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:337
+msgid "The action name you supplied was empty. Please try again."
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:342
+msgid "The following view will be created:"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:344
+msgid "Controller Name: %s"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:345
+msgid "Action Name:     %s"
+msgstr ""
+
+#: cake/console/libs/tasks/view.php:346
+msgid "Path:            %s"
+msgstr ""
+
+#: cake/console/templates/skel/views/layouts/default.ctp:25
+#: cake/libs/view/layouts/default.ctp:25
+#: cake/tests/test_app/views/layouts/default.ctp:25
+msgid "CakePHP: the rapid development php framework:"
+msgstr ""
+
+#: cake/libs/cache.php:595
+msgid "Method write() not implemented in %s"
+msgstr ""
+
+#: cake/libs/cache.php:606
+msgid "Method read() not implemented in %s"
+msgstr ""
+
+#: cake/libs/cache.php:618
+msgid "Method increment() not implemented in %s"
+msgstr ""
+
+#: cake/libs/cache.php:629
+msgid "Method decrement() not implemented in %s"
+msgstr ""
+
+#: cake/libs/cake_log.php:101
+msgid "Missing logger classname"
+msgstr ""
+
+#: cake/libs/cake_log.php:133
+msgid "Could not load logger class %s"
+msgstr ""
+
+#: cake/libs/cake_log.php:138
+msgid "logger class %s does not implement a write method."
+msgstr ""
+
+#: cake/libs/cake_session.php:280
+msgid "Deleting session key {%s}"
+msgstr ""
+
+#: cake/libs/cake_session.php:285
+msgid "%s doesn't exist"
+msgstr ""
+
+#: cake/libs/cake_session.php:444
+msgid "Writing session key {%s}: %s"
+msgstr ""
+
+#: cake/libs/cake_session.php:506
+msgid "You must set the all Configure::write('Session.*') in core.php to use database storage"
+msgstr ""
+
+#: cake/libs/cake_socket.php:238
+#: cake/tests/cases/libs/cake_socket.test.php:153
+msgid "Connection timed out"
+msgstr ""
+
+#: cake/libs/class_registry.php:153
+msgid "(ClassRegistry::init() could not create instance of %1$s class %2$s "
+msgstr ""
+
+#: cake/libs/class_registry.php:163
+msgid "(ClassRegistry::init() Attempted to create instance of a class with a numeric name"
+msgstr ""
+
+#: cake/libs/configure.php:266
+msgid "Configure::load() - no variable $config found in %s.php"
+msgstr ""
+
+#: cake/libs/configure.php:393
+msgid "Can't find application core file. Please create %score.php, and make sure it is readable by PHP."
+msgstr ""
+
+#: cake/libs/configure.php:400
+msgid "Cache not configured properly. Please check Cache::config(); in APP/config/core.php"
+msgstr ""
+
+#: cake/libs/configure.php:434
+msgid "Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP."
+msgstr ""
+
+#: cake/libs/debugger.php:684
+msgid "Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application"
+msgstr ""
+
+#: cake/libs/debugger.php:688
+msgid "Please change the value of 'Security.cipherSeed' in app/config/core.php to a numeric (digits only) seed value specific to your application"
+msgstr ""
+
+#: cake/libs/error.php:162
+msgid "Not Found"
+msgstr ""
+
+#: cake/libs/error.php:185
+msgid "An Internal Error Has Occurred"
+msgstr ""
+
+#: cake/libs/error.php:204
+#: cake/libs/view/errors/missing_controller.ctp:20
+msgid "Missing Controller"
+msgstr ""
+
+#: cake/libs/error.php:223
+msgid "Missing Method in Controller"
+msgstr ""
+
+#: cake/libs/error.php:240
+msgid "Trying to access private method in class"
+msgstr ""
+
+#: cake/libs/error.php:259
+#: cake/libs/view/errors/missing_table.ctp:20
+msgid "Missing Database Table"
+msgstr ""
+
+#: cake/libs/error.php:274
+msgid "Scaffold Missing Database Connection"
+msgstr ""
+
+#: cake/libs/error.php:292
+#: cake/libs/view/errors/missing_view.ctp:20
+msgid "Missing View"
+msgstr ""
+
+#: cake/libs/error.php:309
+#: cake/libs/view/errors/missing_layout.ctp:20
+msgid "Missing Layout"
+msgstr ""
+
+#: cake/libs/error.php:327
+#: cake/libs/view/errors/missing_connection.ctp:20
+#: cake/libs/view/errors/missing_scaffolddb.ctp:20
+msgid "Missing Database Connection"
+msgstr ""
+
+#: cake/libs/error.php:344
+#: cake/libs/view/errors/missing_helper_file.ctp:20
+msgid "Missing Helper File"
+msgstr ""
+
+#: cake/libs/error.php:361
+#: cake/libs/view/errors/missing_helper_class.ctp:20
+msgid "Missing Helper Class"
+msgstr ""
+
+#: cake/libs/error.php:378
+#: cake/libs/view/errors/missing_behavior_file.ctp:20
+msgid "Missing Behavior File"
+msgstr ""
+
+#: cake/libs/error.php:395
+#: cake/libs/view/errors/missing_behavior_class.ctp:20
+msgid "Missing Behavior Class"
+msgstr ""
+
+#: cake/libs/error.php:413
+#: cake/libs/view/errors/missing_component_file.ctp:20
+msgid "Missing Component File"
+msgstr ""
+
+#: cake/libs/error.php:431
+#: cake/libs/view/errors/missing_component_class.ctp:20
+msgid "Missing Component Class"
+msgstr ""
+
+#: cake/libs/error.php:447
+#: cake/libs/view/errors/missing_model.ctp:20
+msgid "Missing Model"
+msgstr ""
+
+#: cake/libs/folder.php:379;400
+msgid "%s changed to %s"
+msgstr ""
+
+#: cake/libs/folder.php:383;402
+msgid "%s NOT changed to %s"
+msgstr ""
+
+#: cake/libs/folder.php:489
+msgid "%s is a file"
+msgstr ""
+
+#: cake/libs/folder.php:500;665
+msgid "%s created"
+msgstr ""
+
+#: cake/libs/folder.php:504
+msgid "%s NOT created"
+msgstr ""
+
+#: cake/libs/folder.php:579;593
+msgid "%s removed"
+msgstr ""
+
+#: cake/libs/folder.php:581;590
+msgid "%s NOT removed"
+msgstr ""
+
+#: cake/libs/folder.php:638
+msgid "%s not writable"
+msgstr ""
+
+#: cake/libs/folder.php:652
+msgid "%s copied to %s"
+msgstr ""
+
+#: cake/libs/folder.php:654
+msgid "%s NOT copied to %s"
+msgstr ""
+
+#: cake/libs/folder.php:669
+msgid "%s not created"
+msgstr ""
+
+#: cake/libs/http_socket.php:539
+msgid "HttpSocket::_decodeBody - Unknown encoding: %s. Activate quirks mode to surpress error."
+msgstr ""
+
+#: cake/libs/http_socket.php:565
+msgid "HttpSocket::_decodeChunkedBody - Could not parse malformed chunk. Activate quirks mode to do this."
+msgstr ""
+
+#: cake/libs/http_socket.php:827
+msgid "HttpSocket::_buildRequestLine - Passed an invalid request line string. Activate quirks mode to do this."
+msgstr ""
+
+#: cake/libs/http_socket.php:842
+msgid "HttpSocket::_buildRequestLine - The \"*\" asterisk character is only allowed for the following methods: %s. Activate quirks mode to work outside of HTTP/1.1 specs."
+msgstr ""
+
+#: cake/libs/overloadable_php4.php:73;133
+#: cake/libs/overloadable_php5.php:48;80
+msgid "Magic method handler call__ not defined in %s"
+msgstr ""
+
+#: cake/libs/router.php:288
+msgid "Route classes must extend CakeRoute"
+msgstr ""
+
+#: cake/libs/security.php:173
+msgid "You cannot use an empty key for Security::cipher()"
+msgstr ""
+
+#: cake/libs/validation.php:342
+msgid "You must define the $operator parameter for Validation::comparison()"
+msgstr ""
+
+#: cake/libs/validation.php:366
+msgid "You must define a regular expression for Validation::custom()"
+msgstr ""
+
+#: cake/libs/validation.php:927
+msgid "Could not find %s class, unable to complete validation."
+msgstr ""
+
+#: cake/libs/validation.php:931
+msgid "Method %s does not exist on %s unable to complete validation."
+msgstr ""
+
+#: cake/libs/xml.php:405
+msgid "Cannot append a node to itself."
+msgstr ""
+
+#: cake/libs/xml.php:916
+msgid "XML cannot be read"
+msgstr ""
+
+#: cake/libs/cache/file.php:267
+msgid "%s is not writable"
+msgstr ""
+
+#: cake/libs/cache/memcache.php:160
+msgid "Method increment() not implemented for compressed cache in %s"
+msgstr ""
+
+#: cake/libs/cache/memcache.php:176
+msgid "Method decrement() not implemented for compressed cache in %s"
+msgstr ""
+
+#: cake/libs/controller/controller.php:366
+msgid "Controller::__construct() : Can not get or parse my own class name, exiting."
+msgstr ""
+
+#: cake/libs/controller/controller.php:803
+msgid "%sController::isAuthorized() is not defined."
+msgstr ""
+
+#: cake/libs/controller/controller.php:1099
+msgid "Controller::paginate() - can't find model %1$s in controller %2$sController"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:180
+msgid "Scaffold :: "
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:293
+msgid "updated"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:296
+msgid "saved"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:306
+msgid "Invalid id for %s::edit()"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:325
+msgid "The %1$s has been %2$s"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:341
+msgid "Please correct errors below."
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:381
+msgid "No id set for %s::delete()"
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:396
+msgid "The %1$s with id: %2$d has been deleted."
+msgstr ""
+
+#: cake/libs/controller/scaffold.php:408
+msgid "There was an error deleting the %1$s with id: %2$d"
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:55
+msgid "Could not find %s."
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:180
+msgid "[acl_base] The AclBase class constructor has been called, or the class was instantiated. This class must remain abstract. Please refer to the Cake docs for ACL configuration."
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:273
+msgid "DbAcl::check() - Failed ARO/ACO node lookup in permissions check.  Node references:\nAro: "
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:278
+msgid "DbAcl::check() - Failed ACO node lookup in permissions check.  Node references:\nAro: "
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:286
+msgid "ACO permissions key %s does not exist in DbAcl::check()"
+msgstr ""
+
+#: cake/libs/controller/components/acl.php:361
+msgid "DbAcl::allow() - Invalid node"
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:421
+msgid "Could not find AclComponent. Please include Acl in Controller::$components."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:464
+msgid "Could not find $userModel. Please set AuthComponent::$userModel in beforeFilter()."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:476
+msgid "Login failed. Invalid username or password."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:477
+msgid "You are not authorized to access that location."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:532
+msgid "Auth::startup() - Attempted access of un-mapped action \"%1$s\" in controller \"%2$s\""
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:556
+msgid "Could not find %s. Set AuthComponent::$object in beforeFilter() or pass a valid object"
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:562
+msgid "%s::isAuthorized() is not defined."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:570
+msgid "Auth::isAuthorized() - $authorize is set to an incorrect value.  Allowed settings are: \"actions\", \"crud\", \"model\" or null."
+msgstr ""
+
+#: cake/libs/controller/components/auth.php:825
+msgid "Auth::getModel() - Model is not set or could not be found"
+msgstr ""
+
+#: cake/libs/controller/components/email.php:727
+msgid "_lineLength cannot be accessed please use lineLength"
+msgstr ""
+
+#: cake/libs/controller/components/security.php:337
+msgid "SecurityComponent::loginCredentials() - Server does not support digest authentication"
+msgstr ""
+
+#: cake/libs/model/cake_schema.php:601
+msgid "Schema generation error: invalid column type %s does not exist in DBO"
+msgstr ""
+
+#: cake/libs/model/connection_manager.php:102
+msgid "ConnectionManager::getDataSource - Non-existent data source %s"
+msgstr ""
+
+#: cake/libs/model/connection_manager.php:110
+msgid "ConnectionManager::getDataSource - Could not load class %s"
+msgstr ""
+
+#: cake/libs/model/connection_manager.php:185
+msgid "ConnectionManager::loadDataSource - Unable to import DataSource class %s"
+msgstr ""
+
+#: cake/libs/model/db_acl.php:146
+msgid "Model class '%s' not found in AclNode::node() when trying to bind %s object"
+msgstr ""
+
+#: cake/libs/model/db_acl.php:191
+msgid "AclNode::node() - Couldn't find %s node identified by \"%s\""
+msgstr ""
+
+#: cake/libs/model/model.php:953
+msgid "(Model::getColumnTypes) Unable to build model field data. If you are using a model without a database table, try implementing schema()"
+msgstr ""
+
+#: cake/libs/model/model.php:2565
+msgid "This field cannot be left blank"
+msgstr ""
+
+#: cake/libs/model/model.php:2613
+msgid "Could not find validation handler %s for %s"
+msgstr ""
+
+#: cake/libs/model/model.php:2923
+msgid "Invalid join model settings in %s"
+msgstr ""
+
+#: cake/libs/model/model_behavior.php:448
+msgid "BehaviorCollection::dispatchMethod() - Method %s not found in any attached behavior"
+msgstr ""
+
+#: cake/libs/model/behaviors/acl.php:64
+msgid "Callback parentNode() not defined in %s"
+msgstr ""
+
+#: cake/libs/model/behaviors/containable.php:363
+msgid "Model \"%s\" is not associated with model \"%s\""
+msgstr ""
+
+#: cake/libs/model/behaviors/translate.php:59
+msgid "Datasource %s for TranslateBehavior of model %s is not connected"
+msgstr ""
+
+#: cake/libs/model/behaviors/translate.php:455
+msgid "Association %s is already binded to model %s"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:684
+msgid "SQL Error:"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:686
+msgid "Aff:%s Num:%s Took:%sms"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:688
+msgid "Query:"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:923
+#: cake/libs/model/datasources/dbo/dbo_oracle.php:997
+msgid "SQL Error in model %s:"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:2521
+msgid "FIXME: Can't parse field: "
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:2632;2694
+#: cake/libs/model/datasources/dbo/dbo_mysql.php:346
+#: cake/libs/model/datasources/dbo/dbo_oracle.php:1147
+msgid "Invalid schema object"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:2720
+#: cake/libs/model/datasources/dbo/dbo_sqlite.php:493
+msgid "Column name or type not defined in schema"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo_source.php:2725
+#: cake/libs/model/datasources/dbo/dbo_sqlite.php:498
+msgid "Column type %s does not exist"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo/dbo_mssql.php:121
+msgid "PHP SQL Server interface is not installed, cannot continue. For troubleshooting information, see http://php.net/mssql/"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo/dbo_oracle.php:586
+msgid "Must specify table to operate on constraints"
+msgstr ""
+
+#: cake/libs/model/datasources/dbo/dbo_oracle.php:644
+msgid "DboOracle::constraint() accepts only enable, disable, or list"
+msgstr ""
+
+#: cake/libs/view/helper.php:154
+msgid "Method %1$s::%2$s does not exist"
+msgstr ""
+
+#: cake/libs/view/view.php:449
+msgid "Error in view %s, got: <blockquote>%s</blockquote>"
+msgstr ""
+
+#: cake/libs/view/view.php:493
+msgid "Error in layout %s, got: <blockquote>%s</blockquote>"
+msgstr ""
+
+#: cake/libs/view/errors/error404.ctp:22
+#: cake/libs/view/errors/error500.ctp:22
+#: cake/libs/view/errors/missing_action.ctp:22;26
+#: cake/libs/view/errors/missing_behavior_class.ctp:22;26
+#: cake/libs/view/errors/missing_behavior_file.ctp:22;26
+#: cake/libs/view/errors/missing_component_class.ctp:22;26
+#: cake/libs/view/errors/missing_component_file.ctp:22;26
+#: cake/libs/view/errors/missing_connection.ctp:22;26
+#: cake/libs/view/errors/missing_controller.ctp:22;26
+#: cake/libs/view/errors/missing_helper_class.ctp:22;26
+#: cake/libs/view/errors/missing_helper_file.ctp:22;26
+#: cake/libs/view/errors/missing_layout.ctp:22;26
+#: cake/libs/view/errors/missing_model.ctp:22;26
+#: cake/libs/view/errors/missing_scaffolddb.ctp:22;26
+#: cake/libs/view/errors/missing_table.ctp:22
+#: cake/libs/view/errors/missing_view.ctp:22;26
+#: cake/libs/view/errors/private_action.ctp:22
+#: cake/libs/view/errors/scaffold_error.ctp:22
+msgid "Error"
+msgstr ""
+
+#: cake/libs/view/errors/error500.ctp:23
+msgid "An Internal Error Has Occurred."
+msgstr ""
+
+#: cake/libs/view/errors/missing_action.ctp:20
+msgid "Missing Method in %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_action.ctp:23
+msgid "The action %1$s is not defined in controller %2$s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_action.ctp:27
+msgid "Create %1$s%2$s in file: %3$s."
+msgstr ""
+
+#: cake/libs/view/errors/missing_action.ctp:44
+#: cake/libs/view/errors/missing_behavior_class.ctp:37
+#: cake/libs/view/errors/missing_behavior_file.ctp:37
+#: cake/libs/view/errors/missing_component_class.ctp:37
+#: cake/libs/view/errors/missing_component_file.ctp:37
+#: cake/libs/view/errors/missing_connection.ctp:30
+#: cake/libs/view/errors/missing_controller.ctp:38
+#: cake/libs/view/errors/missing_helper_class.ctp:37
+#: cake/libs/view/errors/missing_helper_file.ctp:37
+#: cake/libs/view/errors/missing_layout.ctp:30
+#: cake/libs/view/errors/missing_model.ctp:39
+#: cake/libs/view/errors/missing_scaffolddb.ctp:30
+#: cake/libs/view/errors/missing_table.ctp:26
+#: cake/libs/view/errors/missing_view.ctp:30
+#: cake/libs/view/errors/private_action.ctp:26
+#: cake/libs/view/errors/scaffold_error.ctp:26
+msgid "Notice"
+msgstr ""
+
+#: cake/libs/view/errors/missing_action.ctp:45
+#: cake/libs/view/errors/missing_behavior_class.ctp:38
+#: cake/libs/view/errors/missing_behavior_file.ctp:38
+#: cake/libs/view/errors/missing_component_class.ctp:38
+#: cake/libs/view/errors/missing_component_file.ctp:38
+#: cake/libs/view/errors/missing_controller.ctp:39
+#: cake/libs/view/errors/missing_helper_class.ctp:38
+#: cake/libs/view/errors/missing_helper_file.ctp:38
+#: cake/libs/view/errors/missing_layout.ctp:31
+#: cake/libs/view/errors/missing_model.ctp:40
+#: cake/libs/view/errors/missing_scaffolddb.ctp:31
+#: cake/libs/view/errors/missing_table.ctp:27
+#: cake/libs/view/errors/missing_view.ctp:31
+#: cake/libs/view/errors/private_action.ctp:27
+#: cake/libs/view/errors/scaffold_error.ctp:27
+msgid "If you want to customize this error message, create %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_behavior_class.ctp:23
+msgid "The behavior class <em>%s</em> can not be found or does not exist."
+msgstr ""
+
+#: cake/libs/view/errors/missing_behavior_class.ctp:27
+#: cake/libs/view/errors/missing_behavior_file.ctp:27
+#: cake/libs/view/errors/missing_helper_class.ctp:27
+#: cake/libs/view/errors/missing_helper_file.ctp:27
+msgid "Create the class below in file: %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_behavior_file.ctp:23
+msgid "The Behavior file %s can not be found or does not exist."
+msgstr ""
+
+#: cake/libs/view/errors/missing_component_class.ctp:23
+msgid "Component class %1$s in %2$s was not found."
+msgstr ""
+
+#: cake/libs/view/errors/missing_component_class.ctp:27
+#: cake/libs/view/errors/missing_component_file.ctp:27
+#: cake/libs/view/errors/missing_model.ctp:27
+msgid "Create the class %s in file: %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_component_file.ctp:23
+msgid "The component file was not found."
+msgstr ""
+
+#: cake/libs/view/errors/missing_connection.ctp:23
+msgid "%s requires a database connection"
+msgstr ""
+
+#: cake/libs/view/errors/missing_connection.ctp:27
+msgid "Confirm you have created the file : %s."
+msgstr ""
+
+#: cake/libs/view/errors/missing_connection.ctp:31
+msgid "If you want to customize this error message, create %s."
+msgstr ""
+
+#: cake/libs/view/errors/missing_controller.ctp:23
+msgid "%s could not be found."
+msgstr ""
+
+#: cake/libs/view/errors/missing_controller.ctp:27
+msgid "Create the class %s below in file: %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_helper_class.ctp:23
+msgid "The helper class <em>%s</em> can not be found or does not exist."
+msgstr ""
+
+#: cake/libs/view/errors/missing_helper_file.ctp:23
+msgid "The helper file %s can not be found or does not exist."
+msgstr ""
+
+#: cake/libs/view/errors/missing_layout.ctp:23
+msgid "The layout file %s can not be found or does not exist."
+msgstr ""
+
+#: cake/libs/view/errors/missing_layout.ctp:27
+#: cake/libs/view/errors/missing_scaffolddb.ctp:27
+#: cake/libs/view/errors/missing_view.ctp:27
+msgid "Confirm you have created the file: %s"
+msgstr ""
+
+#: cake/libs/view/errors/missing_model.ctp:23
+msgid "<em>%s</em> could not be found."
+msgstr ""
+
+#: cake/libs/view/errors/missing_scaffolddb.ctp:23
+msgid "Scaffold requires a database connection"
+msgstr ""
+
+#: cake/libs/view/errors/missing_table.ctp:23
+msgid "Database table %1$s for model %2$s was not found."
+msgstr ""
+
+#: cake/libs/view/errors/missing_view.ctp:23
+msgid "The view for %1$s%2$s was not found."
+msgstr ""
+
+#: cake/libs/view/errors/private_action.ctp:20
+msgid "Private Method in %s"
+msgstr ""
+
+#: cake/libs/view/errors/private_action.ctp:23
+msgid "%s%s cannot be accessed directly."
+msgstr ""
+
+#: cake/libs/view/errors/scaffold_error.ctp:20
+msgid "Scaffold Error"
+msgstr ""
+
+#: cake/libs/view/errors/scaffold_error.ctp:23
+msgid "Method _scaffoldError in was not found in the controller"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:514
+msgid "Error in field %s"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:631
+#: cake/libs/view/scaffolds/edit.ctp:40
+#: cake/libs/view/scaffolds/index.ctp:79;86
+#: cake/libs/view/scaffolds/view.ctp:56;63;155
+msgid "New %s"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:637
+#: cake/libs/view/scaffolds/view.ctp:53;94
+msgid "Edit %s"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2125
+msgid "January"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2126
+msgid "February"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2127
+msgid "March"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2128
+msgid "April"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2129
+msgid "May"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2130
+msgid "June"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2131
+msgid "July"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2132
+msgid "August"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2133
+msgid "September"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2134
+msgid "October"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2135
+msgid "November"
+msgstr ""
+
+#: cake/libs/view/helpers/form.php:2136
+msgid "December"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:154
+msgid "JsHelper:: Missing Method %s is undefined"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:792
+msgid "%s does not have get() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:811
+msgid "%s does not have event() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:822
+msgid "%s does not have domReady() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:832
+msgid "%s does not have each() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:860
+msgid "%s does not have effect() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:890
+msgid "%s does not have request() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:914
+msgid "%s does not have drag() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:936
+msgid "%s does not have drop() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:962
+msgid "%s does not have sortable() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:987
+msgid "%s does not have slider() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/js.php:1007
+msgid "%s does not have serializeForm() implemented"
+msgstr ""
+
+#: cake/libs/view/helpers/mootools_engine.php:310
+msgid "MootoolsEngine::drop() requires a \"drag\" option to properly function"
+msgstr ""
+
+#: cake/libs/view/helpers/number.php:93
+msgid "%d KB"
+msgstr ""
+
+#: cake/libs/view/helpers/number.php:95
+msgid "%.2f MB"
+msgstr ""
+
+#: cake/libs/view/helpers/number.php:97
+msgid "%.2f GB"
+msgstr ""
+
+#: cake/libs/view/helpers/number.php:99
+msgid "%.2f TB"
+msgstr ""
+
+#: cake/libs/view/helpers/number.php:91
+msgid "%d Byte"
+msgid_plural "%d Bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/paginator.php:99
+msgid "%s does not implement a link() method, it is incompatible with PaginatorHelper"
+msgstr ""
+
+#: cake/libs/view/helpers/paginator.php:534
+msgid " of "
+msgstr ""
+
+#: cake/libs/view/helpers/session.php:184
+msgid "You can not write to a Session from the view"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:230
+msgid "Today, %s"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:232
+msgid "Yesterday, %s"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:579
+msgid "on %s"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:613
+msgid "%s ago"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:649
+msgid "days"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:583
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:584;589
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:585;590;594
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:586;591;595;598
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:599;602
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:603;606
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:609
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/libs/view/helpers/time.php:61
+msgid "abday"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:67
+msgid "day"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:73
+msgid "d_t_fmt"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:86
+#: cake/tests/cases/libs/i18n.test.php:2645;2662
+msgid "abmon"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:92
+msgid "mon"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:103
+#: cake/tests/cases/libs/i18n.test.php:2641;2658
+msgid "am_pm"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:110
+msgid "t_fmt_ampm"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:124
+#: cake/tests/cases/libs/i18n.test.php:2637;2652
+msgid "d_fmt"
+msgstr ""
+
+#: cake/libs/view/helpers/time.php:130
+msgid "t_fmt"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:23
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:99
+msgid "Release Notes for CakePHP %s."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:24
+msgid "Read the changelog"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:34
+#: cake/tests/test_app/views/pages/home.ctp:12
+msgid "Your tmp directory is writable."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:38
+#: cake/tests/test_app/views/pages/home.ctp:16
+msgid "Your tmp directory is NOT writable."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:48
+#: cake/tests/test_app/views/pages/home.ctp:26
+msgid "The %s is being used for caching. To change the config edit APP/config/core.php "
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:52
+#: cake/tests/test_app/views/pages/home.ctp:30
+msgid "Your cache is NOT working. Please check the settings in APP/config/core.php"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:62
+#: cake/tests/test_app/views/pages/home.ctp:40
+msgid "Your database configuration file is present."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:67
+#: cake/tests/test_app/views/pages/home.ctp:45
+msgid "Your database configuration file is NOT present."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:69
+#: cake/tests/test_app/views/pages/home.ctp:47
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:72
+msgid "Rename config/database.php.default to config/database.php"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:78
+msgid "PCRE has not been compiled with Unicode support."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:80
+msgid "Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:96
+#: cake/tests/test_app/views/pages/home.ctp:64
+msgid "Cake is able to connect to the database."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:100
+#: cake/tests/test_app/views/pages/home.ctp:68
+msgid "Cake is NOT able to connect to the database."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:106
+#: cake/tests/test_app/views/pages/extract.ctp:14
+#: cake/tests/test_app/views/pages/home.ctp:74
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:101
+msgid "Editing this Page"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:109
+msgid "To change the content of this page, create: APP/views/pages/home.ctp.<br />\nTo change its layout, create: APP/views/layouts/default.ctp.<br />\nYou can also add some CSS styles for your pages at: APP/webroot/css."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:115
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:108
+msgid "Getting Started"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:119
+msgid "New"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:119
+msgid "CakePHP 1.3 Docs"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:128
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:110
+msgid "The 15 min Blog Tutorial"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:135
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:114
+msgid "More about Cake"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:137
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:116
+msgid "CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:140
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:119
+msgid "Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:144
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:122
+msgid "Cake Software Foundation"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:145
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:123
+msgid "Promoting development related to CakePHP"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:146
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:130
+msgid "CakePHP"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:147
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:131
+msgid "The Rapid Development Framework"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:148
+msgid "CakePHP Documentation"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:149
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:133
+msgid "Your Rapid Development Cookbook"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:150
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:134
+msgid "CakePHP API"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:151
+msgid "Quick Reference"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:152
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:124
+msgid "The Bakery"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:153
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:125
+msgid "Everything CakePHP"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:154
+msgid "The Show"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:155
+msgid "The Show is a live and archived internet radio broadcast CakePHP-related topics and answer questions live via IRC, Skype, and telephone."
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:156
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:140
+msgid "CakePHP Google Group"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:157
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:141
+msgid "Community mailing list"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:159
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:143
+msgid "Live chat about CakePHP"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:160
+msgid "CakePHP Code"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:161
+msgid "For the Development of CakePHP Git repository, Downloads"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:162
+msgid "CakePHP Lighthouse"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:163
+msgid "CakePHP Tickets, Wiki pages, Roadmap"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:164
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:136
+msgid "CakeForge"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:165
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:137
+msgid "Open Development for CakePHP"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:166
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:126
+msgid "Book Store"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:167
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:127
+msgid "Recommended Software Books"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:168
+msgid "CakePHP gear"
+msgstr ""
+
+#: cake/libs/view/pages/home.ctp:169
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:129
+msgid "Get your own CakePHP gear - Doughnate to Cake"
+msgstr ""
+
+#: cake/libs/view/scaffolds/edit.ctp:31
+#: cake/libs/view/scaffolds/index.ctp:57
+#: cake/libs/view/scaffolds/view.ctp:54;146
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: cake/libs/view/scaffolds/edit.ctp:33
+msgid "List"
+msgstr ""
+
+#: cake/libs/view/scaffolds/edit.ctp:39
+#: cake/libs/view/scaffolds/index.ctp:85
+#: cake/libs/view/scaffolds/view.ctp:55;62
+msgid "List %s"
+msgstr ""
+
+#: cake/libs/view/scaffolds/view.ctp:21
+msgid "View %s"
+msgstr ""
+
+#: cake/libs/view/scaffolds/view.ctp:54
+msgid "Delete %s"
+msgstr ""
+
+#: cake/libs/view/scaffolds/view.ctp:75;114
+msgid "Related %s"
+msgstr ""
+
+#: cake/tests/cases/basics.test.php:381;433;493;517
+#: cake/tests/cases/libs/i18n.test.php:2735;2724
+msgid "Plural Rule 1"
+msgstr ""
+
+#: cake/tests/cases/basics.test.php:385;390;497;502;521;534
+#: cake/tests/cases/libs/i18n.test.php:2760
+msgid "Plural Rule 1 (from core)"
+msgstr ""
+
+#: cake/tests/cases/basics.test.php:405;409;461;473;549
+#: cake/tests/cases/libs/i18n.test.php:2578;2582;2586;2748
+msgid "%d = 1"
+msgid_plural "%d = 0 or > 1"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/tests/cases/basics.test.php:413;418;553;562
+#: cake/tests/cases/libs/i18n.test.php:2773
+msgid "%d = 1 (from core)"
+msgid_plural "%d = 0 or > 1 (from core)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/tests/cases/libs/i18n.test.php:2554
+msgid "No Translation needed"
+msgstr ""
+
+#: cake/tests/cases/libs/i18n.test.php:2566
+msgid "this is a \"quoted string\""
+msgstr ""
+
+#: cake/tests/lib/cake_test_case.php:540
+msgid "Referenced fixture class %s not found"
+msgstr ""
+
+#: cake/tests/lib/code_coverage_manager.php:104
+msgid "Xdebug supports no parallel coverage analysis - so this is not possible."
+msgstr ""
+
+#: cake/tests/lib/code_coverage_manager.php:226;239
+msgid "This test object file is invalid: %s"
+msgstr ""
+
+#: cake/tests/lib/code_coverage_manager.php:553
+msgid "This group file does not exist!"
+msgstr ""
+
+#: cake/tests/lib/code_coverage_manager.php:740
+msgid "Sorry, you cannot have more covered lines than total lines!"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:104
+msgid "All App Tests"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:106
+msgid "All %s Plugin Tests"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:108
+msgid "All Core Tests"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:136
+msgid "Test case %s cannot be found"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:146
+msgid "Individual test case: %s"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:164
+msgid "Group test %s cannot be found at %s"
+msgstr ""
+
+#: cake/tests/lib/test_manager.php:173
+msgid "%s group test"
+msgstr ""
+
+#: cake/tests/test_app/views/pages/extract.ctp:6
+msgid "You have %d new message."
+msgid_plural "You have %d new messages."
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/tests/test_app/views/pages/extract.ctp:7
+msgid "You deleted %d message."
+msgid_plural "You deleted %d messages."
+msgstr[0] ""
+msgstr[1] ""
+
+#: cake/tests/test_app/views/pages/home.ctp:77
+msgid "To change the content of this page, edit: %s\n\t\tTo change its layout, edit: %s\n\t\tYou can also add some CSS styles for your pages at: %s"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/cache_form.ctp:5
+msgid "Add User"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:24
+msgid "Your tmp directory is "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:26
+msgid "writable."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:28
+msgid "NOT writable."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:37
+msgid "Your cache is "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:39
+msgid "set up and initialized properly."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:42
+msgid " is being used to cache, to change this edit config/core.php "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:52
+msgid "NOT working."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:55
+msgid "Edit: config/core.php to insure you have the newset version of this file and the variable $cakeCache set properly"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:64
+msgid "Your database configuration file is "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:67
+msgid "present."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:70
+msgid "NOT present."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:88
+msgid "Cake"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:90
+msgid " is able to "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:92
+msgid " is NOT able to "
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:94
+msgid "connect to the database."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:100
+msgid "Read the release notes and get the latest version"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:103
+msgid "To change the content of this page, create: /app/views/pages/home.ctp."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:104
+msgid "To change its layout, create: /app/views/layouts/default.ctp."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:105
+msgid "See the views section of the manual for more info."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:106
+msgid "You can also add some CSS styles for your pages at: app/webroot/css/."
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:111
+msgid "Cook up Web sites fast with CakePHP"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:112
+msgid "Create an interactive production wiki using PHP"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:128
+msgid "CakeSchwag"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:132
+msgid "CakePHP Manual"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:135
+msgid "Docblock Your Best Friend"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:138
+msgid "CakePHP Trac"
+msgstr ""
+
+#: cake/tests/test_app/views/posts/test_nocache_tags.ctp:139
+msgid "For the Development of CakePHP (Tickets, SVN browser, Roadmap, Changelogs)"
+msgstr ""
+

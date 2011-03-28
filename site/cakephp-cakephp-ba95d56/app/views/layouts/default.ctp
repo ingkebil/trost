@@ -38,8 +38,14 @@
 		<div id="header">
 			<h1><?php echo $this->Html->link(__('TROST: Trockentoleranz von Stärkekartoffelsorten', true), '/'); ?></h1>
             <span>
-            <?php echo $html->link('EN', array('controller' => 'lang', 'action' => 'change', 'en-us')); ?> | 
-            <?php echo $html->link('DE', array('controller' => 'lang', 'action' => 'change', 'de-de')); ?>
+<?php
+        $default_url = $this->passedArgs;
+        $de_url = $en_url = $default_url;
+        $de_url['lang'] = 'de-de';
+        $en_url['lang'] = 'en-us';
+?>
+            <?php echo $html->link('EN', $en_url); ?> | 
+            <?php echo $html->link('DE', $de_url); ?>
             </span>
 		</div>
 		<div id="content">

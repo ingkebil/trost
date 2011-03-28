@@ -3,7 +3,6 @@ class EntitiesController extends AppController {
 
 	var $name = 'Entities';
     var $uses = array('Entity');
-    var $components = array('P28n');
 
     function upload() {
 		if (!empty($this->data)) {

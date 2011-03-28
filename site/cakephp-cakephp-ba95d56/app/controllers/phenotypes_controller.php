@@ -105,12 +105,12 @@ class PhenotypesController extends AppController {
                     ));
 
                     # save the attribute info # TODO check if attribute ID exists and matches!
-                    $this->Phenotype->PhenotypeAttribute->create();
-                    $ph_attribute = $this->Phenotype->PhenotypeAttribute->save(array(
-                        'PhenotypeAttribute' => array(
+                    $this->Phenotype->PhenotypeValue->create();
+                    $ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
+                        'PhenotypeValue' => array(
                             'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                            'attribute_id' => $attribute_id,
-                            'value' => $attribute_value
+                            'value_id' => $attribute_id,
+                            'number' => $attribute_value
                         )
                     ));
 

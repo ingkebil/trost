@@ -35,11 +35,25 @@ class AppController extends Controller {
     var $components = array('Session');
     
     function beforeFilter() {        
-        if($this->Session->check('Config.language')) {
-            Configure::write('Config.language', $this->Session->read('Config.language'));
-        } else {
-            $this->Session->write('Config.language', Configure::read('Config.language'));
-        } 
+        # if no language is set in the url, check the session, if no language is set in the session, default to German.
+        if (!isset($this->params['lang'])) {
+            if ($this->Session->check('Languages.default')) {
+                $this->params['lang'] = $this->Session->read('Languages.default');
+            }
+            else {
+                $this->params['lang'] = Configure::read('Languages.default');
+            }
+            $this->redirect('/' . $this->params['lang']. '/' . $this->params['url']['url']);
+        }
+
+        # check if this is a valid language
+        if (!in_array($this->params['lang'], Configure::read('Languages.all'))) {
+            $this->Session->setFlash(__('Whoops, not a valid language.', true));
+            return $this->redirect($this->referer(), 301, true);
+        }
+
+        $this->Session->write('Languages.default', $this->params['lang']);
+        Configure::write('Languages.default', $this->params['lang']);
     } 
 
 }

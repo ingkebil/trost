@@ -27,7 +27,15 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/:lang', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+    #Router::connect('/de-de/:controller/:action/*', array('lang' => 'de-de'));
+    #Router::connect('/en-us/:controller/:action/*', array('lang' => 'en-us'));
+    Router::connect('/language/:action/*', array('controller' => 'language'));
+    Router::connect('/:controller/:action');
+    Router::connect('/:lang/:controller', array('action' => 'index'));
+    Router::connect('/:lang/:controller/:action/*');
