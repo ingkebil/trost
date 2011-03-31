@@ -44,7 +44,7 @@ class AppController extends Controller {
             else {
                 $this->params['lang'] = Configure::read('Languages.default');
             }
-            if (!$this->RequestHandler->isAjax()) { # only redirect if this ain't AJAX so the POST info doesn't get lost
+            if (!$this->RequestHandler->isAjax() and !$this->RequestHandler->isPost()) { # be sure not to redirect requests that have POST content, I mean, the i18n ain't that important ;)
                 $this->redirect('/' . $this->params['lang']. '/' . $this->params['url']['url']);
             }
         }
