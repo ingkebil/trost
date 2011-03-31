@@ -26,6 +26,21 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
+
+    
+    /*
+        http://debuggable.com/posts/quick-dessert-list-all-controllers-of-a-cakephp-application:480f4dd6-adf4-4b18-9fe8-4b99cbdd56cb
+    */
+    function listControllers() {
+        return array_unique(
+            array_map('__plunderscore', Configure::listObjects('controller'))
+        );
+    }
+
+    function __plunderscore($name) {
+        return Inflector::pluralize(Inflector::underscore($name));
+    }
+
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/:lang', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
@@ -35,7 +50,12 @@
 
     #Router::connect('/de-de/:controller/:action/*', array('lang' => 'de-de'));
     #Router::connect('/en-us/:controller/:action/*', array('lang' => 'en-us'));
-    Router::connect('/language/:action/*', array('controller' => 'language'));
+    # explicitly attach all the indexes
+    $controllers = listControllers();
+    foreach ($controllers as $controller) {
+        Router::connect("/:lang/$controller", array('controller' => $controller, 'action' => 'index'));
+    }
+
     Router::connect('/:controller/:action');
     Router::connect('/:lang/:controller', array('action' => 'index'));
     Router::connect('/:lang/:controller/:action/*');
