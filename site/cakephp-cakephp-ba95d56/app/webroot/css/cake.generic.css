@@ -23,11 +23,12 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
-	color: #fff;
+	background: #fff;
+	color: #003d4c;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
+    padding: 0;
 }
 a {
 	color: #003d4c;
@@ -72,15 +73,19 @@ ul, li {
 /** Layout **/
 #container {
 	text-align: left;
+    width: 1000px;
 }
 
 #header{
 	padding: 10px 20px;
 }
 #header span {
-    padding: 5px;
-    background-color: #336f7f;
+    padding: 20px 5px 5px 5px;
     float: right;
+    background-color: #dedede;
+    margin: -10px ;
+    border-right: 3px solid #eee;
+    border-bottom: 3px solid #eee;
 }
 #header h1 {
 	line-height:20px;
@@ -118,7 +123,7 @@ div.index,
 div.view {
 	float:right;
 	width:76%;
-	border-left:1px solid #666;
+	/*border-left:1px solid #3e917c;*/
 	padding:10px 2%;
 }
 div.actions {
@@ -242,7 +247,7 @@ fieldset {
 }
 fieldset legend {
 	background:#fff;
-	color: #e32;
+	color: #d1d1b4;
 	font-size: 160%;
 	font-weight: bold;
 }
@@ -348,7 +353,7 @@ div.message {
 	font-size: 140%;
 	font-weight: bold;
 	margin: 0 0 1em 0;
-	background: #c73e14;
+	background: #eeeca6;
 	padding: 5px;
 }
 div.error-message {

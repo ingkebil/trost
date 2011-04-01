@@ -36,7 +36,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link(__('TROST: Trockentoleranz von Stärkekartoffelsorten', true), '/'); ?></h1>
+        <?php echo $this->Html->link($this->Html->image('banner.jpg'), '/', array('escape' => false) ); ?>
             <span>
             <?php
             $default_url = $this->passedArgs;
@@ -52,6 +52,7 @@
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->Session->flash('edit'); ?>
 
 			<?php echo $content_for_layout; ?>
 

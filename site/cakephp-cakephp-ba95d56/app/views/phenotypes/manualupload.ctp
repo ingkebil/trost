@@ -1,7 +1,14 @@
 <div class="phenotypes form">
 <?php echo $this->Form->create('Phenotype');?>
 	<fieldset>
- 		<legend><?php __('Upload scanner file'); ?></legend>
+        <legend><?php 
+            if ($this->Session->flash('edit')) {
+                __('Upload next scanner file');
+            }
+            else {
+                __('Upload scanner file');
+            }
+        ?></legend>
 	<?php
         echo $this->Form->hidden('Phenotype.program_id');
         echo $this->Form->hidden('Culture.experiment_id');

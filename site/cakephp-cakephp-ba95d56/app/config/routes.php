@@ -29,7 +29,7 @@
 
     
     /*
-        http://debuggable.com/posts/quick-dessert-list-all-controllers-of-a-cakephp-application:480f4dd6-adf4-4b18-9fe8-4b99cbdd56cb
+    http://www.studiocanaria.com/articles/quicktips_finding_all_the_controllers_in_your_cakephp_application
     */
     function listControllers() {
         return array_unique(
@@ -41,6 +41,7 @@
         return Inflector::pluralize(Inflector::underscore($name));
     }
 
+    # connect the from page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/:lang', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**

@@ -36,7 +36,6 @@ class AppController extends Controller {
     
     function beforeFilter() {        
         # if no language is set in the url, check the session, if no language is set in the session, default to German.
-
         if (!isset($this->params['lang'])) {
             if ($this->Session->check('Config.language')) {
                 $this->params['lang'] = $this->Session->read('Config.language');

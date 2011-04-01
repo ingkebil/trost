@@ -96,7 +96,7 @@ class PhenotypesController extends AppController {
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value) = explode(';', $line);
         }
 
-        # TODO maybe it could be easier to create the correct array to save instead of saving each model individually
+        # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
 
         # insert the plant info # TODO we prolly need to check if the plant exists in LIMS
         $plant = $this->Phenotype->Plant->find('first', array('conditions' => array('aliquot' => $plant_id)));
@@ -171,7 +171,7 @@ class PhenotypesController extends AppController {
             ));
         }
 
-        return true;
+        return $this->Phenotype->getLastInsertID();
     }
 
     function get_cultures() {
@@ -187,17 +187,36 @@ class PhenotypesController extends AppController {
 
     function _save_manualupload($program_id) {
         $line = '';
-        $line .= $this->data['Phenotype']['version'];
-        $line .= ';'. $this->data['Phenotype']['object'];
-        $line .= ';Fast Score';
-        $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
-        $line .= ';'. $this->data['PhenotypeValue']['value_id'];
-        $line .= ';'. $this->data['Value']['attribute'];
-        $line .= ';'. $this->data['Value']['value'];
-        $line .= ';'. $this->data['Plant']['aliquot'];
-        $line .= ';'. $this->data['PhenotypeValue']['number'];
-        $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
-        $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
+        pr($this->data);
+        if ($program_id == 1) {
+            $line .= $this->data['Phenotype']['version'];
+            $line .= ';'. $this->data['Phenotype']['object'];
+            $line .= ';Fast Score';
+            $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
+            $line .= ';'. $this->data['PhenotypeValue']['value_id'];
+            $line .= ';'. $this->data['Value']['attribute'];
+            $line .= ';'. $this->data['Value']['value'];
+            $line .= ';'. $this->data['Plant']['aliquot'];
+            $line .= ';'. $this->data['PhenotypeValue']['number'];
+            $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
+            $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
+        }
+        if ($program_id == 2) {
+            $line .= $this->data['Phenotype']['version'];
+            $line .= ';'. $this->data['Phenotype']['object'];
+            $line .= ';Phenotyping';
+            $line .= ';'. $this->data['Plant']['aliquot'];
+            $line .= ';'. $this->data['PhenotypeBbch']['bbch'];
+            $line .= ';'. $this->data['Bbch']['name'];
+            $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
+            $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
+            $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
+            $line .= ';'. $this->data['Entity']['name'];
+            $line .= ';'. $this->data['PhenotypeValue']['value_id'];
+            $line .= ';'. $this->data['Value']['attribute'];
+            $line .= ';'. $this->data['Value']['value'];
+            $line .= ';'. $this->data['PhenotypeValue']['number'];
+        }
         return $this->_save_upload($line, $program_id);
     }
 
@@ -207,8 +226,8 @@ class PhenotypesController extends AppController {
         $experiment_id = isset($this->params['named']['e']) ? $this->params['named']['e'] : @$this->data['Culture']['experiment_id'];
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
             $this->Phenotype->begin();
-            if ($this->_save_manualupload($program_id)) {
-                $this->Session->setFlash(__('The phenotype has been saved', true));
+            if ($phenotype_id = $this->_save_manualupload($program_id)) {
+                $this->Session->setFlash(__('The phenotype has been saved.', true), 'flashedit', array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)), 'edit');
                 $this->Phenotype->commit();
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('action'=>'index'));
@@ -235,6 +254,9 @@ class PhenotypesController extends AppController {
         $this->set('entities_', $this->Phenotype->PhenotypeEntity->Entity->find('list'));
         $this->set('values_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
         $this->set('attributes_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
+        if ($program_id == 2) {
+            $this->set('bbchs_', $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
+        }
 
     }
 
@@ -243,7 +265,7 @@ class PhenotypesController extends AppController {
         pr($program_id);
         pr($this->data);
         if ($this->_save_manualupload($program_id)) {
-            $this->Session->setFlash(__('The phenotype has been saved', true));
+            $this->Session->setFlash(__('The phenotype has been saved.', true), 'flashedit', array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)), 'edit');
             $this->redirect(array('action'=>'index'));
         }
         else {
