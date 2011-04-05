@@ -13,11 +13,11 @@ class PhenotypesController extends AppController {
 
             # check if manual input is needed, if yes, redirect to next view
             if ($this->data['File']['manual']) {
-                $url['controller'] = '/'.$this->params['lang'].'/'.$this->params['controller'];
+                $url['controller'] = $this->params['controller'];
                 $url['action'] = 'manualupload';
-                $url['p'] = $program_id;
-                $url['c'] = $this->data['Plant']['culture_id'];
-                $url['e'] = $this->data['Culture']['experiment_id'];
+                $url[] = $program_id;
+                $url[] = $this->data['Plant']['culture_id'];
+                $url[] = $this->data['Culture']['experiment_id'];
                 $this->redirect($url);
             }
 
@@ -187,7 +187,6 @@ class PhenotypesController extends AppController {
 
     function _save_manualupload($program_id) {
         $line = '';
-        pr($this->data);
         if ($program_id == 1) {
             $line .= $this->data['Phenotype']['version'];
             $line .= ';'. $this->data['Phenotype']['object'];
@@ -220,10 +219,11 @@ class PhenotypesController extends AppController {
         return $this->_save_upload($line, $program_id);
     }
 
-    function manualupload() {
-        $program_id =    isset($this->params['named']['p']) ? $this->params['named']['p'] : @$this->data['Phenotype']['program_id'];
-        $culture_id =    isset($this->params['named']['c']) ? $this->params['named']['c'] : @$this->data['Plant']['culture_id'];
-        $experiment_id = isset($this->params['named']['e']) ? $this->params['named']['e'] : @$this->data['Culture']['experiment_id'];
+    function manualupload($program_id = null, $culture_id = null, $experiment_id = null) {
+        $program_id =    $program_id ? $program_id : @$this->data['Phenotype']['program_id'];
+        $culture_id =    $culture_id ? $culture_id : @$this->data['Plant']['culture_id'];
+        $experiment_id = $experiment_id ? $experiment_id : @$this->data['Culture']['experiment_id'];
+        $id = isset($this->params['named']['id']) ? $this->params['named']['id'] : null;
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
             $this->Phenotype->begin();
             if ($phenotype_id = $this->_save_manualupload($program_id)) {
@@ -245,6 +245,9 @@ class PhenotypesController extends AppController {
             unset($this->data['Phenotype']['time']);
             unset($this->data['Form']['posted']);
         }
+        elseif ($id) {
+            $this->data = $this->Phenotype->read(null, $id);
+        }
 
         $this->data['Phenotype']['program_id'] = $program_id;
         $this->data['Culture']['experiment_id'] = $experiment_id;
@@ -254,7 +257,7 @@ class PhenotypesController extends AppController {
         $this->set('entities_', $this->Phenotype->PhenotypeEntity->Entity->find('list'));
         $this->set('values_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
         $this->set('attributes_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
-        if ($program_id == 2) {
+        if ($program_id == 2) { # load bbch codes when phenotyping program
             $this->set('bbchs_', $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
         }
 
@@ -304,24 +307,18 @@ class PhenotypesController extends AppController {
 	}
 
 	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id) {
 			$this->Session->setFlash(__('Invalid phenotype', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->Phenotype->save($this->data)) {
-				$this->Session->setFlash(__('The phenotype has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Phenotype->read(null, $id);
-		}
-		$programs = $this->Phenotype->Program->find('list');
-		$plants = $this->Phenotype->Plant->find('list');
-		$this->set(compact('programs', 'plants'));
+		$phenotype = $this->Phenotype->read(null, $id);
+        $this->redirect(array(
+            'action' => 'manualupload',
+            'p' => $phenotype['Phenotype']['program_id'],
+            'c' => $phenotype['Plant']['culture_id'],
+            'e' => $phenotype['Culture']['experiment_id'],
+            'id' => $phenotype['Phenotype']['id']
+        ));
 	}
 
 	function delete($id = null) {

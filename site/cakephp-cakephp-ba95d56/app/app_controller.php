@@ -58,4 +58,12 @@ class AppController extends Controller {
         Configure::write('Config.language', $this->params['lang']);
     } 
 
+    function redirect($url, $status = null, $exit = true) {
+        if (! isset($url['lang']) && isset($this->params['lang'])) {
+            $url['lang'] = $this->params['lang'];
+        }
+
+        return parent::redirect($url, $status, $exit);
+    }
+
 }
