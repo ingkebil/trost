@@ -38,13 +38,13 @@ class EntitiesController extends AppController {
                 }
             }
             if ($saved) {
-                $this->Session->setFlash(__('The entity has been saved', true));
+                $this->Session->setFlash(__('The entities have been saved', true));
                 $this->Entity->commit();
                 #$this->redirect(array('action' => 'index'));
             }
             else {
                 $this->Entity->rollback();
-                $this->Session->setFlash(__('The entity could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('The entities could not be saved. Please, try again.', true));
             }
 		}
     }

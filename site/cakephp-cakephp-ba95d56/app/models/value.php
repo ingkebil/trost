@@ -1,6 +1,9 @@
 <?php
 class Value extends AppModel {
 	var $name = 'Value';
+
+    var $actsAs = array('Translate' => array('attribute', 'value'));
+
 	var $validate = array(
 		'attribute' => array(
 			'notempty' => array(

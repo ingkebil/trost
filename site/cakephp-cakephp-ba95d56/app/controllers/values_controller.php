@@ -16,12 +16,23 @@ class ValuesController extends AppController {
                     foreach ($line_parts as &$line_part) {
                         $line_part = preg_replace('/^"|"$/', '', $line_part);
                     }
-                    list($id, $attribute, $value) = $line_parts;
+                    list($id, $attribute, $value, $attr_dt, $val_dt) = $line_parts;
+                    $this->Value->locale = 'en_us';
                     $this->Value->create();
                     if ($this->Value->save(array('Value' => compact('id', 'attribute', 'value')))) {
-                        # look up if this entry exists as German
-                        # TODO add i18n
-                        #$i18n = $this->
+                        # now save in German
+                        $this->Value->locale = 'de_de';
+                        $this->Value->create();
+                        if ($attr_dt) {
+                            $attribute = $attr_dt;
+                        }
+                        if ($val_dt) {
+                            $value = $val_dt;
+                        }
+                        if ( ! $this->Value->save(array('Value' => compact('id', 'attribute', 'value')))) {
+                            $saved = false;
+                            break;
+                        }
                     } else {
                         $saved = false;
                         break;

@@ -2,7 +2,7 @@
 class Bbch extends AppModel {
 	var $name = 'Bbch';
 
-    var $actsAs = array('Containable');
+    var $actsAs = array('Containable', 'Translate' => array('name'));
 
 	var $validate = array(
 		'species_id' => array(

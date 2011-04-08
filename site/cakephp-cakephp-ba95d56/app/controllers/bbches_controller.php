@@ -14,11 +14,11 @@ class BbchesController extends AppController {
                 $line = trim($line);
                 if ($line) {
                     $line_parts_all = explode(';', $line);
-                    $line_parts = array($line_parts_all[0], $line_parts_all[8]);
+                    $line_parts = array($line_parts_all[0], $line_parts_all[8], $line_parts_all[7]); # the other parts are for other species
                     foreach ($line_parts as &$line_part) {
                         $line_part = preg_replace('/^"|"$/', '', $line_part);
                     }
-                    list($bbch, $name) = $line_parts;
+                    list($bbch, $name, $name_dt) = $line_parts;
                     # check if we already have one with the combination of bbch and species_id
                     $bbch_uniq = $this->Bbch->find('first', array('conditions' => compact('name', 'bbch'), 'contain' => false));
                     if (!empty($bbch_uniq)) {
@@ -27,10 +27,16 @@ class BbchesController extends AppController {
                     else {
                         $this->Bbch->create();
                     }
+                    $this->Bbch->locale = 'en_us';
                     if ($this->Bbch->save(array('Bbch' => compact('id', 'bbch', 'name', 'species_id')))) {
-                        # look up if this entry exists as German
-                        # TODO add i18n
-                        #$i18n = $this->
+                        $this->Bbch->locale = 'de_de';
+                        if ($name_dt) {
+                            $name = $name_dt;
+                        }
+                        if ( ! $this->Bbch->save(array('Bbch' => compact('id', 'bbch', 'name', 'species_id')))) {
+                            $saved = false;
+                            break;
+                        }
                     } else {
                         $saved = false;
                         break;
