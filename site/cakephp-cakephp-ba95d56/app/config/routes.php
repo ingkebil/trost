@@ -55,8 +55,10 @@
     $controllers = listControllers();
     foreach ($controllers as $controller) {
         Router::connect("/:lang/$controller", array('controller' => $controller, 'action' => 'index'));
+    #    Router::connect("/:lang/$controller/edit/*", array('controller' => $controller, 'action' => 'edit'));
     }
 
+    Router::connectNamed(array('p', 'c', 'e', 'id'));
     Router::connect('/:controller/:action');
     Router::connect('/:lang/:controller', array('action' => 'index'));
     Router::connect('/:lang/:controller/:action/*');

@@ -21,6 +21,10 @@
                 $("#FileRaw").attr("disabled", "");
             }
         });
+
+        if ($("#CultureExperimentId").val()) {
+            '.$this->Ajax->remoteFunction(array('url' => 'get_cultures', 'update' => 'PlantCultureId', 'data' => '$("#CultureExperimentId").serialize()')).'
+        }
     });
 '); ?>
 <div class="phenotypes form">

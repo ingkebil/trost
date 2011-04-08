@@ -47,7 +47,6 @@ class AppController extends Controller {
                 $this->redirect('/' . $this->params['lang']. '/' . $this->params['url']['url']);
             }
         }
-        
         # check if this is a valid language
         if (!in_array($this->params['lang'], Configure::read('Languages.all'))) {
             $this->Session->setFlash(__('Whoops, not a valid language.', true));

@@ -2,8 +2,8 @@
 <?php echo $this->Form->create('Phenotype');?>
 	<fieldset>
         <legend><?php 
-            if ($this->Session->flash('edit')) {
-                __('Upload next scanner file');
+            if (isset($this->data['PhenotypeRaw']['raw_id']) && $this->data['PhenotypeRaw']['raw_id']) {
+                __('Upload <em>next</em> scanner file');
             }
             else {
                 __('Upload scanner file');
@@ -14,6 +14,7 @@
         echo $this->Form->hidden('Culture.experiment_id');
         echo $this->Form->hidden('Plant.culture_id');
         echo $this->Form->hidden('Form.posted');
+        echo $this->Form->hidden('PhenotypeRaw.raw_id');
 
         if ($this->data['Phenotype']['program_id'] == 1) {
             echo $this->element('phenotypes/fastscore');

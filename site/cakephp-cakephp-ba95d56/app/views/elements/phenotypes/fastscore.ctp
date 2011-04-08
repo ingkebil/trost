@@ -44,19 +44,17 @@
         }
 
         $(document).ready(function() {
+            if ($('#PhenotypeEntityEntityId').val()) {
+                change_entityname('#PhenotypeEntityEntityId');
+            }
+            if ($('#PhenotypeValueValueId').val()) {
+                change_phenotypevalueid('#PhenotypeValueValueId');
+            }
             $('#PhenotypeEntityEntityId').change(function(event) {
                 change_entityname('#PhenotypeEntityEntityId');
-                /*if ($(this).val() in entities) {
-                    $('#PhenotypeEntityEntityIdExpl').html(entities[$(this).val()]);
-                }
-                else {
-                    $('#PhenotypeEntityEntityIdExpl').html('".__('undefined', true)."');
-                }*/
             });
 
             $('#PhenotypeValueValueId').change(function(event) {
-                /*$('#ValueAttribute').val(attributes[$(this).val()]);
-                $('#ValueValue').val(values[$(this).val()]);*/
                 change_phenotypevalueid('#PhenotypeValueValueId');
             });
         });

@@ -15,9 +15,9 @@ class PhenotypesController extends AppController {
             if ($this->data['File']['manual']) {
                 $url['controller'] = $this->params['controller'];
                 $url['action'] = 'manualupload';
-                $url[] = $program_id;
-                $url[] = $this->data['Plant']['culture_id'];
-                $url[] = $this->data['Culture']['experiment_id'];
+                $url['p'] = $program_id;
+                $url['c'] = $this->data['Plant']['culture_id'];
+                $url['e'] = $this->data['Culture']['experiment_id'];
                 $this->redirect($url);
             }
 
@@ -57,13 +57,6 @@ class PhenotypesController extends AppController {
                 else {
                     $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
                 }
-                #$this->Phenotype->create();
-                #if ($this->Phenotype->save($this->data)) {
-                #	$this->Session->setFlash(__('The phenotype has been saved', true));
-                #	$this->redirect(array('action' => 'index'));
-                #} else {
-                #	$this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
-                #}
             }
         }
 		$programs = $this->Phenotype->Program->find('list');
@@ -216,18 +209,62 @@ class PhenotypesController extends AppController {
             $line .= ';'. $this->data['Value']['value'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
-        return $this->_save_upload($line, $program_id);
+
+        $phenotype_id = $this->_save_upload($line, $program_id);
+
+        # now also save the RAW
+        if ($this->data['PhenotypeRaw']['raw_id']) { # ow, we already saved it, so read it and append
+            # read it in
+            $raw = $this->Phenotype->PhenotypeRaw->Raw->read(null, $this->data['PhenotypeRaw']['raw_id']);
+            # append
+            $raw['Raw']['data'] .= "\n$line";
+        }
+        else {
+            $raw['Raw']['data'] = $line;
+        }
+        if ($this->Phenotype->PhenotypeRaw->Raw->save($raw)) {
+            $line_nr = 1;
+            if (!empty($raw['PhenotypeRaw'])) {
+                # first get the last line_nr by reverse sorting them (there actually is no reason why this shouldn't be just the last record in the PhenotypeRaw model of a certain Raw?)
+                usort($raw['PhenotypeRaw'], create_function(
+                    '$a,$b',
+                    'if ($a["line_nr"] == $b["line_nr"]) { return 0; }
+                    return $a["line_nr"] < $b["line_nr"] ? 1 : -1;'
+                ));
+                $line_nr = $raw['PhenotypeRaw'][0];
+            }
+
+            if (!isset($raw['Raw']['id'])) {
+                $raw['Raw']['id'] = $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID();
+            }
+        }
+
+        if ($this->Phenotype->PhenotypeRaw->save(array('PhenotypeRaw' => array(
+            'id' => null,
+            'phenotype_id' => $phenotype_id,
+            'raw_id' => $raw['Raw']['id'],
+            'line_nr' => ++$line_nr,
+        )))) {
+            $this->data['PhenotypeRaw']['raw_id'] = $raw['Raw']['id'];
+        }
+
+        return $phenotype_id;
     }
 
-    function manualupload($program_id = null, $culture_id = null, $experiment_id = null) {
-        $program_id =    $program_id ? $program_id : @$this->data['Phenotype']['program_id'];
-        $culture_id =    $culture_id ? $culture_id : @$this->data['Plant']['culture_id'];
-        $experiment_id = $experiment_id ? $experiment_id : @$this->data['Culture']['experiment_id'];
+    function manualupload() {
+        $program_id =    isset($this->params['named']['p']) ? $this->params['named']['p'] : @$this->data['Phenotype']['program_id'];
+        $culture_id =    isset($this->params['named']['c']) ? $this->params['named']['c'] : @$this->data['Plant']['culture_id'];
+        $experiment_id = isset($this->params['named']['e']) ? $this->params['named']['e'] : @$this->data['Culture']['experiment_id'];
         $id = isset($this->params['named']['id']) ? $this->params['named']['id'] : null;
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
             $this->Phenotype->begin();
             if ($phenotype_id = $this->_save_manualupload($program_id)) {
-                $this->Session->setFlash(__('The phenotype has been saved.', true), 'flashedit', array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)), 'edit');
+                $this->Session->setFlash(
+                    __('The phenotype has been saved.', true),
+                    'flashedit',
+                    array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)),
+                    'edit'
+                );
                 $this->Phenotype->commit();
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('action'=>'index'));
@@ -247,6 +284,8 @@ class PhenotypesController extends AppController {
         }
         elseif ($id) {
             $this->data = $this->Phenotype->read(null, $id);
+            $this->data['PhenotypeEntity'] = $this->data['PhenotypeEntity'][0];
+            $this->data['PhenotypeValue'] = $this->data['PhenotypeValue'][0];
         }
 
         $this->data['Phenotype']['program_id'] = $program_id;
@@ -259,22 +298,6 @@ class PhenotypesController extends AppController {
         $this->set('attributes_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
         if ($program_id == 2) { # load bbch codes when phenotyping program
             $this->set('bbchs_', $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
-        }
-
-    }
-
-    function uploadlastone() {
-        $program_id = isset($this->params['named']['p']) ? $this->params['named']['p'] : @$this->data['Phenotype']['program_id'];
-        pr($program_id);
-        pr($this->data);
-        if ($this->_save_manualupload($program_id)) {
-            $this->Session->setFlash(__('The phenotype has been saved.', true), 'flashedit', array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)), 'edit');
-            $this->redirect(array('action'=>'index'));
-        }
-        else {
-            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
-            unset($this->data['Form']['posted']);
-            $this->action = 'manualupload';
         }
     }
 
