@@ -25,8 +25,10 @@
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $bbch['Bbch']['id'])); ?>
+            <?php if ($this->Session->check('user')): ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $bbch['Bbch']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $bbch['Bbch']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $bbch['Bbch']['id'])); ?>
+            <?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -48,10 +50,14 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Bbch', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Species', true), array('controller' => 'species', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Species', true), array('controller' => 'species', 'action' => 'add')); ?> </li>
+
+		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
 		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Species', true), array('controller' => 'species', 'action' => 'index')); ?> </li>
+        <?php if ($this->Session->check('user')): ?>
+		<li><?php echo $this->Html->link(__('New Bbch', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Species', true), array('controller' => 'species', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
+        <?php endif; ?>
 	</ul>
 </div>

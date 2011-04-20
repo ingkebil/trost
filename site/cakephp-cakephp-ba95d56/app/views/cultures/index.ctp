@@ -4,6 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
+			<th><?php echo $this->Paginator->sort('limsstudyid');?></th>
 			<th><?php echo $this->Paginator->sort('condition');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
@@ -21,6 +22,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $culture['Culture']['id']; ?>&nbsp;</td>
 		<td><?php echo $culture['Culture']['name']; ?>&nbsp;</td>
+		<td><?php echo $culture['Culture']['limsstudyid']; ?>&nbsp;</td>
 		<td><?php echo $culture['Culture']['condition']; ?>&nbsp;</td>
 		<td><?php echo $culture['Culture']['created']; ?>&nbsp;</td>
 		<td><?php echo $culture['Culture']['description']; ?>&nbsp;</td>

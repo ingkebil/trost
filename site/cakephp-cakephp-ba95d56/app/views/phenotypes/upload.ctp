@@ -22,9 +22,9 @@
             }
         });
 
-        if ($("#CultureExperimentId").val()) {
-            '.$this->Ajax->remoteFunction(array('url' => 'get_cultures', 'update' => 'PlantCultureId', 'data' => '$("#CultureExperimentId").serialize()')).'
-        }
+        //if ($("#CultureExperimentId").val()) {
+        //    '.$this->Ajax->remoteFunction(array('url' => 'get_cultures', 'update' => 'PlantCultureId', 'data' => '$("#CultureExperimentId").serialize()')).'
+        //}
     });
 '); ?>
 <div class="phenotypes form">
@@ -33,14 +33,14 @@
  		<legend><?php __('Upload scanner file'); ?></legend>
 	<?php
 
-		echo $this->Form->input('Culture.experiment_id', array('empty' => true));
+		echo $this->Form->input('Culture.experiment_id');
 		echo $this->Form->input('Plant.culture_id');
 		echo $this->Form->input('program_id');
 
-        echo $ajax->observeField('CultureExperimentId', array(
-            'url' => 'get_cultures',
-            'update' => 'PlantCultureId'
-        ));
+        #echo $ajax->observeField('CultureExperimentId', array(
+        #    'url' => 'get_cultures',
+        #    'update' => 'PlantCultureId'
+        #));
 
         echo $this->Form->file('File.raw', array('label' => 'File upload'));
     ?>
@@ -58,7 +58,7 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Upload', true), array('action' => 'upload'));?></li>
+		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
 		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('action' => 'index'));?></li>
 	</ul>
 </div>

@@ -33,8 +33,10 @@
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $phenotype['Phenotype']['id'])); ?>
+            <?php if ($this->Session->check('user')): ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $phenotype['Phenotype']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $phenotype['Phenotype']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotype['Phenotype']['id'])); ?>
+            <?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -56,7 +58,7 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('action' => 'upload'));?></li>
+		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
 		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('action' => 'index'));?></li>
 	</ul>
 </div>

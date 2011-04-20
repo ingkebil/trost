@@ -82,7 +82,7 @@
 <?php
 
     echo $this->Form->input('Phenotype.version');
-    echo $this->Form->input('Phenotype.object');
+    echo $this->Form->hidden('Phenotype.object', array('value' => 'LIMS aliquot')); # TODO remove this hardcoded object
     echo $this->Form->input('Plant.aliquot');
     echo $this->Form->input('PhenotypeBbch.bbch');
     echo $this->Form->input('_Bbch.name', array('disabled' => 'disabled'));

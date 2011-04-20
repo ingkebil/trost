@@ -4,6 +4,7 @@ class PhenotypesController extends AppController {
 	var $name = 'Phenotypes';
     var $helpers = array('Html', 'Form', 'Ajax', 'Javascript');
     var $components = array('RequestHandler');
+    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Study', 'Value');
 
     function upload() {
 		if (!empty($this->data)) {
@@ -13,58 +14,70 @@ class PhenotypesController extends AppController {
 
             # check if manual input is needed, if yes, redirect to next view
             if ($this->data['File']['manual']) {
-                $url['controller'] = $this->params['controller'];
-                $url['action'] = 'manualupload';
-                $url['p'] = $program_id;
-                $url['c'] = $this->data['Plant']['culture_id'];
-                $url['e'] = $this->data['Culture']['experiment_id'];
-                $this->redirect($url);
-            }
-
-            $raw = file_get_contents($this->data['File']['raw']['tmp_name']);
-            $lines = explode("\n", $raw);
-            $line_nr = 1;
-
-            $this->Phenotype->begin(); # start transaction # TODO maybe we should do a transaction per line and not per file
-
-            # save the raw file
-			$this->Phenotype->PhenotypeRaw->Raw->create();
-            $raw = $this->Phenotype->PhenotypeRaw->Raw->save(array(
-                'Raw' => array('data' => $raw)
-            ));
-            if (empty($raw)) {
-                $this->Phenotype->rollback();
+                $this->Phenotype->set($this->data);
+                $this->Culture->set($this->data);
+                if ($this->Phenotype->validates() and $this->Culture->validates()) {
+                    $url['controller'] = $this->params['controller'];
+                    $url['action'] = 'manualupload';
+                    $url['p'] = $program_id;
+                    $url['c'] = $this->data['Plant']['culture_id'];
+                    $url['e'] = $this->data['Culture']['experiment_id'];
+                    $this->redirect($url);
+                }
             }
             else {
-                $raw_id = $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID();
-                $success = false;
-                foreach ($lines as $line) {
-                    $line = trim($line);
-                    if (!$line) {
-                        continue;
-                    }
-                    # GOD SAVE THE GENE!
-                    $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
-                    if (! $success) {
-                        break;
-                    }
-                    $line_nr++;
-                }
-                if ($success) {
-                    $this->Phenotype->commit();
-                    $this->Session->setFlash(__('The phenotype has been saved', true));
+                if ($this->data['File']['raw']['error']) { # as we cannot validate this field, give an error when non-existing
+                    $this->Session->setFlash(__('Please select a file to upload!', true));
                 }
                 else {
-                    $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
+                    $raw = file_get_contents($this->data['File']['raw']['tmp_name']);
+                    $lines = explode("\n", $raw);
+                    $line_nr = 1;
+
+                    $this->Phenotype->begin(); # start transaction # TODO maybe we should do a transaction per line and not per file
+
+                    # save the raw file
+                    $this->Phenotype->PhenotypeRaw->Raw->create();
+                    $raw = $this->Phenotype->PhenotypeRaw->Raw->save(array(
+                        'Raw' => array('data' => $raw)
+                    ));
+                    if (empty($raw)) {
+                        $this->Phenotype->rollback();
+                    }
+                    else {
+                        $raw_id = $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID();
+                        $success = false;
+                        foreach ($lines as $line) {
+                            $line = trim($line);
+                            if (!$line) {
+                                continue;
+                            }
+                            # GOD SAVE THE GENE!
+                            $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
+                            if (! $success) {
+                                break;
+                            }
+                            $line_nr++;
+                        }
+                        if ($success) {
+                            $this->Phenotype->commit();
+                            $this->Session->setFlash(__('The phenotype has been saved', true));
+                            $this->redirect(array('controller' => 'raws', 'action' => 'view', $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID()));
+                        }
+                        else {
+                            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
+                        }
+                    }
                 }
             }
         }
 		$programs = $this->Phenotype->Program->find('list');
         $programs[0] = 'autodetect';
         ksort($programs);
-        $experiments = $this->Phenotype->Plant->Culture->Experiment->find('list');
-#        $cultures = $this->Phenotype->Plant->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
-		$this->set(compact('programs', 'experiments'));
+        $experiments = $this->Experiment->find('list'); # actually, leave this out as it is not necesary right now.
+        $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
+        $cultures = $this->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
+		$this->set(compact('programs', 'experiments', 'cultures'));
     }
 
     function _save_upload($line, $program_id, $raw_id = null, $line_nr = null) {
@@ -154,46 +167,94 @@ class PhenotypesController extends AppController {
         ));
 
         # save the BBCH info # TODO check if BBCH ID exists and matches!
-        if ($bbch_id !== null) {
-            $this->Phenotype->PhenotypeBbch->Bbch->create();
-            $ph_entity = $this->Phenotype->PhenotypeBbch->Bbch->save(array(
-                'Bbch' => array(
-                    'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                    'bbch_id' => $bbch_id
-                )
-            ));
+        if ($program_id != 1) { # only add it if we have a bbch_code
+            # look the right code up (as bbch_id != bbch.id)
+            $bbch = $this->Phenotype->PhenotypeBbch->Bbch->find('first', array('conditions' => array('bbch' => $bbch_id)));
+            if ( ! empty($bbch)) {
+                $this->Phenotype->PhenotypeBbch->create();
+                $ph_bbch = $this->Phenotype->PhenotypeBbch->save(array(
+                    'PhenotypeBbch' => array(
+                        'phenotype_id' => $this->Phenotype->getLastInsertID(),
+                        'bbch_id' => $bbch['Bbch']['id'],
+                    )
+                ));
+            }
         }
 
         return $this->Phenotype->getLastInsertID();
     }
 
-    function get_cultures() {
-        $this->set('options',
-            $this->Phenotype->Plant->Culture->find('list',
-                array('conditions' => array(
-                    'Culture.experiment_id' => $this->data['Culture']['experiment_id'])
-                )
+    function _get_cultures() {
+        $studies = $this->Study->find('list',
+            array(
+                'conditions' => array(
+                    'status NOT' => 'X',
+                    'study_type' => 'Culture',
+                    'U_project' => 'TROST'
+                ),
+                'fields' => array(
+                    'study_id',
+                    'name'
+                ),
             )
         );
+
+        # now check if they need to be added to the internal system!
+        foreach ($studies as $study_id => $name) {
+            $culture = $this->Culture->find('first',
+                array('conditions' => array(
+                    'limsstudyid' => $study_id
+                ))
+            );
+            if (empty($culture)) {
+                $this->Culture->create();
+                $this->Culture->save(array(
+                    'Culture' => array(
+                        'limsstudyid' => $study_id,
+                        'experiment_id' => 1, # TODO remove hardcoded experiment id
+                        'name' => $name
+                    )
+                ));
+            }
+        }
+    }
+
+    function get_cultures() {
+        $this->_get_cultures();
+
+        # no need to check which experiment this is, there is only one
+        $options = $this->Culture->find('list');
+
+        $this->set('options', $options);
+        $this->render('/phenotypes/get_cultures'); # be aware that this also is the layout of get_valuevalues()!
+    }
+
+    function get_valuevalues($id = null) {
+        $id = $id ? $id : $this->data['Value']['attribute'];
+#        $this->Value->locale = Configure::read('Config.language');
+        $this->set('options', $this->Value->find('list', array(
+            'conditions' => array('attribute' => $id),
+            'fields' => array('id', 'value'),
+        )));
         $this->render('/phenotypes/get_cultures');
     }
 
     function _save_manualupload($program_id) {
         $line = '';
-        if ($program_id == 1) {
+        if ($program_id == 1) { # fastscore
             $line .= $this->data['Phenotype']['version'];
             $line .= ';'. $this->data['Phenotype']['object'];
             $line .= ';Fast Score';
             $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
             $line .= ';'. $this->data['PhenotypeValue']['value_id'];
             $line .= ';'. $this->data['Value']['attribute'];
-            $line .= ';'. $this->data['Value']['value'];
+            $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['Plant']['aliquot'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
             $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
             $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
         }
-        if ($program_id == 2) {
+        if ($program_id == 2) { # phenotyping
             $line .= $this->data['Phenotype']['version'];
             $line .= ';'. $this->data['Phenotype']['object'];
             $line .= ';Phenotyping';
@@ -255,8 +316,18 @@ class PhenotypesController extends AppController {
         $program_id =    isset($this->params['named']['p']) ? $this->params['named']['p'] : @$this->data['Phenotype']['program_id'];
         $culture_id =    isset($this->params['named']['c']) ? $this->params['named']['c'] : @$this->data['Plant']['culture_id'];
         $experiment_id = isset($this->params['named']['e']) ? $this->params['named']['e'] : @$this->data['Culture']['experiment_id'];
-        $id = isset($this->params['named']['id']) ? $this->params['named']['id'] : null;
+        $drop = isset($this->params['named']['drop']) ? $this->params['named']['drop'] : 1;
+
+        # check the params
+        if (! $program_id || ! $culture_id || ! $experiment_id ) {
+            $this->Session->setFlash(__('Please select a program and a culture', true));
+            $this->redirect(array('controller' => $this->name, 'action' => 'upload'));
+        }
+
+        # fill in the id in case we're editing this thing
+        $id = isset($this->params['named']['id']) ? $this->params['named']['id'] : null; 
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
+            pr($this->data);
             $this->Phenotype->begin();
             if ($phenotype_id = $this->_save_manualupload($program_id)) {
                 $this->Session->setFlash(
@@ -267,7 +338,7 @@ class PhenotypesController extends AppController {
                 );
                 $this->Phenotype->commit();
                 if ($this->data['Form']['lastone'] == 1) {
-                    $this->redirect(array('action'=>'index'));
+                    $this->redirect(array('controller' => 'raws', 'action'=>'view', $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID()));
                 }
             }
             else {
@@ -290,14 +361,30 @@ class PhenotypesController extends AppController {
 
         $this->data['Phenotype']['program_id'] = $program_id;
         $this->data['Culture']['experiment_id'] = $experiment_id;
-        $this->data['Plant']['culture_id'] = $experiment_id;
+        $this->data['Plant']['culture_id'] = $culture_id;
 
         # fill in some basics
-        $this->set('entities_', $this->Phenotype->PhenotypeEntity->Entity->find('list'));
-        $this->set('values_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
-        $this->set('attributes_', $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
+        $suffix = '_'; # add a suffix so the input fields don't get autofilled
+        if ($drop) {
+            $suffix = '';
+            $this->set('drop', true);
+        }
+        else {
+            $this->set('drop', false);
+        }
+        $this->set('entities'.$suffix, $this->Phenotype->PhenotypeEntity->Entity->find('list', array('fields' => array('id', 'name'))));
+        #$this->set('values'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
+        if ($drop) {
+            $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array(
+                'fields' => array('attribute', 'attribute'),
+                'group_by' => 'attribute',
+            )));
+        }
+        else {
+            $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
+        }
         if ($program_id == 2) { # load bbch codes when phenotyping program
-            $this->set('bbchs_', $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
+            $this->set('bbchs'.$suffix, $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
         }
     }
 

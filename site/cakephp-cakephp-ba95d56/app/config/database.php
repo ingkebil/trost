@@ -13,15 +13,17 @@ class DATABASE_CONFIG {
 
     var $lims = array(
 		'driver' => 'oracle',
-        #'connect' => 'oci_connect',
+        'connect' => 'oci_connect',
 		'persistent' => false,
-		'host' => 'limstest',
+		'host' => 'limstest.mpimp-golm.mpg.de',
         'port' => '1521',
 		'login' => 'TROST_USER',
 		'password' => 'passwordp',
-		'database' => 'naut81',
-		'encoding' => 'utf8_general_ci',
-        'prefex' => 'TROST_'
+		#'database' => 'limstest/naut81',
+        'database' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=141.14.247.122)(PORT=1521)) (CONNECT_DATA=(SERVER=DEDICATED) (SERVICE_NAME = naut81.mpimp-golm)))',
+        'schema' => 'lims',
+		#'encoding' => 'utf8',
+        'prefix' => 'TROST_'
 	);
 }
 ?>

@@ -19,8 +19,10 @@
 		<td><?php echo $species['Species']['name']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $species['Species']['id'])); ?>
+            <?php if ($this->Session->check('user')): ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $species['Species']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $species['Species']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $species['Species']['id'])); ?>
+            <?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -42,8 +44,12 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Species', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
+		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Bbches', true), array('controller' => 'bbches', 'action' => 'index')); ?> </li>
+        <?php if ($this->Session->check('user')): ?>
+		<li><?php echo $this->Html->link(__('New Species', true), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('New Bbch', true), array('controller' => 'bbches', 'action' => 'add')); ?> </li>
+        <?php endif; ?>
 	</ul>
 </div>

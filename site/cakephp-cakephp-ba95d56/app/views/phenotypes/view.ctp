@@ -41,9 +41,11 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
+		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
+		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('action' => 'index')); ?> </li>
+        <?php if ($this->Session->check('user')): ?>
 		<li><?php echo $this->Html->link(__('Edit Phenotype', true), array('action' => 'edit', $phenotype['Phenotype']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Delete Phenotype', true), array('action' => 'delete', $phenotype['Phenotype']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotype['Phenotype']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype', true), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Programs', true), array('controller' => 'programs', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Program', true), array('controller' => 'programs', 'action' => 'add')); ?> </li>
@@ -57,11 +59,12 @@
 		<li><?php echo $this->Html->link(__('New Phenotype Raw', true), array('controller' => 'phenotype_raws', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Phenotype Values', true), array('controller' => 'phenotype_values', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype Value', true), array('controller' => 'phenotype_values', 'action' => 'add')); ?> </li>
+        <?php endif; ?>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php __('Related Phenotype Bbches');?></h3>
 	<?php if (!empty($phenotype['PhenotypeBbch'])):?>
+	<h3><?php __('Related Bbches');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
@@ -83,23 +86,27 @@
 			<td><?php echo $phenotypeBbch['bbch_id'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_bbches', 'action' => 'view', $phenotypeBbch['id'])); ?>
+                <?php if ($this->Session->check('user')): ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_bbches', 'action' => 'edit', $phenotypeBbch['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_bbches', 'action' => 'delete', $phenotypeBbch['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeBbch['id'])); ?>
+                <?php endif; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
+<?php if ($this->Session->check('user')): ?>
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Phenotype Bbch', true), array('controller' => 'phenotype_bbches', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<?php endif; ?>
 </div>
 <div class="related">
-	<h3><?php __('Related Phenotype Entities');?></h3>
 	<?php if (!empty($phenotype['PhenotypeEntity'])):?>
+	<h3><?php __('Related Entities');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
@@ -121,22 +128,25 @@
 			<td><?php echo $phenotypeEntity['entity_id'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_entities', 'action' => 'view', $phenotypeEntity['id'])); ?>
+                <?php if ($this->Session->check('user')): ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_entities', 'action' => 'edit', $phenotypeEntity['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_entities', 'action' => 'delete', $phenotypeEntity['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeEntity['id'])); ?>
+                <?php endif; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
+<?php if ($this->Session->check('user')): ?>
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Phenotype Entity', true), array('controller' => 'phenotype_entities', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<?php endif; ?>
 </div>
 <div class="related">
-	<h3><?php __('Related Phenotype Raws');?></h3>
+	<h3><?php __('Related Raws');?></h3>
 	<?php if (!empty($phenotype['PhenotypeRaw'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -161,23 +171,26 @@
 			<td><?php echo $phenotypeRaw['line_nr'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_raws', 'action' => 'view', $phenotypeRaw['id'])); ?>
+                <?php if ($this->Session->check('user')): ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_raws', 'action' => 'edit', $phenotypeRaw['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_raws', 'action' => 'delete', $phenotypeRaw['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeRaw['id'])); ?>
+                <?php endif; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
+<?php if ($this->Session->check('user')): ?>
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Phenotype Raw', true), array('controller' => 'phenotype_raws', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<?php endif; ?>
 </div>
 <div class="related">
-	<h3><?php __('Related Phenotype Values');?></h3>
 	<?php if (!empty($phenotype['PhenotypeValue'])):?>
+	<h3><?php __('Related Values');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
@@ -201,17 +214,20 @@
 			<td><?php echo $phenotypeValue['number'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotype_values', 'action' => 'view', $phenotypeValue['id'])); ?>
+                <?php if ($this->Session->check('user')): ?>
 				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotype_values', 'action' => 'edit', $phenotypeValue['id'])); ?>
 				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotype_values', 'action' => 'delete', $phenotypeValue['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeValue['id'])); ?>
+                <?php endif; ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
+<?php if ($this->Session->check('user')): ?>
 	<div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Phenotype Value', true), array('controller' => 'phenotype_values', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
+<?php endif; ?>
 </div>

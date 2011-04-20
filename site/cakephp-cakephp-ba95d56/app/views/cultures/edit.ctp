@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
+		echo $this->Form->input('limsstudyid');
 		echo $this->Form->input('condition');
 		echo $this->Form->input('description');
 		echo $this->Form->input('experiment_id');

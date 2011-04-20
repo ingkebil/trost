@@ -73,7 +73,7 @@ msgstr "Die BBCH Kodes sind gespeichert"
 
 #: /controllers/bbches_controller.php:47;47;47
 msgid "The BBCH codes could not be saved. Please, try again."
-"Die BBCH Kodes könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+"Die BBCH Kodes konnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/bbches_controller.php:60;83;60;83;60;83
 msgid "Invalid bbch"
@@ -86,7 +86,7 @@ msgstr "Der BBCH Kode ist gespeichert"
 #: /controllers/bbches_controller.php:73;91;73;91;73;91
 msgid "The bbch could not be saved. Please, try again."
 msgstr ""
-"Die BBCH Kodes könnten nicht gespeichert werden. Bitte, probieren Sie noch "
+"Die BBCH Kodes konnten nicht gespeichert werden. Bitte, probieren Sie noch "
 "mal."
 
 #: /controllers/bbches_controller.php:104;104;104
@@ -111,7 +111,7 @@ msgstr "Die Kultur ist gespeichert"
 
 #: /controllers/cultures_controller.php:26;43;26;43;26;43
 msgid "The culture could not be saved. Please, try again."
-msgstr "Die Kultur könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Kultur konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/cultures_controller.php:55;55;55
 msgid "Invalid id for culture"
@@ -131,7 +131,7 @@ msgstr "Die Entitäten sind gespeichert"
 
 #: /controllers/entities_controller.php:47
 msgid "The entities could not be saved. Please, try again."
-msgstr "Die Entitäten könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Entitäten konnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/entities_controller.php:59;81;59;81;59;81
 msgid "Invalid entity"
@@ -143,7 +143,7 @@ msgstr "Die Entität ist gespeichert"
 
 #: /controllers/entities_controller.php:47;72;89;47;72;89;47;72;89
 msgid "The entity could not be saved. Please, try again."
-msgstr "Die Entität könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Entität konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/entities_controller.php:101;101;101
 msgid "Invalid id for entity"
@@ -167,7 +167,7 @@ msgstr "Das Experiment ist gespeichert"
 
 #: /controllers/experiments_controller.php:26;41;26;41;26;41
 msgid "The experiment could not be saved. Please, try again."
-msgstr "Das Experiment könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Das Experiment konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/experiments_controller.php:51;51;51
 msgid "Invalid id for experiment"
@@ -307,7 +307,7 @@ msgstr "Der Phänotyp ist gespeichert"
 
 #: /controllers/phenotypes_controller.php:136;186;204;136;186;204;136;186;204
 msgid "The phenotype could not be saved. Please, try again."
-msgstr "Der Phänotyp könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Der Phänotyp konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/phenotypes_controller.php:230;268
 msgid "The phenotype has been saved."
@@ -343,7 +343,7 @@ msgstr "Die Pflanze ist gespeichert"
 
 #: /controllers/plants_controller.php:26;44;26;44;26;44
 msgid "The plant could not be saved. Please, try again."
-msgstr "Die Pflanze könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Pflanze konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/plants_controller.php:57;57;57
 msgid "Invalid id for plant"
@@ -367,7 +367,7 @@ msgstr "Das Programm ist gespeichert"
 
 #: /controllers/programs_controller.php:26;41;26;41;26;41
 msgid "The program could not be saved. Please, try again."
-msgstr "Das Programm könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Das Programm konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/programs_controller.php:51;51;51
 msgid "Invalid id for program"
@@ -421,7 +421,7 @@ msgstr "Die Probe ist gespeichert"
 
 #: /controllers/samples_controller.php:26;41;26;41;26;41
 msgid "The sample could not be saved. Please, try again."
-msgstr "Die Probe könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Probe konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/samples_controller.php:51;51;51
 msgid "Invalid id for sample"
@@ -445,7 +445,7 @@ msgstr "Die Sorte ist gespeichert"
 
 #: /controllers/species_controller.php:26;41;26;41;26;41
 msgid "The species could not be saved. Please, try again."
-msgstr "Die Sorte könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Sorte konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/species_controller.php:51;51;51
 msgid "Invalid id for species"
@@ -465,7 +465,7 @@ msgstr "Die Werte sind gespeichert"
 
 #: /controllers/values_controller.php:38;38;38
 msgid "The values could not be saved. Please, try again."
-msgstr "Die Werte könnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Die Werte konnten nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/values_controller.php:50;72;50;72;50;72
 msgid "Invalid value"
@@ -477,7 +477,7 @@ msgstr "Der Wert ist gespeichert"
 
 #: /controllers/values_controller.php:63;80;63;80;63;80
 msgid "The value could not be saved. Please, try again."
-msgstr "Der Wert könnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
+msgstr "Der Wert konnte nicht gespeichert werden. Bitte, probieren Sie noch mal."
 
 #: /controllers/values_controller.php:92;92;92
 msgid "Invalid id for value"

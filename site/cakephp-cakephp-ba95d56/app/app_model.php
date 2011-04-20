@@ -31,4 +31,14 @@
  * @subpackage    cake.app
  */
 class AppModel extends Model {
+
+    function beforeFind($queryData) {
+
+        if ($this->useDbConfig == 'lims') { # oops, this is an oracle db!
+            # change schema manually! # TODO get the schema from the config instead!
+            $this->query('ALTER session set current_schema=LIMS');
+        }
+        return $queryData;
+    }
+
 }

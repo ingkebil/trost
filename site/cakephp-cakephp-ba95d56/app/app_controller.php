@@ -35,6 +35,12 @@ class AppController extends Controller {
     var $components = array('Session', 'RequestHandler');
     
     function beforeFilter() {        
+        # check if the user has access
+        if (in_array($this->params['action'], array('edit', 'delete', 'add')) && ! $this->Session->check('user')) {
+            $this->Session->setFlash('NO ACCESS!');
+            $this->redirect($this->referer(), '401', true);
+        }
+
         # if no language is set in the url, check the session, if no language is set in the session, default to German.
         if (!isset($this->params['lang'])) {
             if ($this->Session->check('Config.language')) {

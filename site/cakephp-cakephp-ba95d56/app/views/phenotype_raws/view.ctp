@@ -26,13 +26,15 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
+		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Phenotype Raws', true), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Raws', true), array('controller' => 'raws', 'action' => 'index')); ?> </li>
+        <?php if ($this->Session->check('user')): ?>
 		<li><?php echo $this->Html->link(__('Edit Phenotype Raw', true), array('action' => 'edit', $phenotypeRaw['PhenotypeRaw']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Delete Phenotype Raw', true), array('action' => 'delete', $phenotypeRaw['PhenotypeRaw']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotypeRaw['PhenotypeRaw']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Phenotype Raws', true), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype Raw', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Raws', true), array('controller' => 'raws', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Raw', true), array('controller' => 'raws', 'action' => 'add')); ?> </li>
+        <?php endif; ?>
 	</ul>
 </div>
