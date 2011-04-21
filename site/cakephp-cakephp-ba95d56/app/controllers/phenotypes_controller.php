@@ -294,14 +294,14 @@ AND i18n2.locale = '$locale'
             $line .= ';Phenotyping';
             $line .= ';'. $this->data['Plant']['aliquot'];
             $line .= ';'. $this->data['PhenotypeBbch']['bbch'];
-            $line .= ';'. $this->data['Bbch']['name'];
+            $line .= ';'. @$this->data['Bbch']['name'];
             $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
             $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
             $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
-            $line .= ';'. $this->data['Entity']['name'];
+            $line .= ';'. @$this->data['Entity']['name'];
             $line .= ';'. $this->data['PhenotypeValue']['value_id'];
             $line .= ';'. $this->data['Value']['attribute'];
-            $line .= ';'. $this->data['Value']['value'];
+            $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
 
@@ -343,7 +343,7 @@ AND i18n2.locale = '$locale'
             $this->data['PhenotypeRaw']['raw_id'] = $raw['Raw']['id'];
         }
 
-        return $phenotype_id;
+        return array($phenotype_id, $raw['Raw']['id']);
     }
 
     function manualupload() {
@@ -361,9 +361,8 @@ AND i18n2.locale = '$locale'
         # fill in the id in case we're editing this thing
         $id = isset($this->params['named']['id']) ? $this->params['named']['id'] : null; 
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
-            pr($this->data);
             $this->Phenotype->begin();
-            if ($phenotype_id = $this->_save_manualupload($program_id)) {
+            if (list($phenotype_id, $raw_id) = $this->_save_manualupload($program_id)) {
                 $this->Session->setFlash(
                     __('The phenotype has been saved.', true),
                     'flashedit',
@@ -372,7 +371,7 @@ AND i18n2.locale = '$locale'
                 );
                 $this->Phenotype->commit();
                 if ($this->data['Form']['lastone'] == 1) {
-                    $this->redirect(array('controller' => 'raws', 'action'=>'view', $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID()));
+                    $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
             }
             else {
@@ -410,19 +409,12 @@ AND i18n2.locale = '$locale'
         #$this->set('values'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
         if ($drop) {
             $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('attribute', 'attribute'))));
-            #$this->set('attributes'.$suffix, 
-            #    array_unique(
-            #        $this->Phenotype->PhenotypeValue->Value->find('list', array(
-            #            'fields' => array('id', 'attribute'),
-            #        ))
-            #    )
-            #);
         }
         else {
             $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
         }
         if ($program_id == 2) { # load bbch codes when phenotyping program
-            $this->set('bbchs'.$suffix, $this->Phenotype->PhenotypeBbch->Bbch->find('list'));
+            $this->set('bbchs'.$suffix, array_unique($this->Phenotype->PhenotypeBbch->Bbch->find('list')));
         }
     }
 
