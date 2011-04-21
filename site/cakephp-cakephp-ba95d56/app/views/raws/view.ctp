@@ -40,7 +40,11 @@
 		<th><?php __('Program Id'); ?></th>
 		<th><?php __('Date'); ?></th>
 		<th><?php __('Time'); ?></th>
-		<th><?php __('Plant Id'); ?></th>
+		<th><?php __('Plant'); ?></th>
+		<th><?php __('Entity'); ?></th>
+		<th><?php __('Attribute'); ?></th>
+		<th><?php __('Value'); ?></th>
+		<th><?php __('Number'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -58,7 +62,11 @@
 			<td><?php echo $phenotype['program_id'];?></td>
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
-			<td><?php echo $phenotype['plant_id'];?></td>
+			<td><?php echo $phenotype['Plant']['name'];?></td>
+			<td><?php echo $phenotype['Entity'][0]['name'];?></td>
+			<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
+			<td><?php echo $phenotype['Value'][0]['value'];?></td>
+			<td><?php echo $phenotype['Value'][0]['PhenotypeValue']['number'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotypes', 'action' => 'view', $phenotype['id'])); ?>
                 <?php if ($this->Session->check('user')): ?><?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotypes', 'action' => 'edit', $phenotype['id'])); ?>

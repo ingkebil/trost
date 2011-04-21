@@ -108,6 +108,37 @@ class Phenotype extends AppModel {
 		)
 	);
 
+    var $hasAndBelongsToMany = array(
+        'Entity' => array(
+            'className' => 'Entity',
+            'joinTable' => 'phenotype_entities',
+            'foreignKey' => 'phenotype_id',
+            'associationForeignKey' => 'entity_id',
+            'unique' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''),
+       'Value' => array(
+            'className' => 'Value',
+            'joinTable' => 'phenotype_values',
+            'foreignKey' => 'phenotype_id',
+            'associationForeignKey' => 'value_id',
+            'unique' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''),
+    );
+
 
 }
 ?>

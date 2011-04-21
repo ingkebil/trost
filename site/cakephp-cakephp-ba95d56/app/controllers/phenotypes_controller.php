@@ -101,6 +101,8 @@ class PhenotypesController extends AppController {
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value) = explode(';', $line);
         }
+        $dt = explode('/', $date);
+        $date = $dt[2] . '-' . $dt[1] . '-' . $dt[0];
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
 
