@@ -8,7 +8,17 @@ class Plant extends AppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Please select a culture',
-				//'allowEmpty' => false,
+				'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'aliquot' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Please fill in the aliquot ID',
+				'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations

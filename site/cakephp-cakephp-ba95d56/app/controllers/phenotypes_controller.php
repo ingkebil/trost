@@ -138,33 +138,42 @@ class PhenotypesController extends AppController {
         if ($raw_id) {
             # connect this line with the raw file
             $this->Phenotype->PhenotypeRaw->create();
-            $ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
+            if( ! ($ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
                 'PhenotypeRaw' => array(
                     'raw_id' => $raw_id,
                     'phenotype_id' => $this->Phenotype->getLastInsertID(),
                     'line_nr' => $line_nr,
                 )
-            ));
+            )))) {
+                $this->Phenotype->rollback();
+                return false;
+            }
         }
 
         # save the entity info # TODO check if entity ID exists and matches!
         $this->Phenotype->PhenotypeEntity->create();
-        $ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
+        if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
             'PhenotypeEntity' => array(
                 'phenotype_id' => $this->Phenotype->getLastInsertID(),
                 'entity_id' => $entity_id
             )
-        ));
+        )))) {
+            $this->Phenotype->rollback();
+            return false;
+        }
 
         # save the attribute info # TODO check if attribute ID exists and matches!
         $this->Phenotype->PhenotypeValue->create();
-        $ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
+        if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
             'PhenotypeValue' => array(
                 'phenotype_id' => $this->Phenotype->getLastInsertID(),
                 'value_id' => $attribute_id,
                 'number' => $attribute_value
             )
-        ));
+        )))) {
+            $this->Phenotype->rollback();
+            return false;
+        }
 
         # save the BBCH info # TODO check if BBCH ID exists and matches!
         if ($program_id != 1) { # only add it if we have a bbch_code
@@ -231,11 +240,36 @@ class PhenotypesController extends AppController {
 
     function get_valuevalues($id = null) {
         $id = $id ? $id : $this->data['Value']['attribute'];
-#        $this->Value->locale = Configure::read('Config.language');
-        $this->set('options', $this->Value->find('list', array(
-            'conditions' => array('attribute' => $id),
-            'fields' => array('id', 'value'),
-        )));
+        $id = mysql_real_escape_string($id);
+        $locale = mysql_real_escape_string(str_replace('-', '_', Configure::read('Config.language')));
+        #$this->Value->locale = str_replace('-', '_', Configure::read('Config.language'));
+        ## find the 'attribute'
+        #$attribute = $this->Value->find('first', array('conditions' => array(
+        #    'Value.id' => $id
+        #)));
+        ## find all the attribute IDs
+        #$ids = $this->Value->find('list', array(
+        #    'conditions' => array('attribute' => $attribute['Value']['attribute']),
+        #    'fields' => array('Value.id', 'Value.id'),
+        #));
+        ## find all values of those attribute IDs
+        #$this->set('options', $this->Value->find('list', array(
+        #    'conditions' => array('Value.id' => $ids),
+        #    'fields' => array('Value.id', 'Value.value'),
+        #)));
+        $id_values = $this->Value->query("
+SELECT Value.id, i18n2.content FROM `values` Value
+JOIN i18n ON (i18n.foreign_key = Value.id AND i18n.model = 'Value')
+JOIN i18n i18n2 ON (i18n2.foreign_key = Value.id AND i18n2.model = 'Value')
+WHERE i18n.content = '$id'
+AND i18n2.field = 'value'
+AND i18n2.locale = '$locale'
+        ");
+        $options = array();
+        foreach ($id_values as $id_value) {
+            $options[ $id_value['Value']['id'] ] = $id_value['i18n2']['content'];
+        }
+        $this->set(compact('options'));
         $this->render('/phenotypes/get_cultures');
     }
 
@@ -375,10 +409,14 @@ class PhenotypesController extends AppController {
         $this->set('entities'.$suffix, $this->Phenotype->PhenotypeEntity->Entity->find('list', array('fields' => array('id', 'name'))));
         #$this->set('values'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'value'))));
         if ($drop) {
-            $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array(
-                'fields' => array('attribute', 'attribute'),
-                'group_by' => 'attribute',
-            )));
+            $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('attribute', 'attribute'))));
+            #$this->set('attributes'.$suffix, 
+            #    array_unique(
+            #        $this->Phenotype->PhenotypeValue->Value->find('list', array(
+            #            'fields' => array('id', 'attribute'),
+            #        ))
+            #    )
+            #);
         }
         else {
             $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
