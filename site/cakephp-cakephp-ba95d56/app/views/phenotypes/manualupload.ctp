@@ -1,4 +1,5 @@
 <div class="phenotypes form">
+<?php if (isset($phenotypes)) { echo $this->element('raws/related', array('phenotypes' => $phenotypes['Phenotype'])); } ?>
 <?php echo $this->Form->create('Phenotype', array('url' => $this->params['named']));?>
 	<fieldset>
         <legend><?php 

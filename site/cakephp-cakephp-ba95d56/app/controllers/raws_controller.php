@@ -2,6 +2,7 @@
 class RawsController extends AppController {
 
 	var $name = 'Raws';
+    var $helpers = array('Javascript', 'Ajax');
 
 	function index() {
 		$this->Raw->recursive = 0;

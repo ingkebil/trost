@@ -101,8 +101,7 @@ class PhenotypesController extends AppController {
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value) = explode(';', $line);
         }
-        $dt = explode('-', $date);
-        $date = $dt[2] . '-' . $dt[1] . '-' . $dt[0];
+        #$date = join('-', array_reverse(explode('-', $date)));
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
 
@@ -382,7 +381,7 @@ AND i18n2.locale = '$locale'
                 $this->Session->setFlash(
                     __('The phenotype has been saved.', true),
                     'flashedit',
-                    array('id' => $phenotype_id, 'controller' => $this->name, 'edit_message' => __('Edit?', true)),
+                    array('id' => $phenotype_id, 'controller' => $this->name, 'action' => 'invalidate', 'edit_message' => __('Invalidate?', true)),
                     'edit'
                 );
                 $this->Phenotype->commit();
@@ -395,6 +394,8 @@ AND i18n2.locale = '$locale'
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
+                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value'))));
+                $this->set('lastinsertid', $phenotype_id);
             }
             else {
                 $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
@@ -434,8 +435,23 @@ AND i18n2.locale = '$locale'
         }
     }
 
+    function invalidate($id = null) {
+        if (!$this->RequestHandler->isAjax()) { # if no AJAX, it might be just a crawler
+            $this->redirect('/', 500);
+        }
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid phenotype', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $phenotype = $this->Phenotype->read(null, $id);
+        $phenotype['Phenotype']['invalid'] = 1; # make invalid
+        if ($this->Phenotype->save($phenotype)) {
+        } else {
+            $this->redirect('/', 500);
+        }
+    }
 	function index() {
-		$this->Phenotype->recursive = 0;
+		$this->Phenotype->recursive = 1;
 		$this->set('phenotypes', $this->paginate());
 	}
 
