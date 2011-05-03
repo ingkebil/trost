@@ -63,11 +63,24 @@
             });
         ");
     }
+    if (isset($this->data['PhenotypeValue']['value_id'])) {
+        echo $javascript->codeBlock("
+            function afterLoad() {
+                $('#PhenotypeValueValueId').val(".$this->data['PhenotypeValue']['value_id'].");
+            }
+
+            $(document).ready(function() {
+                if ($('#ValueAttribute').val()) {
+                    ".$this->Ajax->remoteFunction(array('url' => 'get_valuevalues', 'update' => 'PhenotypeValueValueId', 'data' => '$("#ValueAttribute").serialize()', 'complete' => 'afterLoad()')).";
+                }
+            });
+        ");
+    }
 ?>
 <?php
 
     if( ! $drop) {
-        echo $this->Form->input('Phenotype.version');
+        echo $this->Form->hidden('Phenotype.version', array('value' => 'manuel'));
         echo $this->Form->hidden('Phenotype.object', array('value' => 'LIMS aliquot')); # TODO remove this hardcoded object
         echo $this->Form->label(__('entity id', true));
         echo $this->Form->text('PhenotypeEntity.entity_id');
@@ -85,7 +98,7 @@
         echo $this->Form->input('Phenotype.time');
     }
     else {
-        echo $this->Form->input('Phenotype.version');
+        echo $this->Form->hidden('Phenotype.version', array('value' => 'manuel'));
         echo $this->Form->hidden('Phenotype.object', array('value' => 'LIMS aliquot')); # TODO remove this hardcoded object
         echo $this->Form->input('PhenotypeEntity.entity_id');
         echo $this->Form->input('Value.attribute', array('empty' => true));

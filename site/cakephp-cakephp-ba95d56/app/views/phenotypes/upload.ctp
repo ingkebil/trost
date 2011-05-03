@@ -1,14 +1,14 @@
 <?php echo $javascript->link('jquery-1.5.1.min', false); ?>
 <?php echo $javascript->codeBlock('
     $(document).ready(function() {
-        $("#FileRaw").change(function() {
-            if ($(this).val()) {
-                $("#FileManual").attr("disabled", "disabled");
-            }
-            else {
-                $("#FileManual").attr("disabled", "");
-            }
-        });
+        //$("#FileRaw").change(function() {
+        //    if ($(this).val()) {
+        //        $("#FileManual").attr("disabled", "disabled");
+        //    }
+        //    else {
+        //        $("#FileManual").attr("disabled", "");
+        //    }
+        //});
         
         $("#FileManual").change(function() {
             if ($(this).is(":checked")) {

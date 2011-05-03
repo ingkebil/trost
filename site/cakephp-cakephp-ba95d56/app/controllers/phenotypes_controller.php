@@ -26,7 +26,7 @@ class PhenotypesController extends AppController {
                 }
             }
             else {
-                if ($this->data['File']['raw']['error']) { # as we cannot validate this field, give an error when non-existing
+                if ($this->data['File']['raw']['error']) { # as we cannot validate this field, give an error when it's non-existing
                     $this->Session->setFlash(__('Please select a file to upload!', true));
                 }
                 else {
@@ -101,7 +101,7 @@ class PhenotypesController extends AppController {
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value) = explode(';', $line);
         }
-        $dt = explode('/', $date);
+        $dt = explode('-', $date);
         $date = $dt[2] . '-' . $dt[1] . '-' . $dt[0];
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
@@ -114,7 +114,7 @@ class PhenotypesController extends AppController {
                 'Plant' => array(
                     'aliquot' => $plant_id,
                     'culture_id' => $this->data['Plant']['culture_id'],
-                    'sample_id' => 1,
+                    'sample_id' => 1, # TODO remove this hardcoded value
                 )
             ));
             if (empty($plant)) {
@@ -123,6 +123,10 @@ class PhenotypesController extends AppController {
             }
             $plant['Plant']['id'] = $this->Phenotype->Plant->getLastInsertID();
         }
+        #else {
+        #    $this->Phenotype->rollback();
+        #    return false;
+        #}
 
         # save the phenotyping info
         $this->Phenotype->create();
@@ -282,7 +286,7 @@ AND i18n2.locale = '$locale'
             $line .= ';'. $this->data['Phenotype']['object'];
             $line .= ';Fast Score';
             $line .= ';'. $this->data['PhenotypeEntity']['entity_id'];
-            $line .= ';'. $this->data['PhenotypeValue']['value_id'];
+            $line .= ';'. @$this->data['PhenotypeValue']['value_id'];
             $line .= ';'. $this->data['Value']['attribute'];
             $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['Plant']['aliquot'];
@@ -307,7 +311,12 @@ AND i18n2.locale = '$locale'
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
 
+        $this->Phenotype->begin();
         $phenotype_id = $this->_save_upload($line, $program_id);
+        if (!$phenotype_id) {
+            $this->Phenotype->rollback();
+            return false;
+        }
 
         # now also save the RAW
         if ($this->data['PhenotypeRaw']['raw_id']) { # ow, we already saved it, so read it and append
@@ -344,6 +353,11 @@ AND i18n2.locale = '$locale'
         )))) {
             $this->data['PhenotypeRaw']['raw_id'] = $raw['Raw']['id'];
         }
+        else {
+            $this->Phenotype->rollback();
+            return false;
+        }
+        $this->Phenotype->commit();
 
         return array($phenotype_id, $raw['Raw']['id']);
     }
@@ -372,6 +386,12 @@ AND i18n2.locale = '$locale'
                     'edit'
                 );
                 $this->Phenotype->commit();
+                #unset($this->data['PhenotypeEntity']['entity_id']);
+                #unset($this->data['PhenotypeValue']['value_id']);
+                #unset($this->data['Value']['attribute']);
+                unset($this->data['PhenotypeValue']['Number']);
+                unset($this->data['Phenotype']['time']);
+                unset($this->data['Form']['posted']);
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
@@ -381,12 +401,6 @@ AND i18n2.locale = '$locale'
                 $this->Phenotype->rollback();
             }
 
-            unset($this->data['PhenotypeEntity']['entity_id']);
-            unset($this->data['PhenotypeValue']['value_id']);
-            unset($this->data['Value']['attribute']);
-            unset($this->data['PhenotypeValue']['Number']);
-            unset($this->data['Phenotype']['time']);
-            unset($this->data['Form']['posted']);
         }
         elseif ($id) {
             $this->data = $this->Phenotype->read(null, $id);

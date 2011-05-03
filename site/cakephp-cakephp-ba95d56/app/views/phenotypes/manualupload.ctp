@@ -1,5 +1,5 @@
 <div class="phenotypes form">
-<?php echo $this->Form->create('Phenotype');?>
+<?php echo $this->Form->create('Phenotype', array('url' => $this->params['named']));?>
 	<fieldset>
         <legend><?php 
             if (isset($this->data['PhenotypeRaw']['raw_id']) && $this->data['PhenotypeRaw']['raw_id']) {
