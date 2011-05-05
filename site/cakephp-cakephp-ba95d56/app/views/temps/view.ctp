@@ -26,6 +26,11 @@
 			<?php echo $temp['Temp']['tmax']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Location Id'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $temp['Temp']['location_id']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

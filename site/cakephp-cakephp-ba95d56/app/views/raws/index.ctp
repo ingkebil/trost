@@ -3,7 +3,8 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('data');?></th>
+			<th><?php echo $this->Paginator->sort('Phenotype.date');?></th>
+			<th><?php echo $this->Paginator->sort('Plant.name');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -16,7 +17,8 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $raw['Raw']['id']; ?>&nbsp;</td>
-		<td><?php echo $raw['Raw']['data']; ?>&nbsp;</td>
+		<td><?php echo $raw['Phenotype'][0]['date']; ?>&nbsp;</td>
+		<td><?php echo $raw['Phenotype'][0]['Plant']['name']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $raw['Raw']['id'])); ?>
             <?php if ($this->Session->check('user')): ?>
@@ -40,15 +42,4 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('controller' => 'phenotypes', 'action' => 'upload'));?></li>
-		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
-        <?php if ($this->Session->check('user')): ?>
-		<li><?php echo $this->Html->link(__('New Raw', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
-        <?php endif; ?>
-	</ul>
 </div>

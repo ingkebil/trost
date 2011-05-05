@@ -125,7 +125,7 @@
         echo $this->Form->input('Phenotype.date');
         echo $this->Form->input('Phenotype.time');
         echo $this->Form->input('PhenotypeEntity.entity_id');
-        echo $this->Form->input('Value.attribute');
+        echo $this->Form->input('Value.attribute', array('empty' => true));
         echo $ajax->observeField('ValueAttribute', array(
             'url' => 'get_valuevalues',
             'update' => 'PhenotypeValueValueId',

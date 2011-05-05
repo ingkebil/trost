@@ -99,9 +99,11 @@ class PhenotypesController extends AppController {
             list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_value, $date, $time) = explode(';', $line);
         }
         elseif ($program_id == 2) { # Phenotyping
-            list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value) = explode(';', $line);
+            list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = explode(';', $line);
         }
-        #$date = join('-', array_reverse(explode('-', $date)));
+        if (strpos($date, '/')) {
+            $date = join('-', array_reverse(explode('/', $date)));
+        }
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
 
@@ -169,11 +171,12 @@ class PhenotypesController extends AppController {
 
         # save the attribute info # TODO check if attribute ID exists and matches!
         $this->Phenotype->PhenotypeValue->create();
+        $attribute_number = isset($attribute_number) ? $attribute_number : null;
         if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
             'PhenotypeValue' => array(
                 'phenotype_id' => $this->Phenotype->getLastInsertID(),
                 'value_id' => $attribute_id,
-                'number' => $attribute_value
+                'number' => $attribute_number
             )
         )))) {
             $this->Phenotype->rollback();
@@ -378,12 +381,12 @@ AND i18n2.locale = '$locale'
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
             $this->Phenotype->begin();
             if (list($phenotype_id, $raw_id) = $this->_save_manualupload($program_id)) {
-                $this->Session->setFlash(
-                    __('The phenotype has been saved.', true),
-                    'flashedit',
-                    array('id' => $phenotype_id, 'controller' => $this->name, 'action' => 'invalidate', 'edit_message' => __('Invalidate?', true)),
-                    'edit'
-                );
+                #$this->Session->setFlash(
+                #    __('The phenotype has been saved.', true),
+                #    'flashedit',
+                #    array('id' => $phenotype_id, 'controller' => $this->name, 'action' => 'invalidate', 'edit_message' => __('Invalidate?', true)),
+                #    'edit'
+                #); # we don't really need the flash if we get a list of entered values already
                 $this->Phenotype->commit();
                 #unset($this->data['PhenotypeEntity']['entity_id']);
                 #unset($this->data['PhenotypeValue']['value_id']);
@@ -394,7 +397,7 @@ AND i18n2.locale = '$locale'
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
-                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value'))));
+                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
                 $this->set('lastinsertid', $phenotype_id);
             }
             else {
@@ -444,7 +447,7 @@ AND i18n2.locale = '$locale'
             $this->redirect(array('action' => 'index'));
         }
         $phenotype = $this->Phenotype->read(null, $id);
-        $phenotype['Phenotype']['invalid'] = 1; # make invalid
+        $phenotype['Phenotype']['invalid'] = $phenotype['Phenotype']['invalid'] == 1 ? 0 : 1;
         if ($this->Phenotype->save($phenotype)) {
         } else {
             $this->redirect('/', 500);
@@ -460,7 +463,11 @@ AND i18n2.locale = '$locale'
 			$this->Session->setFlash(__('Invalid phenotype', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('phenotype', $this->Phenotype->read(null, $id));
+		$phenotype = $this->Phenotype->read(null, $id);
+		if ($phenotype['Phenotype']['invalid'] == 1) {
+			$this->Session->setFlash(__('This entry has been marked as invalid!', true));
+		}
+		$this->set('phenotype', $phenotype);
 	}
 
 	function add() {

@@ -55,6 +55,20 @@
 			<?php echo $this->Session->flash('edit'); ?>
 
 			<?php echo $content_for_layout; ?>
+            <div class="actions">
+                <h3><?php __('Actions'); ?></h3>
+                <ul>
+                <li><?php echo $html->link(__('Upload scanner file', true), '/phenotypes/upload'); ?></li>
+                <li><?php echo $html->link(__('Enter temperature', true), '/temps/erature'); ?></li>
+                <li><hr style="margin: 20px;" /></li>
+                <li><?php echo $html->link(__('List scanner files', true), '/raws/index'); ?></li>
+                <li><?php echo $html->link(__('List temperatures', true), '/temps/index'); ?></li>
+                <li><hr style="margin: 20px;" /></li>
+                <li><?php echo $html->link(__('Upload entities file', true), '/entities/upload'); ?></li>
+                <li><?php echo $html->link(__('Upload values file', true), '/values/upload'); ?></li>
+                <li><?php echo $html->link(__('Upload BBCH file', true), '/bbches/upload'); ?></li>
+                </ul>
+            </div>
 
 		</div>
 		<div id="footer">

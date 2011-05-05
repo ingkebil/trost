@@ -5,7 +5,7 @@ class RawsController extends AppController {
     var $helpers = array('Javascript', 'Ajax');
 
 	function index() {
-		$this->Raw->recursive = 0;
+		$this->Raw->recursive = 2;
 		$this->set('raws', $this->paginate());
 	}
 
@@ -14,7 +14,7 @@ class RawsController extends AppController {
 			$this->Session->setFlash(__('Invalid raw', true));
 			$this->redirect(array('action' => 'index'));
 		}
-        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value'))));
+        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
 	}
 
 	function add() {

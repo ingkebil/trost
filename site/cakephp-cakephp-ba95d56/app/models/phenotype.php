@@ -137,6 +137,20 @@ class Phenotype extends AppModel {
             'finderQuery' => '',
             'deleteQuery' => '',
             'insertQuery' => ''),
+       'Bbch' => array(
+            'className' => 'Bbch',
+            'joinTable' => 'phenotype_bbches',
+            'foreignKey' => 'phenotype_id',
+            'associationForeignKey' => 'bbch_id',
+            'unique' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''),
     );
 
 

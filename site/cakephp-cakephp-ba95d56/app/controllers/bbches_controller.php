@@ -2,6 +2,7 @@
 class BbchesController extends AppController {
 
 	var $name = 'Bbches';
+    var $helpers = array('Javascript', 'Ajax');
 
     function upload() {
 		if (!empty($this->data)) {
@@ -65,8 +66,12 @@ class BbchesController extends AppController {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid bbch', true));
 			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('bbch', $this->Bbch->read(null, $id));
+        }
+        $bbch = $this->Bbch->find('first', array('conditions' => array('Bbch.id' => $id), 'contain' => array('Phenotype', 'Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Species')));
+        foreach ($bbch['Phenotype'] as &$phenotype) {
+            $phenotype['Bbch'][0] = $bbch['Bbch']; # correct for the way we use the element to display the phenotype overview
+        }
+        $this->set('bbch', $bbch);
 	}
 
 	function add() {

@@ -73,7 +73,7 @@ ul, li {
 /** Layout **/
 #container {
 	text-align: left;
-    width: 900px;
+    /*width: 900px;*/
 }
 
 #header{

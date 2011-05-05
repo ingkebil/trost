@@ -7,6 +7,7 @@
 			<th><?php echo $this->Paginator->sort('rainfall');?></th>
 			<th><?php echo $this->Paginator->sort('tmin');?></th>
 			<th><?php echo $this->Paginator->sort('tmax');?></th>
+			<th><?php echo $this->Paginator->sort('location_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -23,6 +24,7 @@
 		<td><?php echo $temp['Temp']['rainfall']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['tmin']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['tmax']; ?>&nbsp;</td>
+		<td><?php echo $temp['Temp']['location_id']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $temp['Temp']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $temp['Temp']['id'])); ?>

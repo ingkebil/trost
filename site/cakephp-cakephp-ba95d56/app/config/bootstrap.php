@@ -49,7 +49,7 @@
  *
  */
 
-Configure::write('Languages.default', 'en-us');
+Configure::write('Languages.default', 'de-de');
 $langs = array(
     'de-de',
     'en-us',

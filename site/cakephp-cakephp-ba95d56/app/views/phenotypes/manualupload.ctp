@@ -27,13 +27,12 @@
         echo $this->Form->checkbox('Form.lastone');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<div class="submit">
+    <?php if (isset($this->data['PhenotypeRaw'])): # only show the stop button when we actually have something to stop with ?>
+    <div class="actions" style="float: right"><ul><li>
+    <?php echo $this->Html->link(__('Stop', true), array('controller' => 'raws', 'action'=>'view', $this->data['PhenotypeRaw']['raw_id'])); ?>
+    </li></ul></div>
+    <?php endif ?>
+    <?php echo $this->Form->end(array('value' => __('Submit', true), 'div' => false)); ?>
 </div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Upload Scanner File', true), array('action' => 'upload'));?></li>
-		<li><?php echo $this->Html->link(__('Manual Input', true), array('action' => 'upload'));?></li>
-		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('action' => 'index'));?></li>
-	</ul>
 </div>

@@ -11,6 +11,7 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8_general_ci'
 	);
 
+    # only following params are taken into account: database, connect, driver, login, password and prefix
     var $lims = array(
 		'driver' => 'oracle',
         'connect' => 'oci_connect',
