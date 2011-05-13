@@ -24,11 +24,13 @@
 		<td><?php echo $temp['Temp']['rainfall']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['tmin']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['tmax']; ?>&nbsp;</td>
-		<td><?php echo $temp['Temp']['location_id']; ?>&nbsp;</td>
+		<td><?php echo $temp['Location']['name']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $temp['Temp']['id'])); ?>
+            <?php if ($this->Session->check('user')): ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $temp['Temp']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $temp['Temp']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $temp['Temp']['id'])); ?>
+            <?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -46,10 +48,4 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Temp', true), array('action' => 'add')); ?></li>
-	</ul>
 </div>

@@ -26,19 +26,10 @@
 			<?php echo $temp['Temp']['tmax']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Location Id'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Location'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $temp['Temp']['location_id']; ?>
+			<?php echo $temp['Location']['name']; ?>
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Temp', true), array('action' => 'edit', $temp['Temp']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Temp', true), array('action' => 'delete', $temp['Temp']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $temp['Temp']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Temps', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Temp', true), array('action' => 'add')); ?> </li>
-	</ul>
 </div>
