@@ -1,7 +1,7 @@
 <?php echo $javascript->link('jquery-1.5.1.min', false); ?>
 <?php echo $javascript->codeBlock('
     function strike(id) {
-        $(".row"+id).addClass("invalid");
+        $(".row"+id).toggleClass("invalid");
     }
 '); ?>
 <div class="phenotypes index">

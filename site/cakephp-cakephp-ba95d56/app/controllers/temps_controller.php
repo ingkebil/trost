@@ -2,6 +2,7 @@
 class TempsController extends AppController {
 
 	var $name = 'Temps';
+    var $helpers = array('Ajax');
 
 	function index() {
 		$this->Temp->recursive = 0;
@@ -29,6 +30,21 @@ class TempsController extends AppController {
         $this->set('locations', $this->Temp->Location->find('list'));
 	}
 
+    function invalidate($id = null) {
+        if (!$this->RequestHandler->isAjax()) { # if no AJAX, it might be just a crawler
+            $this->redirect('/', 500);
+        }
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid Temperature', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $temp = $this->Temp->read(null, $id);
+        $temp['Temp']['invalid'] = $temp['Temp']['invalid'] == 1 ? 0 : 1;
+        if ($this->Temp->save($temp)) {
+        } else {
+            $this->redirect('/', 500);
+        }
+    }
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid temp', true));
