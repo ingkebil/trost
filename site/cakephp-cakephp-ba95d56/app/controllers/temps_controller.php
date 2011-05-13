@@ -26,6 +26,7 @@ class TempsController extends AppController {
 				$this->Session->setFlash(__('The temp could not be saved. Please, try again.', true));
 			}
 		}
+        $this->set('locations', $this->Temp->Location->find('list'));
 	}
 
 	function edit($id = null) {
