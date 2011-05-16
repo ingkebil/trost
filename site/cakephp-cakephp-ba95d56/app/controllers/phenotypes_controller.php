@@ -76,7 +76,9 @@ class PhenotypesController extends AppController {
         $programs[0] = 'autodetect';
         ksort($programs);
         $experiments = $this->Experiment->find('list'); # actually, leave this out as it is not necesary right now.
-        $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
+        if ($_SERVER['SERVER_NAME'] == 'hal9000') { # there is a problem with the oracle driver on this machine, so skip this 
+            $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
+        }
         $cultures = $this->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
 		$this->set(compact('programs', 'experiments', 'cultures'));
     }
