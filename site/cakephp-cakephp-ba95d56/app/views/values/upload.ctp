@@ -1,5 +1,5 @@
 <div class="values form">
-<?php echo $this->Form->create('Value', array('type' => 'file', 'accept-charset' => 'UTF-8'));?>
+<?php echo $this->Form->create('Value', array('type' => 'file'));?>
 	<fieldset>
  		<legend><?php __('Add Values'); ?></legend>
         <?php __('Column names:'); ?>
