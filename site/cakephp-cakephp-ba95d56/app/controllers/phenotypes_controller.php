@@ -31,6 +31,7 @@ class PhenotypesController extends AppController {
                 }
                 else {
                     $raw = file_get_contents($this->data['File']['raw']['tmp_name']);
+                    $raw = mb_convert_encoding($raw, 'UTF-8', mb_detect_encoding($raw));
                     $lines = explode("\n", $raw);
                     $line_nr = 1;
 
