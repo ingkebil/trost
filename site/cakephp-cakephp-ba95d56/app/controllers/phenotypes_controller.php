@@ -99,7 +99,7 @@ class PhenotypesController extends AppController {
             }
         }
         if ($program_id == 1) { # FastScore
-            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_value, $date, $time) = explode(';', $line);
+            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_number, $date, $time) = explode(';', $line);
         }
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = explode(';', $line);
