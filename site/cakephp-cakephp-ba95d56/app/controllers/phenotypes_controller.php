@@ -89,7 +89,7 @@ class PhenotypesController extends AppController {
 
         # split the line according to the program
         if ($program_id == 0) {
-            list($version, $object, $program,) = explode(';', $line);
+            list($version, $object, $program,) = preg_split('/;|\t/', $line);
 
             if ($program == 'Fast Score') {
                 $program_id = 1;
@@ -99,10 +99,10 @@ class PhenotypesController extends AppController {
             }
         }
         if ($program_id == 1) { # FastScore
-            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_number, $date, $time) = explode(';', $line);
+            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_number, $date, $time) = preg_split('/;|\t/', $line);
         }
         elseif ($program_id == 2) { # Phenotyping
-            list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = explode(';', $line);
+            list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
         }
         if (strpos($date, '/')) {
             $date = join('-', array_reverse(explode('/', $date)));
