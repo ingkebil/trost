@@ -33,8 +33,8 @@
 		<td><?php echo $temp['Temp']['id']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['datum']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['rainfall']; ?>&nbsp;</td>
-		<td><?php echo $temp['Temp']['tmin']; ?>&nbsp;</td>
-		<td><?php echo $temp['Temp']['tmax']; ?>&nbsp;</td>
+		<td><?php echo str_replace('.', ',', $temp['Temp']['tmin']); ?>&nbsp;</td>
+		<td><?php echo str_replace('.', ',', $temp['Temp']['tmax']); ?>&nbsp;</td>
 		<td><?php echo $temp['Location']['name']; ?>&nbsp;</td>
 		<td class="actions">
             <?php echo $this->Ajax->link(

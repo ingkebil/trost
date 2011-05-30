@@ -20,6 +20,10 @@ class TempsController extends AppController {
 	function erature() {
 		if (!empty($this->data)) {
 			$this->Temp->create();
+            # make the entered temperaturs from European to American notation (comma to dot)
+            # for getting it out of the DB with a comma again, this is done in the views :/
+            $this->data['Temp']['tmin'] = str_replace(',', '.', $this->data['Temp']['tmin']);
+            $this->data['Temp']['tmax'] = str_replace(',', '.', $this->data['Temp']['tmax']);
 			if ($this->Temp->save($this->data)) {
 				$this->Session->setFlash(__('The temp has been saved', true));
 				$this->redirect(array('action' => 'index'));
