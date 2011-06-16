@@ -1,6 +1,6 @@
 Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669004;0;01/12/2008;15:17
-Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669014;0;01/12/2008;15:17
-Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669270;0;01/12/2008;15:18
+Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669014;3;01/12/2008;15:17
+Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669270;4.56;01/12/2008;15:18
 Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669295;0;01/12/2008;15:18
 Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669297;0;01/12/2008;15:18
 Test220606;LIMS-Aliquot;Fast Score;13;3;"presence";"absent";669774;0;01/12/2008;15:19
