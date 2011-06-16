@@ -104,9 +104,7 @@ class PhenotypesController extends AppController {
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
         }
-        if (strpos($date, '/')) {
-            $date = join('-', array_reverse(explode('/', $date)));
-        }
+        $date = $this->_convert_date($date);
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
 
@@ -204,6 +202,19 @@ class PhenotypesController extends AppController {
         return $this->Phenotype->getLastInsertID();
     }
 
+    /**
+     * Tries to detect and convert all dates to yyyy-mm-dd format.
+     */
+    function _convert_date($date) {
+        list($year, $month, $day) = preg_split('/[^0-9]/', $date);
+        if (strlen($day) == 4) { # switch day and year if they seem to be reversed
+            $x = $year;
+            $year = $day;
+            $day = $x;
+        }
+
+        return "$year-$month-$day";
+    }
     function _get_cultures() {
         $studies = $this->Study->find('list',
             array(
