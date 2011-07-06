@@ -5,8 +5,12 @@ class RawsController extends AppController {
     var $helpers = array('Javascript', 'Ajax');
 
 	function index() {
-		$this->Raw->recursive = 2;
-		$this->set('raws', $this->paginate());
+		#$this->Raw->recursive = 2; # seems to go into an endless loop
+        $this->paginate['Raw'] = array(
+            'contain' => array('Phenotype'),
+        );
+        $this->Raw->cacheQueries = true;
+        $this->set('raws', $this->paginate('Raw'));
 	}
 
 	function view($id = null) {

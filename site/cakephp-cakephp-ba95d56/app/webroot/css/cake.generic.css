@@ -122,14 +122,14 @@ div.form,
 div.index,
 div.view {
 	float:right;
-	width:76%;
+	width:78%;
 	/*border-left:1px solid #3e917c;*/
 	padding:10px 2%;
 }
 div.actions {
 	float:left;
 	width:16%;
-	padding:10px 1.5%;
+	padding:10px 0.5%;
 }
 div.actions h3 {
 	padding-top:0;
@@ -226,7 +226,7 @@ div.paging span a {
 dl {
 	line-height: 2em;
 	margin: 0em 0em;
-	width: 60%;
+	width: 90%;
 }
 dl .altrow {
 	background: #f4f4f4;

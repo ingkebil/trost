@@ -49,7 +49,7 @@
 			<td><?php echo $phenotype['Entity'][0]['name'];?></td>
 			<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
 			<td><?php echo $phenotype['Value'][0]['value'];?></td>
-			<td><?php echo $phenotype['Value'][0]['PhenotypeValue']['number'];?></td>
+			<td><?php printf('%.3f', $phenotype['Value'][0]['PhenotypeValue']['number']);?></td>
 <?php if ($phenotype['program_id'] == 2): ?>
 			<td><?php echo $phenotype['Bbch'][0]['name'];?></td>
 			<td><?php echo $phenotype['Bbch'][0]['bbch'];?></td>

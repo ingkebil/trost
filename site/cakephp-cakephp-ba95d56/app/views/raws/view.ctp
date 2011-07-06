@@ -7,9 +7,8 @@
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Data'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $raw['Raw']['data']; ?>
-			&nbsp;
+		<dd<?php if ($i++ % 2 == 0) echo $class;?> style="overflow: scroll">
+            <pre><?php echo $raw['Raw']['data']; ?> &nbsp;</pre>
 		</dd>
 	</dl>
     <?php echo $this->element('raws/related', array('phenotypes' => $raw['Phenotype'])); ?>

@@ -206,12 +206,22 @@ class PhenotypesController extends AppController {
      * Tries to detect and convert all dates to yyyy-mm-dd format.
      */
     function _convert_date($date) {
+        pr($date);
         list($year, $month, $day) = preg_split('/[^0-9]/', $date);
         if (strlen($day) == 4) { # switch day and year if they seem to be reversed
             $x = $year;
             $year = $day;
             $day = $x;
         }
+        pr("$year-$month-$day");
+        # it seems dates are sometimes given as '06-03-11' which is TOTALLY AMbIGUOUS!
+        # anyway, check if all dates are above 2011
+        elseif ($year < 2010) {
+            $x = $year;
+            $year = $day;
+            $day = $x;
+        }
+        pr("$year-$month-$day");
 
         return "$year-$month-$day";
     }

@@ -4,7 +4,6 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('Phenotype.date');?></th>
-			<th><?php echo $this->Paginator->sort('Plant.name');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -18,7 +17,6 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $raw['Raw']['id']; ?>&nbsp;</td>
 		<td><?php echo $raw['Phenotype'][0]['date']; ?>&nbsp;</td>
-		<td><?php echo $raw['Phenotype'][0]['Plant']['name']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $raw['Raw']['id'])); ?>
             <?php if ($this->Session->check('user')): ?>
