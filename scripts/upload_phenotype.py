@@ -8,6 +8,7 @@ from poster.encode import multipart_encode
 from poster.streaminghttp import register_openers
 
 for file_name in sys.argv[1:]:
+    print "%s\n"% (file_name)
 
     # create the CSV file
     kwargs = {
@@ -20,6 +21,7 @@ for file_name in sys.argv[1:]:
     n, tmp_file_name = mkstemp() # returns a tuple of the file descriptor and the file name
     tmp_file = open(tmp_file_name, 'w+');
     xlsx2csv(file_name, tmp_file, **kwargs)
+    tmp_file.close()
 
     # upload the CSV
     register_openers()
@@ -28,7 +30,8 @@ for file_name in sys.argv[1:]:
         'data[Culture][experiment_id]':1, 
         'data[Plant][culture_id]':1,
         'data[Phenotype][program_id]':0,
-        'data[File][raw]': open(tmp_file_name)
+        'data[File][raw]': open(tmp_file_name, 'rb'),
+        'data[File][manual]': 0
     })
 
     req = urllib2.Request("http://localhost/trost/de-de/phenotypes/upload", datagen, headers)
