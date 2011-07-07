@@ -6,6 +6,8 @@ class PhenotypesController extends AppController {
     var $components = array('RequestHandler');
     var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Study', 'Value');
 
+    var $error_msg = false;
+
     function upload() {
 		if (!empty($this->data)) {
 
@@ -66,7 +68,7 @@ class PhenotypesController extends AppController {
                             $this->redirect(array('controller' => 'raws', 'action' => 'view', $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID()));
                         }
                         else {
-                            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true));
+                            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again. ' . $this->error_msg, true));
                         }
                     }
                 }
@@ -121,6 +123,7 @@ class PhenotypesController extends AppController {
             ));
             if (empty($plant)) {
                 $this->Phenotype->rollback();
+                $this->error_msg = 'No plant found!';
                 return false;
             }
             $plant['Plant']['id'] = $this->Phenotype->Plant->getLastInsertID();
@@ -140,6 +143,7 @@ class PhenotypesController extends AppController {
         ));
         if (empty($phenotype)) {
             $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create Phenotype!';
             return false;
         }
 
@@ -154,6 +158,7 @@ class PhenotypesController extends AppController {
                 )
             )))) {
                 $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create phenotyeRaw!';
                 return false;
             }
         }
@@ -167,6 +172,7 @@ class PhenotypesController extends AppController {
             )
         )))) {
             $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create PhenotypeEntity!';
             return false;
         }
 
@@ -181,6 +187,7 @@ class PhenotypesController extends AppController {
             )
         )))) {
             $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create PhenotypeValue!';
             return false;
         }
 
@@ -219,6 +226,15 @@ class PhenotypesController extends AppController {
             $year = $day;
             $day = $x;
         }
+
+        # quick hack so that those ungly US noted dates are uploaded
+        $x = $month;
+        $month = $day;
+        $day = $x;
+
+        #if ($day < 10) $day = "0$day";
+        #if ($month < 10) $month = "0$month";
+        if ($year == 11) $year = 2011;
 
         return "$year-$month-$day";
     }
