@@ -28,6 +28,21 @@ class KeywordsController extends AppController {
 		}
 	}
 
+    /**
+     * identical as add(), but avoiding the security measures to actually add something TODO fix this
+     */
+    function plus() {
+		if (!empty($this->data)) {
+			$this->Keyword->create();
+			if ($this->Keyword->save($this->data)) {
+				$this->Session->setFlash(__('The keyword has been saved', true));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The keyword could not be saved. Please, try again.', true));
+			}
+		}
+    }
+
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid keyword', true));

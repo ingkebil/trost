@@ -60,5 +60,6 @@ PutEnv('ORACLE_BASE=/usr/lib/oracle/xe/app/oracle/product/10.2.0');
 PutEnv('ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server');
 PutEnv('ORACLE_BASE=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server/lib');
 
-Configure::write('FileUpload.uploadDir', '/tmp/');
+Configure::write('FileUpload.uploadDir', '/home/billiau/svn/trost/trunk/site/current/app/webroot/files/');
+Configure::write('FileUpload.viewDir', '/files/');
 

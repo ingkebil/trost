@@ -44,6 +44,9 @@ class UfilesController extends AppController {
                         }
                     }
                 }
+                if ($success) {
+				    $this->redirect(array('action' => 'index'));
+                }
             }
             else {
                 $this->Session->setFlash('ERROR: ' . $this->FileUpload->showErrors());
@@ -53,9 +56,63 @@ class UfilesController extends AppController {
         $this->set(compact('keywords'));
     }
 
+    /**
+     * post-to-get search: post the search question, and redirect to a results page with the question asked in the querystring
+     */
+    function search() {
+        unset($this->Ufile->validate['submitter']); # remove a specific validtion rule only for this action
+        unset($this->Ufile->validate['name']); # remove a specific validtion rule only for this action
+        
+        if ($this->data) {
+            # do some whitelisting
+            $whitelist = array('submitter', 'name', 'description');
+            $passed_values = array();
+            foreach ($this->data['Ufile'] as $key => $value) {
+                if (in_array($key, $whitelist)) {
+                    $passed_values[$key] = $value;
+                }
+            }
+
+            # handle the keywords
+            $keywords = $this->Ufile->Keyword->find('list', array('conditions' => array('id' => $this->data['Keyword']['Keyword'])));
+            if (! empty($keywords)) {
+                $passed_values['keyword'] = implode(';', $keywords);
+            }
+            if (! empty($passed_values)) {
+                $this->redirect(array_merge(array('action' => 'results'), $passed_values));
+            }
+        }
+        else {
+            $keywords = $this->Ufile->Keyword->find('list');
+            $this->set(compact('keywords'));
+        }
+    }
+
+    function results() {
+        # TODO whitelist params
+
+        $keywords = @$this->params['named']['keyword'];
+        unset($this->params['named']['keyword']);
+
+        # TODO integrate the two following queries
+        $keyword_ids = $this->Ufile->Keyword->find('list', array(
+            'fields' => array('id', 'id'),
+            'conditions' => array('name' => explode(';', $keywords)))
+        );
+
+        $this->paginate['Ufilekeyword'] = array(
+            'contain' => array('Keyword', 'Ufile'),
+            'conditions' => array_merge($this->params['named'], array('keyword_id' => $keyword_ids))
+        );
+
+        $this->set('ufiles', $this->paginate('Ufilekeyword'));
+    }
+
 	function index() {
-		$this->Ufile->recursive = 0;
-		$this->set('ufiles', $this->paginate());
+        $this->paginate['Ufile'] = array(
+            'contain' => array('Keyword'),
+        );
+		$this->set('ufiles', $this->paginate('Ufile'));
 	}
 
 	function view($id = null) {
@@ -94,6 +151,8 @@ class UfilesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Ufile->read(null, $id);
 		}
+        $keywords = $this->Ufile->Keyword->find('list');
+        $this->set(compact('keywords'));
 	}
 
 	function delete($id = null) {

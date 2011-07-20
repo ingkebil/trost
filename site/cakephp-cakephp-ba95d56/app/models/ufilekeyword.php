@@ -41,5 +41,7 @@ class ufilekeyword extends AppModel {
 			'order' => ''
 		)
 	);
+
+    var $actsAs = array('Containable');
 }
 ?>

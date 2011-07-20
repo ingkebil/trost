@@ -58,7 +58,7 @@
     #    Router::connect("/:lang/$controller/edit/*", array('controller' => $controller, 'action' => 'edit'));
     }
 
-    Router::connectNamed(array('p', 'c', 'e', 'id', 'page', 'sort', 'direction', 'drop'));
+    Router::connectNamed(array('p', 'c', 'e', 'id', 'page', 'sort', 'direction', 'drop', 'name', 'keyword', 'description', 'submitter'));
     Router::connect('/:controller/:action');
     Router::connect('/:lang/:controller', array('action' => 'index'));
     Router::connect('/:lang/:controller/:action/*');

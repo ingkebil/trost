@@ -13,7 +13,7 @@ class ufile extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'filetype' => array(
+		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -58,6 +58,8 @@ class ufile extends AppModel {
             'deleteQuery' => '',
             'insertQuery' => ''),
     );
+
+    var $actsAs = array('Containable');
 
 }
 ?>

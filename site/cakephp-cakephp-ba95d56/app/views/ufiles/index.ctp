@@ -2,9 +2,9 @@
 	<h2><?php __('Ufiles');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('submitter');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
+			<th>Keywords</th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
 			<th class="actions"><?php __('Actions');?></th>
@@ -18,9 +18,15 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $ufile['Ufile']['id']; ?>&nbsp;</td>
 		<td><?php echo $ufile['Ufile']['submitter']; ?>&nbsp;</td>
-		<td><?php echo $ufile['Ufile']['name']; ?>&nbsp;</td>
+		<td><?php echo $this->Html->link($ufile['Ufile']['name'], Configure::read('FileUpload.viewDir') . $ufile['Ufile']['submitter'] . DS . $ufile['Ufile']['name']); ?>&nbsp;</td>
+        <td><?php 
+            $keywords = array();
+            foreach ($ufile['Keyword'] as $keyword) {
+                $keywords[] = $keyword['name'];
+            }
+            echo implode(', ', $keywords);
+        ?></td>
 		<td><?php echo $ufile['Ufile']['created']; ?>&nbsp;</td>
 		<td><?php echo $ufile['Ufile']['description']; ?>&nbsp;</td>
 		<td class="actions">
