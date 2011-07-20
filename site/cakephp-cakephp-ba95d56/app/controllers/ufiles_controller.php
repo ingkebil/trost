@@ -10,7 +10,10 @@ class UfilesController extends AppController {
         parent::beforeFilter();
 
         # some settings for the automatic upload handling
-        $this->FileUpload->uploadDir('/tmp');
+        $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
+        if (! empty($this->data)) {
+            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $this->data['Ufile']['submitter']);
+        }
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
         $this->FileUpload->allowedTypes(array(

@@ -25,8 +25,10 @@
 		<td><?php echo $ufile['Ufile']['description']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $ufile['Ufile']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $ufile['Ufile']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $ufile['Ufile']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $ufile['Ufile']['id'])); ?>
+            <?php if ($this->Session->check('user')): ?>
+                <?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $ufile['Ufile']['id'])); ?>
+                <?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $ufile['Ufile']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $ufile['Ufile']['id'])); ?>
+            <?php endif; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -44,14 +46,4 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Ufile', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Ufilekeywords', true), array('controller' => 'ufilekeywords', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Ufilekeyword', true), array('controller' => 'ufilekeywords', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Keywords', true), array('controller' => 'keywords', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Keyword', true), array('controller' => 'keywords', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

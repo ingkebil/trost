@@ -137,6 +137,11 @@ class Uploader {
     if(!$fileName){
       return false;
     }    
+    /// billiau: ADDED automatic directory creation ///
+    if (! file_exists($up_dir)) {
+        mkdir($up_dir);
+    }
+    /// billiau /// 
     $target_path = $up_dir . DS . $fileName;
     $target_path = $this->__handleUnique($target_path);
     

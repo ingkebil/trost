@@ -31,5 +31,22 @@ class Keyword extends AppModel {
 		)
 	);
 
+    var $hasAndBelongsToMany = array(
+        'Ufile' => array(
+            'className' => 'Ufile',
+            'joinTable' => 'ufilekeywords',
+            'foreignKey' => 'keyword_id',
+            'associationForeignKey' => 'ufile_id',
+            'unique' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''),
+    );
+
 }
 ?>

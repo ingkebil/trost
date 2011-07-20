@@ -12,53 +12,43 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Keyword', true), array('action' => 'edit', $keyword['Keyword']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Keyword', true), array('action' => 'delete', $keyword['Keyword']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $keyword['Keyword']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Keywords', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Keyword', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Ufilekeywords', true), array('controller' => 'ufilekeywords', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Ufilekeyword', true), array('controller' => 'ufilekeywords', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Ufilekeywords');?></h3>
-	<?php if (!empty($keyword['Ufilekeyword'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Ufile Id'); ?></th>
-		<th><?php __('Keyword Id'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($keyword['Ufilekeyword'] as $ufilekeyword):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $ufilekeyword['id'];?></td>
-			<td><?php echo $ufilekeyword['ufile_id'];?></td>
-			<td><?php echo $ufilekeyword['keyword_id'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'ufilekeywords', 'action' => 'view', $ufilekeyword['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'ufilekeywords', 'action' => 'edit', $ufilekeyword['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'ufilekeywords', 'action' => 'delete', $ufilekeyword['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $ufilekeyword['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Ufilekeyword', true), array('controller' => 'ufilekeywords', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
+    <br />
+    <div class="related">
+        <h3><?php __('Related Ufiles');?></h3>
+        <?php if (!empty($keyword['Ufile'])):?>
+        <table cellpadding = "0" cellspacing = "0">
+        <tr>
+            <th><?php __('Id'); ?></th>
+            <th><?php __('Submitter'); ?></th>
+            <th><?php __('Name'); ?></th>
+            <th><?php __('Created'); ?></th>
+            <th><?php __('Description'); ?></th>
+            <th class="actions"><?php __('Actions');?></th>
+        </tr>
+        <?php
+            $i = 0;
+            foreach ($keyword['Ufile'] as $ufile):
+                $class = null;
+                if ($i++ % 2 == 0) {
+                    $class = ' class="altrow"';
+                }
+            ?>
+            <tr<?php echo $class;?>>
+                <td><?php echo $ufile['id'];?></td>
+                <td><?php echo $ufile['submitter'];?></td>
+                <td><?php echo $ufile['name'];?></td>
+                <td><?php echo $ufile['created'];?></td>
+                <td><?php echo $ufile['description'];?></td>
+                <td class="actions">
+                    <?php echo $this->Html->link(__('View', true), array('controller' => 'ufiles', 'action' => 'view', $ufile['id'])); ?>
+                    <?php if ($this->Session->check('user')): ?>
+                        <?php echo $this->Html->link(__('Edit', true), array('controller' => 'ufiles', 'action' => 'edit', $ufile['id'])); ?>
+                        <?php echo $this->Html->link(__('Delete', true), array('controller' => 'ufiles', 'action' => 'delete', $ufile['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $ufile['id'])); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+    </div>
 </div>
