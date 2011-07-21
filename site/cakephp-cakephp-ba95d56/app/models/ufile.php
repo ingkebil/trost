@@ -26,21 +26,21 @@ class ufile extends AppModel {
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
-		'Ufilekeyword' => array(
-			'className' => 'Ufilekeyword',
-			'foreignKey' => 'ufile_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+	#var $hasMany = array(
+	#	'Ufilekeyword' => array(
+	#		'className' => 'Ufilekeyword',
+	#		'foreignKey' => 'ufile_id',
+	#		'dependent' => false,
+	#		'conditions' => '',
+	#		'fields' => '',
+	#		'order' => '',
+	#		'limit' => '',
+	#		'offset' => '',
+	#		'exclusive' => '',
+	#		'finderQuery' => '',
+	#		'counterQuery' => ''
+	#	)
+	#);
 
     var $hasAndBelongsToMany = array(
         'Keyword' => array(

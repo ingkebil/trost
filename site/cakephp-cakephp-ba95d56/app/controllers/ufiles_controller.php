@@ -94,18 +94,25 @@ class UfilesController extends AppController {
         $keywords = @$this->params['named']['keyword'];
         unset($this->params['named']['keyword']);
 
-        # TODO integrate the two following queries
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
-            'conditions' => array('name' => explode(';', $keywords)))
-        );
+            'conditions' => array('name' => array_unique(explode(';', $keywords), SORT_STRING))
+        ));
 
-        $this->paginate['Ufilekeyword'] = array(
-            'contain' => array('Keyword', 'Ufile'),
-            'conditions' => array_merge($this->params['named'], array('keyword_id' => $keyword_ids))
-        );
+        # this query will not get all the keywords for the files selected, so only use this to get the ufile_id
+        $this->Ufile->bindModel(array('hasOne' => array('Ufilekeyword')), false);
+        $ufile_ids = $this->Ufile->find('all', array(
+            'contain' => array('Ufilekeyword'),
+            'conditions' => array_merge($this->params['named'], array('Ufilekeyword.keyword_id' => $keyword_ids)),
+        ));
+        $ufile_ids = Set::extract('/Ufile/id', $ufile_ids);
 
-        $this->set('ufiles', $this->paginate('Ufilekeyword'));
+        $this->paginate['Ufile'] = array(
+            'group' => array('Ufile.id'),
+            'contain' => array('Keyword'),
+            'conditions' => array('Ufile.id' => $ufile_ids),
+        );
+        $this->set('ufiles', $this->paginate('Ufile'));
     }
 
 	function index() {
