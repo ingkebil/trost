@@ -78,8 +78,9 @@ class UfilesController extends AppController {
         }
         # http://forums.mysql.com/read.php?10,225465,225545#msg-225545
         $keywords  = $this->Ufile->Keyword->find('list', array('order' => array('cast(name as char)' => 'ASC', 'binary name' => 'DESC')));
-        $locations = $this->Location->find('list');
-        $this->set(compact('keywords', 'locations'));
+        $people = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
+        $people = Set::combine($people, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
+        $this->set(compact('keywords', 'people'));
     }
 
     function __add_keywords($kw) {

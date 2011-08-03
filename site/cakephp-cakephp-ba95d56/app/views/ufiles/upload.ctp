@@ -3,8 +3,7 @@
 	<fieldset>
  		<legend><?php __('Add file'); ?></legend>
 	<?php
-        echo $this->Form->input('Location');
-		echo $this->Form->input('person');
+        echo $this->Form->input('People');
 		echo $this->Form->input('description');
         # if below line stops working: http://book.cakephp.org/view/1390/Automagic-Form-Elements#options-multiple-1395
         echo $this->Form->input('Keyword'); // use the ModelName so multiple selection is possible
