@@ -59,6 +59,8 @@ class ufile extends AppModel {
             'insertQuery' => ''),
     );
 
+    var $belongsTo = array('Person');
+
     var $actsAs = array('Containable');
 
 }

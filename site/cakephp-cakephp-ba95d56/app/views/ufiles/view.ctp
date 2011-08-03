@@ -6,9 +6,9 @@
 			<?php echo $ufile['Ufile']['id']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Submitter'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Person'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $ufile['Ufile']['submitter']; ?>
+			<?php echo $ufile['Person']['name']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>

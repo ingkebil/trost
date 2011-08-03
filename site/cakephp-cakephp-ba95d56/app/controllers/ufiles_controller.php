@@ -5,6 +5,8 @@ class UfilesController extends AppController {
  	var $name = 'Ufiles';
     var $helpers = array('Html', 'Form', 'FileUpload.FileUpload');
     var $components = array('FileUpload.FileUpload');
+    var $uses = array('Ufile', 'Location', 'Keyword');
+
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -12,7 +14,23 @@ class UfilesController extends AppController {
         # some settings for the automatic upload handling
         $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
         if (! empty($this->data)) {
-            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $this->data['Ufile']['submitter']);
+
+            # look up of the person exists already
+            $person = $this->Ufile->Person->find('first', array('conditions' => array('Person.name' => $this->data['Ufile']['person']), 'contain' => false));
+            if (empty($person)) {
+                $person = $this->Ufile->Person->save(array(
+                    'Person' => array(
+                        'name' => $this->data['Ufile']['person'],
+                        'location_id' => $this->data['Ufile']['Location']
+                    )
+                ));
+                $this->data['Ufile']['person_id'] = $this->Ufile->Person->id;
+            }
+            else {
+                $this->data['Ufile']['person_id'] = $person['Person']['id'];
+            }
+            
+            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $this->data['Ufile']['person'] . $this->data['Ufile']['person_id']);
         }
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
@@ -28,12 +46,18 @@ class UfilesController extends AppController {
 
     function upload() {
         if (! empty($this->data)) {
+
+            # first add the newly entered kw's
+            $new_kw_ids = $this->__add_keywords($this->data['Ufile']['new_keywords']);
+            # add the new kw_id's to the KwKw array
+            $this->data['Keyword']['Keyword'] = array_unique(array_merge($this->data['Keyword']['Keyword'], $new_kw_ids)); # add unique check in case someone added a new existing keyword and selected it as well
             if ($this->FileUpload->success) {
                 $success = true;
                 foreach ($this->FileUpload->uploadedFiles as $uploaded_file) {
                     if ($uploaded_file['name'] && ! $uploaded_file['error']) {
                         $this->Ufile->create();
                         $this->data['Ufile']['name'] = $uploaded_file['name'];
+
                         if (! $this->Ufile->save($this->data)) {
                             $success = false;
                             $this->Session->setFlash(
@@ -52,8 +76,36 @@ class UfilesController extends AppController {
                 $this->Session->setFlash('ERROR: ' . $this->FileUpload->showErrors());
             }
         }
-        $keywords = $this->Ufile->Keyword->find('list');
-        $this->set(compact('keywords'));
+        # http://forums.mysql.com/read.php?10,225465,225545#msg-225545
+        $keywords  = $this->Ufile->Keyword->find('list', array('order' => array('cast(name as char)' => 'ASC', 'binary name' => 'DESC')));
+        $locations = $this->Location->find('list');
+        $this->set(compact('keywords', 'locations'));
+    }
+
+    function __add_keywords($kw) {
+        $keywords = explode(',', $kw);
+        $keywords = array_map('trim', $keywords);
+
+        $saved = true;
+        $keyword_ids = array();
+        foreach ($keywords as $keyword) {
+            # look up the keyword in case it exists already
+            $first_match = $this->Keyword->find('first', array('conditions' => array('name' => $keyword)));
+            if (empty($first_match)) {
+                $this->Keyword->locale = str_replace('-', '_', Configure::read('Config.language'));
+                $this->Keyword->create();
+                if (! $this->Keyword->save(array('Keyword' => array('name' => $keyword)))) {
+                    $saved = false;
+                    continue;
+                }
+                $keyword_ids[] = $this->Keyword->id;
+            }
+            else {
+                $keyword_ids[] = $first_match['Keyword']['id'];
+            }
+        }
+
+        return $keyword_ids;
     }
 
     /**
@@ -117,7 +169,7 @@ class UfilesController extends AppController {
 
 	function index() {
         $this->paginate['Ufile'] = array(
-            'contain' => array('Keyword'),
+            'contain' => array('Keyword', 'Person', 'Person.Location'),
         );
 		$this->set('ufiles', $this->paginate('Ufile'));
 	}

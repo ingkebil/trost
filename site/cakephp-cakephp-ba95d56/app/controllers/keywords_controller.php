@@ -18,11 +18,26 @@ class KeywordsController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+            $saved = false;
+            $this->Keyword->begin();
+            $this->Keyword->locale = 'en_us';
 			$this->Keyword->create();
 			if ($this->Keyword->save($this->data)) {
-				$this->Session->setFlash(__('The keyword has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
+                if ( ! empty($this->data['Keyword']['name_de'])) {
+                    $this->data['Keyword']['name'] = $this->data['Keyword']['name_de'];
+                }
+                $this->Keyword->locale = 'de_de';
+                $this->Keyword->create();
+                if ($this->Keyword->save($this->data)) {
+                    $this->Keyword->commit();
+                    $saved = true;
+
+                    $this->Session->setFlash(__('The keyword has been saved', true));
+                    $this->redirect(array('action' => 'index'));
+                }
+            }
+            if ( ! $saved) {
+                $this->Keyword->rollback();
 				$this->Session->setFlash(__('The keyword could not be saved. Please, try again.', true));
 			}
 		}

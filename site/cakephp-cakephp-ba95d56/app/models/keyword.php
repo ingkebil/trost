@@ -48,5 +48,7 @@ class Keyword extends AppModel {
             'insertQuery' => ''),
     );
 
+    var $actsAs = array('Translate' => 'name');
+
 }
 ?>
