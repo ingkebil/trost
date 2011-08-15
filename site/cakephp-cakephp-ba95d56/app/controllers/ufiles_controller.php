@@ -16,21 +16,23 @@ class UfilesController extends AppController {
         if (! empty($this->data)) {
 
             # look up of the person exists already
-            $person = $this->Ufile->Person->find('first', array('conditions' => array('Person.name' => $this->data['Ufile']['person']), 'contain' => false));
-            if (empty($person)) {
-                $person = $this->Ufile->Person->save(array(
-                    'Person' => array(
-                        'name' => $this->data['Ufile']['person'],
-                        'location_id' => $this->data['Ufile']['Location']
-                    )
-                ));
-                $this->data['Ufile']['person_id'] = $this->Ufile->Person->id;
-            }
-            else {
-                $this->data['Ufile']['person_id'] = $person['Person']['id'];
-            }
+            #$person = $this->Ufile->Person->find('first', array('conditions' => array('Person.name' => $this->data['Ufile']['person']), 'contain' => false));
+            #if (empty($person)) {
+            #    $person = $this->Ufile->Person->save(array(
+            #        'Person' => array(
+            #            'name' => $this->data['Ufile']['person'],
+            #            'location_id' => $this->data['Ufile']['Location']
+            #        )
+            #    ));
+            #    $this->data['Ufile']['person_id'] = $this->Ufile->Person->id;
+            #}
+            #else {
+            #    $this->data['Ufile']['person_id'] = $person['Person']['id'];
+            #}
+
+            $person = $this->Ufile->Person->find('first', array('conditions' => array('Person.id' => $this->data['Ufile']['person_id']), 'contain' => false));
             
-            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $this->data['Ufile']['person'] . $this->data['Ufile']['person_id']);
+            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $person['Person']['name'] . $this->data['Ufile']['person_id']);
         }
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
@@ -46,7 +48,6 @@ class UfilesController extends AppController {
 
     function upload() {
         if (! empty($this->data)) {
-
             # first add the newly entered kw's
             $new_kw_ids = $this->__add_keywords($this->data['Ufile']['new_keywords']);
             # add the new kw_id's to the KwKw array
@@ -78,8 +79,8 @@ class UfilesController extends AppController {
         }
         # http://forums.mysql.com/read.php?10,225465,225545#msg-225545
         $keywords  = $this->Ufile->Keyword->find('list', array('order' => array('cast(name as char)' => 'ASC', 'binary name' => 'DESC')));
-        $people = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
-        $people = Set::combine($people, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
+        $person = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
+        $people = Set::combine($person, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
         $this->set(compact('keywords', 'people'));
     }
 
@@ -90,6 +91,7 @@ class UfilesController extends AppController {
         $saved = true;
         $keyword_ids = array();
         foreach ($keywords as $keyword) {
+            if (empty($keyword)) continue;
             # look up the keyword in case it exists already
             $first_match = $this->Keyword->find('first', array('conditions' => array('name' => $keyword)));
             if (empty($first_match)) {
