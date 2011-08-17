@@ -32,15 +32,37 @@
  */
 class AppController extends Controller {
 
-    var $components = array('Session', 'RequestHandler');
+    var $components = array(
+        'Session', 
+        'RequestHandler',
+        'Auth' => array(
+            'userModel' => 'Person',
+            'fields'    => array(
+                'username' => 'name',
+                'password' => 'password',
+            ),
+            'loginAction' => array(
+                'admin' => false,
+                'controller' => 'people',
+                'action' => 'login',
+                'lang' => 'de-de',
+            ),
+            'loginRedirect' => array(
+                'controller' => 'people',
+                'actions' => 'index',
+            ),
+#            'loginError' => __('The credentials provided are incorrect', true),
+        )
+    );
     
     function beforeFilter() {        
+        $this->Auth->allow('index');
         # check if the user has access
-        if ((in_array($this->params['action'], array('edit', 'delete', 'add')) && ! $this->Session->check('user'))
-            && ! in_array($this->params['controller'], array('keywords', 'ufiles'))) { # TODO for now just opened up the adding and editing of keywords
-            $this->Session->setFlash('NO ACCESS!');
-            $this->redirect($this->referer(), '401', true);
-        }
+        #if ((in_array($this->params['action'], array('edit', 'delete', 'add')) && ! $this->Session->check('user'))
+        #    && ! in_array($this->params['controller'], array('keywords', 'ufiles'))) { # TODO for now just opened up the adding and editing of keywords
+        #    $this->Session->setFlash('NO ACCESS!');
+        #    $this->redirect($this->referer(), '401', true);
+        #}
 
         # if no language is set in the url, check the session, if no language is set in the session, default to German.
         if (!isset($this->params['lang'])) {

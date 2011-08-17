@@ -39,6 +39,14 @@
         <?php echo $this->Html->link($this->Html->image('banner.jpg'), '/', array('escape' => false) ); ?>
             <span>
             <?php
+            $person = $this->Session->read('Auth.Person');
+            if ( ! empty($person)) {
+                echo __('Welcome');
+                echo '&nbsp;';
+                echo $person['name'];
+                echo '&nbsp;';
+            }
+            
             $default_url = $this->passedArgs;
             $de_url = $en_url = $default_url;
             $de_url['lang'] = 'de-de';

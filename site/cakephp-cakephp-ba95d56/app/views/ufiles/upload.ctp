@@ -3,7 +3,7 @@
 	<fieldset>
  		<legend><?php __('Add file'); ?></legend>
 	<?php
-        echo $this->Form->input('person_id', array('empty' => false));
+        echo $this->Form->input('person_id', array('empty' => false, 'after' => $this->Html->link(__('The list is wrong!', true), 'mailto:billiau@mpimp-golm.mpg.de?subject=TROST')));
 		echo $this->Form->input('description');
         # if below line stops working: http://book.cakephp.org/view/1390/Automagic-Form-Elements#options-multiple-1395
         echo $this->Form->input('Keyword', array('empty' => false)); // use the ModelName so multiple selection is possible

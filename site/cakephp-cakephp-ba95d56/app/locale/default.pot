@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-04-08 16:19+0200\n"
+"POT-Creation-Date: 2011-08-16 13:08+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,40 +14,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /app_controller.php:52
+#: /app_controller.php:59
 #: /controllers/language_controller.php:19;34
 msgid "Whoops, not a valid language."
 msgstr ""
 
-#: /controllers/bbches_controller.php:47
+#: /controllers/bbches_controller.php:48
 msgid "The BBCH codes have been saved"
 msgstr ""
 
-#: /controllers/bbches_controller.php:53
+#: /controllers/bbches_controller.php:54
 msgid "The BBCH codes could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/bbches_controller.php:66;89
+#: /controllers/bbches_controller.php:67;94
 msgid "Invalid bbch"
 msgstr ""
 
-#: /controllers/bbches_controller.php:76;94
+#: /controllers/bbches_controller.php:81;99
 msgid "The bbch has been saved"
 msgstr ""
 
-#: /controllers/bbches_controller.php:79;97
+#: /controllers/bbches_controller.php:84;102
 msgid "The bbch could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/bbches_controller.php:110
+#: /controllers/bbches_controller.php:115
 msgid "Invalid id for bbch"
 msgstr ""
 
-#: /controllers/bbches_controller.php:114
+#: /controllers/bbches_controller.php:119
 msgid "Bbch deleted"
 msgstr ""
 
-#: /controllers/bbches_controller.php:117
+#: /controllers/bbches_controller.php:122
 msgid "Bbch was not deleted"
 msgstr ""
 
@@ -75,35 +75,35 @@ msgstr ""
 msgid "Culture was not deleted"
 msgstr ""
 
-#: /controllers/entities_controller.php:41
+#: /controllers/entities_controller.php:42
 msgid "The entities have been saved"
 msgstr ""
 
-#: /controllers/entities_controller.php:47
+#: /controllers/entities_controller.php:48
 msgid "The entities could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/entities_controller.php:59;81
+#: /controllers/entities_controller.php:60;82
 msgid "Invalid entity"
 msgstr ""
 
-#: /controllers/entities_controller.php:69;86
+#: /controllers/entities_controller.php:70;87
 msgid "The entity has been saved"
 msgstr ""
 
-#: /controllers/entities_controller.php:72;89
+#: /controllers/entities_controller.php:73;90
 msgid "The entity could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/entities_controller.php:101
+#: /controllers/entities_controller.php:102
 msgid "Invalid id for entity"
 msgstr ""
 
-#: /controllers/entities_controller.php:105
+#: /controllers/entities_controller.php:106
 msgid "Entity deleted"
 msgstr ""
 
-#: /controllers/entities_controller.php:108
+#: /controllers/entities_controller.php:109
 msgid "Entity was not deleted"
 msgstr ""
 
@@ -129,6 +129,30 @@ msgstr ""
 
 #: /controllers/experiments_controller.php:58
 msgid "Experiment was not deleted"
+msgstr ""
+
+#: /controllers/keywords_controller.php:13;63
+msgid "Invalid keyword"
+msgstr ""
+
+#: /controllers/keywords_controller.php:35;53;68
+msgid "The keyword has been saved"
+msgstr ""
+
+#: /controllers/keywords_controller.php:41;56;71
+msgid "The keyword could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/keywords_controller.php:81
+msgid "Invalid id for keyword"
+msgstr ""
+
+#: /controllers/keywords_controller.php:85
+msgid "Keyword deleted"
+msgstr ""
+
+#: /controllers/keywords_controller.php:88
+msgid "Keyword was not deleted"
 msgstr ""
 
 #: /controllers/phenotype_bbches_controller.php:13;36
@@ -227,35 +251,43 @@ msgstr ""
 msgid "Phenotype value was not deleted"
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:55;321
+#: /controllers/phenotypes_controller.php:32
+msgid "Please select a file to upload!"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:67;514
 msgid "The phenotype has been saved"
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:58;274;324
+#: /controllers/phenotypes_controller.php:71
+msgid "The phenotype could not be saved. Please, try again. "
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:412
+msgid "Please select a program and a culture"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:441;517
 msgid "The phenotype could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:263
-msgid "The phenotype has been saved."
-msgstr ""
-
-#: /controllers/phenotypes_controller.php:265
-msgid "Edit?"
-msgstr ""
-
-#: /controllers/phenotypes_controller.php:311;334
+#: /controllers/phenotypes_controller.php:483;500;527
 msgid "Invalid phenotype"
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:349
+#: /controllers/phenotypes_controller.php:505
+msgid "This entry has been marked as invalid!"
+msgstr ""
+
+#: /controllers/phenotypes_controller.php:542
 msgid "Invalid id for phenotype"
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:353
+#: /controllers/phenotypes_controller.php:546
 msgid "Phenotype deleted"
 msgstr ""
 
-#: /controllers/phenotypes_controller.php:356
+#: /controllers/phenotypes_controller.php:549
 msgid "Phenotype was not deleted"
 msgstr ""
 
@@ -307,27 +339,27 @@ msgstr ""
 msgid "Program was not deleted"
 msgstr ""
 
-#: /controllers/raws_controller.php:13;35
+#: /controllers/raws_controller.php:18;40
 msgid "Invalid raw"
 msgstr ""
 
-#: /controllers/raws_controller.php:23;40
+#: /controllers/raws_controller.php:28;45
 msgid "The raw has been saved"
 msgstr ""
 
-#: /controllers/raws_controller.php:26;43
+#: /controllers/raws_controller.php:31;48
 msgid "The raw could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/raws_controller.php:55
+#: /controllers/raws_controller.php:60
 msgid "Invalid id for raw"
 msgstr ""
 
-#: /controllers/raws_controller.php:59
+#: /controllers/raws_controller.php:64
 msgid "Raw deleted"
 msgstr ""
 
-#: /controllers/raws_controller.php:62
+#: /controllers/raws_controller.php:67
 msgid "Raw was not deleted"
 msgstr ""
 
@@ -379,36 +411,136 @@ msgstr ""
 msgid "Species was not deleted"
 msgstr ""
 
-#: /controllers/values_controller.php:43
+#: /controllers/temps_controller.php:14;54
+msgid "Invalid temp"
+msgstr ""
+
+#: /controllers/temps_controller.php:28;59
+msgid "The temp has been saved"
+msgstr ""
+
+#: /controllers/temps_controller.php:31;62
+msgid "The temp could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/temps_controller.php:42
+msgid "Invalid Temperature"
+msgstr ""
+
+#: /controllers/temps_controller.php:72
+msgid "Invalid id for temp"
+msgstr ""
+
+#: /controllers/temps_controller.php:76
+msgid "Temp deleted"
+msgstr ""
+
+#: /controllers/temps_controller.php:79
+msgid "Temp was not deleted"
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:13;36
+msgid "Invalid ufilekeyword"
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:23;41
+msgid "The ufilekeyword has been saved"
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:26;44
+msgid "The ufilekeyword could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:57
+msgid "Invalid id for ufilekeyword"
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:61
+msgid "Ufilekeyword deleted"
+msgstr ""
+
+#: /controllers/ufilekeywords_controller.php:64
+msgid "Ufilekeyword was not deleted"
+msgstr ""
+
+#: /controllers/ufiles_controller.php:65
+msgid "One or more files could not be saved."
+msgstr ""
+
+#: /controllers/ufiles_controller.php:182;202
+msgid "Invalid ufile"
+msgstr ""
+
+#: /controllers/ufiles_controller.php:192;207
+msgid "The ufile has been saved"
+msgstr ""
+
+#: /controllers/ufiles_controller.php:195;210
+msgid "The ufile could not be saved. Please, try again."
+msgstr ""
+
+#: /controllers/ufiles_controller.php:222
+msgid "Invalid id for ufile"
+msgstr ""
+
+#: /controllers/ufiles_controller.php:226
+msgid "Ufile deleted"
+msgstr ""
+
+#: /controllers/ufiles_controller.php:229
+msgid "Ufile was not deleted"
+msgstr ""
+
+#: /controllers/values_controller.php:44
 msgid "The values have been saved"
 msgstr ""
 
-#: /controllers/values_controller.php:49
+#: /controllers/values_controller.php:50
 msgid "The values could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/values_controller.php:61;83
+#: /controllers/values_controller.php:62;84
 msgid "Invalid value"
 msgstr ""
 
-#: /controllers/values_controller.php:71;88
+#: /controllers/values_controller.php:72;89
 msgid "The value has been saved"
 msgstr ""
 
-#: /controllers/values_controller.php:74;91
+#: /controllers/values_controller.php:75;92
 msgid "The value could not be saved. Please, try again."
 msgstr ""
 
-#: /controllers/values_controller.php:103
+#: /controllers/values_controller.php:104
 msgid "Invalid id for value"
 msgstr ""
 
-#: /controllers/values_controller.php:107
+#: /controllers/values_controller.php:108
 msgid "Value deleted"
 msgstr ""
 
-#: /controllers/values_controller.php:110
+#: /controllers/values_controller.php:111
 msgid "Value was not deleted"
+msgstr ""
+
+#: /plugins/file_upload/vendors/uploader.php:91
+msgid "No filename resulting after parsing. Function: %s"
+msgstr ""
+
+#: /plugins/file_upload/vendors/uploader.php:154
+msgid "Unable to save temp file to file system."
+msgstr ""
+
+#: /plugins/file_upload/vendors/uploader.php:213
+msgid "%s is not an allowed type."
+msgstr ""
+
+#: /plugins/file_upload/vendors/uploader.php:222
+msgid "extension is not allowed."
+msgstr ""
+
+#: /plugins/file_upload/vendors/uploader.php:263
+msgid "File exceeds %s byte limit."
 msgstr ""
 
 #: /views/bbches/add.ctp:4
@@ -418,13 +550,15 @@ msgstr ""
 #: /views/bbches/add.ctp:12
 #: /views/bbches/edit.ctp:13
 #: /views/bbches/upload.ctp:23
-#: /views/cultures/add.ctp:12
-#: /views/cultures/edit.ctp:13
+#: /views/cultures/add.ctp:13
+#: /views/cultures/edit.ctp:14
 #: /views/entities/add.ctp:12
 #: /views/entities/edit.ctp:13
 #: /views/entities/upload.ctp:22
 #: /views/experiments/add.ctp:13
 #: /views/experiments/edit.ctp:14
+#: /views/keywords/add.ctp:10
+#: /views/keywords/edit.ctp:10
 #: /views/phenotype_bbches/add.ctp:10
 #: /views/phenotype_bbches/edit.ctp:11
 #: /views/phenotype_entities/add.ctp:10
@@ -435,7 +569,7 @@ msgstr ""
 #: /views/phenotype_values/edit.ctp:12
 #: /views/phenotypes/add.ctp:14
 #: /views/phenotypes/edit.ctp:15
-#: /views/phenotypes/manualupload.ctp:29
+#: /views/phenotypes/manualupload.ctp:36
 #: /views/phenotypes/manualupload_fastscore.ctp:10
 #: /views/phenotypes/upload.ctp:56
 #: /views/plants/add.ctp:12
@@ -448,6 +582,15 @@ msgstr ""
 #: /views/samples/edit.ctp:15
 #: /views/species/add.ctp:9
 #: /views/species/edit.ctp:10
+#: /views/temps/add.ctp:13
+#: /views/temps/edit.ctp:14
+#: /views/temps/erature.ctp:13
+#: /views/ufilekeywords/add.ctp:10
+#: /views/ufilekeywords/edit.ctp:11
+#: /views/ufiles/add.ctp:12
+#: /views/ufiles/edit.ctp:13
+#: /views/ufiles/search.ctp:12
+#: /views/ufiles/upload.ctp:18
 #: /views/values/add.ctp:11
 #: /views/values/edit.ctp:12
 #: /views/values/upload.ctp:18
@@ -456,304 +599,299 @@ msgstr ""
 
 #: /views/bbches/add.ctp:15
 #: /views/bbches/edit.ctp:16
-#: /views/bbches/index.ctp:9;49
-#: /views/bbches/upload.ctp:26
-#: /views/bbches/view.ctp:27;51
-#: /views/cultures/add.ctp:15
-#: /views/cultures/edit.ctp:16
-#: /views/cultures/index.ctp:11;53
-#: /views/cultures/view.ctp:37;60
+#: /views/bbches/index.ctp:9
+#: /views/cultures/add.ctp:16
+#: /views/cultures/edit.ctp:17
+#: /views/cultures/index.ctp:12;55
+#: /views/cultures/view.ctp:42;65
+#: /views/elements/raws/related.ctp:25
 #: /views/entities/add.ctp:15
 #: /views/entities/edit.ctp:16
-#: /views/entities/index.ctp:9;47
-#: /views/entities/upload.ctp:25
-#: /views/entities/view.ctp:27;49
+#: /views/entities/index.ctp:9;49
+#: /views/entities/view.ctp:27;52
 #: /views/experiments/add.ctp:16
 #: /views/experiments/edit.ctp:17
 #: /views/experiments/index.ctp:11;51
 #: /views/experiments/view.ctp:37;58
-#: /views/pages/home.ctp:2
+#: /views/keywords/index.ctp:7;43
+#: /views/keywords/view.ctp:26
+#: /views/layouts/default.ctp:59
 #: /views/phenotype_bbches/add.ctp:13
 #: /views/phenotype_bbches/edit.ctp:14
-#: /views/phenotype_bbches/index.ctp:8;49
+#: /views/phenotype_bbches/index.ctp:8;51
 #: /views/phenotype_bbches/view.ctp:22
 #: /views/phenotype_entities/add.ctp:13
 #: /views/phenotype_entities/edit.ctp:14
-#: /views/phenotype_entities/index.ctp:8;49
+#: /views/phenotype_entities/index.ctp:8;51
 #: /views/phenotype_entities/view.ctp:22
 #: /views/phenotype_raws/add.ctp:14
 #: /views/phenotype_raws/edit.ctp:15
-#: /views/phenotype_raws/index.ctp:9;51
+#: /views/phenotype_raws/index.ctp:9;53
 #: /views/phenotype_raws/view.ctp:27
 #: /views/phenotype_values/add.ctp:14
 #: /views/phenotype_values/edit.ctp:15
-#: /views/phenotype_values/index.ctp:9;51
+#: /views/phenotype_values/index.ctp:9;53
 #: /views/phenotype_values/view.ctp:27
 #: /views/phenotypes/add.ctp:17
 #: /views/phenotypes/edit.ctp:18
-#: /views/phenotypes/index.ctp:12;57
-#: /views/phenotypes/manualupload.ctp:32
+#: /views/phenotypes/index.ctp:20
 #: /views/phenotypes/manualupload_fastscore.ctp:13
-#: /views/phenotypes/upload.ctp:59
-#: /views/phenotypes/view.ctp:42;70;108;147;187
 #: /views/plants/add.ctp:15
 #: /views/plants/edit.ctp:16
 #: /views/plants/index.ctp:11;55
 #: /views/plants/view.ctp:37;63
 #: /views/programs/add.ctp:12
 #: /views/programs/edit.ctp:13
-#: /views/programs/index.ctp:7;43
-#: /views/programs/view.ctp:17;39
+#: /views/programs/index.ctp:7;45
+#: /views/programs/view.ctp:17;42
 #: /views/raws/add.ctp:13
 #: /views/raws/edit.ctp:14
-#: /views/raws/index.ctp:7;43
-#: /views/raws/view.ctp:17;39
+#: /views/raws/index.ctp:7
 #: /views/samples/add.ctp:17
 #: /views/samples/edit.ctp:18
 #: /views/samples/index.ctp:13;55
 #: /views/samples/view.ctp:47;68
 #: /views/species/add.ctp:12
 #: /views/species/edit.ctp:13
-#: /views/species/index.ctp:7;43
-#: /views/species/view.ctp:17;36
+#: /views/species/index.ctp:7;45
+#: /views/species/view.ctp:17;40
+#: /views/temps/add.ctp:16
+#: /views/temps/edit.ctp:17
+#: /views/temps/index.ctp:18
+#: /views/ufilekeywords/add.ctp:13
+#: /views/ufilekeywords/edit.ctp:14
+#: /views/ufilekeywords/index.ctp:8;49
+#: /views/ufilekeywords/view.ctp:22
+#: /views/ufiles/add.ctp:15
+#: /views/ufiles/index.ctp:10
+#: /views/ufiles/results.ctp:10
+#: /views/ufiles/view.ctp:38
 #: /views/values/add.ctp:14
 #: /views/values/edit.ctp:15
-#: /views/values/index.ctp:8;45
-#: /views/values/upload.ctp:21
-#: /views/values/view.ctp:22;44
+#: /views/values/index.ctp:8;47
+#: /views/values/view.ctp:22;47
 msgid "Actions"
 msgstr ""
 
 #: /views/bbches/add.ctp:18
 #: /views/bbches/edit.ctp:20
-#: /views/bbches/upload.ctp:28
-#: /views/bbches/view.ctp:31
 #: /views/phenotype_bbches/add.ctp:19
 #: /views/phenotype_bbches/edit.ctp:21
-#: /views/phenotype_bbches/index.ctp:54
-#: /views/phenotype_bbches/view.ctp:30
+#: /views/phenotype_bbches/index.ctp:56
+#: /views/phenotype_bbches/view.ctp:27
 #: /views/species/add.ctp:16
 #: /views/species/edit.ctp:18
-#: /views/species/index.ctp:46
-#: /views/species/view.ctp:23
+#: /views/species/index.ctp:49
+#: /views/species/view.ctp:21
 msgid "List Bbches"
 msgstr ""
 
 #: /views/bbches/add.ctp:19
 #: /views/bbches/edit.ctp:21
-#: /views/bbches/index.ctp:52
-#: /views/bbches/upload.ctp:29
-#: /views/bbches/view.ctp:33
 #: /views/species/add.ctp:15
 #: /views/species/edit.ctp:17
-#: /views/species/view.ctp:21
+#: /views/species/view.ctp:22
 msgid "List Species"
 msgstr ""
 
 #: /views/bbches/add.ctp:20
 #: /views/bbches/edit.ctp:22
-#: /views/bbches/index.ctp:53
-#: /views/bbches/upload.ctp:30
-#: /views/bbches/view.ctp:34
-#: /views/species/index.ctp:45
-#: /views/species/view.ctp:22
+#: /views/species/index.ctp:51
+#: /views/species/view.ctp:26
 msgid "New Species"
 msgstr ""
 
 #: /views/bbches/add.ctp:21
 #: /views/bbches/edit.ctp:23
-#: /views/bbches/index.ctp:54
-#: /views/bbches/upload.ctp:31
-#: /views/bbches/view.ctp:35
 #: /views/entities/add.ctp:19
 #: /views/entities/edit.ctp:21
-#: /views/entities/index.ctp:50
-#: /views/entities/upload.ctp:29
-#: /views/entities/view.ctp:33
+#: /views/entities/index.ctp:52
+#: /views/entities/view.ctp:30
 #: /views/phenotype_bbches/add.ctp:17
 #: /views/phenotype_bbches/edit.ctp:19
-#: /views/phenotype_bbches/index.ctp:52
-#: /views/phenotype_bbches/view.ctp:28
+#: /views/phenotype_bbches/index.ctp:55
+#: /views/phenotype_bbches/view.ctp:25
 #: /views/phenotype_entities/add.ctp:17
 #: /views/phenotype_entities/edit.ctp:19
-#: /views/phenotype_entities/index.ctp:52
-#: /views/phenotype_entities/view.ctp:28
+#: /views/phenotype_entities/index.ctp:54
+#: /views/phenotype_entities/view.ctp:25
 #: /views/phenotype_raws/add.ctp:18
 #: /views/phenotype_raws/edit.ctp:20
-#: /views/phenotype_raws/index.ctp:54
-#: /views/phenotype_raws/view.ctp:33
+#: /views/phenotype_raws/index.ctp:56
+#: /views/phenotype_raws/view.ctp:29
 #: /views/phenotype_values/add.ctp:20
 #: /views/phenotype_values/edit.ctp:22
 #: /views/phenotype_values/index.ctp:56
-#: /views/phenotype_values/view.ctp:35
+#: /views/phenotype_values/view.ctp:30
 #: /views/phenotypes/add.ctp:20
 #: /views/phenotypes/edit.ctp:22
-#: /views/phenotypes/index.ctp:60
-#: /views/phenotypes/manualupload.ctp:36
 #: /views/phenotypes/manualupload_fastscore.ctp:17
-#: /views/phenotypes/upload.ctp:62
-#: /views/phenotypes/view.ctp:46
 #: /views/plants/add.ctp:23
 #: /views/plants/edit.ctp:25
 #: /views/plants/index.ctp:62
 #: /views/plants/view.ctp:47
 #: /views/programs/add.ctp:16
 #: /views/programs/edit.ctp:18
-#: /views/programs/index.ctp:46
-#: /views/programs/view.ctp:23
+#: /views/programs/index.ctp:48
+#: /views/programs/view.ctp:20
 #: /views/raws/add.ctp:17
 #: /views/raws/edit.ctp:19
-#: /views/raws/index.ctp:46
-#: /views/raws/view.ctp:23
+#: /views/species/index.ctp:48
+#: /views/species/view.ctp:20
 #: /views/values/add.ctp:18
 #: /views/values/edit.ctp:20
-#: /views/values/index.ctp:48
-#: /views/values/upload.ctp:24
-#: /views/values/view.ctp:28
+#: /views/values/index.ctp:50
+#: /views/values/view.ctp:25
 msgid "List Phenotypes"
 msgstr ""
 
 #: /views/bbches/add.ctp:22
 #: /views/bbches/edit.ctp:24
-#: /views/bbches/index.ctp:55
-#: /views/bbches/upload.ctp:32
-#: /views/bbches/view.ctp:36;81
 #: /views/entities/add.ctp:20
 #: /views/entities/edit.ctp:22
-#: /views/entities/index.ctp:51
-#: /views/entities/upload.ctp:30
-#: /views/entities/view.ctp:34;79
+#: /views/entities/index.ctp:55
+#: /views/entities/view.ctp:36
 #: /views/phenotype_bbches/add.ctp:18
 #: /views/phenotype_bbches/edit.ctp:20
-#: /views/phenotype_bbches/index.ctp:53
-#: /views/phenotype_bbches/view.ctp:29
+#: /views/phenotype_bbches/index.ctp:59
+#: /views/phenotype_bbches/view.ctp:32
 #: /views/phenotype_entities/add.ctp:18
 #: /views/phenotype_entities/edit.ctp:20
-#: /views/phenotype_entities/index.ctp:53
-#: /views/phenotype_entities/view.ctp:29
+#: /views/phenotype_entities/index.ctp:58
+#: /views/phenotype_entities/view.ctp:31
 #: /views/phenotype_raws/add.ctp:19
 #: /views/phenotype_raws/edit.ctp:21
-#: /views/phenotype_raws/index.ctp:55
-#: /views/phenotype_raws/view.ctp:34
+#: /views/phenotype_raws/index.ctp:60
+#: /views/phenotype_raws/view.ctp:36
 #: /views/phenotype_values/add.ctp:21
 #: /views/phenotype_values/edit.ctp:23
-#: /views/phenotype_values/index.ctp:57
-#: /views/phenotype_values/view.ctp:36
-#: /views/phenotypes/view.ctp:47
+#: /views/phenotype_values/index.ctp:61
+#: /views/phenotype_values/view.ctp:38
 #: /views/plants/add.ctp:24
 #: /views/plants/edit.ctp:26
 #: /views/plants/index.ctp:63
 #: /views/plants/view.ctp:48;93
 #: /views/programs/add.ctp:17
 #: /views/programs/edit.ctp:19
-#: /views/programs/index.ctp:47
-#: /views/programs/view.ctp:24;69
+#: /views/programs/index.ctp:51
+#: /views/programs/view.ctp:26
 #: /views/raws/add.ctp:18
 #: /views/raws/edit.ctp:20
-#: /views/raws/index.ctp:47
-#: /views/raws/view.ctp:24;69
 #: /views/values/add.ctp:19
 #: /views/values/edit.ctp:21
-#: /views/values/index.ctp:49
-#: /views/values/upload.ctp:25
-#: /views/values/view.ctp:29;74
+#: /views/values/index.ctp:53
+#: /views/values/view.ctp:31
 msgid "New Phenotype"
 msgstr ""
 
 #: /views/bbches/edit.ctp:4
-#: /views/bbches/view.ctp:29
 msgid "Edit Bbch"
 msgstr ""
 
 #: /views/bbches/edit.ctp:19
-#: /views/bbches/index.ctp:29
-#: /views/bbches/view.ctp:72
-#: /views/cultures/edit.ctp:19
-#: /views/cultures/index.ctp:33
-#: /views/cultures/view.ctp:80
+#: /views/bbches/index.ctp:30
+#: /views/cultures/edit.ctp:20
+#: /views/cultures/index.ctp:35
+#: /views/cultures/view.ctp:85
+#: /views/elements/raws/related.ctp:66
 #: /views/entities/edit.ctp:19
-#: /views/entities/index.ctp:27
-#: /views/entities/view.ctp:70
+#: /views/entities/index.ctp:28
+#: /views/entities/view.ctp:74
 #: /views/experiments/edit.ctp:20
 #: /views/experiments/index.ctp:31
 #: /views/experiments/view.ctp:78
+#: /views/keywords/index.ctp:23
+#: /views/keywords/view.ctp:46
 #: /views/phenotype_bbches/edit.ctp:17
-#: /views/phenotype_bbches/index.ctp:29
+#: /views/phenotype_bbches/index.ctp:30
 #: /views/phenotype_entities/edit.ctp:17
-#: /views/phenotype_entities/index.ctp:29
+#: /views/phenotype_entities/index.ctp:30
 #: /views/phenotype_raws/edit.ctp:18
-#: /views/phenotype_raws/index.ctp:31
+#: /views/phenotype_raws/index.ctp:32
 #: /views/phenotype_values/edit.ctp:18
-#: /views/phenotype_values/index.ctp:31
+#: /views/phenotype_values/index.ctp:32
 #: /views/phenotypes/edit.ctp:21
-#: /views/phenotypes/index.ctp:37
-#: /views/phenotypes/view.ctp:87;125;165;205
+#: /views/phenotypes/index.ctp:59
 #: /views/plants/edit.ctp:19
 #: /views/plants/index.ctp:35
 #: /views/plants/view.ctp:84
 #: /views/programs/edit.ctp:16
-#: /views/programs/index.ctp:23
-#: /views/programs/view.ctp:60
+#: /views/programs/index.ctp:24
+#: /views/programs/view.ctp:64
 #: /views/raws/edit.ctp:17
-#: /views/raws/index.ctp:23
-#: /views/raws/view.ctp:60
+#: /views/raws/index.ctp:24
 #: /views/samples/edit.ctp:21
 #: /views/samples/index.ctp:35
 #: /views/samples/view.ctp:88
 #: /views/species/edit.ctp:16
-#: /views/species/index.ctp:23
-#: /views/species/view.ctp:54
+#: /views/species/index.ctp:24
+#: /views/species/view.ctp:59
+#: /views/temps/edit.ctp:20
+#: /views/temps/index.ctp:51
+#: /views/ufilekeywords/edit.ctp:17
+#: /views/ufilekeywords/index.ctp:29
+#: /views/ufiles/index.ctp:41
+#: /views/ufiles/results.ctp:41
+#: /views/ufiles/view.ctp:55
 #: /views/values/edit.ctp:18
-#: /views/values/index.ctp:25
-#: /views/values/view.ctp:65
+#: /views/values/index.ctp:26
+#: /views/values/view.ctp:69
 msgid "Delete"
 msgstr ""
 
 #: /views/bbches/edit.ctp:19
-#: /views/bbches/index.ctp:29
-#: /views/bbches/view.ctp:30;72
-#: /views/cultures/edit.ctp:19
-#: /views/cultures/index.ctp:33
-#: /views/cultures/view.ctp:40;80
+#: /views/bbches/index.ctp:30
+#: /views/cultures/edit.ctp:20
+#: /views/cultures/index.ctp:35
+#: /views/cultures/view.ctp:45;85
+#: /views/elements/raws/related.ctp:66
 #: /views/entities/edit.ctp:19
-#: /views/entities/index.ctp:27
-#: /views/entities/view.ctp:30;70
+#: /views/entities/index.ctp:28
+#: /views/entities/view.ctp:34;74
 #: /views/experiments/edit.ctp:20
 #: /views/experiments/index.ctp:31
 #: /views/experiments/view.ctp:40;78
+#: /views/keywords/index.ctp:23
+#: /views/keywords/view.ctp:46
 #: /views/phenotype_bbches/edit.ctp:17
-#: /views/phenotype_bbches/index.ctp:29
-#: /views/phenotype_bbches/view.ctp:25
+#: /views/phenotype_bbches/index.ctp:30
+#: /views/phenotype_bbches/view.ctp:30
 #: /views/phenotype_entities/edit.ctp:17
-#: /views/phenotype_entities/index.ctp:29
-#: /views/phenotype_entities/view.ctp:25
+#: /views/phenotype_entities/index.ctp:30
+#: /views/phenotype_entities/view.ctp:29
 #: /views/phenotype_raws/edit.ctp:18
-#: /views/phenotype_raws/index.ctp:31
-#: /views/phenotype_raws/view.ctp:30
+#: /views/phenotype_raws/index.ctp:32
+#: /views/phenotype_raws/view.ctp:34
 #: /views/phenotype_values/edit.ctp:18
-#: /views/phenotype_values/index.ctp:31
-#: /views/phenotype_values/view.ctp:30
+#: /views/phenotype_values/index.ctp:32
+#: /views/phenotype_values/view.ctp:35
 #: /views/phenotypes/edit.ctp:21
-#: /views/phenotypes/index.ctp:37
-#: /views/phenotypes/view.ctp:45;87;125;165;205
+#: /views/phenotypes/index.ctp:59
 #: /views/plants/edit.ctp:19
 #: /views/plants/index.ctp:35
 #: /views/plants/view.ctp:40;84
 #: /views/programs/edit.ctp:16
-#: /views/programs/index.ctp:23
-#: /views/programs/view.ctp:20;60
+#: /views/programs/index.ctp:24
+#: /views/programs/view.ctp:24;64
 #: /views/raws/edit.ctp:17
-#: /views/raws/index.ctp:23
-#: /views/raws/view.ctp:20;60
+#: /views/raws/index.ctp:24
 #: /views/samples/edit.ctp:21
 #: /views/samples/index.ctp:35
 #: /views/samples/view.ctp:50;88
 #: /views/species/edit.ctp:16
-#: /views/species/index.ctp:23
-#: /views/species/view.ctp:20;54
+#: /views/species/index.ctp:24
+#: /views/species/view.ctp:25;59
+#: /views/temps/edit.ctp:20
+#: /views/temps/index.ctp:51
+#: /views/ufilekeywords/edit.ctp:17
+#: /views/ufilekeywords/index.ctp:29
+#: /views/ufilekeywords/view.ctp:25
+#: /views/ufiles/index.ctp:41
+#: /views/ufiles/results.ctp:41
+#: /views/ufiles/view.ctp:55
 #: /views/values/edit.ctp:18
-#: /views/values/index.ctp:25
-#: /views/values/view.ctp:25;65
+#: /views/values/index.ctp:26
+#: /views/values/view.ctp:29;69
 msgid "Are you sure you want to delete # %s?"
 msgstr ""
 
@@ -762,128 +900,140 @@ msgid "Bbches"
 msgstr ""
 
 #: /views/bbches/index.ctp:27
-#: /views/bbches/view.ctp:70
-#: /views/cultures/index.ctp:31
-#: /views/cultures/view.ctp:78
+#: /views/cultures/index.ctp:33
+#: /views/cultures/view.ctp:83
+#: /views/elements/raws/related.ctp:64
 #: /views/entities/index.ctp:25
-#: /views/entities/view.ctp:68
+#: /views/entities/view.ctp:71
 #: /views/experiments/index.ctp:29
 #: /views/experiments/view.ctp:76
+#: /views/keywords/index.ctp:21
+#: /views/keywords/view.ctp:43
 #: /views/phenotype_bbches/index.ctp:27
 #: /views/phenotype_entities/index.ctp:27
 #: /views/phenotype_raws/index.ctp:29
 #: /views/phenotype_values/index.ctp:29
-#: /views/phenotypes/index.ctp:35
-#: /views/phenotypes/view.ctp:85;123;163;203
+#: /views/phenotypes/index.ctp:56
 #: /views/plants/index.ctp:33
 #: /views/plants/view.ctp:82
 #: /views/programs/index.ctp:21
-#: /views/programs/view.ctp:58
+#: /views/programs/view.ctp:61
 #: /views/raws/index.ctp:21
-#: /views/raws/view.ctp:58
 #: /views/samples/index.ctp:33
 #: /views/samples/view.ctp:86
 #: /views/species/index.ctp:21
-#: /views/species/view.ctp:52
+#: /views/species/view.ctp:56
+#: /views/temps/index.ctp:48
+#: /views/ufilekeywords/index.ctp:27
+#: /views/ufiles/index.ctp:38
+#: /views/ufiles/results.ctp:38
+#: /views/ufiles/view.ctp:52
 #: /views/values/index.ctp:23
-#: /views/values/view.ctp:63
+#: /views/values/view.ctp:66
 msgid "View"
 msgstr ""
 
-#: /views/bbches/index.ctp:28
-#: /views/bbches/view.ctp:71
-#: /views/cultures/index.ctp:32
-#: /views/cultures/view.ctp:79
-#: /views/entities/index.ctp:26
-#: /views/entities/view.ctp:69
+#: /views/bbches/index.ctp:29
+#: /views/cultures/index.ctp:34
+#: /views/cultures/view.ctp:84
+#: /views/elements/raws/related.ctp:65
+#: /views/entities/index.ctp:27
+#: /views/entities/view.ctp:73
 #: /views/experiments/index.ctp:30
 #: /views/experiments/view.ctp:77
-#: /views/phenotype_bbches/index.ctp:28
-#: /views/phenotype_entities/index.ctp:28
-#: /views/phenotype_raws/index.ctp:30
-#: /views/phenotype_values/index.ctp:30
-#: /views/phenotypes/index.ctp:36
-#: /views/phenotypes/view.ctp:86;124;164;204
+#: /views/keywords/index.ctp:22
+#: /views/keywords/view.ctp:45
+#: /views/phenotype_bbches/index.ctp:29
+#: /views/phenotype_entities/index.ctp:29
+#: /views/phenotype_raws/index.ctp:31
+#: /views/phenotype_values/index.ctp:31
+#: /views/phenotypes/index.ctp:58
 #: /views/plants/index.ctp:34
 #: /views/plants/view.ctp:83
-#: /views/programs/index.ctp:22
-#: /views/programs/view.ctp:59
-#: /views/raws/index.ctp:22
-#: /views/raws/view.ctp:59
+#: /views/programs/index.ctp:23
+#: /views/programs/view.ctp:63
+#: /views/raws/index.ctp:23
 #: /views/samples/index.ctp:34
 #: /views/samples/view.ctp:87
-#: /views/species/index.ctp:22
-#: /views/species/view.ctp:53
-#: /views/values/index.ctp:24
-#: /views/values/view.ctp:64
+#: /views/species/index.ctp:23
+#: /views/species/view.ctp:58
+#: /views/temps/index.ctp:50
+#: /views/ufilekeywords/index.ctp:28
+#: /views/ufiles/index.ctp:40
+#: /views/ufiles/results.ctp:40
+#: /views/ufiles/view.ctp:54
+#: /views/values/index.ctp:25
+#: /views/values/view.ctp:68
 msgid "Edit"
 msgstr ""
 
-#: /views/bbches/index.ctp:37
-#: /views/cultures/index.ctp:41
-#: /views/entities/index.ctp:35
+#: /views/bbches/index.ctp:39
+#: /views/cultures/index.ctp:43
+#: /views/entities/index.ctp:37
 #: /views/experiments/index.ctp:39
-#: /views/phenotype_bbches/index.ctp:37
-#: /views/phenotype_entities/index.ctp:37
-#: /views/phenotype_raws/index.ctp:39
-#: /views/phenotype_values/index.ctp:39
-#: /views/phenotypes/index.ctp:45
+#: /views/keywords/index.ctp:31
+#: /views/phenotype_bbches/index.ctp:39
+#: /views/phenotype_entities/index.ctp:39
+#: /views/phenotype_raws/index.ctp:41
+#: /views/phenotype_values/index.ctp:41
+#: /views/phenotypes/index.ctp:68
 #: /views/plants/index.ctp:43
-#: /views/programs/index.ctp:31
-#: /views/raws/index.ctp:31
+#: /views/programs/index.ctp:33
+#: /views/raws/index.ctp:33
 #: /views/samples/index.ctp:43
-#: /views/species/index.ctp:31
-#: /views/values/index.ctp:33
+#: /views/species/index.ctp:33
+#: /views/temps/index.ctp:60
+#: /views/ufilekeywords/index.ctp:37
+#: /views/ufiles/index.ctp:50
+#: /views/ufiles/results.ctp:50
+#: /views/values/index.ctp:35
 msgid "Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%"
 msgstr ""
 
-#: /views/bbches/index.ctp:42
-#: /views/cultures/index.ctp:46
-#: /views/entities/index.ctp:40
+#: /views/bbches/index.ctp:44
+#: /views/cultures/index.ctp:48
+#: /views/entities/index.ctp:42
 #: /views/experiments/index.ctp:44
-#: /views/phenotype_bbches/index.ctp:42
-#: /views/phenotype_entities/index.ctp:42
-#: /views/phenotype_raws/index.ctp:44
-#: /views/phenotype_values/index.ctp:44
-#: /views/phenotypes/index.ctp:50
+#: /views/keywords/index.ctp:36
+#: /views/phenotype_bbches/index.ctp:44
+#: /views/phenotype_entities/index.ctp:44
+#: /views/phenotype_raws/index.ctp:46
+#: /views/phenotype_values/index.ctp:46
+#: /views/phenotypes/index.ctp:73
 #: /views/plants/index.ctp:48
-#: /views/programs/index.ctp:36
-#: /views/raws/index.ctp:36
+#: /views/programs/index.ctp:38
+#: /views/raws/index.ctp:38
 #: /views/samples/index.ctp:48
-#: /views/species/index.ctp:36
-#: /views/values/index.ctp:38
+#: /views/species/index.ctp:38
+#: /views/temps/index.ctp:65
+#: /views/ufilekeywords/index.ctp:42
+#: /views/ufiles/index.ctp:55
+#: /views/ufiles/results.ctp:55
+#: /views/values/index.ctp:40
 msgid "previous"
 msgstr ""
 
-#: /views/bbches/index.ctp:45
-#: /views/cultures/index.ctp:49
-#: /views/entities/index.ctp:43
+#: /views/bbches/index.ctp:47
+#: /views/cultures/index.ctp:51
+#: /views/entities/index.ctp:45
 #: /views/experiments/index.ctp:47
-#: /views/phenotype_bbches/index.ctp:45
-#: /views/phenotype_entities/index.ctp:45
-#: /views/phenotype_raws/index.ctp:47
-#: /views/phenotype_values/index.ctp:47
-#: /views/phenotypes/index.ctp:53
+#: /views/keywords/index.ctp:39
+#: /views/phenotype_bbches/index.ctp:47
+#: /views/phenotype_entities/index.ctp:47
+#: /views/phenotype_raws/index.ctp:49
+#: /views/phenotype_values/index.ctp:49
+#: /views/phenotypes/index.ctp:76
 #: /views/plants/index.ctp:51
-#: /views/programs/index.ctp:39
-#: /views/raws/index.ctp:39
+#: /views/programs/index.ctp:41
+#: /views/raws/index.ctp:41
 #: /views/samples/index.ctp:51
-#: /views/species/index.ctp:39
-#: /views/values/index.ctp:41
+#: /views/species/index.ctp:41
+#: /views/temps/index.ctp:68
+#: /views/ufilekeywords/index.ctp:45
+#: /views/ufiles/index.ctp:58
+#: /views/ufiles/results.ctp:58
+#: /views/values/index.ctp:43
 msgid "next"
-msgstr ""
-
-#: /views/bbches/index.ctp:51
-#: /views/bbches/view.ctp:32
-#: /views/phenotype_bbches/add.ctp:20
-#: /views/phenotype_bbches/edit.ctp:22
-#: /views/phenotype_bbches/index.ctp:55
-#: /views/phenotype_bbches/view.ctp:31
-#: /views/species/add.ctp:17
-#: /views/species/edit.ctp:19
-#: /views/species/index.ctp:47
-#: /views/species/view.ctp:24;63
-msgid "New Bbch"
 msgstr ""
 
 #: /views/bbches/upload.ctp:4
@@ -907,10 +1057,12 @@ msgid "unused column"
 msgstr ""
 
 #: /views/bbches/upload.ctp:14
+#: /views/keywords/add.ctp:7
 msgid "Name in German"
 msgstr ""
 
 #: /views/bbches/upload.ctp:15
+#: /views/keywords/add.ctp:6
 msgid "Name in English"
 msgstr ""
 
@@ -918,125 +1070,61 @@ msgstr ""
 msgid "The BBCH codes will be saved in both English and German if possible"
 msgstr ""
 
-#: /views/bbches/view.ctp:2;9
+#: /views/bbches/view.ctp:2;10
 #: /views/phenotype_bbches/view.ctp:14
-#: /views/species/view.ctp:33
+#: /views/species/view.ctp:37
 msgid "Bbch"
 msgstr ""
 
-#: /views/bbches/view.ctp:4;44
-#: /views/cultures/view.ctp:4;54
-#: /views/entities/view.ctp:4;42
+#: /views/bbches/view.ctp:5
+#: /views/cultures/view.ctp:4;59
+#: /views/elements/raws/related.ctp:12
+#: /views/entities/view.ctp:4;45
 #: /views/experiments/view.ctp:4;52
+#: /views/keywords/view.ctp:4;21
 #: /views/phenotype_bbches/view.ctp:4
 #: /views/phenotype_entities/view.ctp:4
 #: /views/phenotype_raws/view.ctp:4
 #: /views/phenotype_values/view.ctp:4
-#: /views/phenotypes/view.ctp:4;67;105;143;183
+#: /views/phenotypes/view.ctp:4
 #: /views/plants/view.ctp:4;56
-#: /views/programs/view.ctp:4;32
-#: /views/raws/view.ctp:4;32
+#: /views/programs/view.ctp:4;35
+#: /views/raws/view.ctp:4
 #: /views/samples/view.ctp:4;62
-#: /views/species/view.ctp:4;32
-#: /views/values/view.ctp:4;37
+#: /views/species/view.ctp:4;36
+#: /views/temps/view.ctp:4
+#: /views/ufilekeywords/view.ctp:4
+#: /views/ufiles/view.ctp:4;36
+#: /views/values/view.ctp:4;40
 msgid "Id"
 msgstr ""
 
-#: /views/bbches/view.ctp:14
-#: /views/cultures/view.ctp:9;55
+#: /views/bbches/view.ctp:15
+#: /views/cultures/view.ctp:9;60
 #: /views/entities/view.ctp:9
 #: /views/experiments/view.ctp:9;53
+#: /views/keywords/view.ctp:9;23
 #: /views/plants/view.ctp:9
 #: /views/programs/view.ctp:9
 #: /views/samples/view.ctp:9;63
-#: /views/species/view.ctp:9;34
+#: /views/species/view.ctp:9;38
+#: /views/ufiles/view.ctp:14;37
 msgid "Name"
 msgstr ""
 
-#: /views/bbches/view.ctp:19
+#: /views/bbches/view.ctp:20
 #: /views/species/index.ctp:2
 #: /views/species/view.ctp:2
 msgid "Species"
-msgstr ""
-
-#: /views/bbches/view.ctp:30
-msgid "Delete Bbch"
-msgstr ""
-
-#: /views/bbches/view.ctp:40
-#: /views/entities/view.ctp:38
-#: /views/plants/view.ctp:52
-#: /views/programs/view.ctp:28
-#: /views/raws/view.ctp:28
-#: /views/values/view.ctp:33
-msgid "Related Phenotypes"
-msgstr ""
-
-#: /views/bbches/view.ctp:45
-#: /views/entities/view.ctp:43
-#: /views/phenotypes/view.ctp:9
-#: /views/plants/view.ctp:57
-#: /views/programs/view.ctp:33
-#: /views/raws/view.ctp:33
-#: /views/values/view.ctp:38
-msgid "Version"
-msgstr ""
-
-#: /views/bbches/view.ctp:46
-#: /views/entities/view.ctp:44
-#: /views/phenotypes/view.ctp:14
-#: /views/plants/view.ctp:58
-#: /views/programs/view.ctp:34
-#: /views/raws/view.ctp:34
-#: /views/values/view.ctp:39
-msgid "Object"
-msgstr ""
-
-#: /views/bbches/view.ctp:47
-#: /views/entities/view.ctp:45
-#: /views/plants/view.ctp:59
-#: /views/programs/view.ctp:35
-#: /views/raws/view.ctp:35
-#: /views/values/view.ctp:40
-msgid "Program Id"
-msgstr ""
-
-#: /views/bbches/view.ctp:48
-#: /views/entities/view.ctp:46
-#: /views/phenotypes/view.ctp:24
-#: /views/plants/view.ctp:60
-#: /views/programs/view.ctp:36
-#: /views/raws/view.ctp:36
-#: /views/values/view.ctp:41
-msgid "Date"
-msgstr ""
-
-#: /views/bbches/view.ctp:49
-#: /views/entities/view.ctp:47
-#: /views/phenotypes/view.ctp:29
-#: /views/plants/view.ctp:61
-#: /views/programs/view.ctp:37
-#: /views/raws/view.ctp:37
-#: /views/values/view.ctp:42
-msgid "Time"
-msgstr ""
-
-#: /views/bbches/view.ctp:50
-#: /views/entities/view.ctp:48
-#: /views/plants/view.ctp:62
-#: /views/programs/view.ctp:38
-#: /views/raws/view.ctp:38
-#: /views/values/view.ctp:43
-msgid "Plant Id"
 msgstr ""
 
 #: /views/cultures/add.ctp:4
 msgid "Add Culture"
 msgstr ""
 
-#: /views/cultures/add.ctp:18
-#: /views/cultures/edit.ctp:20
-#: /views/cultures/view.ctp:41
+#: /views/cultures/add.ctp:19
+#: /views/cultures/edit.ctp:21
+#: /views/cultures/view.ctp:46
 #: /views/experiments/add.ctp:20
 #: /views/experiments/edit.ctp:22
 #: /views/experiments/index.ctp:54
@@ -1048,32 +1136,31 @@ msgstr ""
 msgid "List Cultures"
 msgstr ""
 
-#: /views/cultures/add.ctp:19
-#: /views/cultures/edit.ctp:21
-#: /views/cultures/index.ctp:56
-#: /views/cultures/view.ctp:43
+#: /views/cultures/add.ctp:20
+#: /views/cultures/edit.ctp:22
+#: /views/cultures/index.ctp:58
+#: /views/cultures/view.ctp:48
 #: /views/experiments/add.ctp:19
 #: /views/experiments/edit.ctp:21
 #: /views/experiments/view.ctp:41
 msgid "List Experiments"
 msgstr ""
 
-#: /views/cultures/add.ctp:20
-#: /views/cultures/edit.ctp:22
-#: /views/cultures/index.ctp:57
-#: /views/cultures/view.ctp:44
+#: /views/cultures/add.ctp:21
+#: /views/cultures/edit.ctp:23
+#: /views/cultures/index.ctp:59
+#: /views/cultures/view.ctp:49
 #: /views/experiments/index.ctp:53
 #: /views/experiments/view.ctp:42
 msgid "New Experiment"
 msgstr ""
 
-#: /views/cultures/add.ctp:21
-#: /views/cultures/edit.ctp:23
-#: /views/cultures/index.ctp:58
-#: /views/cultures/view.ctp:45
+#: /views/cultures/add.ctp:22
+#: /views/cultures/edit.ctp:24
+#: /views/cultures/index.ctp:60
+#: /views/cultures/view.ctp:50
 #: /views/phenotypes/add.ctp:23
 #: /views/phenotypes/edit.ctp:25
-#: /views/phenotypes/view.ctp:50
 #: /views/plants/add.ctp:18
 #: /views/plants/edit.ctp:20
 #: /views/plants/view.ctp:41
@@ -1084,13 +1171,12 @@ msgstr ""
 msgid "List Plants"
 msgstr ""
 
-#: /views/cultures/add.ctp:22
-#: /views/cultures/edit.ctp:24
-#: /views/cultures/index.ctp:59
-#: /views/cultures/view.ctp:46;89
+#: /views/cultures/add.ctp:23
+#: /views/cultures/edit.ctp:25
+#: /views/cultures/index.ctp:61
+#: /views/cultures/view.ctp:51;94
 #: /views/phenotypes/add.ctp:24
 #: /views/phenotypes/edit.ctp:26
-#: /views/phenotypes/view.ctp:51
 #: /views/plants/index.ctp:57
 #: /views/plants/view.ctp:42
 #: /views/samples/add.ctp:22
@@ -1101,7 +1187,7 @@ msgid "New Plant"
 msgstr ""
 
 #: /views/cultures/edit.ctp:4
-#: /views/cultures/view.ctp:39
+#: /views/cultures/view.ctp:44
 msgid "Edit Culture"
 msgstr ""
 
@@ -1109,8 +1195,8 @@ msgstr ""
 msgid "Cultures"
 msgstr ""
 
-#: /views/cultures/index.ctp:55
-#: /views/cultures/view.ctp:42
+#: /views/cultures/index.ctp:57
+#: /views/cultures/view.ctp:47
 #: /views/experiments/add.ctp:21
 #: /views/experiments/edit.ctp:23
 #: /views/experiments/index.ctp:55
@@ -1128,66 +1214,168 @@ msgid "Culture"
 msgstr ""
 
 #: /views/cultures/view.ctp:14
+msgid "Limsstudyid"
+msgstr ""
+
+#: /views/cultures/view.ctp:19
 #: /views/experiments/view.ctp:54
 msgid "Condition"
 msgstr ""
 
-#: /views/cultures/view.ctp:19;58
+#: /views/cultures/view.ctp:24;63
 #: /views/experiments/view.ctp:55
+#: /views/keywords/view.ctp:24
 #: /views/plants/view.ctp:24
 #: /views/samples/view.ctp:19;66
+#: /views/ufiles/view.ctp:19
 msgid "Created"
 msgstr ""
 
-#: /views/cultures/view.ctp:24
+#: /views/cultures/view.ctp:29
 #: /views/experiments/view.ctp:56
+#: /views/keywords/view.ctp:25
 #: /views/samples/view.ctp:39
+#: /views/ufiles/view.ctp:24
 msgid "Description"
 msgstr ""
 
-#: /views/cultures/view.ctp:29
+#: /views/cultures/view.ctp:34
 #: /views/experiments/view.ctp:2
 msgid "Experiment"
 msgstr ""
 
-#: /views/cultures/view.ctp:40
+#: /views/cultures/view.ctp:45
 msgid "Delete Culture"
 msgstr ""
 
-#: /views/cultures/view.ctp:50
+#: /views/cultures/view.ctp:55
 #: /views/samples/view.ctp:58
 msgid "Related Plants"
 msgstr ""
 
-#: /views/cultures/view.ctp:56
+#: /views/cultures/view.ctp:61
 #: /views/plants/view.ctp:14
 #: /views/samples/view.ctp:64
 msgid "Aliquot"
 msgstr ""
 
-#: /views/cultures/view.ctp:57
+#: /views/cultures/view.ctp:62
 #: /views/samples/view.ctp:65
 msgid "Culture Id"
 msgstr ""
 
-#: /views/cultures/view.ctp:59
+#: /views/cultures/view.ctp:64
 #: /views/samples/view.ctp:67
 msgid "Sample Id"
 msgstr ""
 
-#: /views/elements/phenotypes/fastscore.ctp:41;42
+#: /views/elements/phenotypes/fastscore.ctp:44;45
 #: /views/elements/phenotypes/phenotyping.ctp:41;42
 msgid "undefined"
 msgstr ""
 
-#: /views/elements/phenotypes/fastscore.ctp:67
-#: /views/elements/phenotypes/phenotyping.ctp:92
+#: /views/elements/phenotypes/fastscore.ctp:85
+#: /views/elements/phenotypes/phenotyping.ctp:107
 msgid "entity id"
 msgstr ""
 
-#: /views/elements/phenotypes/fastscore.ctp:71
-#: /views/elements/phenotypes/phenotyping.ctp:96
+#: /views/elements/phenotypes/fastscore.ctp:89
+#: /views/elements/phenotypes/phenotyping.ctp:111
 msgid "value id"
+msgstr ""
+
+#: /views/elements/phenotypes/phenotyping.ctp:123
+msgid "Bbch Code"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:8
+#: /views/entities/view.ctp:41
+#: /views/plants/view.ctp:52
+#: /views/programs/view.ctp:31
+#: /views/values/view.ctp:36
+msgid "Related Phenotypes"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:13
+#: /views/entities/view.ctp:48
+#: /views/plants/view.ctp:59
+#: /views/programs/view.ctp:38
+#: /views/values/view.ctp:43
+msgid "Program Id"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:14
+#: /views/entities/view.ctp:49
+#: /views/phenotypes/view.ctp:14
+#: /views/plants/view.ctp:60
+#: /views/programs/view.ctp:39
+#: /views/values/view.ctp:44
+msgid "Date"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:15
+#: /views/entities/view.ctp:50
+#: /views/phenotypes/view.ctp:19
+#: /views/plants/view.ctp:61
+#: /views/programs/view.ctp:40
+#: /views/values/view.ctp:45
+msgid "Time"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:16
+#: /views/phenotypes/view.ctp:24
+#: /views/plants/view.ctp:2
+msgid "Plant"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:17
+#: /views/entities/view.ctp:2
+#: /views/phenotype_entities/view.ctp:14
+#: /views/phenotypes/index.ctp:16
+#: /views/phenotypes/view.ctp:29
+msgid "Entity"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:18
+#: /views/phenotypes/index.ctp:17
+#: /views/phenotypes/view.ctp:34
+#: /views/values/view.ctp:9
+msgid "Attribute"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:19
+#: /views/phenotype_values/view.ctp:9
+#: /views/phenotypes/index.ctp:18
+#: /views/phenotypes/view.ctp:39
+#: /views/values/view.ctp:2;14
+msgid "Value"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:20
+#: /views/phenotype_values/view.ctp:19
+#: /views/phenotypes/index.ctp:19
+#: /views/phenotypes/view.ctp:44
+msgid "Number"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:22
+msgid "Bbch.name"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:23
+msgid "Bbch.id"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:59
+#: /views/phenotypes/index.ctp:51
+#: /views/temps/index.ctp:43
+msgid "Invalidate"
+msgstr ""
+
+#: /views/elements/raws/related.ctp:62
+#: /views/phenotypes/index.ctp:54
+#: /views/temps/index.ctp:46
+msgid "Are you sure you want to invalidate # %s?"
 msgstr ""
 
 #: /views/entities/add.ctp:4
@@ -1196,17 +1384,16 @@ msgstr ""
 
 #: /views/entities/add.ctp:18
 #: /views/entities/edit.ctp:20
-#: /views/entities/upload.ctp:28
 #: /views/entities/view.ctp:31
 #: /views/phenotype_entities/add.ctp:19
 #: /views/phenotype_entities/edit.ctp:21
-#: /views/phenotype_entities/index.ctp:54
-#: /views/phenotype_entities/view.ctp:30
+#: /views/phenotype_entities/index.ctp:55
+#: /views/phenotype_entities/view.ctp:32
 msgid "List Entities"
 msgstr ""
 
 #: /views/entities/edit.ctp:4
-#: /views/entities/view.ctp:29
+#: /views/entities/view.ctp:33
 msgid "Edit Entity"
 msgstr ""
 
@@ -1214,12 +1401,31 @@ msgstr ""
 msgid "Entities"
 msgstr ""
 
-#: /views/entities/index.ctp:49
-#: /views/entities/view.ctp:32
+#: /views/entities/index.ctp:51
+#: /views/entities/view.ctp:29
+#: /views/phenotype_bbches/index.ctp:54
+#: /views/phenotype_bbches/view.ctp:24
+#: /views/phenotype_entities/index.ctp:53
+#: /views/phenotype_entities/view.ctp:24
+#: /views/phenotype_raws/index.ctp:55
+#: /views/phenotype_values/index.ctp:55
+#: /views/phenotype_values/view.ctp:29
+#: /views/phenotypes/manualupload_fastscore.ctp:15
+#: /views/programs/index.ctp:47
+#: /views/programs/view.ctp:19
+#: /views/species/index.ctp:47
+#: /views/species/view.ctp:19
+#: /views/values/index.ctp:49
+#: /views/values/view.ctp:24
+msgid "Upload Scanner File"
+msgstr ""
+
+#: /views/entities/index.ctp:54
+#: /views/entities/view.ctp:35
 #: /views/phenotype_entities/add.ctp:20
 #: /views/phenotype_entities/edit.ctp:22
-#: /views/phenotype_entities/index.ctp:55
-#: /views/phenotype_entities/view.ctp:31
+#: /views/phenotype_entities/index.ctp:59
+#: /views/phenotype_entities/view.ctp:33
 msgid "New Entity"
 msgstr ""
 
@@ -1248,17 +1454,35 @@ msgstr ""
 msgid "Entities will be saved in both English and German if possible"
 msgstr ""
 
-#: /views/entities/view.ctp:2
-#: /views/phenotype_entities/view.ctp:14
-msgid "Entity"
-msgstr ""
-
 #: /views/entities/view.ctp:19
 msgid "Definition"
 msgstr ""
 
-#: /views/entities/view.ctp:30
+#: /views/entities/view.ctp:34
 msgid "Delete Entity"
+msgstr ""
+
+#: /views/entities/view.ctp:46
+#: /views/phenotypes/view.ctp:61
+#: /views/plants/view.ctp:57
+#: /views/programs/view.ctp:36
+#: /views/values/view.ctp:41
+msgid "Version"
+msgstr ""
+
+#: /views/entities/view.ctp:47
+#: /views/phenotypes/view.ctp:66
+#: /views/plants/view.ctp:58
+#: /views/programs/view.ctp:37
+#: /views/values/view.ctp:42
+msgid "Object"
+msgstr ""
+
+#: /views/entities/view.ctp:51
+#: /views/plants/view.ctp:62
+#: /views/programs/view.ctp:41
+#: /views/values/view.ctp:46
+msgid "Plant Id"
 msgstr ""
 
 #: /views/experiments/add.ctp:4
@@ -1302,27 +1526,100 @@ msgstr ""
 msgid "Experiment Id"
 msgstr ""
 
+#: /views/keywords/add.ctp:4
+msgid "Add Keyword"
+msgstr ""
+
+#: /views/keywords/edit.ctp:4
+msgid "Edit Keyword"
+msgstr ""
+
+#: /views/keywords/index.ctp:2
+msgid "Keywords"
+msgstr ""
+
+#: /views/keywords/index.ctp:45
+#: /views/ufilekeywords/add.ctp:20
+#: /views/ufilekeywords/edit.ctp:22
+#: /views/ufilekeywords/index.ctp:55
+#: /views/ufilekeywords/view.ctp:31
+#: /views/ufiles/add.ctp:22
+msgid "New Keyword"
+msgstr ""
+
+#: /views/keywords/index.ctp:46
+#: /views/ufilekeywords/add.ctp:16
+#: /views/ufilekeywords/edit.ctp:18
+#: /views/ufilekeywords/view.ctp:26
+#: /views/ufiles/add.ctp:19
+msgid "List Ufilekeywords"
+msgstr ""
+
+#: /views/keywords/index.ctp:47
+#: /views/ufilekeywords/index.ctp:51
+#: /views/ufilekeywords/view.ctp:27
+#: /views/ufiles/add.ctp:20
+msgid "New Ufilekeyword"
+msgstr ""
+
+#: /views/keywords/view.ctp:2
+#: /views/ufilekeywords/view.ctp:14
+msgid "Keyword"
+msgstr ""
+
+#: /views/keywords/view.ctp:17
+msgid "Related Ufiles"
+msgstr ""
+
+#: /views/keywords/view.ctp:22
+msgid "Submitter"
+msgstr ""
+
 #: /views/layouts/default.ctp:25
 msgid "TROST"
 msgstr ""
 
-#: /views/layouts/default.ctp:62
-msgid "CakePHP: the rapid development php framework"
-msgstr ""
-
-#: /views/pages/home.ctp:4
-#: /views/phenotypes/manualupload.ctp:9
+#: /views/layouts/default.ctp:61
+#: /views/phenotypes/manualupload.ctp:10
 #: /views/phenotypes/manualupload_fastscore.ctp:5
 #: /views/phenotypes/upload.ctp:33
 msgid "Upload scanner file"
 msgstr ""
 
-#: /views/pages/home.ctp:5
+#: /views/layouts/default.ctp:62
+msgid "Upload file"
+msgstr ""
+
+#: /views/layouts/default.ctp:63
+msgid "Enter temperature"
+msgstr ""
+
+#: /views/layouts/default.ctp:65
+msgid "List scanner files"
+msgstr ""
+
+#: /views/layouts/default.ctp:66
+msgid "List files"
+msgstr ""
+
+#: /views/layouts/default.ctp:67
+msgid "List temperatures"
+msgstr ""
+
+#: /views/layouts/default.ctp:69
 msgid "Upload entities file"
 msgstr ""
 
-#: /views/pages/home.ctp:6
+#: /views/layouts/default.ctp:70
 msgid "Upload values file"
+msgstr ""
+
+#: /views/layouts/default.ctp:71
+msgid "Upload BBCH file"
+msgstr ""
+
+#: /views/layouts/default.ctp:78
+msgid "CakePHP: the rapid development php framework"
 msgstr ""
 
 #: /views/phenotype_bbches/add.ctp:4
@@ -1334,12 +1631,22 @@ msgstr ""
 #: /views/phenotype_bbches/view.ctp:26
 #: /views/phenotypes/add.ctp:25
 #: /views/phenotypes/edit.ctp:27
-#: /views/phenotypes/view.ctp:52
 msgid "List Phenotype Bbches"
 msgstr ""
 
+#: /views/phenotype_bbches/add.ctp:20
+#: /views/phenotype_bbches/edit.ctp:22
+#: /views/phenotype_bbches/index.ctp:60
+#: /views/phenotype_bbches/view.ctp:33
+#: /views/species/add.ctp:17
+#: /views/species/edit.ctp:19
+#: /views/species/index.ctp:52
+#: /views/species/view.ctp:27
+msgid "New Bbch"
+msgstr ""
+
 #: /views/phenotype_bbches/edit.ctp:4
-#: /views/phenotype_bbches/view.ctp:24
+#: /views/phenotype_bbches/view.ctp:29
 msgid "Edit Phenotype Bbch"
 msgstr ""
 
@@ -1347,11 +1654,10 @@ msgstr ""
 msgid "Phenotype Bbches"
 msgstr ""
 
-#: /views/phenotype_bbches/index.ctp:51
-#: /views/phenotype_bbches/view.ctp:27
+#: /views/phenotype_bbches/index.ctp:58
+#: /views/phenotype_bbches/view.ctp:31
 #: /views/phenotypes/add.ctp:26
 #: /views/phenotypes/edit.ctp:28
-#: /views/phenotypes/view.ctp:53;96
 msgid "New Phenotype Bbch"
 msgstr ""
 
@@ -1367,7 +1673,7 @@ msgstr ""
 msgid "Phenotype"
 msgstr ""
 
-#: /views/phenotype_bbches/view.ctp:25
+#: /views/phenotype_bbches/view.ctp:30
 msgid "Delete Phenotype Bbch"
 msgstr ""
 
@@ -1380,12 +1686,11 @@ msgstr ""
 #: /views/phenotype_entities/view.ctp:26
 #: /views/phenotypes/add.ctp:27
 #: /views/phenotypes/edit.ctp:29
-#: /views/phenotypes/view.ctp:54
 msgid "List Phenotype Entities"
 msgstr ""
 
 #: /views/phenotype_entities/edit.ctp:4
-#: /views/phenotype_entities/view.ctp:24
+#: /views/phenotype_entities/view.ctp:28
 msgid "Edit Phenotype Entity"
 msgstr ""
 
@@ -1393,11 +1698,10 @@ msgstr ""
 msgid "Phenotype Entities"
 msgstr ""
 
-#: /views/phenotype_entities/index.ctp:51
-#: /views/phenotype_entities/view.ctp:27
+#: /views/phenotype_entities/index.ctp:57
+#: /views/phenotype_entities/view.ctp:30
 #: /views/phenotypes/add.ctp:28
 #: /views/phenotypes/edit.ctp:30
-#: /views/phenotypes/view.ctp:55;134
 msgid "New Phenotype Entity"
 msgstr ""
 
@@ -1405,7 +1709,7 @@ msgstr ""
 msgid "Phenotype Entity"
 msgstr ""
 
-#: /views/phenotype_entities/view.ctp:25
+#: /views/phenotype_entities/view.ctp:29
 msgid "Delete Phenotype Entity"
 msgstr ""
 
@@ -1415,34 +1719,30 @@ msgstr ""
 
 #: /views/phenotype_raws/add.ctp:17
 #: /views/phenotype_raws/edit.ctp:19
-#: /views/phenotype_raws/view.ctp:31
+#: /views/phenotype_raws/view.ctp:30
 #: /views/phenotypes/add.ctp:29
 #: /views/phenotypes/edit.ctp:31
-#: /views/phenotypes/view.ctp:56
 msgid "List Phenotype Raws"
 msgstr ""
 
 #: /views/phenotype_raws/add.ctp:20
 #: /views/phenotype_raws/edit.ctp:22
-#: /views/phenotype_raws/index.ctp:56
-#: /views/phenotype_raws/view.ctp:35
+#: /views/phenotype_raws/index.ctp:57
+#: /views/phenotype_raws/view.ctp:31
 #: /views/raws/add.ctp:16
 #: /views/raws/edit.ctp:18
-#: /views/raws/view.ctp:21
 msgid "List Raws"
 msgstr ""
 
 #: /views/phenotype_raws/add.ctp:21
 #: /views/phenotype_raws/edit.ctp:23
-#: /views/phenotype_raws/index.ctp:57
-#: /views/phenotype_raws/view.ctp:36
-#: /views/raws/index.ctp:45
-#: /views/raws/view.ctp:22
+#: /views/phenotype_raws/index.ctp:61
+#: /views/phenotype_raws/view.ctp:37
 msgid "New Raw"
 msgstr ""
 
 #: /views/phenotype_raws/edit.ctp:4
-#: /views/phenotype_raws/view.ctp:29
+#: /views/phenotype_raws/view.ctp:33
 msgid "Edit Phenotype Raw"
 msgstr ""
 
@@ -1450,11 +1750,10 @@ msgstr ""
 msgid "Phenotype Raws"
 msgstr ""
 
-#: /views/phenotype_raws/index.ctp:53
-#: /views/phenotype_raws/view.ctp:32
+#: /views/phenotype_raws/index.ctp:59
+#: /views/phenotype_raws/view.ctp:35
 #: /views/phenotypes/add.ctp:30
 #: /views/phenotypes/edit.ctp:32
-#: /views/phenotypes/view.ctp:57;174
 msgid "New Phenotype Raw"
 msgstr ""
 
@@ -1468,11 +1767,10 @@ msgid "Raw"
 msgstr ""
 
 #: /views/phenotype_raws/view.ctp:19
-#: /views/phenotypes/view.ctp:146
 msgid "Line Nr"
 msgstr ""
 
-#: /views/phenotype_raws/view.ctp:30
+#: /views/phenotype_raws/view.ctp:34
 msgid "Delete Phenotype Raw"
 msgstr ""
 
@@ -1485,32 +1783,30 @@ msgstr ""
 #: /views/phenotype_values/view.ctp:31
 #: /views/phenotypes/add.ctp:31
 #: /views/phenotypes/edit.ctp:33
-#: /views/phenotypes/view.ctp:58
 msgid "List Phenotype Values"
 msgstr ""
 
 #: /views/phenotype_values/add.ctp:18
 #: /views/phenotype_values/edit.ctp:20
-#: /views/phenotype_values/index.ctp:54
-#: /views/phenotype_values/view.ctp:33
+#: /views/phenotype_values/index.ctp:57
+#: /views/phenotype_values/view.ctp:32
 #: /views/values/add.ctp:17
 #: /views/values/edit.ctp:19
-#: /views/values/upload.ctp:23
 #: /views/values/view.ctp:26
 msgid "List Values"
 msgstr ""
 
 #: /views/phenotype_values/add.ctp:19
 #: /views/phenotype_values/edit.ctp:21
-#: /views/phenotype_values/index.ctp:55
-#: /views/phenotype_values/view.ctp:34
-#: /views/values/index.ctp:47
-#: /views/values/view.ctp:27
+#: /views/phenotype_values/index.ctp:60
+#: /views/phenotype_values/view.ctp:37
+#: /views/values/index.ctp:52
+#: /views/values/view.ctp:30
 msgid "New Value"
 msgstr ""
 
 #: /views/phenotype_values/edit.ctp:4
-#: /views/phenotype_values/view.ctp:29
+#: /views/phenotype_values/view.ctp:34
 msgid "Edit Phenotype Value"
 msgstr ""
 
@@ -1518,11 +1814,10 @@ msgstr ""
 msgid "Phenotype Values"
 msgstr ""
 
-#: /views/phenotype_values/index.ctp:53
-#: /views/phenotype_values/view.ctp:32
+#: /views/phenotype_values/index.ctp:59
+#: /views/phenotype_values/view.ctp:36
 #: /views/phenotypes/add.ctp:32
 #: /views/phenotypes/edit.ctp:34
-#: /views/phenotypes/view.ctp:59;214
 msgid "New Phenotype Value"
 msgstr ""
 
@@ -1530,17 +1825,7 @@ msgstr ""
 msgid "Phenotype Value"
 msgstr ""
 
-#: /views/phenotype_values/view.ctp:9
-#: /views/values/view.ctp:2;14
-msgid "Value"
-msgstr ""
-
-#: /views/phenotype_values/view.ctp:19
-#: /views/phenotypes/view.ctp:186
-msgid "Number"
-msgstr ""
-
-#: /views/phenotype_values/view.ctp:30
+#: /views/phenotype_values/view.ctp:35
 msgid "Delete Phenotype Value"
 msgstr ""
 
@@ -1550,7 +1835,6 @@ msgstr ""
 
 #: /views/phenotypes/add.ctp:21
 #: /views/phenotypes/edit.ctp:23
-#: /views/phenotypes/view.ctp:48
 #: /views/programs/add.ctp:15
 #: /views/programs/edit.ctp:17
 #: /views/programs/view.ctp:21
@@ -1559,36 +1843,31 @@ msgstr ""
 
 #: /views/phenotypes/add.ctp:22
 #: /views/phenotypes/edit.ctp:24
-#: /views/phenotypes/view.ctp:49
-#: /views/programs/index.ctp:45
-#: /views/programs/view.ctp:22
+#: /views/programs/index.ctp:50
+#: /views/programs/view.ctp:25
 msgid "New Program"
 msgstr ""
 
 #: /views/phenotypes/edit.ctp:4
-#: /views/phenotypes/view.ctp:44
 msgid "Edit Phenotype"
 msgstr ""
 
-#: /views/phenotypes/index.ctp:2
+#: /views/phenotypes/index.ctp:8
 msgid "Phenotypes"
 msgstr ""
 
-#: /views/phenotypes/index.ctp:59
-#: /views/phenotypes/manualupload.ctp:34
-#: /views/phenotypes/manualupload_fastscore.ctp:15
-msgid "Upload Scanner File"
-msgstr ""
-
-#: /views/phenotypes/manualupload.ctp:6
+#: /views/phenotypes/manualupload.ctp:7
 msgid "Upload <em>next</em> scanner file"
 msgstr ""
 
-#: /views/phenotypes/manualupload.ctp:25
+#: /views/phenotypes/manualupload.ctp:26
 msgid "last one?"
 msgstr ""
 
-#: /views/phenotypes/manualupload.ctp:35
+#: /views/phenotypes/manualupload.ctp:33
+msgid "Stop"
+msgstr ""
+
 #: /views/phenotypes/manualupload_fastscore.ctp:16
 msgid "Manual Input"
 msgstr ""
@@ -1597,58 +1876,17 @@ msgstr ""
 msgid "Input manually"
 msgstr ""
 
-#: /views/phenotypes/upload.ctp:61
-msgid "Upload"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:19
+#: /views/phenotypes/view.ctp:9
 #: /views/programs/view.ctp:2
 msgid "Program"
 msgstr ""
 
-#: /views/phenotypes/view.ctp:34
-#: /views/plants/view.ctp:2
-msgid "Plant"
+#: /views/phenotypes/view.ctp:50
+msgid "BBCH name"
 msgstr ""
 
-#: /views/phenotypes/view.ctp:45
-msgid "Delete Phenotype"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:63
-msgid "Related Phenotype Bbches"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:68;106;144;185
-msgid "Phenotype Id"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:69
-msgid "Bbch Id"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:101
-msgid "Related Phenotype Entities"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:107
-msgid "Entity Id"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:139
-msgid "Related Phenotype Raws"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:145
-msgid "Raw Id"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:179
-msgid "Related Phenotype Values"
-msgstr ""
-
-#: /views/phenotypes/view.ctp:184
-msgid "Value Id"
+#: /views/phenotypes/view.ctp:55
+msgid "BBCH id"
 msgstr ""
 
 #: /views/plants/add.ctp:4
@@ -1697,7 +1935,7 @@ msgid "Add Program"
 msgstr ""
 
 #: /views/programs/edit.ctp:4
-#: /views/programs/view.ctp:19
+#: /views/programs/view.ctp:23
 msgid "Edit Program"
 msgstr ""
 
@@ -1705,7 +1943,7 @@ msgstr ""
 msgid "Programs"
 msgstr ""
 
-#: /views/programs/view.ctp:20
+#: /views/programs/view.ctp:24
 msgid "Delete Program"
 msgstr ""
 
@@ -1714,7 +1952,6 @@ msgid "Add Raw"
 msgstr ""
 
 #: /views/raws/edit.ctp:4
-#: /views/raws/view.ctp:19
 msgid "Edit Raw"
 msgstr ""
 
@@ -1724,10 +1961,6 @@ msgstr ""
 
 #: /views/raws/view.ctp:9
 msgid "Data"
-msgstr ""
-
-#: /views/raws/view.ctp:20
-msgid "Delete Raw"
 msgstr ""
 
 #: /views/samples/add.ctp:4
@@ -1768,20 +2001,152 @@ msgid "Add Species"
 msgstr ""
 
 #: /views/species/edit.ctp:4
-#: /views/species/view.ctp:19
+#: /views/species/view.ctp:24
 msgid "Edit Species"
 msgstr ""
 
-#: /views/species/view.ctp:20
+#: /views/species/view.ctp:25
 msgid "Delete Species"
 msgstr ""
 
-#: /views/species/view.ctp:28
+#: /views/species/view.ctp:32
 msgid "Related Bbches"
 msgstr ""
 
-#: /views/species/view.ctp:35
+#: /views/species/view.ctp:39
 msgid "Species Id"
+msgstr ""
+
+#: /views/temps/add.ctp:4
+#: /views/temps/erature.ctp:4
+msgid "Add Temp"
+msgstr ""
+
+#: /views/temps/add.ctp:19
+#: /views/temps/edit.ctp:21
+msgid "List Temps"
+msgstr ""
+
+#: /views/temps/edit.ctp:4
+msgid "Edit Temp"
+msgstr ""
+
+#: /views/temps/index.ctp:8
+msgid "Temps"
+msgstr ""
+
+#: /views/temps/view.ctp:2
+msgid "Temp"
+msgstr ""
+
+#: /views/temps/view.ctp:9
+msgid "Datum"
+msgstr ""
+
+#: /views/temps/view.ctp:14
+msgid "Rainfall"
+msgstr ""
+
+#: /views/temps/view.ctp:19
+msgid "Irrigation"
+msgstr ""
+
+#: /views/temps/view.ctp:24
+msgid "Tmin"
+msgstr ""
+
+#: /views/temps/view.ctp:29
+msgid "Tmax"
+msgstr ""
+
+#: /views/temps/view.ctp:34
+msgid "Location"
+msgstr ""
+
+#: /views/ufilekeywords/add.ctp:4
+msgid "Add Ufilekeyword"
+msgstr ""
+
+#: /views/ufilekeywords/add.ctp:17
+#: /views/ufilekeywords/edit.ctp:19
+#: /views/ufilekeywords/index.ctp:52
+#: /views/ufilekeywords/view.ctp:28
+#: /views/ufiles/add.ctp:18
+msgid "List Ufiles"
+msgstr ""
+
+#: /views/ufilekeywords/add.ctp:18
+#: /views/ufilekeywords/edit.ctp:20
+#: /views/ufilekeywords/index.ctp:53
+#: /views/ufilekeywords/view.ctp:29
+msgid "New Ufile"
+msgstr ""
+
+#: /views/ufilekeywords/add.ctp:19
+#: /views/ufilekeywords/edit.ctp:21
+#: /views/ufilekeywords/index.ctp:54
+#: /views/ufilekeywords/view.ctp:30
+#: /views/ufiles/add.ctp:21
+msgid "List Keywords"
+msgstr ""
+
+#: /views/ufilekeywords/edit.ctp:4
+#: /views/ufilekeywords/view.ctp:24
+msgid "Edit Ufilekeyword"
+msgstr ""
+
+#: /views/ufilekeywords/index.ctp:2
+msgid "Ufilekeywords"
+msgstr ""
+
+#: /views/ufilekeywords/view.ctp:2
+msgid "Ufilekeyword"
+msgstr ""
+
+#: /views/ufilekeywords/view.ctp:9
+#: /views/ufiles/view.ctp:2
+msgid "Ufile"
+msgstr ""
+
+#: /views/ufilekeywords/view.ctp:25
+msgid "Delete Ufilekeyword"
+msgstr ""
+
+#: /views/ufiles/add.ctp:4
+msgid "Add Ufile"
+msgstr ""
+
+#: /views/ufiles/edit.ctp:4
+msgid "Edit Ufile"
+msgstr ""
+
+#: /views/ufiles/index.ctp:2
+#: /views/ufiles/results.ctp:2
+msgid "Ufiles"
+msgstr ""
+
+#: /views/ufiles/search.ctp:4
+msgid "Search file"
+msgstr ""
+
+#: /views/ufiles/upload.ctp:4
+msgid "Add file"
+msgstr ""
+
+#: /views/ufiles/upload.ctp:6
+msgid "The list is wrong!"
+msgstr ""
+
+#: /views/ufiles/upload.ctp:10
+msgid "New Keywords (seperated by comma's)"
+msgstr ""
+
+#: /views/ufiles/view.ctp:9
+msgid "Person"
+msgstr ""
+
+#: /views/ufiles/view.ctp:32
+msgid "Related Keywords"
 msgstr ""
 
 #: /views/values/add.ctp:4
@@ -1789,7 +2154,7 @@ msgid "Add Value"
 msgstr ""
 
 #: /views/values/edit.ctp:4
-#: /views/values/view.ctp:24
+#: /views/values/view.ctp:28
 msgid "Edit Value"
 msgstr ""
 
@@ -1825,11 +2190,7 @@ msgstr ""
 msgid "The values will be saved in both English and German if possible"
 msgstr ""
 
-#: /views/values/view.ctp:9
-msgid "Attribute"
-msgstr ""
-
-#: /views/values/view.ctp:25
+#: /views/values/view.ctp:29
 msgid "Delete Value"
 msgstr ""
 

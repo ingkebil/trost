@@ -1,10 +1,10 @@
 <div class="ufiles index">
-	<h2><?php __('Ufiles');?></h2>
+	<h2><?php __('Files');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('Person.name');?></th>
+			<th><?php echo $this->Paginator->sort(__('Person', true), 'Person.name');?></th>
 			<th><?php echo $this->Paginator->sort('Name');?></th>
-			<th>Keywords</th>
+            <th><?php __('Keywords') ?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
 			<th class="actions"><?php __('Actions');?></th>

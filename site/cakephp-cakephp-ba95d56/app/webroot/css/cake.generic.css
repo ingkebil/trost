@@ -355,6 +355,10 @@ form .submit input[type=submit]:hover {
 	background-image: -moz-linear-gradient(top, #85e573, #4ca83d);
 }
 
+form div>a {
+    font-size: 80%;
+}
+
 /** Notices and Errors **/
 div.message {
 	clear: both;
