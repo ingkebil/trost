@@ -5,6 +5,11 @@ class PeopleController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
+        $this->Auth->allow('add', 'edit');
+
+        if ($this->action == 'add' || $this->action == 'edit') {
+            $this->Auth->authenticate = $this->Person;
+        }
     }
 
 	function index() {

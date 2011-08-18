@@ -13,26 +13,10 @@ class UfilesController extends AppController {
 
         # some settings for the automatic upload handling
         $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
-        if (! empty($this->data)) {
-
-            # look up of the person exists already
-            #$person = $this->Ufile->Person->find('first', array('conditions' => array('Person.name' => $this->data['Ufile']['person']), 'contain' => false));
-            #if (empty($person)) {
-            #    $person = $this->Ufile->Person->save(array(
-            #        'Person' => array(
-            #            'name' => $this->data['Ufile']['person'],
-            #            'location_id' => $this->data['Ufile']['Location']
-            #        )
-            #    ));
-            #    $this->data['Ufile']['person_id'] = $this->Ufile->Person->id;
-            #}
-            #else {
-            #    $this->data['Ufile']['person_id'] = $person['Person']['id'];
-            #}
-
-            $person = $this->Ufile->Person->find('first', array('conditions' => array('Person.id' => $this->data['Ufile']['person_id']), 'contain' => false));
-            
-            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $person['Person']['name'] . $this->data['Ufile']['person_id']);
+        # change the upload dir when we actually are uploading something
+        if ($this->action == 'upload' && ! empty($this->data)) {
+            $person = $this->Session->read('Auth.Person');
+            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $person['name'] . $person['id']);
         }
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
@@ -52,25 +36,30 @@ class UfilesController extends AppController {
             $new_kw_ids = $this->__add_keywords($this->data['Ufile']['new_keywords']);
             # add the new kw_id's to the KwKw array
             $this->data['Keyword']['Keyword'] = array_unique(array_merge($this->data['Keyword']['Keyword'], $new_kw_ids)); # add unique check in case someone added a new existing keyword and selected it as well
-            if ($this->FileUpload->success) {
-                $success = true;
-                foreach ($this->FileUpload->uploadedFiles as $uploaded_file) {
-                    if ($uploaded_file['name'] && ! $uploaded_file['error']) {
-                        $this->Ufile->create();
-                        $this->data['Ufile']['name'] = $uploaded_file['name'];
+            # add the user id of the logged in user
+            $person = $this->Session->read('Auth.Person');
+            $this->data['Ufile']['person_id'] = $person['id'];
+            if ($this->Ufile->validates($this->data)) {
+                if ($this->FileUpload->success) {
+                    $success = true;
+                    foreach ($this->FileUpload->uploadedFiles as $uploaded_file) {
+                        if ($uploaded_file['name'] && ! $uploaded_file['error']) {
+                            $this->Ufile->create();
+                            $this->data['Ufile']['name'] = $uploaded_file['name'];
 
-                        if (! $this->Ufile->save($this->data)) {
-                            $success = false;
-                            $this->Session->setFlash(
-                                __('One or more files could not be saved.', true) .
-                               ' ' . $this->FileUpload->showErrors()
-                            );
-                            break;
+                            if (! $this->Ufile->save($this->data)) {
+                                $success = false;
+                                $this->Session->setFlash(
+                                    __('One or more files could not be saved.', true) .
+                                   ' ' . $this->FileUpload->showErrors()
+                                );
+                                break;
+                            }
                         }
                     }
-                }
-                if ($success) {
-				    $this->redirect(array('action' => 'index'));
+                    if ($success) {
+                        $this->redirect(array('action' => 'index'));
+                    }
                 }
             }
             else {

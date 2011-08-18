@@ -38,7 +38,7 @@ class AppController extends Controller {
         'Auth' => array(
             'userModel' => 'Person',
             'fields'    => array(
-                'username' => 'name',
+                'username' => 'username',
                 'password' => 'password',
             ),
             'loginAction' => array(
@@ -56,7 +56,11 @@ class AppController extends Controller {
     );
     
     function beforeFilter() {        
-        $this->Auth->allow('index');
+        $this->Auth->allow('display');
+        if ($this->action == 'delete') {
+            $this->Session->setFlash('NO ACCESS!');
+            $this->redirect($this->referer(), '401', true);
+        }
         # check if the user has access
         #if ((in_array($this->params['action'], array('edit', 'delete', 'add')) && ! $this->Session->check('user'))
         #    && ! in_array($this->params['controller'], array('keywords', 'ufiles'))) { # TODO for now just opened up the adding and editing of keywords

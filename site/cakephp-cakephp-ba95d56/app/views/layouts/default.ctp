@@ -55,6 +55,8 @@
             echo '|';
             echo $html->link('DE', $de_url);
             ?>
+            <br />
+            <?php echo $this->Html->link(__('Change password', true), array('controller' => 'people', 'action' => 'edit', $person['id'])); ?>
             </span>
 		</div>
 		<div id="content">

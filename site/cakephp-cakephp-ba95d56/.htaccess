@@ -1,10 +1,10 @@
-ErrorDocument 403 "Maintanance"
-
-Order deny,allow
-Deny from all
-Allow from 141.14.245.195
-Allow from 127.0.0.1
-Satisfy All
+#ErrorDocument 403 "Maintanance"
+#
+#Order deny,allow
+#Deny from all
+#Allow from 141.14.245.195
+#Allow from 127.0.0.1
+#Satisfy All
 
 <IfModule mod_rewrite.c>
    RewriteEngine on
