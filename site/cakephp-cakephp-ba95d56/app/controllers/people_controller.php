@@ -49,12 +49,12 @@ class PeopleController extends AppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid person', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect('/');
 		}
 		if (!empty($this->data)) {
 			if ($this->Person->save($this->data)) {
 				$this->Session->setFlash(__('The person has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect('/');
 			} else {
 				$this->Session->setFlash(__('The person could not be saved. Please, try again.', true));
 			}
