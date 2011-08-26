@@ -2,7 +2,7 @@
 class Keyword extends AppModel {
 	var $name = 'Keyword';
 	var $validate = array(
-		'keyword' => array(
+		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -11,6 +11,9 @@ class Keyword extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+            'Please enter a username' => array(
+                'rule' => array('isUnique'),
+            ),
 		),
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

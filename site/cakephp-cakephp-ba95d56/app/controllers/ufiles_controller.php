@@ -12,11 +12,13 @@ class UfilesController extends AppController {
         parent::beforeFilter();
 
         # some settings for the automatic upload handling
-        $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
         # change the upload dir when we actually are uploading something
         if ($this->action == 'upload' && ! empty($this->data)) {
             $person = $this->Session->read('Auth.Person');
             $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $person['name'] . $person['id']);
+        }
+        else {
+            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
         }
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
@@ -35,6 +37,9 @@ class UfilesController extends AppController {
             # first add the newly entered kw's
             $new_kw_ids = $this->__add_keywords($this->data['Ufile']['new_keywords']);
             # add the new kw_id's to the KwKw array
+            if (empty($this->data['Keyword']['Keyword'])) {
+                $this->data['Keyword']['Keyword'] = array();
+            }
             $this->data['Keyword']['Keyword'] = array_unique(array_merge($this->data['Keyword']['Keyword'], $new_kw_ids)); # add unique check in case someone added a new existing keyword and selected it as well
             # add the user id of the logged in user
             $person = $this->Session->read('Auth.Person');
@@ -61,16 +66,14 @@ class UfilesController extends AppController {
                         $this->redirect(array('action' => 'index'));
                     }
                 }
-            }
-            else {
-                $this->Session->setFlash('ERROR: ' . $this->FileUpload->showErrors());
+                else {
+                    $this->Session->setFlash('ERROR: ' . $this->FileUpload->showErrors());
+                }
             }
         }
         # http://forums.mysql.com/read.php?10,225465,225545#msg-225545
         $keywords  = $this->Ufile->Keyword->find('list', array('order' => array('cast(name as char)' => 'ASC', 'binary name' => 'DESC')));
-        $person = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
-        $people = Set::combine($person, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
-        $this->set(compact('keywords', 'people'));
+        $this->set(compact('keywords'));
     }
 
     function __add_keywords($kw) {
@@ -109,7 +112,7 @@ class UfilesController extends AppController {
         
         if ($this->data) {
             # do some whitelisting
-            $whitelist = array('submitter', 'name', 'description');
+            $whitelist = array('person_id', 'name', 'description');
             $passed_values = array();
             foreach ($this->data['Ufile'] as $key => $value) {
                 if (in_array($key, $whitelist)) {
@@ -118,7 +121,7 @@ class UfilesController extends AppController {
             }
 
             # handle the keywords
-            $keywords = $this->Ufile->Keyword->find('list', array('conditions' => array('id' => $this->data['Keyword']['Keyword'])));
+            $keywords = $this->Ufile->Keyword->find('list', array('conditions' => array('Keyword.id' => $this->data['Keyword']['Keyword'])));
             if (! empty($keywords)) {
                 $passed_values['keyword'] = implode(';', $keywords);
             }
@@ -128,7 +131,9 @@ class UfilesController extends AppController {
         }
         else {
             $keywords = $this->Ufile->Keyword->find('list');
-            $this->set(compact('keywords'));
+            $person = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
+            $people = Set::combine($person, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
+            $this->set(compact('keywords', 'people'));
         }
     }
 
@@ -138,23 +143,32 @@ class UfilesController extends AppController {
         $keywords = @$this->params['named']['keyword'];
         unset($this->params['named']['keyword']);
 
+        pr($keywords);
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
             'conditions' => array('name' => array_unique(explode(';', $keywords), SORT_STRING))
         ));
+        pr($keyword_ids);
+        $conditions = $this->params['named'];
+        if (!empty($keyword_ids)) {
+            foreach (array_unique($keyword_ids, SORT_NUMERIC) as $keyword_id) {
+                $conditions[] = array('Ufilekeyword.keyword_id' => $keyword_id);
+            }
+            #$conditions = am($conditions, array('Ufilekeyword.keyword_id' => array_unique($keyword_ids, SORT_NUMERIC)));
+        }
 
         # this query will not get all the keywords for the files selected, so only use this to get the ufile_id
         $this->Ufile->bindModel(array('hasOne' => array('Ufilekeyword')), false);
         $ufile_ids = $this->Ufile->find('all', array(
             'contain' => array('Ufilekeyword'),
-            'conditions' => array_merge($this->params['named'], array('Ufilekeyword.keyword_id' => $keyword_ids)),
+            'conditions' => $conditions,
         ));
         $ufile_ids = Set::extract('/Ufile/id', $ufile_ids);
 
         $this->paginate['Ufile'] = array(
             'group' => array('Ufile.id'),
-            'contain' => array('Keyword'),
-            'conditions' => array('Ufile.id' => $ufile_ids),
+            'contain' => array('Keyword', 'Person'),
+            'conditions' => array('Ufile.id' => array_unique($ufile_ids, SORT_NUMERIC)),
         );
         $this->set('ufiles', $this->paginate('Ufile'));
     }
