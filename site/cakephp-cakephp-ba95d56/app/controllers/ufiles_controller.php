@@ -143,18 +143,15 @@ class UfilesController extends AppController {
         $keywords = @$this->params['named']['keyword'];
         unset($this->params['named']['keyword']);
 
-        pr($keywords);
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
             'conditions' => array('name' => array_unique(explode(';', $keywords), SORT_STRING))
         ));
-        pr($keyword_ids);
         $conditions = $this->params['named'];
         if (!empty($keyword_ids)) {
             foreach (array_unique($keyword_ids, SORT_NUMERIC) as $keyword_id) {
                 $conditions[] = array('Ufilekeyword.keyword_id' => $keyword_id);
             }
-            #$conditions = am($conditions, array('Ufilekeyword.keyword_id' => array_unique($keyword_ids, SORT_NUMERIC)));
         }
 
         # this query will not get all the keywords for the files selected, so only use this to get the ufile_id
