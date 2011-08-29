@@ -30,3 +30,8 @@ my $host = $ARGV[2] || 'localhost';
 `echo 'DELETE FROM temps;'              | mysql -u $user -p$pass -h $host $db`;
 `echo 'DELETE FROM phenotypes;'         | mysql -u $user -p$pass -h $host $db`;
 `echo 'DELETE FROM plants;'             | mysql -u $user -p$pass -h $host $db`;
+`echo 'DELETE FROM ufilekeywords;'      | mysql -u $user -p$pass -h $host $db`;
+`echo 'DELETE FROM keywords;'           | mysql -u $user -p$pass -h $host $db`;
+`echo 'DELETE FROM ufiles;'             | mysql -u $user -p$pass -h $host $db`;
+`echo 'DELETE FROM people;'             | mysql -u $user -p$pass -h $host $db`;
+`echo 'DELETE FROM locations;'          | mysql -u $user -p$pass -h $host $db`;
