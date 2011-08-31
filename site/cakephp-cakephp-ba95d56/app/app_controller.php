@@ -51,22 +51,34 @@ class AppController extends Controller {
                 'controller' => 'people',
                 'actions' => 'index',
             ),
+            'authorize' => 'controller',
 #            'loginError' => __('The credentials provided are incorrect', true),
         )
     );
+
+    var $helpers = array('Javascript', 'Form', 'Html', 'Ajax', 'Session');
     
+    /**
+     * Works together with the Auth component, when that component is set to Auth::authorize='controller'.
+     */
+    function isAuthorized() {
+        # disable delete site wide after login
+        if ($this->action == 'delete') return false;
+
+        if ($this->Auth->user('role') == 'admin') {
+            return true;
+        }
+        elseif (in_array($this->action, array('edit', 'add', 'delete'))) {
+            return false;
+        }
+        return true;
+    }
+
     function beforeFilter() {        
         $this->Auth->allow('display');
-        if ($this->action == 'delete') {
-            $this->Session->setFlash('NO ACCESS!');
-            $this->redirect($this->referer(), '401', true);
-        }
-        # check if the user has access
-        #if ((in_array($this->params['action'], array('edit', 'delete', 'add')) && ! $this->Session->check('user'))
-        #    && ! in_array($this->params['controller'], array('keywords', 'ufiles'))) { # TODO for now just opened up the adding and editing of keywords
-        #    $this->Session->setFlash('NO ACCESS!');
-        #    $this->redirect($this->referer(), '401', true);
-        #}
+        $this->Auth->deny('delete'); # disable this action explicitely before login sitewide
+        $admin = $this->Auth->user('role') == 'admin' ? true : false;
+        $this->set(compact('admin'));
 
         # if no language is set in the url, check the session, if no language is set in the session, default to German.
         if (!isset($this->params['lang'])) {

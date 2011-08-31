@@ -29,8 +29,35 @@
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+        echo $this->Javascript->link('jquery-1.5.1.min', true);
 
 		echo $scripts_for_layout;
+
+        $bo_started = $this->Session->read('BO.started') ? 1 : 0;
+        echo $this->Javascript->codeBlock("
+            $(document).ready(function() {
+                if ($bo_started) {
+                    $('#backoffice_menu').show();
+                    $('#normal_menu').hide();
+                    $('#backoffice_link').text('NormalMenu');
+                }
+                else {
+                    $('#backoffice_menu').hide();
+                    $('#normal_menu').show();
+                }
+                $('#backoffice_link').click(function() {
+                    $('#backoffice_menu').slideToggle('fast');
+                    $('#normal_menu').slideToggle('fast', function () {
+                        if ($('#backoffice_menu').is(':visible')) {
+                            $('#backoffice_link').text('NormalMenu');
+                        }
+                        else {
+                            $('#backoffice_link').text('BackOffice');
+                        }
+                    });
+                });
+            });
+            ");
 	?>
 </head>
 <body>
@@ -59,7 +86,6 @@
             <?php if ( ! empty($person)) {
                 echo $this->Html->link(__('Change password', true), array('controller' => 'people', 'action' => 'edit', $person['id'])); 
             } ?>
-
             </span>
 		</div>
 		<div id="content">
@@ -70,7 +96,7 @@
 			<?php echo $content_for_layout; ?>
             <div class="actions">
                 <h3><?php __('Actions'); ?></h3>
-                <ul>
+                <ul id="normal_menu">
                 <li><?php echo $html->link(__('Upload scanner file', true), '/phenotypes/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload file', true), '/ufiles/upload'); ?></li>
                 <li><?php echo $html->link(__('Enter temperature', true), '/temps/erature'); ?></li>
@@ -79,10 +105,15 @@
                 <li><?php echo $html->link(__('List files', true), '/ufiles/index'); ?></li>
                 <li><?php echo $html->link(__('Search files', true), '/ufiles/search'); ?></li>
                 <li><?php echo $html->link(__('List temperatures', true), '/temps/index'); ?></li>
+                <?php if ($admin): ?>
                 <li><hr style="margin: 20px;" /></li>
+                </ul>
+                <ul><li><?php echo $this->Ajax->link(__('BackOffice', true), '/bos/toggle', array('id' => 'backoffice_link')); ?></li></ul>
+                <ul id="backoffice_menu"> 
                 <li><?php echo $html->link(__('Upload entities file', true), '/entities/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload values file', true), '/values/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload BBCH file', true), '/bbches/upload'); ?></li>
+                <?php endif; ?>
                 </ul>
             </div>
 

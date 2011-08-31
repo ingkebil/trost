@@ -6,7 +6,7 @@ class PeopleController extends AppController {
 
     function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add', 'edit');
+        #$this->Auth->allow('add', 'edit');
 
         if ($this->action == 'add' || $this->action == 'edit') {
             $this->Auth->authenticate = $this->Person;
@@ -25,7 +25,7 @@ class PeopleController extends AppController {
     function logout() {
         $this->redirect($this->Auth->logout());
     }
-    /*
+    /**
      * Expects a file with on each line following information:
      * - prolly an ID, but first column is ignored
      * - username (login)
@@ -111,7 +111,8 @@ class PeopleController extends AppController {
 			}
 		}
 		$locations = $this->Person->Location->find('list');
-		$this->set(compact('locations'));
+        $roles = array('admin' => 'admin', 'normal' => 'normal');
+		$this->set(compact('locations', 'roles'));
 	}
 
 	function edit($id = null) {
@@ -134,7 +135,8 @@ class PeopleController extends AppController {
 			$this->data = $this->Person->read(null, $id);
 		}
 		$locations = $this->Person->Location->find('list');
-		$this->set(compact('locations'));
+        $roles = array('admin' => 'admin', 'normal' => 'normal');
+		$this->set(compact('locations', 'roles'));
 	}
 
 	function delete($id = null) {

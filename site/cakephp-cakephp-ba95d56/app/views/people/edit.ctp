@@ -9,6 +9,9 @@
 		echo $this->Form->input('location_id');
 		echo $this->Form->input('password', array('value' => ''));
 		echo $this->Form->input('password_confirm', array('type' => 'password'));
+        if ($admin) {
+            echo $this->Form->select('role', $roles);
+        }
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
