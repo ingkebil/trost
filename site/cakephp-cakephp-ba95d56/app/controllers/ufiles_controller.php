@@ -169,7 +169,7 @@ class UfilesController extends AppController {
                 $loc_conds[] = array('Person.id' => $this->params['named']['person_id']);
             }
 
-            $person_ids = $this->Person->find('all', array(
+            $person_ids = $this->Ufile->Person->find('all', array(
                 'conditions' => $loc_conds,
                 'contain' => false
             ));
