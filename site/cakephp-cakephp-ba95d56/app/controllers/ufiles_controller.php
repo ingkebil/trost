@@ -112,7 +112,7 @@ class UfilesController extends AppController {
         
         if ($this->data) {
             # do some whitelisting
-            $whitelist = array('person_id', 'name', 'description');
+            $whitelist = array('person_id', 'name', 'description', 'location_id');
             $passed_values = array();
             foreach ($this->data['Ufile'] as $key => $value) {
                 if (in_array($key, $whitelist)) {
@@ -133,15 +133,20 @@ class UfilesController extends AppController {
             $keywords = $this->Ufile->Keyword->find('list');
             $person = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
             $people = Set::combine($person, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
-            $this->set(compact('keywords', 'people'));
+            $locations = $this->Ufile->Person->Location->find('list');
+            $this->set(compact('keywords', 'people', 'locations'));
         }
     }
 
     function results() {
         # TODO whitelist params
+        # is actually not that necessary: any not correct conditions will result in a faulty query with no results.
+        # CakePHP already handles SQL-injection anyway.
 
         $keywords = @$this->params['named']['keyword'];
+        $location_ids = @$this->params['named']['location_id'];
         unset($this->params['named']['keyword']);
+        unset($this->params['named']['location_id']);
 
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
@@ -149,12 +154,30 @@ class UfilesController extends AppController {
         ));
         $conditions = $this->params['named'];
         if (!empty($keyword_ids)) {
-            foreach (array_unique($keyword_ids, SORT_NUMERIC) as $keyword_id) {
-                $conditions[] = array('Ufilekeyword.keyword_id' => $keyword_id);
-            }
+            ## this actually doesn't work as planned, which is: to find all files tagged with multople tags
+            #foreach (array_unique($keyword_ids, SORT_NUMERIC) as $keyword_id) {
+            #    $conditions[] = array('Ufilekeyword.keyword_id' => );
+            #}
+            # this one finds all files that have either of the keywords
+            $conditions = array('Ufilekeyword.keyword_id' => array_unique($keyword_ids, SORT_NUMERIC));
         }
 
+        # when we query for locations, get the people involved
+        if (! empty($location_ids)) {
+            $loc_conds = array('Person.location_id' => $location_ids);
+            if (! empty($this->params['named']['person_id'])) {
+                $loc_conds[] = array('Person.id' => $this->params['named']['person_id']);
+            }
+
+            $person_ids = $this->Person->find('all', array(
+                'conditions' => $loc_conds,
+                'contain' => false
+            ));
+            $person_ids = Set::extract('/Person/id', $person_ids);
+            $conditions[] = array('Ufile.person_id' => $person_ids);
+        }
         # this query will not get all the keywords for the files selected, so only use this to get the ufile_id
+
         $this->Ufile->bindModel(array('hasOne' => array('Ufilekeyword')), false);
         $ufile_ids = $this->Ufile->find('all', array(
             'contain' => array('Ufilekeyword'),
