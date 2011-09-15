@@ -11,34 +11,14 @@
 			<?php echo $sample['Sample']['name']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Supplier'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sample['Sample']['supplier']; ?>
-			&nbsp;
-		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $sample['Sample']['created']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created By'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Plant'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sample['Sample']['created_by']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Mag'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sample['Sample']['mag']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Alias'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sample['Sample']['alias']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sample['Sample']['description']; ?>
+			<?php echo $this->Html->link($sample['Plant']['name'], array('controller' => 'plants', 'action' => 'view', $sample['Plant']['id'])); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -52,40 +32,46 @@
 		<li><?php echo $this->Html->link(__('New Sample', true), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Plants', true), array('controller' => 'plants', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Plant', true), array('controller' => 'plants', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php __('Related Plants');?></h3>
-	<?php if (!empty($sample['Plant'])):?>
+	<h3><?php __('Related Phenotypes');?></h3>
+	<?php if (!empty($sample['Phenotype'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
-		<th><?php __('Name'); ?></th>
-		<th><?php __('Aliquot'); ?></th>
-		<th><?php __('Culture Id'); ?></th>
-		<th><?php __('Created'); ?></th>
+		<th><?php __('Version'); ?></th>
+		<th><?php __('Object'); ?></th>
+		<th><?php __('Program Id'); ?></th>
+		<th><?php __('Date'); ?></th>
+		<th><?php __('Time'); ?></th>
 		<th><?php __('Sample Id'); ?></th>
+		<th><?php __('Invalid'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($sample['Plant'] as $plant):
+		foreach ($sample['Phenotype'] as $phenotype):
 			$class = null;
 			if ($i++ % 2 == 0) {
 				$class = ' class="altrow"';
 			}
 		?>
 		<tr<?php echo $class;?>>
-			<td><?php echo $plant['id'];?></td>
-			<td><?php echo $plant['name'];?></td>
-			<td><?php echo $plant['aliquot'];?></td>
-			<td><?php echo $plant['culture_id'];?></td>
-			<td><?php echo $plant['created'];?></td>
-			<td><?php echo $plant['sample_id'];?></td>
+			<td><?php echo $phenotype['id'];?></td>
+			<td><?php echo $phenotype['version'];?></td>
+			<td><?php echo $phenotype['object'];?></td>
+			<td><?php echo $phenotype['program_id'];?></td>
+			<td><?php echo $phenotype['date'];?></td>
+			<td><?php echo $phenotype['time'];?></td>
+			<td><?php echo $phenotype['sample_id'];?></td>
+			<td><?php echo $phenotype['invalid'];?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'plants', 'action' => 'view', $plant['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'plants', 'action' => 'edit', $plant['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'plants', 'action' => 'delete', $plant['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $plant['id'])); ?>
+				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotypes', 'action' => 'view', $phenotype['id'])); ?>
+				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'phenotypes', 'action' => 'edit', $phenotype['id'])); ?>
+				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'phenotypes', 'action' => 'delete', $phenotype['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $phenotype['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -94,7 +80,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New Plant', true), array('controller' => 'plants', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>

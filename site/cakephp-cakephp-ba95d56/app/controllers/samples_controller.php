@@ -26,6 +26,8 @@ class SamplesController extends AppController {
 				$this->Session->setFlash(__('The sample could not be saved. Please, try again.', true));
 			}
 		}
+		$plants = $this->Sample->Plant->find('list');
+		$this->set(compact('plants'));
 	}
 
 	function edit($id = null) {
@@ -44,6 +46,8 @@ class SamplesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Sample->read(null, $id);
 		}
+		$plants = $this->Sample->Plant->find('list');
+		$this->set(compact('plants'));
 	}
 
 	function delete($id = null) {
