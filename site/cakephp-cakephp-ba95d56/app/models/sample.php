@@ -3,9 +3,9 @@ class Sample extends AppModel {
 
 	var $name = 'Sample';
 
-	var $hasMany = array(
-		'Plant' => array(
-			'className' => 'Plant',
+    var $hasMany = array(
+        'Phenotype' => array(
+			'className' => 'Phenotype',
 			'foreignKey' => 'sample_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -16,6 +16,13 @@ class Sample extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		)
+	);
+
+	var $belongsTo = array(
+		'Plant' => array(
+			'className' => 'Plant',
+			'foreignKey' => 'plant_id',
 		)
 	);
 

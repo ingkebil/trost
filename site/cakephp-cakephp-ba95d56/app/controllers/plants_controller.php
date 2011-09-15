@@ -26,9 +26,8 @@ class PlantsController extends AppController {
 				$this->Session->setFlash(__('The plant could not be saved. Please, try again.', true));
 			}
 		}
-		$cultures = $this->Plant->Culture->find('list');
-		$samples = $this->Plant->Sample->find('list');
-		$this->set(compact('cultures', 'samples'));
+        $cultures = $this->Plant->Culture->find('list');
+        $this->set(compact('cultures'));
 	}
 
 	function edit($id = null) {
@@ -47,9 +46,8 @@ class PlantsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Plant->read(null, $id);
 		}
-		$cultures = $this->Plant->Culture->find('list');
-		$samples = $this->Plant->Sample->find('list');
-		$this->set(compact('cultures', 'samples'));
+        $cultures = $this->Plant->Culture->find('list');
+        $this->set(compact('cultures'));
 	}
 
 	function delete($id = null) {

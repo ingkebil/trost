@@ -7,7 +7,6 @@
 			<th><?php echo $this->Paginator->sort('aliquot');?></th>
 			<th><?php echo $this->Paginator->sort('culture_id');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('sample_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -22,13 +21,11 @@
 		<td><?php echo $plant['Plant']['id']; ?>&nbsp;</td>
 		<td><?php echo $plant['Plant']['name']; ?>&nbsp;</td>
 		<td><?php echo $plant['Plant']['aliquot']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($plant['Culture']['name'], array('controller' => 'cultures', 'action' => 'view', $plant['Culture']['id'])); ?>
-		</td>
+        <td>
+            <?php echo $this->Html->link($plant['Culture']['name'], array('controller' => 'cultures', 'action' => 'view', $plant['Culture']['id'])); ?>
+        </td>
+
 		<td><?php echo $plant['Plant']['created']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($plant['Sample']['name'], array('controller' => 'samples', 'action' => 'view', $plant['Sample']['id'])); ?>
-		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $plant['Plant']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $plant['Plant']['id'])); ?>
@@ -50,16 +47,4 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Plant', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Cultures', true), array('controller' => 'cultures', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Culture', true), array('controller' => 'cultures', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Samples', true), array('controller' => 'samples', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sample', true), array('controller' => 'samples', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

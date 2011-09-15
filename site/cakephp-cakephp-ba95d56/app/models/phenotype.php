@@ -12,7 +12,7 @@ class Phenotype extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'plant_id' => array(
+		'sample_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -44,9 +44,9 @@ class Phenotype extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Plant' => array(
-			'className' => 'Plant',
-			'foreignKey' => 'plant_id',
+		'Sample' => array(
+			'className' => 'Sample',
+			'foreignKey' => 'sample_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
