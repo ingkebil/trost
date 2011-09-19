@@ -87,7 +87,7 @@ class PhenotypesController extends AppController {
 
     function _save_upload($line, $program_id, $raw_id = null, $line_nr = null) {
         #init
-        $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $plant_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
+        $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $sample_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
 
         # split the line according to the program
         if ($program_id == 0) {
@@ -101,32 +101,33 @@ class PhenotypesController extends AppController {
             }
         }
         if ($program_id == 1) { # FastScore
-            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $plant_id, $attribute_number, $date, $time) = preg_split('/;|\t/', $line);
+            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $sample_id, $attribute_number, $date, $time) = preg_split('/;|\t/', $line);
         }
         elseif ($program_id == 2) { # Phenotyping
-            list($version, $object, $program, $plant_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
+            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
         }
         $date = $this->_convert_date($date);
+        $attribute_number = str_replace(',', '.', $attribute_number); # Germanify the number (this should be done easier somehow)
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
+        # actually wouldn't work! We need to look up each model id or it will be saved as a new entry
 
-        # insert the plant info # TODO we prolly need to check if the plant exists in LIMS
-        $plant = $this->Phenotype->Plant->find('first', array('conditions' => array('aliquot' => $plant_id)));
-        if (empty($plant)) {
-            $this->Phenotype->Plant->create();
-            $plant = $this->Phenotype->Plant->save(array(
-                'Plant' => array(
-                    'aliquot' => $plant_id,
-                    'culture_id' => $this->data['Plant']['culture_id'],
-                    'sample_id' => 1, # TODO remove this hardcoded value
+        # insert the sample info
+        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array('Sample.name' => $sample_id)));
+        if (empty($sample)) {
+            $this->Phenotype->Sample->create();
+            $sample = $this->Phenotype->Sample->save(array(
+                'Sample' => array(
+                    'name' => $sample_id,
+                    'plant_id' => 1, # will get connected once the propper component_id file is uploaded
                 )
             ));
-            if (empty($plant)) {
+            if (empty($sample)) {
                 $this->Phenotype->rollback();
-                $this->error_msg = 'No plant found!';
+                $this->error_msg = 'No sample found!';
                 return false;
             }
-            $plant['Plant']['id'] = $this->Phenotype->Plant->getLastInsertID();
+            $sample['Sample']['id'] = $this->Phenotype->Sample->getLastInsertID();
         }
         #else {
         #    $this->Phenotype->rollback();
@@ -135,10 +136,11 @@ class PhenotypesController extends AppController {
 
         # save the phenotyping info
         $this->Phenotype->create();
+        #$date = implode('-', array_reverse(explode('-', $date)));
         $phenotype = $this->Phenotype->save(array(
             'Phenotype' => array_merge(
                 compact('version', 'object', 'program_id', 'date', 'time'),
-                array('plant_id' => $plant['Plant']['id'])
+                array('sample_id' => $sample['Sample']['id'])
             )
         ));
         if (empty($phenotype)) {
@@ -183,7 +185,7 @@ class PhenotypesController extends AppController {
             'PhenotypeValue' => array(
                 'phenotype_id' => $this->Phenotype->getLastInsertID(),
                 'value_id' => $attribute_id,
-                'number' => $attribute_number
+                'number' => $attribute_number,
             )
         )))) {
             $this->Phenotype->rollback();
@@ -210,7 +212,7 @@ class PhenotypesController extends AppController {
     }
 
     /**
-     * Tries to detect and convert all dates to yyyy-mm-dd format.
+     * Tries to detect and convert dates to yyyy-mm-dd format.
      */
     function _convert_date($date) {
         list($year, $month, $day) = preg_split('/[^0-9]/', $date);
@@ -228,9 +230,9 @@ class PhenotypesController extends AppController {
         }
 
         # quick hack so that those ungly US noted dates are uploaded
-        $x = $month;
-        $month = $day;
-        $day = $x;
+        #$x = $month;
+        #$month = $day;
+        #$day = $x;
 
         #if ($day < 10) $day = "0$day";
         #if ($month < 10) $month = "0$month";
@@ -328,7 +330,7 @@ AND i18n2.locale = '$locale'
             $line .= ';'. @$this->data['PhenotypeValue']['value_id'];
             $line .= ';'. $this->data['Value']['attribute'];
             $line .= ';'. @$this->data['Value']['value'];
-            $line .= ';'. $this->data['Plant']['aliquot'];
+            $line .= ';'. $this->data['Sample']['name'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
             $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
             $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
@@ -337,7 +339,7 @@ AND i18n2.locale = '$locale'
             $line .= $this->data['Phenotype']['version'];
             $line .= ';'. $this->data['Phenotype']['object'];
             $line .= ';Phenotyping';
-            $line .= ';'. $this->data['Plant']['aliquot'];
+            $line .= ';'. $this->data['Sample']['name'];
             $line .= ';'. $this->data['PhenotypeBbch']['bbch'];
             $line .= ';'. @$this->data['Bbch']['name'];
             $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
@@ -349,6 +351,7 @@ AND i18n2.locale = '$locale'
             $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
+        pr($line);
 
         $this->Phenotype->begin();
         $phenotype_id = $this->_save_upload($line, $program_id);
@@ -434,7 +437,7 @@ AND i18n2.locale = '$locale'
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
-                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
+                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Sample', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
                 $this->set('lastinsertid', $phenotype_id);
             }
             else {
@@ -518,8 +521,8 @@ AND i18n2.locale = '$locale'
 			}
 		}
 		$programs = $this->Phenotype->Program->find('list');
-		$plants = $this->Phenotype->Plant->find('list');
-		$this->set(compact('programs', 'plants'));
+		$samples = $this->Phenotype->Sample->find('list');
+		$this->set(compact('programs', 'samples'));
 	}
 
 	function edit($id = null) {

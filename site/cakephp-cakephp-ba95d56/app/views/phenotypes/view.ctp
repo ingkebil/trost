@@ -21,9 +21,9 @@
 			<?php echo $phenotype['Phenotype']['time']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Plant'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sample'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($phenotype['Plant']['name'], array('controller' => 'plants', 'action' => 'view', $phenotype['Plant']['id'])); ?>
+			<?php echo $this->Html->link($phenotype['Sample']['name'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Entity'); ?></dt>

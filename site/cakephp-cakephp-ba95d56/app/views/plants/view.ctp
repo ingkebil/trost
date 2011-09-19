@@ -27,7 +27,6 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
 <?php if (!empty($plant['Sample'])):?>
     <div class="related">
 	<h3><?php __('Related Samples');?></h3>
@@ -62,3 +61,4 @@
 	</table>
     </div>
 <?php endif; ?>
+</div>

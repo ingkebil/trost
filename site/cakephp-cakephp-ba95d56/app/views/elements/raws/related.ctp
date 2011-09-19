@@ -45,7 +45,7 @@
 			<td><?php echo $phenotype['program_id'];?></td>
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
-			<td><?php echo $phenotype['Plant']['name'];?></td>
+			<td><?php echo $phenotype['Sample']['name'];?></td>
 			<td><?php echo $phenotype['Entity'][0]['name'];?></td>
 			<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
 			<td><?php echo $phenotype['Value'][0]['value'];?></td>

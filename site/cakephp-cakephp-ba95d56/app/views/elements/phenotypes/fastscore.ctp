@@ -92,7 +92,7 @@
         echo $this->Form->hidden('Value.attribute');
         echo $this->Form->input('_Value.value', array('disabled' => 'disabled'));
         echo $this->Form->hidden('Value.value');
-        echo $this->Form->input('Plant.aliquot');
+        echo $this->Form->input('Sample.name');
         echo $this->Form->input('PhenotypeValue.number');
         echo $this->Form->input('Phenotype.date');
         echo $this->Form->input('Phenotype.time');
@@ -108,7 +108,7 @@
         ));
         #echo $this->Form->input('Value.value');
         echo $this->Form->input('PhenotypeValue.value_id');
-        echo $this->Form->input('Plant.aliquot');
+        echo $this->Form->input('Sample.name');
         echo $this->Form->input('PhenotypeValue.number');
         echo $this->Form->input('Phenotype.date');
         echo $this->Form->input('Phenotype.time');

@@ -18,7 +18,7 @@ class RawsController extends AppController {
 			$this->Session->setFlash(__('Invalid raw', true));
 			$this->redirect(array('action' => 'index'));
 		}
-        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
+        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Sample', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
 	}
 
 	function add() {

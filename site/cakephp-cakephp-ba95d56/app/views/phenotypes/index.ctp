@@ -12,7 +12,7 @@
 			<th><?php echo $this->Paginator->sort('program_id');?></th>
 			<th><?php echo $this->Paginator->sort('date');?></th>
 			<th><?php echo $this->Paginator->sort('time');?></th>
-			<th><?php echo $this->Paginator->sort('plant_id');?></th>
+			<th><?php echo $this->Paginator->sort('sample_id');?></th>
             <th><?php __('Entity'); ?></th>
             <th><?php __('Attribute'); ?></th>
             <th><?php __('Value'); ?></th>
@@ -40,7 +40,7 @@
 		<td><?php echo $phenotype['Phenotype']['date']; ?>&nbsp;</td>
 		<td><?php echo $phenotype['Phenotype']['time']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($phenotype['Plant']['name'], array('controller' => 'plants', 'action' => 'view', $phenotype['Plant']['id'])); ?>
+			<?php echo $this->Html->link($phenotype['Sample']['name'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample']['id'])); ?>
 		</td>
 		<td><?php echo $phenotype['Entity'][0]['name'];?></td>
 		<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
