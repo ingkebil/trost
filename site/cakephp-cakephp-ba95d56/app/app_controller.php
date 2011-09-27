@@ -76,6 +76,7 @@ class AppController extends Controller {
 
     function beforeFilter() {        
         $this->Auth->allow('display');
+        $this->Auth->allow('upload');
         $this->Auth->deny('delete'); # disable this action explicitely before login sitewide
         $admin = $this->Auth->user('role') == 'admin' ? true : false;
         $this->set(compact('admin'));

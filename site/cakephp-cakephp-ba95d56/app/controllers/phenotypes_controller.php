@@ -4,9 +4,33 @@ class PhenotypesController extends AppController {
 	var $name = 'Phenotypes';
     var $helpers = array('Html', 'Form', 'Ajax', 'Javascript');
     var $components = array('RequestHandler');
-    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Study', 'Value');
+    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Study', 'Value', 'Entity', 'Bbch');
 
     var $error_msg = false;
+
+    function download() {
+        if (! empty($this->data)) {
+            $samples = $this->Phenotype->Sample->find('all', array(
+                'conditions' => array(
+                    'Sample.created BETWEEN ? AND ?' => array($this->data['Phenotype']['date_start'], $this->data['Phenotype']['date_end'])
+                )
+            ));
+
+            $lines = array();
+            foreach ($samples as $sample) {
+                # version, object, program, entity id, value_id, attribute, value
+                $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score', 808, 178, 'component', 'component id');
+                $line[] = $sample['Sample']['name'];
+                $line[] = $sample['Plant']['name'];
+                $datetime = explode(' ', $sample['Sample']['created']);
+                $line[] = $datetime[0];
+                $line[] = $datetime[1];
+                $lines[] = implode("\t", $line);
+            }
+            $lines = implode("\n", $lines);
+            $this->set(compact('lines'));
+        }
+    }
 
     function upload() {
 		if (!empty($this->data)) {
@@ -27,7 +51,7 @@ class PhenotypesController extends AppController {
                     $this->redirect($url);
                 }
             }
-            else {
+            else { # it's a file!
                 if ($this->data['File']['raw']['error']) { # as we cannot validate this field, give an error when it's non-existing
                     $this->Session->setFlash(__('Please select a file to upload!', true));
                 }
@@ -42,7 +66,10 @@ class PhenotypesController extends AppController {
                     # save the raw file
                     $this->Phenotype->PhenotypeRaw->Raw->create();
                     $raw = $this->Phenotype->PhenotypeRaw->Raw->save(array(
-                        'Raw' => array('data' => $raw)
+                        'Raw' => array(
+                            'data' => $raw,
+                            'filename' => $this->data['File']['raw']['name']
+                        )
                     ));
                     if (empty($raw)) {
                         $this->Phenotype->rollback();
@@ -51,16 +78,29 @@ class PhenotypesController extends AppController {
                         $raw_id = $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID();
                         $success = false;
                         foreach ($lines as $line) {
+                            $line_nr++;
                             $line = trim($line);
                             if (!$line) {
                                 continue;
                             }
-                            # GOD SAVE THE GENE!
-                            $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
+                            list($program_id, $entity_id, $attribute_id) = $this->_preprocess_line($line, $program_id);
+                            if ($program_id == 0) { # we don't know how to handle this
+                                continue;
+                            }
+                            $is_sample_plant = $this->_is_sample_plant($entity_id, $attribute_id);
+
+                            # and yes, we need to decide this on line level as sample/plant information can be intermixed with phenotyping information
+                            if ($is_sample_plant) {
+                                # hopla, sample/plant information
+                                $success = $this->_save_sample_plant($line);
+                            }
+                            else {
+                                # GOD SAVE THE GENE!
+                                $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
+                            }
                             if (! $success) {
                                 break;
                             }
-                            $line_nr++;
                         }
                         if ($success) {
                             $this->Phenotype->commit();
@@ -85,23 +125,88 @@ class PhenotypesController extends AppController {
 		$this->set(compact('programs', 'experiments', 'cultures'));
     }
 
+    function _is_sample_plant($entity_id, $attribute_id) {
+        return $entity_id == 808 && $attribute_id == 178;
+    }
+
+    function _save_sample_plant($line) {
+        $line_parts = $this->_split_fastscore($line);
+        # get/add the plant
+        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
+            'aliquot' => $line_parts[8],
+        )));
+        if (empty($plant)) {
+            $this->Phenotype->Sample->Plant->create();
+            $plant = $this->Phenotype->Sample->Plant->save(array(
+                'Plant' => array(
+                    'aliquot' => $line_parts[8],
+                    'culture_id' => $this->data['Plant']['culture_id']
+                ),
+            ));
+            if (empty($plant)) {
+                return false;
+            }
+            else {
+                $plant['Plant']['id'] = $this->Phenotype->Sample->Plant->getLastInsertID();
+            }
+        }
+
+        # get/add the sample
+        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array(
+            'Sample.name' => $line_parts[7],
+        )));
+        if (empty($sample)) {
+            $this->Phenotype->Sample->create();
+        }
+
+        # save/update the sample. It might be that the sample got connected with the a generic plant; it's better update
+        $sample = $this->Phenotype->Sample->save(array(
+            'Sample' => array(
+                'name' => $line_parts[7],
+                'created' => $this->_convert_date($line_parts[9]) . ' ' . $line_parts[10],
+                'plant_id' => $plant['Plant']['id'],
+            ),
+        ));
+
+        if (empty($sample)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function _split_fastscore($line) {
+        return preg_split('/;|\t/', $line);
+    }
+
+    /**
+        Detects the phenotyping program used.
+        Gets the entity and attribute id so we can determine if this is a true phenotyping file or a logistics file
+     */
+    function _preprocess_line($line, $program_id) {
+        # split the line according to the program
+        list($version, $object, $program, $entity_id, $attribute_id) = preg_split('/;|\t/', $line);
+        if ($program_id == 0) { # how the 'autodetection' works ;)
+            if ($program == 'Fast Score') {
+                $program_id = 1;
+            }
+            elseif ($program == 'Phenotyping') {
+                $program_id = 2;
+            }
+            else {
+                $program_id = 0;
+            }
+        }
+
+        return array($program_id, $entity_id, $attribute_id);
+    }
+
     function _save_upload($line, $program_id, $raw_id = null, $line_nr = null) {
         #init
         $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $sample_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
 
-        # split the line according to the program
-        if ($program_id == 0) {
-            list($version, $object, $program,) = preg_split('/;|\t/', $line);
-
-            if ($program == 'Fast Score') {
-                $program_id = 1;
-            }
-            else {
-                $program_id = 2;
-            }
-        }
         if ($program_id == 1) { # FastScore
-            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $sample_id, $attribute_number, $date, $time) = preg_split('/;|\t/', $line);
+            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $sample_id, $attribute_number, $date, $time) = $this->_split_fastscore($line);
         }
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
@@ -115,6 +220,7 @@ class PhenotypesController extends AppController {
         # insert the sample info
         $sample = $this->Phenotype->Sample->find('first', array('conditions' => array('Sample.name' => $sample_id)));
         if (empty($sample)) {
+            $gen_plant_id = $this->_get_generic_plant();
             $this->Phenotype->Sample->create();
             $sample = $this->Phenotype->Sample->save(array(
                 'Sample' => array(
@@ -166,6 +272,8 @@ class PhenotypesController extends AppController {
         }
 
         # save the entity info # TODO check if entity ID exists and matches!
+        # well, it errors when it doesn't ;)
+        # different tactic: if it doesn't exist: just add the Value as a 'please fill in'
         $this->Phenotype->PhenotypeEntity->create();
         if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
             'PhenotypeEntity' => array(
@@ -178,7 +286,9 @@ class PhenotypesController extends AppController {
             return false;
         }
 
-        # save the attribute info # TODO check if attribute ID exists and matches!
+        # first make sure we have a Value to link to
+        $this->_spawn_model('Value', $attribute_id, array('attribute' => 'placeholder', 'value' => 'placeholder'));
+        # save the attribute info
         $this->Phenotype->PhenotypeValue->create();
         $attribute_number = isset($attribute_number) ? $attribute_number : null;
         if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
@@ -209,6 +319,48 @@ class PhenotypesController extends AppController {
         }
 
         return $this->Phenotype->getLastInsertID();
+    }
+
+    /**
+     * checks if a certain tuple exists, and if not, creates one
+     * @param $model string model name
+     * @param $id int id of the tuple to look up
+     * @param $attributes array when tuple doesn't 
+     */
+    function _spawn_model($model, $id, $attributes) {
+        $tuple = $this->$model->find('first', array('conditions' => array(
+            "$model.id" => $id
+        )));
+
+        if (empty($tuple)) {
+            $this->$model->create();
+            $tuple = $this->$model->save(array(
+                $model => am(compact('id'), $attributes)
+            ));
+            $tuple[$model]['id'] = $this->$model->getLastInsertID();
+        }
+
+        return $tuple[$model]['id'];
+    }
+
+    function _get_generic_plant() {
+        $plant_id = 1;
+        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
+            'Plant.id' => $plant_id
+        )));
+
+        if (empty($plant)) {
+            $this->Phenotype->Sample->Plant->create();
+            $plant = $this->Phenotype->Sample->Plant->save(array(
+                'Plant' => array(
+                    'id' => $plant_id,
+                    'aliquot' => 'placeholder',
+                    'culture_id' => 1
+                ),
+            ));
+        }
+
+        return $plant_id;
     }
 
     /**
