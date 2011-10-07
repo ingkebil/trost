@@ -41,5 +41,7 @@ class PhenotypeBbch extends AppModel {
 			'order' => ''
 		)
 	);
+
+    var $actsAs = array('Containable');
 }
 ?>

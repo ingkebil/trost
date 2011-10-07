@@ -1,6 +1,7 @@
 <?php
 class Phenotype extends AppModel {
 	var $name = 'Phenotype';
+    var $actsAs = array('Containable');
 	var $validate = array(
 		'program_id' => array(
 			'numeric' => array(

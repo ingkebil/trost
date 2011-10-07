@@ -2,6 +2,7 @@
 class RawsController extends AppController {
 
 	var $name = 'Raws';
+    var $uses = array('Raw', 'PhenotypeRaw');
     var $helpers = array('Javascript', 'Ajax');
 
 	function index() {
@@ -10,7 +11,19 @@ class RawsController extends AppController {
             'contain' => array('Phenotype'),
         );
         $this->Raw->cacheQueries = true;
-        $this->set('raws', $this->paginate('Raw'));
+        $raws = $this->paginate('Raw');
+
+        # do some counts
+        $dates = array(); # to get a date range
+        foreach ($raws as &$raw) {
+            $raw['Phenotype']['count']['bbch']   = $this->Raw->count_bbch($raw['Raw']['id']);
+            $raw['Phenotype']['count']['sample'] = $this->Raw->count_sample($raw['Raw']['id']);
+            $raw['Phenotype']['count']['value']  = $this->Raw->count_value($raw['Raw']['id']);
+            $raw['Phenotype']['count']['entity'] = $this->Raw->count_entity($raw['Raw']['id']);
+            $raw['Phenotype']['daterange'] = $this->Raw->find_phenotype_daterange($raw['Raw']['id']);
+            $raw['Phenotype']['count']['new_sample'] = $this->Raw->contains_sampleplant($raw['Raw']['id']);
+        }
+        $this->set(compact('raws'));
 	}
 
 	function view($id = null) {

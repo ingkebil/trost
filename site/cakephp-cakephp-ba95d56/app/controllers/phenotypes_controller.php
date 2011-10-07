@@ -90,15 +90,15 @@ class PhenotypesController extends AppController {
                             $is_sample_plant = $this->_is_sample_plant($entity_id, $attribute_id);
 
                             # and yes, we need to decide this on line level as sample/plant information can be intermixed with phenotyping information
+                            $sp_success = true;
                             if ($is_sample_plant) {
                                 # hopla, sample/plant information
-                                $success = $this->_save_sample_plant($line);
+                                $sp_success = $this->_save_sample_plant($line);
                             }
-                            else {
-                                # GOD SAVE THE GENE!
-                                $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
-                            }
-                            if (! $success) {
+
+                            # GOD SAVE THE GENE!
+                            $success = $this->_save_upload($line, $program_id, $raw_id, $line_nr);
+                            if (! ($success && $sp_success)) {
                                 break;
                             }
                         }
@@ -211,12 +211,128 @@ class PhenotypesController extends AppController {
         elseif ($program_id == 2) { # Phenotyping
             list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
         }
+        elseif ($program_id == 3) { # BBCH
+            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time) = preg_split('/;|\t/', $line);
+        }
         $date = $this->_convert_date($date);
         $attribute_number = str_replace(',', '.', $attribute_number); # Germanify the number (this should be done easier somehow)
 
         # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
         # actually wouldn't work! We need to look up each model id or it will be saved as a new entry
 
+        $sample = $this->_get_sample($sample_id);
+        $phenotype = $this->_save_phenotype(am(array('sample_id' => $sample['Sample']['id']), compact('program_id', 'version', 'object', 'date', 'time' )));
+
+        if ($raw_id) { # if it doesn't exist
+            $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
+        }
+
+        $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
+        $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
+
+        if ($program_id != 1) {
+            $this->_save_bbch($bbch_id, $phenotype['Phenotype']['id']);
+        }
+
+        return $this->Phenotype->getLastInsertID();
+    }
+
+    function _save_bbch($bbch_id, $ph_id, $species_id = 1) {
+        # look the right code up (as bbch_id != bbch.id)
+        $bbch = $this->Phenotype->PhenotypeBbch->Bbch->find('first', array('conditions' => array('bbch' => $bbch_id)));
+        if (empty($bbch)) { # oops. Let's create a placeholder instead
+            $this->Phenotype->PhenotypeBbch->Bbch->save(array(
+                'Bbch' => array(
+                    'name' => 'Placeholder',
+                    'bbch' => $bbch_id,
+                    'species_id' => $species_id,
+                ),
+            ));
+        }
+        $this->Phenotype->PhenotypeBbch->create();
+        $ph_bbch = $this->Phenotype->PhenotypeBbch->save(array(
+            'PhenotypeBbch' => array(
+                'phenotype_id' => $ph_id,
+                'bbch_id' => $bbch['Bbch']['id'],
+            )
+        ));
+    }
+
+    function _save_value($attribute_id, $attribute_number = null, $ph_id) {
+        # first make sure we have a Value to link to
+        $this->_spawn_model('Value', $attribute_id, array('attribute' => 'placeholder', 'value' => 'placeholder'));
+        # save the attribute info
+        $this->Phenotype->PhenotypeValue->create();
+        $attribute_number = ! is_null($attribute_number) ? $attribute_number : null;
+        if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
+            'PhenotypeValue' => array(
+                'phenotype_id' => $this->Phenotype->getLastInsertID(),
+                'value_id' => $attribute_id,
+                'number' => $attribute_number,
+            )
+        )))) {
+            $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create PhenotypeValue!';
+            return false;
+        }
+    }
+
+    function _save_entity($entity_id, $ph_id) {
+        # save the entity info # TODO check if entity ID exists and matches!
+        # well, it errors when it doesn't ;)
+        # different tactic: if it doesn't exist: just add the Value as a 'please fill in'
+        $this->Phenotype->PhenotypeEntity->create();
+        if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
+            'PhenotypeEntity' => array(
+                'phenotype_id' => $ph_id,
+                'entity_id' => $entity_id,
+            )
+        )))) {
+            $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create PhenotypeEntity!';
+            return false;
+        }
+
+    }
+
+    function _save_raw($raw_id, $ph_id, $line_nr) {
+        # connect this line with the raw file
+        $this->Phenotype->PhenotypeRaw->create();
+        if( ! ($ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
+            'PhenotypeRaw' => array(
+                'raw_id' => $raw_id,
+                'phenotype_id' => $ph_id,
+                'line_nr' => $line_nr,
+            )
+        )))) {
+            $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create phenotyeRaw!';
+            return false;
+        }
+
+        return $raw;
+    }
+
+    function _save_phenotype($tuples) {
+        # save the phenotyping info
+        $this->Phenotype->create();
+        #$date = implode('-', array_reverse(explode('-', $date)));
+        $phenotype = $this->Phenotype->save(array(
+            'Phenotype' => $tuples, # version, object, program_id, date, time, sample_id
+        ));
+        if (empty($phenotype)) {
+            $this->Phenotype->rollback();
+            $this->error_msg = 'Failed to create Phenotype!';
+            return false;
+        }
+        else {
+            $phenotype['Phenotype']['id'] = $this->Phenotype->getLastInsertID();
+        }
+
+        return $phenotype;
+    }
+
+    function _get_sample($sample_id) {
         # insert the sample info
         $sample = $this->Phenotype->Sample->find('first', array('conditions' => array('Sample.name' => $sample_id)));
         if (empty($sample)) {
@@ -225,7 +341,7 @@ class PhenotypesController extends AppController {
             $sample = $this->Phenotype->Sample->save(array(
                 'Sample' => array(
                     'name' => $sample_id,
-                    'plant_id' => 1, # will get connected once the propper component_id file is uploaded
+                    'plant_id' => $gen_plant_id, # will get connected once the propper component_id file is uploaded
                 )
             ));
             if (empty($sample)) {
@@ -240,85 +356,7 @@ class PhenotypesController extends AppController {
         #    return false;
         #}
 
-        # save the phenotyping info
-        $this->Phenotype->create();
-        #$date = implode('-', array_reverse(explode('-', $date)));
-        $phenotype = $this->Phenotype->save(array(
-            'Phenotype' => array_merge(
-                compact('version', 'object', 'program_id', 'date', 'time'),
-                array('sample_id' => $sample['Sample']['id'])
-            )
-        ));
-        if (empty($phenotype)) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create Phenotype!';
-            return false;
-        }
-
-        if ($raw_id) {
-            # connect this line with the raw file
-            $this->Phenotype->PhenotypeRaw->create();
-            if( ! ($ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
-                'PhenotypeRaw' => array(
-                    'raw_id' => $raw_id,
-                    'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                    'line_nr' => $line_nr,
-                )
-            )))) {
-                $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create phenotyeRaw!';
-                return false;
-            }
-        }
-
-        # save the entity info # TODO check if entity ID exists and matches!
-        # well, it errors when it doesn't ;)
-        # different tactic: if it doesn't exist: just add the Value as a 'please fill in'
-        $this->Phenotype->PhenotypeEntity->create();
-        if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
-            'PhenotypeEntity' => array(
-                'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                'entity_id' => $entity_id
-            )
-        )))) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create PhenotypeEntity!';
-            return false;
-        }
-
-        # first make sure we have a Value to link to
-        $this->_spawn_model('Value', $attribute_id, array('attribute' => 'placeholder', 'value' => 'placeholder'));
-        # save the attribute info
-        $this->Phenotype->PhenotypeValue->create();
-        $attribute_number = isset($attribute_number) ? $attribute_number : null;
-        if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
-            'PhenotypeValue' => array(
-                'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                'value_id' => $attribute_id,
-                'number' => $attribute_number,
-            )
-        )))) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create PhenotypeValue!';
-            return false;
-        }
-
-        # save the BBCH info # TODO check if BBCH ID exists and matches!
-        if ($program_id != 1) { # only add it if we have a bbch_code
-            # look the right code up (as bbch_id != bbch.id)
-            $bbch = $this->Phenotype->PhenotypeBbch->Bbch->find('first', array('conditions' => array('bbch' => $bbch_id)));
-            if ( ! empty($bbch)) {
-                $this->Phenotype->PhenotypeBbch->create();
-                $ph_bbch = $this->Phenotype->PhenotypeBbch->save(array(
-                    'PhenotypeBbch' => array(
-                        'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                        'bbch_id' => $bbch['Bbch']['id'],
-                    )
-                ));
-            }
-        }
-
-        return $this->Phenotype->getLastInsertID();
+        return $sample;
     }
 
     /**

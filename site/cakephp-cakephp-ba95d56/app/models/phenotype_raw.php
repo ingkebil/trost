@@ -1,6 +1,7 @@
 <?php
 class PhenotypeRaw extends AppModel {
 	var $name = 'PhenotypeRaw';
+    var $actsAs = array('Containable');
 	var $validate = array(
 		'phenotype_id' => array(
 			'numeric' => array(

@@ -4,6 +4,11 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('Phenotype.date');?></th>
+            <th># <?php __('samples'); ?></td>
+            <th># <?php __('entities'); ?></td>
+            <th># <?php __('values'); ?></td>
+            <th># <?php __('bbches'); ?></td>
+            <th># <?php __('new samples'); ?></td>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -16,7 +21,22 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $raw['Raw']['id']; ?>&nbsp;</td>
-		<td><?php echo $raw['Phenotype'][0]['date']; ?>&nbsp;</td>
+        <td><?php if (! empty($raw['Phenotype']['daterange']['mindate'])) {
+            echo $raw['Phenotype']['daterange']['mindate']; 
+            if ($raw['Phenotype']['daterange']['mindate'] != $raw['Phenotype']['daterange']['maxdate']) {
+                echo ' > ';
+                echo $raw['Phenotype']['daterange']['maxdate']; 
+            }
+        }
+        else {
+            echo __('No lines found', true);
+        } ?>&nbsp;
+        </td>
+        <td><?php echo $raw['Phenotype']['count']['sample']; ?></td>
+        <td><?php echo $raw['Phenotype']['count']['entity']; ?></td>
+        <td><?php echo $raw['Phenotype']['count']['value']; ?></td>
+        <td><?php echo $raw['Phenotype']['count']['bbch']; ?></td>
+        <td><?php echo $raw['Phenotype']['count']['new_sample']; ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $raw['Raw']['id'])); ?>
             <?php if ($this->Session->check('user')): ?>
