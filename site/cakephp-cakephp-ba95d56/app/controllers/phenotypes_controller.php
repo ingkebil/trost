@@ -201,7 +201,7 @@ class PhenotypesController extends AppController {
         return array($program_id, $entity_id, $attribute_id);
     }
 
-    function _save_upload($line, $program_id, $raw_id = null, $line_nr = null) {
+    function _save_upload($line, $program_id, $raw_id, $line_nr) {
         #init
         $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $sample_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
 
@@ -222,11 +222,7 @@ class PhenotypesController extends AppController {
 
         $sample = $this->_get_sample($sample_id);
         $phenotype = $this->_save_phenotype(am(array('sample_id' => $sample['Sample']['id']), compact('program_id', 'version', 'object', 'date', 'time' )));
-
-        if ($raw_id) { # if it doesn't exist
-            $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
-        }
-
+        $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
         $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
         $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
 
@@ -310,7 +306,7 @@ class PhenotypesController extends AppController {
             return false;
         }
 
-        return $raw;
+        return $ph_raw;
     }
 
     function _save_phenotype($tuples) {
@@ -541,16 +537,10 @@ AND i18n2.locale = '$locale'
             $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
-        pr($line);
 
         $this->Phenotype->begin();
-        $phenotype_id = $this->_save_upload($line, $program_id);
-        if (!$phenotype_id) {
-            $this->Phenotype->rollback();
-            return false;
-        }
-
-        # now also save the RAW
+        # save the RAW
+        $raw = null;
         if ($this->data['PhenotypeRaw']['raw_id']) { # ow, we already saved it, so read it and append
             # read it in
             $raw = $this->Phenotype->PhenotypeRaw->Raw->read(null, $this->data['PhenotypeRaw']['raw_id']);
@@ -560,10 +550,12 @@ AND i18n2.locale = '$locale'
         else {
             $raw['Raw']['data'] = $line;
         }
+        $line_nr = 1;
         if ($this->Phenotype->PhenotypeRaw->Raw->save($raw)) {
-            $line_nr = 1;
             if (!empty($raw['PhenotypeRaw'])) {
-                # first get the last line_nr by reverse sorting them (there actually is no reason why this shouldn't be just the last record in the PhenotypeRaw model of a certain Raw?)
+                # first get the last line_nr by reverse sorting them 
+                # (there actually is no reason why this shouldn't be
+                # just the last record in the PhenotypeRaw model of a certain Raw?)
                 usort($raw['PhenotypeRaw'], create_function(
                     '$a,$b',
                     'if ($a["line_nr"] == $b["line_nr"]) { return 0; }
@@ -577,15 +569,9 @@ AND i18n2.locale = '$locale'
             }
         }
 
-        if ($this->Phenotype->PhenotypeRaw->save(array('PhenotypeRaw' => array(
-            'id' => null,
-            'phenotype_id' => $phenotype_id,
-            'raw_id' => $raw['Raw']['id'],
-            'line_nr' => ++$line_nr,
-        )))) {
-            $this->data['PhenotypeRaw']['raw_id'] = $raw['Raw']['id'];
-        }
-        else {
+        # save the line
+        $phenotype_id = $this->_save_upload($line, $program_id, $raw['Raw']['id'], ++$line_nr);
+        if (!$phenotype_id) {
             $this->Phenotype->rollback();
             return false;
         }
@@ -611,12 +597,6 @@ AND i18n2.locale = '$locale'
         if (!empty($this->data) and isset($this->data['Form']['posted'])) {
             $this->Phenotype->begin();
             if (list($phenotype_id, $raw_id) = $this->_save_manualupload($program_id)) {
-                #$this->Session->setFlash(
-                #    __('The phenotype has been saved.', true),
-                #    'flashedit',
-                #    array('id' => $phenotype_id, 'controller' => $this->name, 'action' => 'invalidate', 'edit_message' => __('Invalidate?', true)),
-                #    'edit'
-                #); # we don't really need the flash if we get a list of entered values already
                 $this->Phenotype->commit();
                 #unset($this->data['PhenotypeEntity']['entity_id']);
                 #unset($this->data['PhenotypeValue']['value_id']);
@@ -624,10 +604,11 @@ AND i18n2.locale = '$locale'
                 unset($this->data['PhenotypeValue']['Number']);
                 unset($this->data['Phenotype']['time']);
                 unset($this->data['Form']['posted']);
+                $this->data['PhenotypeRaw']['raw_id'] = $raw_id;
                 if ($this->data['Form']['lastone'] == 1) {
                     $this->redirect(array('controller' => 'raws', 'action'=>'view', $raw_id));
                 }
-                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('id' => $raw_id), 'contain' => array('Phenotype.Sample', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
+                $this->set('phenotypes', $this->Phenotype->PhenotypeRaw->Raw->find('first', array('conditions' => array('Raw.id' => $raw_id), 'contain' => array('Phenotype.Sample', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
                 $this->set('lastinsertid', $phenotype_id);
             }
             else {
