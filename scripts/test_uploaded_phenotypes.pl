@@ -12,15 +12,16 @@ my $dbi;
 
 sub run {
     opendir(D, $ARGV[0]);
-    my @files = grep { /[^.]/ } readdir D;
+    my @files = sort grep { /[^.]/ } grep { !-d } readdir D;
     close D;
+
 
     my $counts_of = {}; # { filename => { comp => 0, noncomp => 0 }}
 
     if (scalar(@files)) {
         $dbi = DBI->connect('dbi:mysql:database=trost;host=localhost', 'trost', 'passwordpas');
         &test_file_count(\@files);
-        my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT filename, count(*) as noncomp FROM raws JOIN phenotype_raws ON raw_id = raws.id GROUP BY filename}, 'filename');
+        my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT filename, count(*) as phen_samples,  count(distinct phenotypes.sample_id) as uniq_phen_samples FROM raws JOIN phenotype_raws ON raw_id = raws.id join phenotypes on phenotypes.id = phenotype_raws.phenotype_id GROUP BY filename}, 'filename');
         print "FILENAME:\t\t\tDBI\t\t!COMP\t\tBBCH\t\tCOMP\t\tPLANTS\t\tSAMPLES\n";
         for my $file (@files) {
             # next if $file ne 'trost_010611_3.txt';
@@ -37,7 +38,9 @@ sub run {
             $counts_of->{ $file }->{ total   } = scalar @lines;
             $counts_of->{ $file }->{ plants  } = {};
             $counts_of->{ $file }->{ samples } = {};
-            $counts_of->{ $file }->{ phen_samples } = {};
+            $counts_of->{ $file }->{ bbch_samples } = {}; # the sample ids when a line has BBCH program
+            $counts_of->{ $file }->{ phen_samples } = {}; # the sample ids when a line has Fast Score program (without sample/plant files)
+            $counts_of->{ $file }->{ comp_samples } = {}; # the sample ids for sample/plants files
 
             # count the plants and samples (as explicitely mentioned in the file)
             if (scalar @comp) {
@@ -54,9 +57,26 @@ sub run {
                 my @sample_name = split /;/, $line;
                 $counts_of->{ $file }->{ phen_samples }->{ $sample_name[7] } = 1;
             }
+            for my $line (@bbch) {
+                my @sample_name = split /;/, $line;
+                $counts_of->{ $file }->{ bbch_samples }->{ $sample_name[3] } = 1;
+            }
+            for my $line (@comp) {
+                my @sample_name = split /;/, $line;
+                $counts_of->{ $file }->{ comp_samples }->{ $sample_name[7] } = 1;
+            }
 
-            my $dbi_count = defined $dbi_counts_of->{ $file }->{ noncomp } ? $dbi_counts_of->{ $file }->{ noncomp } : 0;
-            if ($dbi_count + $counts_of->{ $file }->{ bbch } != $counts_of->{ $file }->{ noncomp }) {
+            #test
+            #for my $line (@lines) {
+            #    my @sample_name = split /;/, $line;
+            #    if ($sample_name[7] eq '22' || $sample_name[3] eq '22') {
+            #        print $file, ': ', $line;
+            #    }
+            #}
+
+
+            my $dbi_count = defined $dbi_counts_of->{ $file }->{ phen_samples } ? $dbi_counts_of->{ $file }->{ phen_samples } : 0;
+            if ($dbi_count != $counts_of->{ $file }->{ total }) {
                 print '*';
             }
 
@@ -78,7 +98,7 @@ sub run {
         print &count_uniq_pheno_samples($counts_of);
         print ' = ';
         print &count_uniq_pheno_dbi_samples(), "\n";
-        print "# DBI samples = # uniq phen samples + # unconnected samples\n";
+        print "# DBI samples = # uniq phen samples + # unconnected DBI samples\n";
         print &count_dbi_samples();
         print ' = ';
         print &count_uniq_pheno_samples($counts_of);
@@ -87,11 +107,54 @@ sub run {
         print "# samples = # uniq samples\n";
         print &count_samples($counts_of);
         print ' = ';
-        print &count_uniq_samples($counts_of);
+        print &count_uniq_samples($counts_of), "\n";
+        print "# lines = # DBI phenotypes = # DBI summed phen\n";
+        print &count_lines($counts_of);
+        print ' = ';
+        print &count_dbi_phenotypes();
+        print ' = ';
+        print &sum_dbi_phen_samples($dbi_counts_of), "\n";
 
         print "\n\n\n\n";
-        print Dumper &list_samples_not_db(&list_uniq_pheno_samples($counts_of));
+        #print Dumper &list_samples_not_db(&list_uniq_pheno_samples($counts_of));
     }
+}
+
+sub sum_dbi_phen_samples {
+    my $dbi_counts_of = $_[0];
+
+    my $total = 0;
+    for my $file (keys %$dbi_counts_of) {
+        $total += $dbi_counts_of->{ $file }->{ phen_samples };
+    }
+
+    return $total;
+}
+
+sub sum_dbi_uniq_phen_samples {
+    my $dbi_counts_of = $_[0];
+
+    my $total = 0;
+    for my $file (keys %$dbi_counts_of) {
+        $total += $dbi_counts_of->{ $file }->{ uniq_phen_samples };
+    }
+
+    return $total;
+}
+
+sub count_dbi_phenotypes {
+    return $dbi->selectrow_arrayref(q{SELECT count(*) from phenotypes})->[0];
+}
+
+sub count_lines {
+    my $counts_of = $_[0];
+
+    my $total = 0;
+    for my $file (keys %$counts_of) {
+        $total += $counts_of->{ $file }->{ total };
+    }
+
+    return $total;
 }
 
 sub count_unconnected_samples {
@@ -170,10 +233,58 @@ sub list_uniq_pheno_samples {
         for my $phen (keys %{ $counts_of->{ $file }->{ phen_samples } }) {
             $uniq->{ $phen } += 1;
         }
+        for my $phen (keys %{ $counts_of->{ $file }->{ bbch_samples } }) {
+            $uniq->{ $phen } += 1;
+        }
+        for my $phen (keys %{ $counts_of->{ $file }->{ comp_samples } }) {
+            $uniq->{ $phen } += 1;
+        }
     }
 
     my @uniq_samples = keys %$uniq;
     return \@uniq_samples;
+}
+
+sub diff_dbi_samples {
+    my $counts_of = $_[0];
+    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.name FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'name');
+    my $uniq_phen_samples = &list_uniq_pheno_samples($counts_of);
+
+    my @not_found = ();
+    for my $dbi_sample (keys $dbi_uniq_phen_samples) {
+        my $found = 0;
+        for my $sample (@$uniq_phen_samples) {
+            if ($sample eq $dbi_sample) {
+                $found = 1;
+                next;
+            }
+        }
+
+        push @not_found, $dbi_sample if !$found;
+    }
+
+    return \@not_found;
+}
+
+sub diff_samples {
+    my $counts_of = $_[0];
+    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.name FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'name');
+    my $uniq_phen_samples = &list_uniq_pheno_samples($counts_of);
+
+    my @not_found = ();
+    for my $sample (@$uniq_phen_samples) {
+        my $found = 0;
+        for my $dbi_sample (keys $dbi_uniq_phen_samples) {
+            if ($sample eq $dbi_sample) {
+                $found = 1;
+                next;
+            }
+        }
+
+        push @not_found, $sample if !$found;
+    }
+
+    return \@not_found;
 }
 
 sub list_samples_not_db {
