@@ -10,10 +10,13 @@ class PhenotypesController extends AppController {
 
     function download() {
         if (! empty($this->data)) {
+            $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
+            $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
             $samples = $this->Phenotype->Sample->find('all', array(
                 'conditions' => array(
-                    'Sample.created BETWEEN ? AND ?' => array($this->data['Phenotype']['date_start'], $this->data['Phenotype']['date_end'])
-                )
+                    'Sample.created BETWEEN ? AND ?' => array($date_start, $date_end)
+                ),
+                'contain' => 'Plant'
             ));
 
             $lines = array();
@@ -27,8 +30,13 @@ class PhenotypesController extends AppController {
                 $line[] = $datetime[1];
                 $lines[] = implode("\t", $line);
             }
-            $lines = implode("\n", $lines);
-            $this->set(compact('lines'));
+            if ($lines) {
+                $lines = implode("\n", $lines);
+                $this->set(compact('lines', 'date_start', 'date_end'));
+            }
+            else {
+                $this->Session->flash(__('No lines found!'));
+            }
         }
     }
 
@@ -152,20 +160,24 @@ class PhenotypesController extends AppController {
         }
 
         # get/add the sample
+        $conds = array(
+            'name' => $line_parts[7],
+            'created' => $this->_convert_date($line_parts[9]) . ' ' . $line_parts[10],
+            'plant_id' => $plant['Plant']['id'],
+        );
         $sample = $this->Phenotype->Sample->find('first', array('conditions' => array(
             'Sample.name' => $line_parts[7],
         )));
         if (empty($sample)) {
             $this->Phenotype->Sample->create();
         }
+        else {
+            $conds['id'] = $sample['Sample']['id'];
+        }
 
-        # save/update the sample. It might be that the sample got connected with the a generic plant; it's better update
+        # save/update the sample. It might be that the sample got connected with the a generic plant; it's better to update
         $sample = $this->Phenotype->Sample->save(array(
-            'Sample' => array(
-                'name' => $line_parts[7],
-                'created' => $this->_convert_date($line_parts[9]) . ' ' . $line_parts[10],
-                'plant_id' => $plant['Plant']['id'],
-            ),
+            'Sample' => $conds
         ));
 
         if (empty($sample)) {
@@ -186,16 +198,11 @@ class PhenotypesController extends AppController {
     function _preprocess_line($line, $program_id) {
         # split the line according to the program
         list($version, $object, $program, $entity_id, $attribute_id) = preg_split('/;|\t/', $line);
-        if ($program_id == 0) { # how the 'autodetection' works ;)
-            if ($program == 'Fast Score') {
-                $program_id = 1;
-            }
-            elseif ($program == 'Phenotyping') {
-                $program_id = 2;
-            }
-            else {
-                $program_id = 0;
-            }
+        switch (strtolower($program)) {
+            case 'fast score' : $program_id = 1; break;
+            case 'phenotyping': $program_id = 2; break;
+            case 'bbch'       : $program_id = 3; break;
+            default           : $program_id = 0;
         }
 
         return array($program_id, $entity_id, $attribute_id);
@@ -223,10 +230,12 @@ class PhenotypesController extends AppController {
         $sample = $this->_get_sample($sample_id);
         $phenotype = $this->_save_phenotype(am(array('sample_id' => $sample['Sample']['id']), compact('program_id', 'version', 'object', 'date', 'time' )));
         $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
-        $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
-        $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
+        if ($program_id != 3) {
+            $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
+            $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
+        }
 
-        if ($program_id != 1) {
+        if ($program_id != 1) { # only add BBCH if it ain't fastscore
             $this->_save_bbch($bbch_id, $phenotype['Phenotype']['id']);
         }
 
@@ -347,10 +356,6 @@ class PhenotypesController extends AppController {
             }
             $sample['Sample']['id'] = $this->Phenotype->Sample->getLastInsertID();
         }
-        #else {
-        #    $this->Phenotype->rollback();
-        #    return false;
-        #}
 
         return $sample;
     }
@@ -537,6 +542,16 @@ AND i18n2.locale = '$locale'
             $line .= ';'. @$this->data['Value']['value'];
             $line .= ';'. $this->data['PhenotypeValue']['number'];
         }
+        if ($program_id == 3) {
+            $line .= $this->data['Phenotype']['version'];
+            $line .= ';'. $this->data['Phenotype']['object'];
+            $line .= ';BBCH';
+            $line .= ';'. $this->data['Sample']['name'];
+            $line .= ';'. $this->data['PhenotypeBbch']['bbch'];
+            $line .= ';'. @$this->data['Bbch']['name'];
+            $line .= ';'. $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date']);
+            $line .= ';'. $this->Phenotype->deconstruct('time', $this->data['Phenotype']['time']);
+        }
 
         $this->Phenotype->begin();
         # save the RAW
@@ -644,7 +659,7 @@ AND i18n2.locale = '$locale'
         else {
             $this->set('attributes'.$suffix, $this->Phenotype->PhenotypeValue->Value->find('list', array('fields' => array('id', 'attribute'))));
         }
-        if ($program_id == 2) { # load bbch codes when phenotyping program
+        if ($program_id != 1) { # load bbch codes when not fastscoring
             $this->set('bbchs'.$suffix, array_unique($this->Phenotype->PhenotypeBbch->Bbch->find('list')));
         }
     }

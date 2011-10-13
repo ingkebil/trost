@@ -17,12 +17,12 @@
         echo $this->Form->hidden('Form.posted');
         echo $this->Form->hidden('PhenotypeRaw.raw_id');
 
-        if ($this->data['Phenotype']['program_id'] == 1) {
-            echo $this->element('phenotypes/fastscore');
+        switch ($this->data['Phenotype']['program_id']) {
+            case 1: echo $this->element('phenotypes/fastscore'); break;
+            case 2: echo $this->element('phenotypes/phenotyping'); break;
+            case 3: echo $this->element('phenotypes/bbch'); break;
         }
-        else {
-            echo $this->element('phenotypes/phenotyping');
-        }
+        
         echo $this->Form->label('Form.lastone', __('last one?', true));
         echo $this->Form->checkbox('Form.lastone');
 	?>

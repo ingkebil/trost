@@ -14,10 +14,12 @@
 		<th><?php __('Date'); ?></th>
 		<th><?php __('Time'); ?></th>
 		<th><?php __('Plant'); ?></th>
+<?php if ($phenotypes[0]['program_id'] != 3): ?>
 		<th><?php __('Entity'); ?></th>
 		<th><?php __('Attribute'); ?></th>
 		<th><?php __('Value'); ?></th>
 		<th><?php __('Number'); ?></th>
+<?php endif ?>
 <?php if ($phenotypes[0]['program_id'] == 2): ?>
 		<th><?php __('Bbch.name'); ?></th>
 		<th><?php __('Bbch.id'); ?></th>
@@ -46,10 +48,12 @@
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
 			<td><?php echo $phenotype['Sample']['name'];?></td>
+<?php if ($phenotype['program_id'] != 3): ?>
 			<td><?php echo $phenotype['Entity'][0]['name'];?></td>
 			<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
 			<td><?php echo $phenotype['Value'][0]['value'];?></td>
 			<td><?php printf('%.3f', $phenotype['Value'][0]['PhenotypeValue']['number']);?></td>
+<?php endif ?>
 <?php if ($phenotype['program_id'] == 2): ?>
 			<td><?php echo $phenotype['Bbch'][0]['name'];?></td>
 			<td><?php echo $phenotype['Bbch'][0]['bbch'];?></td>

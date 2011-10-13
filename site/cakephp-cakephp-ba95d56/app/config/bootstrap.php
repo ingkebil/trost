@@ -64,4 +64,6 @@ Configure::write('FileUpload.uploadDir', dirname(dirname(__FILE__)) . '/webroot/
 Configure::write('FileUpload.viewDir', '/files/');
 Configure::write('default.password', 'passwo');
 
-
+#define('FASTSCORE', 1);
+#define('PHENOTYPING', 2);
+#define('BBCH', 3);

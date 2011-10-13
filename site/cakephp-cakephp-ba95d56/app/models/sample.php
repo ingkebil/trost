@@ -1,6 +1,7 @@
 <?php
 class Sample extends AppModel {
 	var $name = 'Sample';
+    var $actsAs = array('Containable');
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
