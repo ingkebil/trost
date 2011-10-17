@@ -4,7 +4,7 @@ class PhenotypesController extends AppController {
 	var $name = 'Phenotypes';
     var $helpers = array('Html', 'Form', 'Ajax', 'Javascript');
     var $components = array('RequestHandler');
-    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Study', 'Value', 'Entity', 'Bbch');
+    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Value', 'Entity', 'Bbch');
 
     var $error_msg = false;
 
@@ -126,7 +126,7 @@ class PhenotypesController extends AppController {
         $programs[0] = 'autodetect';
         ksort($programs);
         $experiments = $this->Experiment->find('list'); # actually, leave this out as it is not necesary right now.
-        if ($_SERVER['SERVER_NAME'] == 'hal9000') { # there is a problem with the oracle driver on this machine, so skip this 
+        if ($_SERVER['SERVER_NAME'] != 'trost.mpimp-golm.mpg.de') { # there is a problem with the oracle driver on this production machine, so skip this 
             $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
         }
         $cultures = $this->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
@@ -432,6 +432,7 @@ class PhenotypesController extends AppController {
         return "$year-$month-$day";
     }
     function _get_cultures() {
+        $this->loadModel('Study');
         $studies = $this->Study->find('list',
             array(
                 'conditions' => array(
