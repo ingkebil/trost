@@ -19,7 +19,7 @@ sub run {
     my $counts_of = {}; # { filename => { comp => 0, noncomp => 0 }}
 
     if (scalar(@files)) {
-        $dbi = DBI->connect('dbi:mysql:database=trost;host=localhost', 'trost', 'passwordpas');
+        $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=localhost', 'trost', 'passwordpas');
         &test_file_count(\@files);
         my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT filename, count(*) as phen_samples,  count(distinct phenotypes.sample_id) as uniq_phen_samples FROM raws JOIN phenotype_raws ON raw_id = raws.id join phenotypes on phenotypes.id = phenotype_raws.phenotype_id GROUP BY filename}, 'filename');
         print "FILENAME:\t\t\tDBI\t\t!COMP\t\tBBCH\t\tCOMP\t\tPLANTS\t\tSAMPLES\n";
