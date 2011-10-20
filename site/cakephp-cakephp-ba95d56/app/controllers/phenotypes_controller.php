@@ -31,6 +31,7 @@ class PhenotypesController extends AppController {
                 $lines[] = implode("\t", $line);
             }
             if ($lines) {
+                $this->layout = 'ajax';
                 $lines = implode("\n", $lines);
                 $this->set(compact('lines', 'date_start', 'date_end'));
             }

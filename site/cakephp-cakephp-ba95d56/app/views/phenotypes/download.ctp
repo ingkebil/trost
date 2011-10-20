@@ -1,7 +1,7 @@
 <?php if (isset($lines)): ?>
-    <?php header('Content-type: text/text'); ?>
-    <?php header("Content-Disposition: attachment; filename=$date_start-$date_end.txt"); ?>
-    <?php if (isset($lines)) echo $lines; ?>
+<?php header('Content-type: text/text'); ?>
+<?php header("Content-Disposition: attachment; filename=$date_start-$date_end.txt"); ?>
+<?php if (isset($lines)) echo $lines; ?>
 <?php else: ?>
 <div class="phenotypes form">
 <?php echo $this->Form->create('Phenotype');?>
