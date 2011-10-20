@@ -114,6 +114,8 @@
                 <li><?php echo $html->link(__('Upload values file', true), '/values/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload BBCH file', true), '/bbches/upload'); ?></li>
                 <li><hr style="margin: 20px;" /></li>
+                <li><?php echo $html->link(__('Download XML', true), '/phenotypes/download'); ?></li>
+                <li><hr style="margin: 20px;" /></li>
                 <li><?php echo $html->link(__('Add user', true), '/people/add'); ?></li>
                 <li><?php echo $html->link(__('List users', true), '/people/index'); ?></li>
                 <?php endif; ?>
