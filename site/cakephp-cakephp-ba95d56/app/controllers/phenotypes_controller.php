@@ -24,9 +24,9 @@ class PhenotypesController extends AppController {
                 # version, object, program, entity id, value_id, attribute, value
                 $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score', 808, 178, 'component', 'component id');
                 $line[] = $sample['Sample']['name'];
-                $line[] = $sample['Plant']['name'];
+                $line[] = $sample['Plant']['aliquot'];
                 $datetime = explode(' ', $sample['Sample']['created']);
-                $line[] = $datetime[0];
+                $line[] = preg_replace('/\D/', '.', $datetime[0]);
                 $line[] = $datetime[1];
                 $lines[] = implode("\t", $line);
             }
