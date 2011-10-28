@@ -4,6 +4,15 @@ class Raw extends AppModel {
     var $actsAs = array('Containable');
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
+    var $virtualFields = array(
+        'date' => '(SELECT `phenotypes`.`date`
+            FROM `phenotypes`
+            JOIN `phenotype_raws` ON `phenotypes`.`id` = `phenotype_raws`.phenotype_id`
+            WHERE `phenotype_raws`.`raw_id` = Raw.id
+            ORDER BY `phenotypes`.`date` ASC
+            LIMIT 1)',
+    ); 
+
     var $hasAndBelongsToMany = array(
         'Phenotype' => array(
             'className' => 'Phenotype',

@@ -8,7 +8,7 @@ class RawsController extends AppController {
 	function index() {
 		#$this->Raw->recursive = 2; # seems to go into an endless loop
         $this->paginate['Raw'] = array(
-            'contain' => array('Phenotype'),
+            'contain' => false
         );
         $this->Raw->cacheQueries = true;
         $raws = $this->paginate('Raw');
