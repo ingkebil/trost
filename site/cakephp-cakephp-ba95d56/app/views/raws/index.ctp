@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('Raw.date');?></th>
+			<th><?php echo $this->Paginator->sort('date', 'Raw.date');?></th>
             <th># <?php __('samples'); ?></td>
             <th># <?php __('entities'); ?></td>
             <th># <?php __('values'); ?></td>

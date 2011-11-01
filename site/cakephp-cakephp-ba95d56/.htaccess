@@ -6,6 +6,8 @@
 #Allow from 127.0.0.1
 #Satisfy All
 
+AddType	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet       xlsx
+
 <IfModule mod_rewrite.c>
    RewriteEngine on
    RewriteRule    ^$ app/webroot/    [L]

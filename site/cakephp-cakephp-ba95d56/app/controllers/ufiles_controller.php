@@ -150,7 +150,7 @@ class UfilesController extends AppController {
 
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
-            'conditions' => array('name' => array_unique(explode(';', $keywords), SORT_STRING))
+            'conditions' => array('name' => array_unique(explode(';', $keywords)))
         ));
         $conditions = $this->params['named'];
         if (!empty($keyword_ids)) {
@@ -159,7 +159,7 @@ class UfilesController extends AppController {
             #    $conditions[] = array('Ufilekeyword.keyword_id' => );
             #}
             # this one finds all files that have either of the keywords
-            $conditions = array('Ufilekeyword.keyword_id' => array_unique($keyword_ids, SORT_NUMERIC));
+            $conditions = array('Ufilekeyword.keyword_id' => array_unique($keyword_ids));
         }
 
         # when we query for locations, get the people involved
@@ -188,7 +188,7 @@ class UfilesController extends AppController {
         $this->paginate['Ufile'] = array(
             'group' => array('Ufile.id'),
             'contain' => array('Keyword', 'Person'),
-            'conditions' => array('Ufile.id' => array_unique($ufile_ids, SORT_NUMERIC)),
+            'conditions' => array('Ufile.id' => array_unique($ufile_ids)),
         );
         $this->set('ufiles', $this->paginate('Ufile'));
     }

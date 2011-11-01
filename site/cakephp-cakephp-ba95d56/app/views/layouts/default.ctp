@@ -95,11 +95,12 @@
 
 			<?php echo $content_for_layout; ?>
             <div class="actions">
-                <h3><?php __('Actions'); ?></h3>
+                <h3><?php __('Menu'); ?></h3>
                 <ul id="normal_menu">
+                <li><?php echo $html->link(__('Home', true), '/'); ?></li>
                 <li><?php echo $html->link(__('Upload scanner file', true), '/phenotypes/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload file', true), '/ufiles/upload'); ?></li>
-                <li><?php echo $html->link(__('Enter temperature', true), '/temps/erature'); ?></li>
+                <li><?php echo $html->link(__('Enter climate data', true), '/temps/erature'); ?></li>
                 <li><hr style="margin: 20px;" /></li>
                 <li><?php echo $html->link(__('List scanner files', true), '/raws/index'); ?></li>
                 <li><?php echo $html->link(__('List files', true), '/ufiles/index'); ?></li>
@@ -110,6 +111,7 @@
                 </ul>
                 <ul><li><?php echo $this->Ajax->link(__('BackOffice', true), '/bos/toggle', array('id' => 'backoffice_link')); ?></li></ul>
                 <ul id="backoffice_menu"> 
+                <li><?php echo $html->link(__('Home', true), '/'); ?></li>
                 <li><?php echo $html->link(__('Upload entities file', true), '/entities/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload values file', true), '/values/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload BBCH file', true), '/bbches/upload'); ?></li>
