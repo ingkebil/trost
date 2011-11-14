@@ -83,9 +83,12 @@
             echo $html->link('DE', $de_url);
             ?>
             <br />
-            <?php if ( ! empty($person)) {
-                echo $this->Html->link(__('Change password', true), array('controller' => 'people', 'action' => 'edit', $person['id'])); 
-            } ?>
+            <?php if ( ! empty($person)): ?>
+                <ul>
+                <li><?php echo $this->Html->link(__('Change password', true), array('controller' => 'people', 'action' => 'edit', $person['id'])); ?></li>
+                <li><?php echo $this->Html->link(__('Logout', true), array('controller' => 'people', 'action' => 'logout')); ?></li>
+                </ul>
+            <?php endif ?>
             </span>
 		</div>
 		<div id="content">

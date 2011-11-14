@@ -25,6 +25,7 @@ class PeopleController extends AppController {
     function logout() {
         $this->redirect($this->Auth->logout());
     }
+
     /**
      * Expects a file with on each line following information:
      * - prolly an ID, but first column is ignored
