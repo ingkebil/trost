@@ -117,7 +117,7 @@ class PhenotypesController extends AppController {
                             $this->redirect(array('controller' => 'raws', 'action' => 'view', $this->Phenotype->PhenotypeRaw->Raw->getLastInsertID()));
                         }
                         else {
-                            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again. ' . $this->error_msg, true));
+                            $this->Session->setFlash(__('The phenotype could not be saved. Please, try again.', true) . ' ' . $this->error_msg);
                         }
                     }
                 }

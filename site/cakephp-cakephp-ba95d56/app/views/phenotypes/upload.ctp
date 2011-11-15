@@ -33,7 +33,7 @@
  		<legend><?php __('Upload scanner file'); ?></legend>
 	<?php
 
-		echo $this->Form->input('Culture.experiment_id');
+		echo $this->Form->hidden('Culture.experiment_id');
 		echo $this->Form->input('Plant.culture_id');
 		echo $this->Form->input('program_id');
 
