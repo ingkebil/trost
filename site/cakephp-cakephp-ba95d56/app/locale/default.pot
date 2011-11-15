@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-11-15 14:12+0100\n"
+"POT-Creation-Date: 2011-11-15 14:44+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -2198,6 +2198,10 @@ msgstr ""
 
 #: /views/ufiles/upload.ctp:4
 msgid "Add file"
+msgstr ""
+
+#: /views/ufiles/upload.ctp:9
+msgid "Keywords: to select several keywords please hold down the ctrl key."
 msgstr ""
 
 #: /views/ufiles/upload.ctp:10

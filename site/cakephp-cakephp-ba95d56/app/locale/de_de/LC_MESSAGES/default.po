@@ -1,5 +1,8 @@
+# #-#-#-#-#  default.pot (PROJECT VERSION)  #-#-#-#-#
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
 # #-#-#-#-#  default.po (PROJECT VERSION)  #-#-#-#-#
-# #-#-#-#-#  de.pot (PROJECT VERSION)  #-#-#-#-#
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
@@ -7,8 +10,6 @@
 msgid ""
 msgstr ""
 "#-#-#-#-#  default.po (PROJECT VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  de.pot (PROJECT VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  default.pot (PROJECT VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-04-08 16:19+0200\n"
 "PO-Revision-Date: 2011-11-15 14:28+0200\n"
@@ -30,7 +31,8 @@ msgstr "Die BBCH Kodes sind gespeichert"
 
 #: /controllers/bbches_controller.php:47;47;47
 msgid "The BBCH codes could not be saved. Please, try again."
-msgstr "Die BBCH Kodes konnten nicht gespeichert werden. Bitte versuchen Sie es erneut."
+msgstr "Die BBCH Kodes konnten nicht gespeichert werden. Bitte versuchen Sie es "
+"erneut."
 
 #: /controllers/bbches_controller.php:60;83;60;83;60;83
 msgid "Invalid bbch"
@@ -42,7 +44,8 @@ msgstr "Der BBCH Kode ist gespeichert"
 
 #: /controllers/bbches_controller.php:73;91;73;91;73;91
 msgid "The bbch could not be saved. Please, try again."
-msgstr "Die BBCH Kodes konnten nicht gespeichert werden. Bitte, versuchen Sie er erneut."
+msgstr "Die BBCH Kodes konnten nicht gespeichert werden. Bitte, versuchen Sie er "
+"erneut."
 
 #: /controllers/bbches_controller.php:104;104;104
 msgid "Invalid id for bbch"
@@ -86,7 +89,8 @@ msgstr "Die Entitäten sind gespeichert"
 
 #: /controllers/entities_controller.php:47
 msgid "The entities could not be saved. Please, try again."
-msgstr "Die Entitäten konnten nicht gespeichert werden. Bitte, versuchen Sie es erneut."
+msgstr "Die Entitäten konnten nicht gespeichert werden. Bitte, versuchen Sie es "
+"erneut."
 
 #: /controllers/entities_controller.php:59;81;59;81;59;81
 msgid "Invalid entity"
@@ -122,7 +126,8 @@ msgstr "Das Experiment ist gespeichert"
 
 #: /controllers/experiments_controller.php:26;41;26;41;26;41
 msgid "The experiment could not be saved. Please, try again."
-msgstr "Das Experiment konnte nicht gespeichert werden. Bitte, versuchen Sie es erneut."
+msgstr "Das Experiment konnte nicht gespeichert werden. Bitte, versuchen Sie es "
+"erneut."
 
 #: /controllers/experiments_controller.php:51;51;51
 msgid "Invalid id for experiment"
@@ -318,7 +323,8 @@ msgstr "Der Phänotyp ist gespeichert"
 
 #: /controllers/phenotypes_controller.php:136;186;204;136;186;204;136;186;204
 msgid "The phenotype could not be saved. Please, try again."
-msgstr "Der Phänotyp konnte nicht gespeichert werden. Bitte versuchen Sie erneut."
+msgstr ""
+"Der Phänotyp konnte nicht gespeichert werden. Bitte versuchen Sie erneut."
 
 #: /controllers/phenotypes_controller.php:608
 #: /controllers/phenotypes_controller.php:412
@@ -355,7 +361,8 @@ msgstr "Die Pflanze ist gespeichert"
 
 #: /controllers/plants_controller.php:26;44;26;44;26;44
 msgid "The plant could not be saved. Please, try again."
-msgstr "Die Pflanze konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+msgstr ""
+"Die Pflanze konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
 
 #: /controllers/plants_controller.php:57;57;57
 msgid "Invalid id for plant"
@@ -468,7 +475,8 @@ msgstr "Die Sorte ist gespeichert"
 
 #: /controllers/species_controller.php:26;41;26;41;26;41
 msgid "The species could not be saved. Please, try again."
-msgstr "Die Sorte konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+msgstr ""
+"Die Sorte konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
 
 #: /controllers/species_controller.php:51;51;51
 msgid "Invalid id for species"
@@ -492,7 +500,9 @@ msgstr "Die Temperatur ist gespeichert"
 
 #: /controllers/temps_controller.php:31;62
 msgid "The temp could not be saved. Please, try again."
-msgstr "Die Temperatur konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+msgstr ""
+"Die Temperatur konnte nicht gespeichert werden. Bitte versuchen Sie es "
+"erneut."
 
 #: /controllers/temps_controller.php:42
 msgid "Invalid Temperature"
@@ -928,10 +938,12 @@ msgstr "Bearbeiten"
 #: /views/programs/index.ctp:31 /views/raws/index.ctp:31
 #: /views/samples/index.ctp:43 /views/species/index.ctp:31
 #: /views/values/index.ctp:33 /views/raws/index.ctp:33
-msgid "Page %page% of %pages%, showing %current% records out of %count% total, "
+msgid ""
+"Page %page% of %pages%, showing %current% records out of %count% total, "
 "starting on record %start%, ending on %end%"
-msgstr "Seite %page% von %pages%, Anzeige von %current% Einträgen von insgesamt %count% "
-", von Eintrag %start% bis Eintrag %end%"
+msgstr ""
+"Seite %page% von %pages%, Anzeige von %current% Einträgen von insgesamt "
+"%count% , von Eintrag %start% bis Eintrag %end%"
 
 #: /views/bbches/index.ctp:42;42;42 /views/cultures/index.ctp:46;46;46
 #: /views/entities/index.ctp:40;40;40 /views/experiments/index.ctp:44;44;44
@@ -2059,6 +2071,10 @@ msgstr "Datei suchen"
 msgid "Add file"
 msgstr "Datei zufügen"
 
+#: /views/ufiles/upload.ctp:9
+msgid "To select several keywords please hold down the ctrl key."
+msgstr "Zur Auswahl mehrerer Schlagworte bitte die Strg/Ctrl-Taste gedrückt halten."
+
 #: /views/ufiles/upload.ctp:10
 msgid "New Keywords (seperated by comma's)"
 msgstr "Neue Schlagwörter (getrennt durch Kommas)"
@@ -2210,10 +2226,12 @@ msgstr "Probe löschen"
 #: /views/programs/index.ctp:31;31;31 /views/raws/index.ctp:31;31;31
 #: /views/samples/index.ctp:43;43;43 /views/species/index.ctp:31;31;31
 #: /views/values/index.ctp:33;33;33 cake/libs/view/scaffolds/index.ctp:67
-msgid "Page %page% of %pages%, showing %current% records out of %count% total,"
+msgid ""
+"Page %page% of %pages%, showing %current% records out of %count% total,"
 "starting on record %start%, ending on %end%"
-msgstr "Seite %page% von %pages%, Anzeige von %current% Einträgen von insgesamt %count% "
-", von Eintrag %start% bis Eintrag %end%"
+msgstr ""
+"Seite %page% von %pages%, Anzeige von %current% Einträgen von insgesamt "
+"%count% , von Eintrag %start% bis Eintrag %end%"
 
 #: /views/pages/home.ctp:6 /views/pages/home.ctp:4
 msgid "Upload attributes file"
