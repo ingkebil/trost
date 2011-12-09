@@ -11,6 +11,7 @@
             <li><?php __('unused column'); ?></li>
             <li><?php __('unused column'); ?></li>
             <li><?php __('unused column'); ?></li>
+            <li><?php __('unused column'); ?></li>
             <li><?php __('PO'); ?></li>
             <li><?php __('definition'); ?></li>
         </ul><br />
