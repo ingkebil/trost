@@ -14,11 +14,11 @@ class EntitiesController extends AppController {
             foreach ($lines as $line) {
                 $line = trim($line);
                 if ($line) {
-                    $line_parts = explode(';', $line);
+                    $line_parts = preg_split("/\t|;/", $line);
                     foreach ($line_parts as &$line_part) {
                         $line_part = preg_replace('/^"|"$/', '', $line_part);
                     }
-                    list($id, $name, $name_dt, $one, $two, $three, $four, $PO, $definition) = $line_parts;
+                    list($id, $name, $name_dt, $one, $two, $three, $four, $five, $PO, $definition) = $line_parts;
                     $this->Entity->locale = 'en_us';
                     $this->Entity->create();
                     if ($this->Entity->save(array('Entity' => compact('id', 'name', 'PO', 'definition')))) {
