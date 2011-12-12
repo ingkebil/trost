@@ -5,6 +5,7 @@
         <?php __('Column names:'); ?>
         <ul>
             <li><?php __('ID'); ?></li>
+            <li><?php __('unused column'); ?></li>
             <li><?php __('Attribute in English'); ?></li>
             <li><?php __('Value in English'); ?></li>
             <li><?php __('Attribute in German'); ?></li>

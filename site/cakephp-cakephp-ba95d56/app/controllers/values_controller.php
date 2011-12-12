@@ -10,14 +10,24 @@ class ValuesController extends AppController {
             $lines = explode("\n", $raw);
             $this->Value->begin();
             $saved = true;
+            $errors = array();
+            $line_nr = 1;
             foreach ($lines as $line) {
                 $line = trim($line);
                 if ($line) {
-                    $line_parts = explode(';', $line);
+                    $line_parts = preg_split("/;|\t/", $line);
                     foreach ($line_parts as &$line_part) {
                         $line_part = preg_replace('/^"|"$/', '', $line_part);
                     }
-                    list($id, $attribute, $value, $attr_dt, $val_dt) = $line_parts;
+                    list($id, $one, $attribute, $value, $attr_dt, $val_dt) = $line_parts;
+
+                    # fill in English values with German onesif missing
+                    if (! $attribute) {
+                        $attribute = $attr_dt;
+                    }
+                    if (! $value) {
+                        $value = $val_dt;
+                    }
                     $this->Value->locale = 'en_us';
                     $this->Value->create();
                     if ($this->Value->save(array('Value' => compact('id', 'attribute', 'value')))) {
@@ -31,14 +41,21 @@ class ValuesController extends AppController {
                             $value = $val_dt;
                         }
                         if ( ! $this->Value->save(array('Value' => compact('id', 'attribute', 'value')))) {
+                            foreach ($this->Value->validationErrors as $field => $error_msg) {
+                                $errors[] = "$field has error '$error_msg' on line $line_nr";
+                            }
                             $saved = false;
                             break;
                         }
                     } else {
+                        foreach ($this->Value->validationErrors as $field => $error_msg) {
+                            $errors[] = "$field has error '$error_msg' on line $line_nr";
+                        }
                         $saved = false;
                         break;
                     }
                 }
+                $line_nr++;
             }
             if ($saved) {
                 $this->Session->setFlash(__('The values have been saved', true));
@@ -47,7 +64,7 @@ class ValuesController extends AppController {
             }
             else {
                 $this->Value->rollback();
-                $this->Session->setFlash(__('The values could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('The values could not be saved. Please, try again.<br />Error: '.join('<br />', $errors), true));
             }
 		}
     }
