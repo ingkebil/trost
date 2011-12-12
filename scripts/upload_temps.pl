@@ -19,14 +19,20 @@ sub run {
     close F;
 
     if (scalar(@lines)) {
-        my $dbi = DBI->connect('dbi:mysql:database=db_billiau_trost;host=hal9000', 'TROST_USER', 'kartoffel');
+        #my $dbi = DBI->connect('dbi:mysql:database=db_billiau_trost;host=hal9000', 'TROST_USER', 'kartoffel');
+        #my $dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
+        my $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=gent', 'trost', 'passwordpas');
         my $sth = $dbi->prepare('INSERT INTO temps (datum, rainfall, irrigation, tmin, tmax, location_id) VALUES (?, ?, ?, ?, ?, ?)');
         my $location_id = undef;
 
         my @values = (); # store all VALUES to be inserted afterwards
 
+        LINE:
         for my $line (@lines) {
-            my ($date, $rainfall, $irrigation, $tmin, $tmax, $limsid) = split /\t/, $line;
+            next LINE if $line =~ m/\s*#/;
+            chomp($line);
+            #my ($date, $rainfall, $irrigation, $tmin, $tmax, $limsid) = split /\t/, $line;
+            my ($limsid, $date, $tmin, $tmax, $rainfall, $irrigation) = split /\t/, $line;
             if (! $location_id) {
                 $location_id = $dbi->selectcol_arrayref('SELECT id FROM locations WHERE limsid = ?', undef, $limsid)->[0];
             }
