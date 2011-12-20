@@ -1,3 +1,9 @@
+<?php echo $javascript->link('jquery-1.5.1.min', false); ?>
+<?php echo $javascript->codeBlock('
+    function strike(id) {
+        $(".row"+id).toggleClass("invalid");
+    }
+'); ?>
 <div class="ufiles index">
 	<h2><?php __('Files');?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -12,10 +18,15 @@
 	<?php
 	$i = 0;
 	foreach ($ufiles as $ufile):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
+        $class = array('row'.$ufile['Ufile']['id']);
+        if ($i++ % 2 == 0) {
+            $class[] = 'altrow';
+        }
+        if ($ufile['Ufile']['invalid'] == 1) {
+            $class[] = 'invalid';
+        }
+        $class = implode(' ', $class);
+        $class = " class='$class'";
 	?>
 	<tr<?php echo $class;?>>
         <td>
@@ -35,6 +46,12 @@
 		<td><?php echo $ufile['Ufile']['created']; ?>&nbsp;</td>
 		<td><?php echo $ufile['Ufile']['description']; ?>&nbsp;</td>
 		<td class="actions">
+            <?php echo $this->Ajax->link(
+                __('Invalidate', true),
+                array('controller' => 'ufiles', 'action' => 'invalidate', $ufile['Ufile']['id']),
+                array('complete' => 'strike('.$ufile['Ufile']['id'].')'),
+                sprintf(__('Are you sure you want to invalidate # %s?', true), $ufile['Ufile']['id'])
+            ); ?>
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $ufile['Ufile']['id'])); ?>
             <?php if ($this->Session->check('user')): ?>
                 <?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $ufile['Ufile']['id'])); ?>

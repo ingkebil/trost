@@ -4,7 +4,7 @@ class UfilesController extends AppController {
 
  	var $name = 'Ufiles';
     var $helpers = array('Html', 'Form', 'FileUpload.FileUpload');
-    var $components = array('FileUpload.FileUpload');
+    var $components = array('FileUpload.FileUpload', 'RequestHandler');
     var $uses = array('Ufile', 'Location', 'Keyword');
 
 
@@ -193,6 +193,21 @@ class UfilesController extends AppController {
         $this->set('ufiles', $this->paginate('Ufile'));
     }
 
+    function invalidate($id = null) {
+        if (!$this->RequestHandler->isAjax()) { # if no AJAX, it might be just a crawler
+            $this->redirect('/', 500);
+        }
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid file', true));
+            $this->redirect(array('action' => 'index'));
+        }
+        $ufile = $this->Ufile->read(null, $id);
+        $ufile['Ufile']['invalid'] = $ufile['Ufile']['invalid'] == 1 ? 0 : 1;
+        if ($this->Ufile->save($ufile)) {
+        } else {
+            $this->redirect('/', 500);
+        }
+    }
 	function index() {
         $this->paginate['Ufile'] = array(
             'contain' => array('Keyword', 'Person', 'Person.Location'),
@@ -205,7 +220,11 @@ class UfilesController extends AppController {
 			$this->Session->setFlash(__('Invalid ufile', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('ufile', $this->Ufile->read(null, $id));
+        $ufile = $this->Ufile->read(null, $id);
+		if ($ufile['Ufile']['invalid'] == 1) {
+			$this->Session->setFlash(__('This entry has been marked as invalid!', true));
+		}
+		$this->set('ufile', $ufile);
 	}
 
 	function add() {

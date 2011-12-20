@@ -132,6 +132,7 @@ class PhenotypesController extends AppController {
         }
         $cultures = $this->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
 		$this->set(compact('programs', 'experiments', 'cultures'));
+        $this->data['Culture']['experiment_id'] = 1; # TODO un-hardcode!
     }
 
     function _is_sample_plant($entity_id, $attribute_id) {
