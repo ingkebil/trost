@@ -147,12 +147,14 @@ class UfilesController extends AppController {
         $location_ids = @$this->params['named']['location_id'];
         unset($this->params['named']['keyword']);
         unset($this->params['named']['location_id']);
+        $conditions = $this->params['named'];
+        $this->params['named']['keyword']     = $keywords;
+        $this->params['named']['location_id'] = $location_ids;
 
         $keyword_ids = $this->Ufile->Keyword->find('list', array(
             'fields' => array('id', 'id'),
             'conditions' => array('name' => array_unique(explode(';', $keywords)))
         ));
-        $conditions = $this->params['named'];
         if (!empty($keyword_ids)) {
             ## this actually doesn't work as planned, which is: to find all files tagged with multople tags
             #foreach (array_unique($keyword_ids, SORT_NUMERIC) as $keyword_id) {

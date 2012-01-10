@@ -4,6 +4,7 @@
         $(".row"+id).toggleClass("invalid");
     }
 '); ?>
+<?php $this->Paginator->options(array('url' => $this->passedArgs)); ?>
 <div class="ufiles index">
 	<h2><?php __('Files');?></h2>
 	<table cellpadding="0" cellspacing="0">
