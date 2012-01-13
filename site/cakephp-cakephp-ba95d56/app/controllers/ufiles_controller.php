@@ -112,7 +112,7 @@ class UfilesController extends AppController {
         
         if ($this->data) {
             # do some whitelisting
-            $whitelist = array('person_id', 'name', 'description', 'location_id');
+            $whitelist = array('person_id', 'name', 'description', 'location_id', 'invalid');
             $passed_values = array();
             foreach ($this->data['Ufile'] as $key => $value) {
                 if (in_array($key, $whitelist)) {
