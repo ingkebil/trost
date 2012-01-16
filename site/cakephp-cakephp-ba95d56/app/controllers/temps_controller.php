@@ -44,10 +44,36 @@ class TempsController extends AppController {
         }
         $temp = $this->Temp->read(null, $id);
         $temp['Temp']['invalid'] = $temp['Temp']['invalid'] == 1 ? 0 : 1;
+        pr($temp);
         if ($this->Temp->save($temp)) {
         } else {
             $this->redirect('/', 500);
         }
+    }
+    function duplicates() {
+        $this->paginate = array(
+            'conditions' => array(
+                # these AND/OR statements don't seem to work
+                #'AND' => array(
+                #    'OR' => array('Temp.invalid' => 0, 'Temp.invalid' => null),
+                #    'OR' => array('Temp2.invalid' => 0, 'Temp2.invalid' => null),
+                #),
+                'Temp.id != Temp2.id',
+            ),
+            'joins' => array(
+                array(
+                    'table' => 'temps',
+                    'alias' => 'Temp2',
+                    'type'  => 'inner',
+                    'conditions' => array(
+                        'Temp.datum = Temp2.datum',
+                        'Temp.location_id = Temp2.location_id'
+                    )
+                )
+            ),
+            'order' => array('Location.id', 'Temp.datum', 'Temp2.datum')
+        );
+        $this->set('temps', $this->paginate());
     }
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {

@@ -44,5 +44,28 @@ class Temp extends AppModel {
 			'order' => ''
 		)
 	);
+
+
+    /**
+     * Returns all the duplicate rows: same location_id and date.
+     */
+    function find_duplicates() {
+        return $this->find('all', array(
+            'conditions' => array(
+                'Temp.id != Temp2.id',
+            ),
+            'joins' => array(
+                array(
+                    'table' => 'temps',
+                    'alias' => 'Temp2',
+                    'type'  => 'inner',
+                    'conditions' => array(
+                        'Temp.datum = Temp2.datum',
+                        'Temp.location_id = Temp2.location_id'
+                    )
+                )
+            ),
+        ));
+    }
 }
 ?>
