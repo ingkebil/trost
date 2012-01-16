@@ -33,10 +33,11 @@
 class AppModel extends Model {
 
     function beforeFind($queryData) {
-
-        if ($this->useDbConfig == 'lims') { # oops, this is an oracle db!
-            # change schema manually! # TODO get the schema from the config instead!
-            $this->query('ALTER session set current_schema=LIMS');
+        # TODO there is probably an easier way of doing this
+        $dbo = $this->getDataSource();
+        if ($dbo->config['driver'] == 'oracle') {
+            # change schema manually!
+            $this->query('ALTER session set current_schema=' . $dbo->config['schema']);
         }
         return $queryData;
     }
