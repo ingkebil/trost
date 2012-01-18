@@ -13,9 +13,9 @@ YIELD_TABLE_NAME = 'starch_yield'
 YIELD_TABLE = [
     'id INT',
     'name VARCHAR(45)',
-    'aliquot_id INT NOT NULL',
+    'aliquotid INT NOT NULL',
     'parzellennr INT',
-    'location_id INT NOT NULL',
+    'locationid INT NOT NULL',
     'cultivar VARCHAR(45)',
     'pflanzen_parzelle INT',
     'knollenmasse_kgfw_parzelle DOUBLE NOT NULL',
@@ -24,7 +24,7 @@ YIELD_TABLE = [
     'PRIMARY KEY(id)']
                
 columns_d = {'Name': (0, 'name', str), 
-             'Aliquot_Id': (1, 'aliquot_id', int), 
+             'Plant_ID': (1, 'aliquot_id', int), 
              'Parzellennr': (2, 'parzellennr', int), 
              'Standort': (3, 'location_id', int),
              'Sorte': (4, 'cultivar', lambda x:str(x).upper()),
@@ -49,11 +49,16 @@ default_values = {
 
 ###
 def main(argv):
+
+    if len(argv) == 0:
+        sys.stderr.write('Missing input file.\nUsage: python create_trmttable.py <dir>\n')
+        sys.exit(1)
     
     sql.write_sql_header(DB_NAME, YIELD_TABLE_NAME, YIELD_TABLE)
-    index = 0
+    index = 1
     sheet_index=p_xls.DEFAULT_PARCELLE_INDEX 
-    for fn in glob.glob('TROST_Knollenernte*.xls'):
+    dir_name = argv[0]
+    for fn in glob.glob('%s/%s'% (dir_name, 'TROST_Knollenernte_Atting.xls')):
         data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index)       
         index = sql.write_sql_table(data, columns_d, table_name=YIELD_TABLE_NAME, index=index)
         

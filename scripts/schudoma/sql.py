@@ -27,7 +27,7 @@ def format_entry(entry):
     return '(%s)' % ','.join(map(str, formatted))
     
 
-def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, index=0):
+def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, index=1):
     for dobj in data:
         entry = []        
         for key, val in columns_d.items():
