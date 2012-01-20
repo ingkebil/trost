@@ -4,8 +4,21 @@ import os
 import sys
 import math
 
+import login
+the_db = login.get_db()
+
+location_query = """
+SELECT id, limsid FROM locations
+""".strip()
+
+def get_locations():
+    query = the_db.query(location_query)
+    data = the_db.store_result().fetch_row(how=1, maxrows=99)
+    # print data
+    return dict([(int(d['limsid']), int(d['id'])) for d in data])
+
 USE_DB = 'USE %s;'
-DROP_TABLE = 'DROP TABLE %s;'
+DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
 CREATE_TABLE = 'CREATE TABLE %s(\n%s\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;' 
 INSERT_STR = 'INSERT INTO %s VALUES %s;\n'
 
@@ -27,7 +40,7 @@ def format_entry(entry):
     return '(%s)' % ','.join(map(str, formatted))
     
 
-def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, index=1):
+def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout):
     for dobj in data:
         entry = []        
         for key, val in columns_d.items():
@@ -37,8 +50,7 @@ def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, index=1
                 entry.append(val[:-1] + (str, 'NULL'))
             pass
 
-        entry = [(-1, 'id', int, index)] + entry
-        index += 1
+        entry = [(-1, 'id', str, 'NULL')] + entry # add the id
 
         try:
             out.write(INSERT_STR % (table_name,
@@ -48,7 +60,7 @@ def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, index=1
             sys.stderr.write('EXC: %s\n' % sorted(entry))
             sys.exit(1)
         
-    return index
+    return None
 
 
 ###

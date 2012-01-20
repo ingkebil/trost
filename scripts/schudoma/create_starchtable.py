@@ -11,29 +11,28 @@ import process_xls as p_xls
 DB_NAME = 'trost_prod'
 YIELD_TABLE_NAME = 'starch_yield'
 YIELD_TABLE = [
-    'id INT',
+    'id INT AUTO_INCREMENT',
     'name VARCHAR(45)',
     'aliquotid INT NOT NULL',
     'parzellennr INT',
-    'locationid INT NOT NULL',
+    'location_id INT NOT NULL',
     'cultivar VARCHAR(45)',
     'pflanzen_parzelle INT',
     'knollenmasse_kgfw_parzelle DOUBLE NOT NULL',
     'staerkegehalt_g_kg DOUBLE NOT NULL',
-    'staerkeertrag_kg_parzelle DOUBLE NOT NULL',
     'PRIMARY KEY(id)']
                
 columns_d = {'Name': (0, 'name', str), 
-             'Plant_ID': (1, 'aliquot_id', int), 
+             'Aliquot_Id': (1, 'aliquot_id', int), 
              'Parzellennr': (2, 'parzellennr', int), 
              'Standort': (3, 'location_id', int),
              'Sorte': (4, 'cultivar', lambda x:str(x).upper()),
              'Pflanzen_Parzelle': (5, 'pflanzen_parzelle', int),
              'Knollenmasse_kgFW_Parzelle': (6, 'knollenmasse_kgfw_parzelle', 
                                             float),
-             'Staerkegehalt_g_kg': (7, 'staerkegehalt_g_kg', float),
-             'Staerkeertrag_kg_Parzelle': (8, 'staerkeertrag_kg_parzelle', 
-                                           float)}
+             'Staerkegehalt_g_kg': (7, 'staerkegehalt_g_kg', float)
+             }
+
 default_values = {
     'Name': 'NULL',
     'Aliquot_Id': 0,
@@ -47,21 +46,29 @@ default_values = {
     }
 
 
+def annotate_locations(data):
+    locations = sql.get_locations()
+    for dobj in data:
+        dobj.Standort = locations[dobj.Standort]
+    return data
+    
+
+
 ###
 def main(argv):
-
+    
     if len(argv) == 0:
-        sys.stderr.write('Missing input file.\nUsage: python create_trmttable.py <dir>\n')
+        sys.stderr.write('Missing input file.\nUsage: python create_starchtable.py <dir>\n')
         sys.exit(1)
     
     sql.write_sql_header(DB_NAME, YIELD_TABLE_NAME, YIELD_TABLE)
-    index = 1
     sheet_index=p_xls.DEFAULT_PARCELLE_INDEX 
     dir_name = argv[0]
-    for fn in glob.glob('%s/%s'% (dir_name, 'TROST_Knollenernte_Atting.xls')):
-        data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index)       
-        index = sql.write_sql_table(data, columns_d, table_name=YIELD_TABLE_NAME, index=index)
-        
+    for fn in glob.glob('%s/%s'% (dir_name, 'TROST_Knollenernte*.xls')):
+        data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index)
+        data = annotate_locations(data)
+        sql.write_sql_table(data, columns_d, table_name=YIELD_TABLE_NAME)
+    
 
     return None
 

@@ -8,12 +8,10 @@ import glob
 import process_xls as p_xls
 import sql
 
-from pprint import pprint
-
 DB_NAME = 'trost_prod'
 TREATMENT_TABLE_NAME = 'treatments'
 TREATMENT_TABLE = [
-    'id INT',
+    'id INT AUTO_INCREMENT',
     'name VARCHAR(45)',
     'aliquotid INT NOT NULL',
     'alias VARCHAR(45) NULL',
@@ -34,14 +32,13 @@ def main(argv):
         sys.exit(1)
 
     sql.write_sql_header(DB_NAME, TREATMENT_TABLE_NAME, TREATMENT_TABLE)
-    index = 0
     sheet_index=p_xls.DEFAULT_TREATMENT_ALIQUOT_INDEX
 
     fn = argv[0]
     data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index) 
     # return None
-    index = sql.write_sql_table(data, columns_d, 
-                                table_name=TREATMENT_TABLE_NAME, index=index)
+    sql.write_sql_table(data, columns_d, 
+                        table_name=TREATMENT_TABLE_NAME)
     return None
 
 if __name__ == '__main__': main(sys.argv[1:])
