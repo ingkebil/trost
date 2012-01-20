@@ -11,11 +11,30 @@ location_query = """
 SELECT id, limsid FROM locations
 """.strip()
 
+value_query = """
+select `values`.id, content, value from `values`
+join i18n on foreign_key = values.id
+where locale = 'en_us'
+and `model` = 'value'
+and attribute = 'Behandlung'
+and field = 'value'
+""".strip()
+
 def get_locations():
     query = the_db.query(location_query)
     data = the_db.store_result().fetch_row(how=1, maxrows=99)
     # print data
     return dict([(int(d['limsid']), int(d['id'])) for d in data])
+
+def get_values():
+    query = the_db.query(value_query)
+    data = the_db.store_result().fetch_row(how=1, maxrows=200)
+    id_of = dict()
+    for d in data:
+        id_of[str(d['content'])] = int(d['id'])
+        id_of[str(d['value'])]   = int(d['id'])
+    id_of[''] = '0' # add the empty value
+    return id_of
 
 USE_DB = 'USE %s;'
 DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
