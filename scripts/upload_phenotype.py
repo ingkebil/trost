@@ -1,6 +1,6 @@
 #!usr/bin/python2
 # .. module:: upload_phenotype
-#    :synopsys: Convert xlsx to csv and then upload that file to the TROST website.
+#    :synopsys: upload csv to the TROST website.
 # .. moduleauthor:: Kenny Billiau <billiau@mpimp-golm.mpg.de>
 
 import sys
@@ -22,11 +22,8 @@ for file_name in sys.argv[1:]:
         'data[File][manual]': 0
     })
 
-    req = urllib2.Request("http://trost.mpimp-golm.mpg.de/database_test/de-de/phenotypes/upload", datagen, headers)
+    req = urllib2.Request("http://trost.mpimp-golm.mpg.de/database/de-de/phenotypes/upload", datagen, headers)
     #req = urllib2.Request("http://localhost/trost/de-de/phenotypes/upload", datagen, headers)
     print >> sys.stderr, urllib2.urlopen(req).read()
-
-    # maybe delete the tmp_file?
-    # 
 
 # http://atlee.ca/software/poster/

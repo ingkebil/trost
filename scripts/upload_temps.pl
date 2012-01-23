@@ -22,6 +22,8 @@ sub run {
         #my $dbi = DBI->connect('dbi:mysql:database=db_billiau_trost;host=hal9000', 'TROST_USER', 'kartoffel');
         #my $dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
         my $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=gent', 'trost', 'passwordpas');
+        #my $dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
+
         my $sth = $dbi->prepare('INSERT INTO temps (datum, rainfall, irrigation, tmin, tmax, location_id) VALUES (?, ?, ?, ?, ?, ?)');
         my $location_id = undef;
 
@@ -45,6 +47,7 @@ sub run {
             if ($us_date) {
                 ($day, $month) = ($month, $day);
             }
+            $month = $month < 10 ? "0$month" : $month;
 
             $date = "$year/$month/$day";
 
@@ -67,7 +70,10 @@ __END__
 
 =head1 SYNOPSIS
 
-    USAGE: upload_temps.pl file.csv
+    USAGE: upload_temps.pl [-d] file.csv
+
+options:
+    -d	American style date
 
 The CSV file is to have the columns in the right order: date, rainfall, irrigation, tmin, tmax, location_id
 

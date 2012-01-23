@@ -19,16 +19,18 @@ sub run {
     my $counts_of = {}; # { filename => { comp => 0, noncomp => 0 }}
 
     if (scalar(@files)) {
-        $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=localhost', 'trost', 'passwordpas');
+        #$dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
+        $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=hal9000', 'TROST_USER', 'kartoffel');
         &test_file_count(\@files);
-        my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT filename, count(*) as phen_samples,  count(distinct phenotypes.sample_id) as uniq_phen_samples FROM raws JOIN phenotype_raws ON raw_id = raws.id join phenotypes on phenotypes.id = phenotype_raws.phenotype_id GROUP BY filename}, 'filename');
+        my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT lower(filename) as filename, count(*) as phen_samples,  count(distinct phenotypes.sample_id) as uniq_phen_samples FROM raws JOIN phenotype_raws ON raw_id = raws.id join phenotypes on phenotypes.id = phenotype_raws.phenotype_id GROUP BY filename}, 'filename');
         print "FILENAME:\t\t\tDBI\t\t!COMP\t\tBBCH\t\tCOMP\t\tPLANTS\t\tSAMPLES\n";
         for my $file (@files) {
-            # next if $file ne 'trost_010611_3.txt';
+#            next if $file ne 'trost_2012_01_11_2.txt';
             my $fh = open(F, '<', $ARGV[0] . $file);
             my @lines = <F>;
             close F;
 
+            $file = lc $file;
             $counts_of->{ $file } = {};
             my @comp = grep {/component/} @lines;
             my @bbch = grep {/BBCH/} @lines;
@@ -45,30 +47,30 @@ sub run {
             # count the plants and samples (as explicitely mentioned in the file)
             if (scalar @comp) {
                 for my $line (@comp) {
-                    $line =~ m/.*id;(\d+);(\d+);.*/;
-                    $counts_of->{ $file }->{ plants  }->{ $2 } = 1;
-                    $counts_of->{ $file }->{ samples }->{ $1 } = 1;
+                    $line =~ m/.*id(;|\t)(\d+)(;|\t)(\d+)(;|\t).*/;
+                    $counts_of->{ $file }->{ plants  }->{ $4 } = 1;
+                    $counts_of->{ $file }->{ samples }->{ $2 } = 1;
                 }
             }
 
             # count samples names in the phenotype (for each phenotype there is a sample)
             my @noncomp = grep { !/component/ } grep { !/BBCH/ } @lines;
             for my $line (@noncomp) {
-                my @sample_name = split /;/, $line;
+                my @sample_name = split /;|\t/, $line;
                 $counts_of->{ $file }->{ phen_samples }->{ $sample_name[7] } = 1;
             }
             for my $line (@bbch) {
-                my @sample_name = split /;/, $line;
+                my @sample_name = split /;|\t/, $line;
                 $counts_of->{ $file }->{ bbch_samples }->{ $sample_name[3] } = 1;
             }
             for my $line (@comp) {
-                my @sample_name = split /;/, $line;
+                my @sample_name = split /;|\t/, $line;
                 $counts_of->{ $file }->{ comp_samples }->{ $sample_name[7] } = 1;
             }
 
             #test
             #for my $line (@lines) {
-            #    my @sample_name = split /;/, $line;
+            #    my @sample_name = split /;|\t/, $line;
             #    if ($sample_name[7] eq '22' || $sample_name[3] eq '22') {
             #        print $file, ': ', $line;
             #    }
@@ -251,7 +253,7 @@ sub diff_dbi_samples {
     my $uniq_phen_samples = &list_uniq_pheno_samples($counts_of);
 
     my @not_found = ();
-    for my $dbi_sample (keys $dbi_uniq_phen_samples) {
+    for my $dbi_sample (keys %$dbi_uniq_phen_samples) {
         my $found = 0;
         for my $sample (@$uniq_phen_samples) {
             if ($sample eq $dbi_sample) {
@@ -274,7 +276,7 @@ sub diff_samples {
     my @not_found = ();
     for my $sample (@$uniq_phen_samples) {
         my $found = 0;
-        for my $dbi_sample (keys $dbi_uniq_phen_samples) {
+        for my $dbi_sample (keys %$dbi_uniq_phen_samples) {
             if ($sample eq $dbi_sample) {
                 $found = 1;
                 next;
@@ -331,4 +333,4 @@ __END__
 
     USAGE: test_uploaded_phenotypes.pl
 
-This script will test
+This script will test .. say what?
