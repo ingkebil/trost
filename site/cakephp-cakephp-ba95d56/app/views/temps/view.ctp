@@ -11,9 +11,9 @@
 			<?php echo $temp['Temp']['datum']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rainfall'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Precipitation'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $temp['Temp']['rainfall']; ?>
+			<?php echo $temp['Temp']['precipitation']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Irrigation'); ?></dt>

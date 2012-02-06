@@ -10,7 +10,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('datum');?></th>
-			<th><?php echo $this->Paginator->sort('rainfall');?></th>
+			<th><?php echo $this->Paginator->sort('precipitation');?></th>
 			<th><?php echo $this->Paginator->sort('irrigation');?></th>
 			<th><?php echo $this->Paginator->sort('tmin');?></th>
 			<th><?php echo $this->Paginator->sort('tmax');?></th>
@@ -33,7 +33,7 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $temp['Temp']['id']; ?>&nbsp;</td>
 		<td><?php echo $temp['Temp']['datum']; ?>&nbsp;</td>
-		<td><?php echo str_replace('.', ',', $temp['Temp']['rainfall']); ?>&nbsp;</td>
+		<td><?php echo str_replace('.', ',', $temp['Temp']['precipitation']); ?>&nbsp;</td>
 		<td><?php echo str_replace('.', ',', $temp['Temp']['irrigation']); ?>&nbsp;</td>
 		<td><?php echo str_replace('.', ',', $temp['Temp']['tmin']); ?>&nbsp;</td>
 		<td><?php echo str_replace('.', ',', $temp['Temp']['tmax']); ?>&nbsp;</td>

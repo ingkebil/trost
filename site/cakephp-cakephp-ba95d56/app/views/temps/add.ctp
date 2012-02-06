@@ -4,7 +4,7 @@
  		<legend><?php __('Add Temp'); ?></legend>
 	<?php
 		echo $this->Form->input('datum');
-		echo $this->Form->input('rainfall');
+		echo $this->Form->input('precipitation');
 		echo $this->Form->input('tmin');
 		echo $this->Form->input('tmax');
 		echo $this->Form->input('location_id');
