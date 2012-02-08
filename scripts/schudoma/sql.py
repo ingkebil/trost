@@ -20,6 +20,26 @@ and attribute = 'Behandlung'
 and field = 'value'
 """.strip()
 
+cultures_q = """
+SELECT limsstudyid, id FROM cultures
+""".strip()
+
+plant_ids_q = """
+SELECT aliquot, id FROM plants
+"""
+
+def get_cultures():
+    query = the_db.query(cultures_q)
+    data = the_db.store_result().fetch_row(how=1, maxrows=0)
+    #print data
+    return dict([(int(d['limsstudyid']), int(d['id'])) for d in data])
+
+def get_plants():
+    query = the_db.query(plant_ids_q)
+    data = the_db.store_result().fetch_row(how=1, maxrows=0)
+    #print data
+    return dict([(int(d['aliquot']), int(d['id'])) for d in data])
+
 def get_locations():
     query = the_db.query(location_query)
     data = the_db.store_result().fetch_row(how=1, maxrows=99)
@@ -81,6 +101,7 @@ def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout):
         
     return None
 
+def write_update_sql(): pass
 
 ###
 def main(argv):
