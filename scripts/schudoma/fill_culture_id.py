@@ -9,32 +9,20 @@ import data_objects
 
 ###
 def main(argv):
+    trost_plants = sql.get_plants()
     trost_cultures = sql.get_cultures()
-    trost_plants   = sql.get_plants()
 
-    trost_bad_plants = []
-    trost_good_plants = []
+    bad_plants = []
 
-    for culture_id in trost_cultures:
-        lims_plants = ora_sql.get_aliquots(culture_id)
-        for lims_plant in lims_plants:
-            if (trost_plants.has_key(lims_plant)):
-                trost_good_plants.append(data_objects.plant(
-                    plant_id=lims_plant,
-                    trost_plant_id=trost_plants[lims_plant],
-                    culture_id=culture_id,
-                    trost_culture_id=trost_cultures[culture_id]
-                ))
-            else:
-                trost_bad_plants.append(data_objects.plant(
-                    plant_id=lims_plant,
-                    trost_plant_id=trost_plants[lims_plant],
-                    culture_id=culture_id,
-                    trost_culture_id=trost_cultures[culture_id]
-                ))
-    
-    print trost_good_plants
-    print trost_good_plants
+    for aliquot_id, plant_id in trost_plants.iteritems():
+        culture_id = ora_sql.get_culture_id(aliquot_id)
+        if (trost_cultures.has_key(culture_id)):
+            print "UPDATE `plants` SET culture_id = %d WHERE id = %d;" % (trost_cultures[culture_id], plant_id)
+        else:
+            bad_plants.append(plant_id)
+
+    if len(bad_plants) > 0:
+        print bad_plants
 
     return None
 

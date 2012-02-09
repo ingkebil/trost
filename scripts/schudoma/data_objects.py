@@ -6,17 +6,6 @@ import math
 
 import cast
 
-class plant(object):
-
-    plant_id = None # the aliquot id in LIMS/TROST
-    trost_plant_id = None # the primary key in TROST DB
-    culture_id = None # the culture/study id in LIMS/TROST
-    trost_culture_id = None # the primary key in the TROST DB of the culture
-
-    def __init__(self, **kw):
-        for key, value in kw.items():
-            self.setattr(key, value)
-
 #
 class DataObject(object):
     def __init__(self, headers=[], values=[]):
