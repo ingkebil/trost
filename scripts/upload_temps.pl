@@ -19,10 +19,9 @@ sub run {
     close F;
 
     if (scalar(@lines)) {
-        #my $dbi = DBI->connect('dbi:mysql:database=db_billiau_trost;host=hal9000', 'TROST_USER', 'kartoffel');
+        my $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=hal9000', 'TROST_USER', 'kartoffel');
         #my $dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
-        my $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=gent', 'trost', 'passwordpas');
-        #my $dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
+        #my $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=hal9000', 'trost', 'passwordpas');
 
         my $sth = $dbi->prepare('INSERT INTO temps (datum, rainfall, irrigation, tmin, tmax, location_id) VALUES (?, ?, ?, ?, ?, ?)');
         my $location_id = undef;

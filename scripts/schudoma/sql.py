@@ -7,6 +7,28 @@ import math
 import login
 the_db = login.get_db()
 
+USE_DB = 'USE %s;'
+DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
+CREATE_TABLE = 'CREATE TABLE %s(\n%s\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;' 
+INSERT_STR = 'INSERT INTO %s VALUES %s;\n'
+"""
+INSERT_SELECT_STR = ''
+insert into plants (id, location_id) select NULL, locations.id from locations where locations.limsid = 1111;
+"""
+
+INSERT_PLANTS2_STR = """
+INSERT INTO plants2 
+(id, aliquot, name, subspecies_id, location_id, culture_id, sampleid,
+description, created)
+SELECT NULL, %s, %s, subspecies.id, locations.id, %s, %s, '', ''
+FROM subspecies, locations
+WHERE subspecies.limsid = %s AND locations.limsid = %s;
+""".strip()
+
+
+
+""" SQL Queries """
+
 location_query = """
 SELECT id, limsid FROM locations
 """.strip()
@@ -26,25 +48,36 @@ SELECT limsstudyid, id FROM cultures
 
 plant_ids_q = """
 SELECT aliquot, id FROM plants
-"""
+""".strip()
+
+subspecies_q = """
+SELECT limsid, id FROM subspecies
+""".strip()
+
+
+def _get_table(query, key_key, pk_key='id'):
+    query = the_db.query(query)
+    data = the_db.store_result().fetch_row(how=1, maxrows=0)
+    #print data
+    rs = dict() 
+    for d in data:
+        cast_key_key = 'None'
+        # lame casting solution
+        if type(d[key_key]) is str: cast_key_key = int(d[key_key])
+        rs[cast_key_key] = int(d[pk_key])
+    return rs
+
+def get_subspecies():
+    return _get_table(subspecies_q, 'limsid')
 
 def get_cultures():
-    query = the_db.query(cultures_q)
-    data = the_db.store_result().fetch_row(how=1, maxrows=0)
-    #print data
-    return dict([(int(d['limsstudyid']), int(d['id'])) for d in data])
+    return _get_table(cultures_q, 'limsstudyid')
 
 def get_plants():
-    query = the_db.query(plant_ids_q)
-    data = the_db.store_result().fetch_row(how=1, maxrows=0)
-    #print data
-    return dict([(int(d['aliquot']), int(d['id'])) for d in data])
+    return _get_table(plant_ids_q, 'aliquot')
 
 def get_locations():
-    query = the_db.query(location_query)
-    data = the_db.store_result().fetch_row(how=1, maxrows=99)
-    # print data
-    return dict([(int(d['limsid']), int(d['id'])) for d in data])
+    return _get_table(location_query, 'limsid')
 
 def get_values():
     query = the_db.query(value_query)
@@ -56,10 +89,7 @@ def get_values():
     id_of[''] = '0' # add the empty value
     return id_of
 
-USE_DB = 'USE %s;'
-DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
-CREATE_TABLE = 'CREATE TABLE %s(\n%s\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;' 
-INSERT_STR = 'INSERT INTO %s VALUES %s;\n'
+""" Output """
 
 def write_sql_header(db_name, table_name, table, out=sys.stdout):
     out.write('%s\n' % USE_DB % db_name)
@@ -76,32 +106,44 @@ def format_entry(entry):
             formatted.append("'%s'" % x)
         else:
             formatted.append(x)
-    return '(%s)' % ','.join(map(str, formatted))
+    # return '(%s)' % ','.join(map(str, formatted))
+    return formatted
     
 
-def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout):
+def prepare_sql_table(data, columns_d):
+    rows = []
     for dobj in data:
-        entry = []        
+        row = []
         for key, val in columns_d.items():
             if hasattr(dobj, key) and getattr(dobj, key) != '':
-                entry.append(val + (getattr(dobj, key),))
+                row.append(val + (getattr(dobj, key),))
             else:
-                entry.append(val[:-1] + (str, 'NULL'))
-            pass
+                row.append(val[:-1] + (str, 'NULL'))
+                pass
+        row = [(-1, 'id', str, 'NULL')] + row # add the id
+        rows.append(sorted(row))
+    return rows
 
-        entry = [(-1, 'id', str, 'NULL')] + entry # add the id
 
-        try:
-            out.write(INSERT_STR % (table_name,
-                                    format_entry([x[2](x[3]) 
-                                                  for x in sorted(entry)])))
+def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout):
+    for row in rows:
+        try:       
+            formatted = format_entry([x[2](x[3]) for x in row])
+            entry = '(%s)' % ','.join(map(str, formatted))
+            out.write(INSERT_STR % (table_name, entry))
         except:
-            sys.stderr.write('EXC: %s\n' % sorted(entry))
+            sys.stderr.write('EXC: %s\n' % row)
             sys.exit(1)
-        
-    return None
+    pass
 
+# legacy support
+def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout):
+    write_standard_sql_table(prepare_sql_table(data, columns_d),
+                             table_name=table_name, out=out)
+    pass
+  
 def write_update_sql(): pass
+  
 
 ###
 def main(argv):
