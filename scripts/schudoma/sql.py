@@ -60,6 +60,10 @@ aliquotid from starch_yield, plants where location_id=%s AND
 aliquotid=plants.aliquot order by cultivar) AND location_id=%s;
 """.strip()
 
+starch_yield_plants_q = """
+select aliquotid from starch_yield where cultivar = %s;
+""".strip()
+
 get_value_id_q = """
 SELECT id FROM `values` WHERE value=%s;
 """.strip()
@@ -67,6 +71,13 @@ SELECT id FROM `values` WHERE value=%s;
 def get_missing_plants(location_id):
     q    = the_db.query(missing_plants_q % (location_id, location_id))
     data = the_db.store_result().fetch_row(how=0, maxrows=0)
+    rs   = [d[0] for d in data]
+    return rs
+
+def get_plants_culivar_of(cultivar):
+    c = the_db.cursor()
+    c.execute(starch_yield_plants_q, (cultivar,))
+    data = c.fetchall()
     rs   = [d[0] for d in data]
     return rs
 

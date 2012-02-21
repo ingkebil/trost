@@ -35,38 +35,6 @@ columns_d = {
 
 extra_column_names = [ 'Kontrolle', 'Trockenstress', '50_%_nFK', '30_%_nFK' ]
 
-#columns_d = [
-#     {
-#        'Datum': (0, 'date', str),
-#        'Standort_ID': (2, 'location_id', int),
-#        'Kontrolle': (3, 'value', str, 'custom'),
-#     },
-#     {
-#        'Datum': (0, 'date', str),
-#        'Standort_ID': (2, 'location_id', int),
-#        'Trockenstress': (3, 'value', str, 'custom'),
-#     },
-#     {
-#        'Datum': (0, 'date', str),
-#        'Standort_ID': (2, 'location_id', int),
-#        '50_%_nFK': (3, 'value', str, 'custom'),
-#    },
-#    {
-#        'Datum': (0, 'date', str),
-#        'Standort_ID': (2, 'location_id', int),
-#        '30_%_nFK': (3, 'value', str, 'custom'),
-#    }
-#]
-
-def annotate_locations(data):
-    locations = sql.get_locations()
-    for dobj in data:
-        dobj.Standort = locations[dobj.Standort]
-    return data
-    
-
-
-
 ###
 def main(argv):
     
@@ -78,7 +46,7 @@ def main(argv):
     for fn in argv:
         data, headers  = p_xls.read_xls_data(fn)
 
-        # find the right treatment columns: intersect two dicts
+        # find the right treatment columns: intersect two lists 
         treatment_column_names = [item for item in headers if item in extra_column_names]
 
         for column in treatment_column_names:
