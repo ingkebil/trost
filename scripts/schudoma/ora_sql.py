@@ -25,9 +25,26 @@ where study_user.u_project = 'TROST'
 AND aliquot.aliquot_id = :aliquot_id
 """.strip()
 
+pedigree_subspecies_q = """
+select plant_subspecies_id_single(a.aliquot_id) as subspecies_id, a.aliquot_id, a.name, au.u_culture from aliquot a, aliquot_user au, sample_user sau, study_user stu where a.aliquot_id = au.aliquot_id and sau.sample_id = a.sample_id and au.u_culture = stu.study_id and stu.u_project = 'TROST' and a.aliquot_id = :aliquot_id
+""".strip()
+
 def get_plant_information(aliquot_id):
     c = _odb.cursor()
     c.execute(subspecies_q, dict(aliquot_id=aliquot_id))
+    row = c.fetchall()
+    if len(row) > 0:
+        return {
+            'name'          : row[0][2],
+            'aliquot_id'    : row[0][1],
+            'subspecies_id' : row[0][0],
+            'culture_id'    : row[0][3],
+        }
+    return None
+
+def get_pedigree_plant_information(aliquot_id):
+    c = _odb.cursor()
+    c.execute(pedigree_subspecies_q, dict(aliquot_id=aliquot_id))
     row = c.fetchall()
     if len(row) > 0:
         return {

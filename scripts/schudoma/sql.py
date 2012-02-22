@@ -60,24 +60,17 @@ aliquotid from starch_yield, plants where location_id=%s AND
 aliquotid=plants.aliquot order by cultivar) AND location_id=%s;
 """.strip()
 
-starch_yield_plants_q = """
-select aliquotid from starch_yield where cultivar = %s;
-""".strip()
-
 get_value_id_q = """
 SELECT id FROM `values` WHERE value=%s;
+""".strip()
+
+starch_yield_plants_q = """
+select aliquotid from starch_yield where cultivar = %s;
 """.strip()
 
 def get_missing_plants(location_id):
     q    = the_db.query(missing_plants_q % (location_id, location_id))
     data = the_db.store_result().fetch_row(how=0, maxrows=0)
-    rs   = [d[0] for d in data]
-    return rs
-
-def get_plants_culivar_of(cultivar):
-    c = the_db.cursor()
-    c.execute(starch_yield_plants_q, (cultivar,))
-    data = c.fetchall()
     rs   = [d[0] for d in data]
     return rs
 
@@ -87,10 +80,11 @@ def _get_table(query, key_key, pk_key='id'):
     #print data
     rs = dict() 
     for d in data:
-        cast_key_key = 'None'
-        # lame casting solution
-        if type(d[key_key]) is str: cast_key_key = int(d[key_key])
-        rs[cast_key_key] = int(d[pk_key])
+        #cast_key_key = 'None'
+        ## lame casting solution
+        #if type(d[key_key]) is str: cast_key_key = int(d[key_key])
+        #rs[cast_key_key] = int(d[pk_key])
+        rs[d[key_key]] = d[pk_key]
     return rs
 
 def get_subspecies():
@@ -124,6 +118,14 @@ def get_value_id(value):
             return data[0][0]
     return None
 
+def get_plants_culivar_of(cultivar):
+    c = the_db.cursor()
+    c.execute(starch_yield_plants_q, (cultivar,))
+    data = c.fetchall()
+    rs   = [d[0] for d in data]
+    return rs
+
+
 
 """ Output """
 
@@ -144,7 +146,7 @@ def format_entry(entry):
             formatted.append(x)
     # return '(%s)' % ','.join(map(str, formatted))
     return formatted
-    
+
 def prepare_sql_table(data, columns_d):
     rows = []
     for dobj in data:

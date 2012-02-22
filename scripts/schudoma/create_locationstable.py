@@ -8,31 +8,24 @@ import glob
 import sql
 import process_xls as p_xls
 
-DEFAULT_POTATO_ID = 1
 
 DB_NAME = 'trost_prod'
-TABLE_NAME = 'subspecies'
+TABLE_NAME = 'locations'
 TABLE = [
     'id INT AUTO_INCREMENT',
     'limsid INT',
-    'species_id INT',
-    'cultivar VARCHAR(45)',
-    'breeder VARCHAR(45)',
-    'reifegruppe VARCHAR(10)',
-    'reifegrclass INT',
-    'krautfl INT',
-    'verwendung VARCHAR(10)',
+    'name VARCHAR(45)',
+    'elevation FLOAT',
+    'gridref_north FLOAT',
+    'gridref_east FLOAT',
     'PRIMARY KEY(id)']
                
-columns_d = {'LIMS_Subspecies_id': (0, 'limsid', int),      
-             'species': (1, 'species_id', int),
-             'SORTE': (2, 'cultivar', str),
-             'ZUECHTER': (3, 'breeder', str),
-             'REIFEGRP': (4, 'reifegruppe', str),
-             'Reifegrclass': (5, 'reifegrclass', int),
-             'KRAUTFL': (6, 'krautfl', int),
-             'Verwendung': (7, 'verwendung', str)}
-
+columns_d = {'limsid': (0, 'limsid', int),
+             'name': (1, 'name', str),
+             'elevation': (2, 'elevation', float),
+             'gridref_north': (3, 'gridref_north', float),
+             'gridref_east': (4, 'gridref_east', float)}
+    
 def annotate_locations(data):
     locations = sql.get_locations()
     for dobj in data:
@@ -50,10 +43,8 @@ def main(argv):
     
     sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
     dir_name = argv[0]
-    fn = '%s/%s' % (dir_name, 'TROSTSorten20120217.xls')
+    fn = '%s/%s' % (dir_name, 'locations_with_geodata.xls')
     data, headers  = p_xls.read_xls_data(fn)
-    for dobj in data:
-        dobj.species = DEFAULT_POTATO_ID
     sql.write_sql_table(data, columns_d, table_name=TABLE_NAME)   
 
     return None

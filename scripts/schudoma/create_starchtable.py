@@ -15,7 +15,7 @@ YIELD_TABLE = [
     'name VARCHAR(45)',
     'aliquotid INT NOT NULL',
     'parzellennr INT',
-    'location_id INT NOT NULL',
+    'locationid INT NOT NULL',
     'cultivar VARCHAR(45)',
     'pflanzen_parzelle INT',
     'knollenmasse_kgfw_parzelle DOUBLE NOT NULL',

@@ -15,20 +15,14 @@ TREATMENT_TABLE = [
     'name VARCHAR(45)',
     'aliquotid INT NOT NULL',
     'alias VARCHAR(45) NULL',
-    'value_id int NULL',
+    'treatment VARCHAR(45) NULL',
     'PRIMARY KEY(id)']
 
 columns_d = {'Name': (0, 'name', str), 
              'Aliquot_Id': (1, 'aliquot_id', int), 
              'Alias': (2, 'alias', str),
-             'value_id': (3, 'treatment', int)
+             'Treatment': (3, 'treatment', str)
              }
-
-def annotate_treatment(data):
-    values = sql.get_values()
-    for dobj in data:
-        dobj.value_id = values[dobj.Treatment]
-    return data
     
 ###
 def main(argv):
@@ -43,7 +37,6 @@ def main(argv):
     fn = argv[0]
     data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index) 
     # return None
-    data = annotate_treatment(data)
     sql.write_sql_table(data, columns_d, 
                         table_name=TREATMENT_TABLE_NAME)
     return None
