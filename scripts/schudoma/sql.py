@@ -10,6 +10,7 @@ the_db = login.get_db()
 USE_DB = 'USE %s;'
 DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
 CREATE_TABLE = 'CREATE TABLE %s(\n%s\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;' 
+ALTER_TABLE  = 'ALTER TABLE %s %s;' # table name, ADD column TYPE
 INSERT_STR = 'INSERT INTO %s VALUES %s;\n'
 """
 INSERT_SELECT_STR = ''
@@ -24,7 +25,6 @@ SELECT NULL, %s, %s, subspecies.id, locations.id, %s, %s, '', ''
 FROM subspecies, locations
 WHERE subspecies.limsid = %s AND locations.limsid = %s;
 """.strip()
-
 
 
 """ SQL Queries """
@@ -128,6 +128,11 @@ def get_plants_culivar_of(cultivar):
 
 
 """ Output """
+
+def write_sql_alter(db_name, table_name, table, out=sys.stdout):
+    out.write('%s\n' % USE_DB % db_name)
+    out.write('%s\n' % (ALTER_TABLE% (table_name,
+                                        ',\n'.join(["ADD %s" % entry for entry in table]))))
 
 def write_sql_header(db_name, table_name, table, out=sys.stdout):
     out.write('%s\n' % USE_DB % db_name)

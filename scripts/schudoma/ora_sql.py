@@ -29,6 +29,33 @@ pedigree_subspecies_q = """
 select plant_subspecies_id_single(a.aliquot_id) as subspecies_id, a.aliquot_id, a.name, au.u_culture from aliquot a, aliquot_user au, sample_user sau, study_user stu where a.aliquot_id = au.aliquot_id and sau.sample_id = a.sample_id and au.u_culture = stu.study_id and stu.u_project = 'TROST' and a.aliquot_id = :aliquot_id
 """.strip()
 
+all_aliquot_info_q = """
+SELECT * FROM aliquot WHERE aliquot_id = :aliquot_id
+""".strip()
+
+def format_entry(entry):
+    """ This is a really really ugly workaround... """
+    formatted = []
+    for x in entry:
+        if x == None:
+            formatted.append("NULL")
+        elif isinstance(x, str):
+            formatted.append("'%s'" % x)
+        else:
+            formatted.append(x)
+    return formatted
+
+def get_sample_description_of(aliquot):
+    c = _odb.cursor()
+    c.execute(all_aliquot_info_q, {'aliquot_id': aliquot})
+    rows = c.fetchall()
+    # http://stackoverflow.com/questions/4468071/how-can-i-make-cx-oracle-bind-the-results-of-a-query-to-a-dictionary-rather-than
+    desc = [d[0] for d in c.description]
+    if len(rows) > 0:
+        rs = [dict(zip(desc, format_entry(row))) for row in rows]
+        return rs[0]
+    return None
+
 def get_plant_information(aliquot_id):
     c = _odb.cursor()
     c.execute(subspecies_q, dict(aliquot_id=aliquot_id))
