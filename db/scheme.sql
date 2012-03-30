@@ -1,279 +1,328 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+-- Adminer 3.0.1 MySQL dump
 
-CREATE SCHEMA IF NOT EXISTS `trost` DEFAULT CHARACTER SET utf8 ;
-USE `trost` ;
+SET NAMES utf8;
+SET foreign_key_checks = 0;
+SET time_zone = 'SYSTEM';
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
--- -----------------------------------------------------
--- Table `trost`.`experiments`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`experiments` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  `startdate` DATE NULL ,
-  `project` VARCHAR(45) NULL ,
-  `study` VARCHAR(45) NULL ,
-  `protocol` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+USE `trost_prod`;
 
-
--- -----------------------------------------------------
--- Table `trost`.`cultures`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`cultures` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  `condition` VARCHAR(45) NULL ,
-  `created` DATETIME NULL ,
-  `description` TEXT NULL ,
-  `experiment_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_cultures_experiments` (`experiment_id` ASC) ,
-  CONSTRAINT `fk_cultures_experiments`
-    FOREIGN KEY (`experiment_id` )
-    REFERENCES `trost`.`experiments` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `aliquots` (
+      `id` int(11) NOT NULL auto_increment,
+      `aliquot` int(11) default NULL,
+      `plantid` int(11) default NULL,
+      `sample_date` date default NULL,
+      `amount` int(11) default NULL,
+      `amount_unit` varchar(20) default NULL,
+      `organ` varchar(255) default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11408 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`samples`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`samples` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  `supplier` VARCHAR(45) NULL ,
-  `created` DATETIME NULL ,
-  `created_by` VARCHAR(45) NULL ,
-  `mag` VARCHAR(45) NULL ,
-  `alias` VARCHAR(45) NULL ,
-  `description` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `bbches` (
+      `id` int(11) NOT NULL auto_increment,
+      `bbch` int(11) default NULL,
+      `name` varchar(45) default NULL,
+      `species_id` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      UNIQUE KEY `unique_bbch_id` (`bbch`,`species_id`),
+      KEY `fk_bbchs_species1` (`species_id`),
+      CONSTRAINT `fk_bbchs_species1` FOREIGN KEY (`species_id`) REFERENCES `species` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`plants`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`plants` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  `aliquot` VARCHAR(45) NULL ,
-  `culture_id` INT NOT NULL ,
-  `created` DATETIME NULL ,
-  `sample_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_plants_cultures1` (`culture_id` ASC) ,
-  INDEX `fk_plants_samples1` (`sample_id` ASC) ,
-  CONSTRAINT `fk_plants_cultures1`
-    FOREIGN KEY (`culture_id` )
-    REFERENCES `trost`.`cultures` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_plants_samples1`
-    FOREIGN KEY (`sample_id` )
-    REFERENCES `trost`.`samples` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `cultures` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) default NULL,
+      `limsstudyid` int(11) default NULL,
+      `condition` varchar(45) default NULL,
+      `created` datetime default NULL,
+      `description` text,
+      `experiment_id` int(11) default NULL,
+      `plantspparcelle` int(11) default NULL,
+      `location_id` int(11) default NULL,
+      `planted` date default NULL,
+      `terminated` date default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`species`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`species` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `entities` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) NOT NULL,
+      `PO` varchar(45) default NULL,
+      `definition` text,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=810 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`bbches`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`bbches` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `bbch` INT NULL ,
-  `name` VARCHAR(45) NULL ,
-  `species_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_bbchs_species1` (`species_id` ASC) ,
-  CONSTRAINT `fk_bbchs_species1`
-    FOREIGN KEY (`species_id` )
-    REFERENCES `trost`.`species` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `experiments` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) default NULL,
+      `startdate` date default NULL,
+      `project` varchar(45) default NULL,
+      `study` varchar(45) default NULL,
+      `protocol` varchar(45) default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`entities`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`entities` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `PO` VARCHAR(45) NULL ,
-  `definition` TEXT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `i18n` (
+      `id` int(10) NOT NULL auto_increment,
+      `locale` varchar(6) NOT NULL,
+      `model` varchar(255) NOT NULL,
+      `foreign_key` int(10) NOT NULL,
+      `field` varchar(255) NOT NULL,
+      `content` text,
+      PRIMARY KEY  (`id`),
+      KEY `locale` (`locale`),
+      KEY `model` (`model`),
+      KEY `row_id` (`foreign_key`),
+      KEY `field` (`field`)
+) ENGINE=MyISAM AUTO_INCREMENT=2405 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`values`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`values` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `attribute` VARCHAR(45) NOT NULL ,
-  `value` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `irrigation` (
+      `id` int(11) NOT NULL auto_increment,
+      `date` date default NULL,
+      `treatment_id` int(11) default NULL,
+      `location_id` int(11) default NULL,
+      `value` float default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`programs`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`programs` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `keywords` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) NOT NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`phenotypes`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`phenotypes` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `version` VARCHAR(45) NULL ,
-  `object` VARCHAR(45) NULL ,
-  `program_id` INT NOT NULL ,
-  `date` DATE NULL ,
-  `time` TIME NULL ,
-  `plant_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_phenotypes_plants1` (`plant_id` ASC) ,
-  INDEX `fk_phenotypes_programs1` (`program_id` ASC) ,
-  CONSTRAINT `fk_phenotypes_plants1`
-    FOREIGN KEY (`plant_id` )
-    REFERENCES `trost`.`plants` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phenotypes_programs1`
-    FOREIGN KEY (`program_id` )
-    REFERENCES `trost`.`programs` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `locations` (
+      `id` int(11) NOT NULL auto_increment,
+      `limsid` int(11) default NULL,
+      `name` varchar(45) default NULL,
+      `elevation` float default NULL,
+      `gridref_north` float default NULL,
+      `gridref_east` float default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`phenotype_entities`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`phenotype_entities` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `phenotype_id` INT NOT NULL ,
-  `entity_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_phenotype_entities_phenotypes1` (`phenotype_id` ASC) ,
-  INDEX `fk_phenotype_entities_entities1` (`entity_id` ASC) ,
-  CONSTRAINT `fk_phenotype_entities_phenotypes1`
-    FOREIGN KEY (`phenotype_id` )
-    REFERENCES `trost`.`phenotypes` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phenotype_entities_entities1`
-    FOREIGN KEY (`entity_id` )
-    REFERENCES `trost`.`entities` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `people` (
+      `id` int(11) NOT NULL auto_increment,
+      `username` varchar(45) NOT NULL,
+      `name` varchar(45) NOT NULL,
+      `location_id` int(11) NOT NULL,
+      `password` varchar(40) NOT NULL,
+      `role` varchar(10) default NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_people_locations1` (`location_id`),
+      CONSTRAINT `fk_people_locations1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`phenotype_values`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`phenotype_values` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `value_id` INT NOT NULL ,
-  `phenotype_id` INT NOT NULL ,
-  `number` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_phenotype_attributes_phenotypes1` (`phenotype_id` ASC) ,
-  INDEX `fk_phenotype_values_values1` (`value_id` ASC) ,
-  CONSTRAINT `fk_phenotype_attributes_phenotypes1`
-    FOREIGN KEY (`phenotype_id` )
-    REFERENCES `trost`.`phenotypes` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phenotype_values_values1`
-    FOREIGN KEY (`value_id` )
-    REFERENCES `trost`.`values` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `phenotype_bbches` (
+      `id` int(11) NOT NULL auto_increment,
+      `phenotype_id` int(11) NOT NULL,
+      `bbch_id` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_phenotype_bbchs_phenotypes1` (`phenotype_id`),
+      KEY `fk_phenotype_bbchs_bbchs1` (`bbch_id`),
+      CONSTRAINT `fk_phenotype_bbchs_bbchs1` FOREIGN KEY (`bbch_id`) REFERENCES `bbches` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_phenotype_bbchs_phenotypes1` FOREIGN KEY (`phenotype_id`) REFERENCES `phenotypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=28258 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`phenotype_bbches`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`phenotype_bbches` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `phenotype_id` INT NOT NULL ,
-  `bbch_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_phenotype_bbchs_phenotypes1` (`phenotype_id` ASC) ,
-  INDEX `fk_phenotype_bbchs_bbchs1` (`bbch_id` ASC) ,
-  CONSTRAINT `fk_phenotype_bbchs_phenotypes1`
-    FOREIGN KEY (`phenotype_id` )
-    REFERENCES `trost`.`phenotypes` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phenotype_bbchs_bbchs1`
-    FOREIGN KEY (`bbch_id` )
-    REFERENCES `trost`.`bbches` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `phenotype_entities` (
+      `id` int(11) NOT NULL auto_increment,
+      `phenotype_id` int(11) NOT NULL,
+      `entity_id` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_phenotype_entities_phenotypes1` (`phenotype_id`),
+      KEY `fk_phenotype_entities_entities1` (`entity_id`),
+      CONSTRAINT `fk_phenotype_entities_entities1` FOREIGN KEY (`entity_id`) REFERENCES `entities` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_phenotype_entities_phenotypes1` FOREIGN KEY (`phenotype_id`) REFERENCES `phenotypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=187241 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`raws`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`raws` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `data` BLOB NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+CREATE TABLE `phenotype_raws` (
+      `id` int(11) NOT NULL auto_increment,
+      `phenotype_id` int(11) NOT NULL,
+      `raw_id` int(11) NOT NULL,
+      `line_nr` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_phenotype_raws_phenotypes1` (`phenotype_id`),
+      KEY `fk_phenotype_raws_raws1` (`raw_id`),
+      CONSTRAINT `fk_phenotype_raws_phenotypes1` FOREIGN KEY (`phenotype_id`) REFERENCES `phenotypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_phenotype_raws_raws1` FOREIGN KEY (`raw_id`) REFERENCES `raws` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=215532 DEFAULT CHARSET=utf8;
 
 
--- -----------------------------------------------------
--- Table `trost`.`phenotype_raws`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `trost`.`phenotype_raws` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `phenotype_id` INT NOT NULL ,
-  `raw_id` INT NOT NULL ,
-  `line_nr` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_phenotype_raws_phenotypes1` (`phenotype_id` ASC) ,
-  INDEX `fk_phenotype_raws_raws1` (`raw_id` ASC) ,
-  CONSTRAINT `fk_phenotype_raws_phenotypes1`
-    FOREIGN KEY (`phenotype_id` )
-    REFERENCES `trost`.`phenotypes` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_phenotype_raws_raws1`
-    FOREIGN KEY (`raw_id` )
-    REFERENCES `trost`.`raws` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `phenotype_values` (
+      `id` int(11) NOT NULL auto_increment,
+      `value_id` int(11) NOT NULL,
+      `phenotype_id` int(11) NOT NULL,
+      `number` varchar(45) default NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_phenotype_attributes_phenotypes1` (`phenotype_id`),
+      KEY `fk_phenotype_values_values1` (`value_id`),
+      CONSTRAINT `fk_phenotype_attributes_phenotypes1` FOREIGN KEY (`phenotype_id`) REFERENCES `phenotypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_phenotype_values_values1` FOREIGN KEY (`value_id`) REFERENCES `values` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=187635 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `phenotypes` (
+      `id` int(11) NOT NULL auto_increment,
+      `version` varchar(45) default NULL,
+      `object` varchar(45) default NULL,
+      `program_id` int(11) NOT NULL,
+      `date` date NOT NULL,
+      `time` time NOT NULL,
+      `sample_id` int(11) NOT NULL,
+      `invalid` tinyint(4) default NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_phenotypes_programs1` (`program_id`),
+      KEY `fk_phenotypes_samples1` (`sample_id`),
+      CONSTRAINT `fk_phenotypes_programs1` FOREIGN KEY (`program_id`) REFERENCES `programs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_phenotypes_samples1` FOREIGN KEY (`sample_id`) REFERENCES `samples` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=215938 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `plants` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) default NULL,
+      `aliquot` int(11) NOT NULL,
+      `culture_id` int(11) NOT NULL,
+      `subspecies_id` int(11) NOT NULL,
+      `created` datetime default NULL,
+      `lineid` int(11) default NULL,
+      `description` text,
+      PRIMARY KEY  (`id`),
+      KEY `fk_plants_cultures1` (`culture_id`),
+      KEY `aliquot` (`aliquot`),
+      CONSTRAINT `fk_plants_cultures1` FOREIGN KEY (`culture_id`) REFERENCES `cultures` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=17833 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `programs` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) NOT NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `raws` (
+      `id` int(11) NOT NULL auto_increment,
+      `data` blob NOT NULL,
+      `filename` varchar(45) default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1096 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `samples` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) NOT NULL,
+      `created` datetime default NULL,
+      `plant_id` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_samples_plants1` (`plant_id`),
+      CONSTRAINT `fk_samples_plants1` FOREIGN KEY (`plant_id`) REFERENCES `plants` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=48502 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `species` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) NOT NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `starch_yield` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) default NULL,
+      `aliquotid` int(11) NOT NULL,
+      `parzellennr` int(11) default NULL,
+      `location_id` int(11) NOT NULL,
+      `cultivar` varchar(45) default NULL,
+      `pflanzen_parzelle` int(11) default NULL,
+      `knollenmasse_kgfw_parzelle` double NOT NULL,
+      `staerkegehalt_g_kg` double NOT NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1765 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `subspecies` (
+      `id` int(11) NOT NULL auto_increment,
+      `limsid` int(11) default NULL,
+      `species_id` int(11) default NULL,
+      `cultivar` varchar(45) default NULL,
+      `breeder` varchar(45) default NULL,
+      `reifegruppe` varchar(10) default NULL,
+      `reifegrclass` int(11) default NULL,
+      `krautfl` int(11) default NULL,
+      `verwendung` varchar(10) default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `temps` (
+      `id` int(11) NOT NULL auto_increment,
+      `datum` date NOT NULL,
+      `precipitation` float default NULL,
+      `irrigation` float default NULL,
+      `tmin` float default NULL,
+      `tmax` float default NULL,
+      `location_id` int(11) NOT NULL,
+      `invalid` tinyint(4) default NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_temps_locations1` (`location_id`),
+      CONSTRAINT `fk_temps_locations1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3007 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `treatments` (
+      `id` int(11) NOT NULL auto_increment,
+      `name` varchar(45) default NULL,
+      `aliquotid` int(11) NOT NULL,
+      `alias` varchar(45) default NULL,
+      `value_id` int(11) default NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2300 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `ufilekeywords` (
+      `id` int(11) NOT NULL auto_increment,
+      `ufile_id` int(11) NOT NULL,
+      `keyword_id` int(11) NOT NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_ufilekeywords_1` (`ufile_id`),
+      KEY `fk_ufilekeywords_2` (`keyword_id`),
+      CONSTRAINT `fk_ufilekeywords_1` FOREIGN KEY (`ufile_id`) REFERENCES `ufiles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_ufilekeywords_2` FOREIGN KEY (`keyword_id`) REFERENCES `keywords` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `ufiles` (
+      `id` int(11) NOT NULL auto_increment,
+      `person_id` int(11) NOT NULL,
+      `name` varchar(255) NOT NULL,
+      `created` datetime default NULL,
+      `description` varchar(45) default NULL,
+      `invalid` tinyint(4) default NULL,
+      PRIMARY KEY  (`id`),
+      KEY `fk_ufiles_people1` (`person_id`),
+      CONSTRAINT `fk_ufiles_people1` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `values` (
+      `id` int(11) NOT NULL auto_increment,
+      `attribute` varchar(45) NOT NULL,
+      `value` varchar(45) NOT NULL,
+      PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8;
 
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
