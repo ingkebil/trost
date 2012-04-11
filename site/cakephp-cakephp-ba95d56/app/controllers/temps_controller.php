@@ -32,6 +32,7 @@ class TempsController extends AppController {
 			}
 		}
         $this->set('locations', $this->Temp->Location->find('list'));
+        $this->data['Temp']['location_id'] = $this->Auth->user('location_id');
 	}
 
     function invalidate($id = null) {
