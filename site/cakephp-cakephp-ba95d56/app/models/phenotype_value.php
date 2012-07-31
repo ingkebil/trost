@@ -1,6 +1,7 @@
 <?php
 class PhenotypeValue extends AppModel {
 	var $name = 'PhenotypeValue';
+    var $actsAs = array('Containable');
 	var $validate = array(
 		'value_id' => array(
 			'numeric' => array(
@@ -41,5 +42,44 @@ class PhenotypeValue extends AppModel {
 			'order' => ''
 		)
 	);
+
+    function fetchLine($params) {
+        return $this->find('all', 
+            am(
+                $params,
+                array(
+                    'recursive' => -1,
+                    'fields' => array('Phenotype.*', 'Sample.*', 'PhenotypeEntity.*', 'PhenotypeValue.*', 'Value.*'),
+                    #'contain' => array('Phenotype', 'Phenotype.PhenotypeEntity', 'Phenotype.Sample'),
+                    'joins' => array(
+                        array(
+                            'table' => 'phenotypes',
+                            'alias' => 'Phenotype',
+                            'type'  => 'left',
+                            'conditions' => array('PhenotypeValue.phenotype_id = Phenotype.id')
+                        ),
+                        array(
+                            'table' => 'phenotype_entities',
+                            'alias' => 'PhenotypeEntity',
+                            'type'  => 'left',
+                            'conditions' => array('PhenotypeEntity.phenotype_id = Phenotype.id')
+                        ),
+                        array(
+                            'table' => 'samples',
+                            'alias' => 'Sample',
+                            'type'  => 'left',
+                            'conditions' => array('Sample.id' => 'Phenotype.sample_id')
+                        ),
+                        array(
+                            'table' => '`values`',
+                            'alias' => 'Value',
+                            'type'  => '',
+                            'conditions' => array('Value.id' => 'PhenotypeValue.value_id')
+                        )
+                    ),
+                )
+            )
+        );
+    }
 }
 ?>

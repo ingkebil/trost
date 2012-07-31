@@ -115,6 +115,7 @@ ul, li {
 	clear: both;
 	padding: 6px 10px;
 	text-align: right;
+    border-top: 1px gray dotted;
 }
 
 /** containers **/
@@ -555,4 +556,7 @@ div.code-coverage-results span.result-ok {
 }
 div.code-coverage-results span.result-good {
 	color: #0a0;
+}
+.greyout {
+    color: #CCC;
 }

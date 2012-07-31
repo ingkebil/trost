@@ -109,6 +109,8 @@
                 <li><?php echo $html->link(__('List files', true), '/ufiles/index'); ?></li>
                 <li><?php echo $html->link(__('Search files', true), '/ufiles/search'); ?></li>
                 <li><?php echo $html->link(__('List temperatures', true), '/temps/index'); ?></li>
+                <li><hr style="margin: 20px;" /></li>
+                <li><?php echo $html->link(__('FAQ', true), '/faqs/index'); ?></li>
                 <?php if ($admin): ?>
                 <li><hr style="margin: 20px;" /></li>
                 </ul>
@@ -118,6 +120,7 @@
                 <li><?php echo $html->link(__('Upload entities file', true), '/entities/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload values file', true), '/values/upload'); ?></li>
                 <li><?php echo $html->link(__('Upload BBCH file', true), '/bbches/upload'); ?></li>
+                <li><?php echo $html->link(__('Add FAQ', true), '/faqs/add'); ?></li>
                 <li><hr style="margin: 20px;" /></li>
                 <li><?php echo $html->link(__('Download XML', true), '/phenotypes/download'); ?></li>
                 <li><hr style="margin: 20px;" /></li>
@@ -131,6 +134,34 @@
 
 		</div>
 		<div id="footer">
+            <?php
+                $lang = Configure::read('Config.language');
+            ?>
+            <?php 
+            $url = 'http://www.mpg.de';
+            if ($lang == 'en-us') {
+                $url .= '/en';
+            }
+            echo $this->Html->link(
+					$this->Html->image('minerva_logo.gif', array('alt'=> __('Max Planck Society', true), 'border' => '0')),
+					$url,
+					array('target' => '_blank', 'escape' => false)
+				);
+			?>
+            <?php
+            $url = 'http://www.mpimp-golm.mpg.de';
+            if ($lang == 'en-us') {
+                $url = 'http://www-en.mpimp-golm.mpg.de';
+            }
+            else {
+                $url = 'http://www-de.mpimp-golm.mpg.de';
+            }
+            echo $this->Html->link(
+					$this->Html->image('mpimp_logo_150x69.png', array('alt'=> __('Max Plank Institute for Molekular Plant Physiology', true), 'border' => '0')),
+                    $url,
+					array('target' => '_blank', 'escape' => false)
+				);
+			?>
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
 					'http://www.cakephp.org/',

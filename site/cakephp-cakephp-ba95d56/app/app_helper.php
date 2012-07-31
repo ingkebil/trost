@@ -43,3 +43,5 @@ class AppHelper extends Helper {
     }
 
 }
+
+?>

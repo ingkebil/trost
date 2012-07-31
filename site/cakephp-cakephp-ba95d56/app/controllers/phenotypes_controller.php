@@ -3,42 +3,148 @@ class PhenotypesController extends AppController {
 
 	var $name = 'Phenotypes';
     var $helpers = array('Html', 'Form', 'Ajax', 'Javascript');
-    var $components = array('RequestHandler');
+    var $components = array('Session', 'RequestHandler');
     var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Value', 'Entity', 'Bbch');
 
     var $error_msg = false;
 
-    function download() {
+    /*
+     * calls the right callback based on the parameter.
+     * The callback needs to return 'lines' (of the scannerfiles) that will then be concatenated.
+     */
+    function download($mode = 'component') {
         if (! empty($this->data)) {
-            $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
-            $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
-            $samples = $this->Phenotype->Sample->find('all', array(
-                'conditions' => array(
-                    'Sample.created BETWEEN ? AND ?' => array($date_start, $date_end)
-                ),
-                'contain' => 'Plant'
-            ));
-
             $lines = array();
-            foreach ($samples as $sample) {
-                # version, object, program, entity id, value_id, attribute, value
-                $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score', 808, 178, 'component', 'component id');
-                $line[] = $sample['Sample']['name'];
-                $line[] = $sample['Plant']['aliquot'];
-                $datetime = explode(' ', $sample['Sample']['created']);
-                $line[] = preg_replace('/\D/', '.', $datetime[0]);
-                $line[] = $datetime[1];
-                $lines[] = implode("\t", $line);
+            $zip_fn = '';
+            if (! empty($this->data['Phenotype']['date_start'])) {
+                $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
+                $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
+
+                $callback = "_download_$mode";
+                $lines = $this->$callback($date_start, $date_end);
             }
-            if ($lines) {
+            if (!empty($this->data['Phenotype']['files'])) {
+                $callback = "_download_$mode";
+                $zip_fn = $this->$callback($this->data['Phenotype']['files']);
+            }
+
+            if (! empty($lines)) {
                 $this->layout = 'ajax';
                 $lines = implode("\n", $lines);
                 $this->set(compact('lines', 'date_start', 'date_end'));
             }
+            elseif (! empty($zip_fn)) {
+                $this->layout = 'ajax';
+                $this->set(compact('zip_fn'));
+            }
             else {
-                $this->Session->flash(__('No lines found!'));
+                $this->Session->setFlash(__('No lines found!'));
             }
         }
+        $this->set('files', $this->Phenotype->PhenotypeRaw->Raw->find('list', array('fields' => array('id', 'filename'), 'order' => array('Raw.id' => 'asc'))));
+    }
+
+    function _download_files($files) {
+        App::import('Component', 'Zip');
+        $phenotypes = $this->Phenotype->fetchLine(array(
+            'conditions' => array(
+                'PhenotypeRaw.raw_id' => $files
+            ),
+            'fields' => array('PhenotypeEntity.entity_id', 'PhenotypeValue.value_id', 'PhenotypeValue.number', 'Value.attribute', 'Value.value','Sample.name', 'Phenotype.date', 'Phenotype.time', 'Raw.filename'),
+            'joins' => array(
+                array(
+                    'table' => 'phenotype_raws',
+                    'alias' => 'PhenotypeRaw',
+                    'type'  => 'left',
+                    'conditions' => array('PhenotypeRaw.phenotype_id = Phenotype.id')
+                ),
+                array(
+                    'table' => 'raws',
+                    'alias' => 'Raw',
+                    'type'  => 'left',
+                    'conditions' => array('PhenotypeRaw.raw_id = Raw.id')
+                ),
+            ),
+            'order' => array('Raw.id' => 'asc')
+        ));
+
+        $lines = array();
+        $fn = '';
+        if (! empty($phenotypes[0]['Raw']['filename'])) {
+            $fn = $phenotypes[0]['Raw']['filename'];
+        }
+        $zip_fn = tempnam('phenotype_files', 'zip');
+        $zip = new ZipComponent();
+        $zip->begin($zip_fn);
+        foreach ($phenotypes as $p) {
+            if ($fn != $p['Raw']['filename']) {
+                $zip->addByContent($fn, implode("\n", $lines));
+                $lines = array();
+                $fn = $p['Raw']['filename'];
+            }
+            # version, object, program, entity id, value_id, attribute, value, sample_id, number, date, time
+            $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score');
+            $line[] = $p['PhenotypeEntity']['entity_id'];
+            $line[] = $p['PhenotypeValue']['value_id'];
+            $line[] = $p['Value']['attribute'];
+            $line[] = $p['Value']['value'];
+            $line[] = $p['Sample']['name'];
+            $line[] = $p['PhenotypeValue']['number'];
+            $line[] = $p['Phenotype']['date'];
+            $line[] = $p['Phenotype']['time'];
+            $lines[] = implode("\t", $line);
+        }
+        $zip->addByContent($fn, implode("\n", $lines));
+        $zip->close();
+        return $zip_fn;
+    }
+
+    function _download_all_date($date_start, $date_end){
+        $phenotypes = $this->Phenotype->fetchLine(array(
+            'conditions' => array(
+                'Phenotype.date BETWEEN ? AND ?' => array($date_start, $date_end)
+            ),
+            'fields' => array('PhenotypeEntity.entity_id', 'PhenotypeValue.value_id', 'PhenotypeValue.number', 'Value.attribute', 'Value.value','Sample.name', 'Phenotype.date', 'Phenotype.time')
+        ));
+
+        $lines = array();
+        foreach ($phenotypes as $p) {
+            # version, object, program, entity id, value_id, attribute, value, sample_id, number, date, time
+            $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score');
+            $line[] = $p['PhenotypeEntity']['entity_id'];
+            $line[] = $p['PhenotypeValue']['value_id'];
+            $line[] = $p['Value']['attribute'];
+            $line[] = $p['Value']['value'];
+            $line[] = $p['Sample']['name'];
+            $line[] = $p['PhenotypeValue']['number'];
+            $line[] = $p['Phenotype']['date'];
+            $line[] = $p['Phenotype']['time'];
+            $lines[] = implode("\t", $line);
+        }
+        return $lines;
+
+    }
+
+    function _download_component($date_start, $date_end) {
+        $samples = $this->Phenotype->Sample->find('all', array(
+            'conditions' => array(
+                'Sample.created BETWEEN ? AND ?' => array($date_start, $date_end)
+            ),
+            'contain' => 'Plant'
+        ));
+
+        $lines = array();
+        foreach ($samples as $sample) {
+            # version, object, program, entity id, value_id, attribute, value
+            $line = array('Test220606', 'LIMS-Aliquot', 'Fast Score', 808, 178, 'component', 'component id');
+            $line[] = $sample['Sample']['name'];
+            $line[] = $sample['Plant']['aliquot'];
+            $datetime = explode(' ', $sample['Sample']['created']);
+            $line[] = preg_replace('/\D/', '.', $datetime[0]);
+            $line[] = $datetime[1];
+            $lines[] = implode("\t", $line);
+        }
+        return $lines;
     }
 
     function upload() {

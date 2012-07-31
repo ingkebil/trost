@@ -11,7 +11,7 @@ class TempsController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid temp', true));
+			$this->Session->setFlash(__('Invalid temperature', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('temp', $this->Temp->read(null, $id));
@@ -25,10 +25,10 @@ class TempsController extends AppController {
             $this->data['Temp']['tmin'] = str_replace(',', '.', $this->data['Temp']['tmin']);
             $this->data['Temp']['tmax'] = str_replace(',', '.', $this->data['Temp']['tmax']);
 			if ($this->Temp->save($this->data)) {
-				$this->Session->setFlash(__('The temp has been saved', true));
+				$this->Session->setFlash(__('The temperature has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The temp could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The temperature could not be saved. Please, try again.', true));
 			}
 		}
         $this->set('locations', $this->Temp->Location->find('list'));
@@ -40,7 +40,7 @@ class TempsController extends AppController {
             $this->redirect('/', 500);
         }
         if (!$id) {
-            $this->Session->setFlash(__('Invalid Temperature', true));
+            $this->Session->setFlash(__('Invalid temperature', true));
             $this->redirect(array('action' => 'index'));
         }
         $temp = $this->Temp->read(null, $id);

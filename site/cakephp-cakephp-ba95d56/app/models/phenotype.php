@@ -154,6 +154,45 @@ class Phenotype extends AppModel {
             'insertQuery' => ''),
     );
 
+    function fetchLine($params) {
+        $default = array(
+            'recursive' => -1,
+            'fields' => array('Phenotype.*', 'Sample.*', 'PhenotypeEntity.*', 'PhenotypeValue.*', 'Value.*'),
+            'joins' => array(
+                array(
+                    'table' => 'phenotype_values',
+                    'alias' => 'PhenotypeValue',
+                    'type'  => 'left',
+                    'conditions' => array('PhenotypeValue.phenotype_id = Phenotype.id'),
+                ),
+                array(
+                    'table' => 'phenotype_entities',
+                    'alias' => 'PhenotypeEntity',
+                    'type'  => 'left',
+                    'conditions' => array('PhenotypeEntity.phenotype_id = Phenotype.id'),
+                ),
+                array(
+                    'table' => '`values`',
+                    'alias' => 'Value',
+                    'type'  => 'left',
+                    'conditions' => array('PhenotypeValue.value_id = Value.id'),
+                ),
+                array(
+                    'table' => 'samples',
+                    'alias' => 'Sample',
+                    'type'  => 'left',
+                    'conditions' => array('Sample.id = Phenotype.sample_id')
+                ),
+            )
+        );
+        return $this->find('all',
+            array_merge_recursive(
+                $default,
+                $params
+            )
+        );
+    }
+
 
 }
 ?>

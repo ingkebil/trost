@@ -5,10 +5,10 @@ class DATABASE_CONFIG {
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
-		'host' => 'gent',
+		'host' => 'localhost',
 		'login' => 'trost',
 		'password' => 'passwordpas',
-		'database' => 'trost',
+		'database' => 'trost_test',
 		'encoding' => 'utf8_general_ci'
 	);
 

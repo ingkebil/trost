@@ -6,6 +6,8 @@
 #Allow from 127.0.0.1
 #Satisfy All
 
+php_value max_execution_time 300
+
 AddType	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet       xlsx
 
 <IfModule mod_rewrite.c>
