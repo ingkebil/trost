@@ -4,3 +4,7 @@
     width: 40%;
     float: left;
 }
+
+.checkbox > label {
+    font-size: 90%;
+}

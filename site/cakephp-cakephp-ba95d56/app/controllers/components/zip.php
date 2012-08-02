@@ -1,4 +1,4 @@
- <?php 
+<?php 
 class ZipComponent extends Object {
     
     var $controller;
@@ -259,4 +259,4 @@ class ZipComponent extends Object {
         $this->extract($location, $entries);
     }
 }
-?> 
+?>

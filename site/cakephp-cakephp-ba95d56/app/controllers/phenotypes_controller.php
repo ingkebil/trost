@@ -4,7 +4,7 @@ class PhenotypesController extends AppController {
 	var $name = 'Phenotypes';
     var $helpers = array('Html', 'Form', 'Ajax', 'Javascript');
     var $components = array('Session', 'RequestHandler');
-    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Value', 'Entity', 'Bbch');
+    var $uses = array('Phenotype', 'Plant', 'Culture', 'Experiment', 'Value', 'Entity', 'Bbch', 'Raw');
 
     var $error_msg = false;
 
@@ -16,16 +16,26 @@ class PhenotypesController extends AppController {
         if (! empty($this->data)) {
             $lines = array();
             $zip_fn = '';
-            if (! empty($this->data['Phenotype']['date_start'])) {
-                $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
-                $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
+            $callback = "_download_$mode";
+            switch ($mode) {
+                case 'component':
+                case 'all_date':
+                    $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
+                    $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
 
-                $callback = "_download_$mode";
-                $lines = $this->$callback($date_start, $date_end);
-            }
-            if (!empty($this->data['Phenotype']['files'])) {
-                $callback = "_download_$mode";
-                $zip_fn = $this->$callback($this->data['Phenotype']['files']);
+                    $lines = $this->$callback($date_start, $date_end);
+                    break;
+                case 'blobsdate':
+                    $date_start = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_start']);
+                    $date_end   = $this->Phenotype->deconstruct('date', $this->data['Phenotype']['date_end']);
+
+                    $zip_fn = $this->$callback($date_start, $date_end);
+                    break;
+
+                case 'blobs':
+                case 'files':
+                    $zip_fn = $this->$callback($this->data['Phenotype']['files']);
+                    break;
             }
 
             if (! empty($lines)) {
@@ -95,6 +105,62 @@ class PhenotypesController extends AppController {
             $lines[] = implode("\t", $line);
         }
         $zip->addByContent($fn, implode("\n", $lines));
+        $zip->close();
+        return $zip_fn;
+    }
+
+    function _download_blobs($files) {
+        App::import('Component', 'Zip');
+        $raws = $this->Raw->find('list', array(
+            'conditions' => array(
+                'Raw.id' => $files
+            ),
+            'fields' => array('filename', 'data', 'id'),
+        ));
+
+        $zip_fn = tempnam('phenotype_files', 'zip');
+        $zip = new ZipComponent();
+        $zip->begin($zip_fn);
+        foreach ($raws as $id => $raw) {
+            $fn = array_shift(array_keys($raw));
+            $zip->addByContent($fn, $raw[$fn]);
+        }
+        $zip->close();
+        return $zip_fn;
+    }
+
+    function _download_blobsdate($date_start, $date_end) {
+        App::import('Component', 'Zip');
+        $raw_ids = $this->Phenotype->find('list', array(
+            'conditions' => array('Phenotype.date BETWEEN ? AND ?' => array($date_start, $date_end)),
+            'fields' => array('PhenotypeRaw.raw_id'),
+            'joins' => array(
+                array(
+                    'table' => 'phenotype_raws',
+                    'alias' => 'PhenotypeRaw',
+                    'type'  => 'left',
+                    'conditions' => array(
+                        'Phenotype.id = PhenotypeRaw.phenotype_id'
+                    ),
+                ),
+            ),
+            'group' => array('PhenotypeRaw.raw_id'),
+
+        ));
+        $raws = $this->Raw->find('list', array(
+            'conditions' => array(
+                'Raw.id' => $raw_ids,
+            ),
+            'fields' => array('filename', 'data', 'id'),
+        ));
+
+        $zip_fn = tempnam('phenotype_files', 'zip');
+        $zip = new ZipComponent();
+        $zip->begin($zip_fn);
+        foreach ($raws as $id => $raw) {
+            $fn = array_shift(array_keys($raw));
+            $zip->addByContent($fn, $raw[$fn]);
+        }
         $zip->close();
         return $zip_fn;
     }

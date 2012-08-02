@@ -12,7 +12,8 @@ else: ?>
 <div class="phenotypes form">
 <?php echo $this->Form->create('Phenotype');?>
 	<fieldset>
- 		<legend><?php __('Download'); ?></legend>
+ 		<legend><?php __('Download XML'); ?></legend>
+        Download link between aliquots and plants in XML format.<br />
 	<?php
 		echo $this->Form->dateTime('date_start', 'DMY', 24, null, array('minYear' => 2011, 'maxYear' => date('Y'), 'empty' => false, 'default' => '2011-03-01 00:00'));
         echo '<br />';
@@ -23,9 +24,10 @@ else: ?>
 </div>
 
 <div class="phenotypes form">
-<?php echo $this->Form->create('Phenotype', array('url' => array('all_date')));?>
+<?php echo $this->Form->create('Phenotype', array('url' => array('blobsdate')));?>
 	<fieldset>
- 		<legend><?php __('Download'); ?></legend>
+ 		<legend><?php __('Download Scanner Files'); ?></legend>
+        Download the original scanner files.<br />
 	<?php
 		echo $this->Form->dateTime('date_start', 'DMY', 24, null, array('minYear' => 2011, 'maxYear' => date('Y'), 'empty' => false, 'default' => '2011-03-01 00:00'));
         echo '<br />';
@@ -36,11 +38,12 @@ else: ?>
 </div>
 
 <div class="phenotypes form">
-<?php echo $this->Form->create('Phenotype', array('url' => array('files')));?>
+<?php echo $this->Form->create('Phenotype', array('url' => array('blobs')));?>
 	<fieldset>
- 		<legend><?php __('Download'); ?></legend>
+ 		<legend><?php __('Download Scanner Files'); ?></legend>
+        Download the original scanner files.<br />
 	<?php
-		echo $this->Form->input('files', array('type' => 'select', 'multiple' => 'checkbox'));
+		echo $this->Form->input('files', array('type' => 'select', 'multiple' => 'checkbox', 'label' => false));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
