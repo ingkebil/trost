@@ -9,6 +9,8 @@ readfile($zip_fn);
 unlink($zip_fn);
 else: ?>
 <?php echo $this->Html->css('download', null, array('inline' => false));  ?>
+<?php echo $this->Javascript->link('jquery-1.5.1.min',  false); ?>
+<?php echo $this->Javascript->link('jquery.shiftclick', false); ?>
 <div class="phenotypes form">
 <?php echo $this->Form->create('Phenotype');?>
 	<fieldset>
@@ -48,4 +50,10 @@ else: ?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
+
+<?php echo $this->Javascript->codeBlock('
+    $(document).ready(function() {
+        $("input[type=\'checkbox\']").shiftClick();
+    });
+'); ?>
 <?php endif ?>
