@@ -1965,7 +1965,7 @@ msgid "Species Id"
 msgstr "Sorten ID"
 
 #: /views/temps/add.ctp:4 /views/temps/erature.ctp:4
-msgid "Add Temp"
+msgid "Add Temperature"
 msgstr "Temperatur hinzufügen"
 
 #: /views/temps/add.ctp:19 /views/temps/edit.ctp:21
