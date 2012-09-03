@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
 
 import login
 the_db = login.get_db()
@@ -12,6 +10,7 @@ DROP_TABLE = 'DROP TABLE IF EXISTS %s;'
 CREATE_TABLE = 'CREATE TABLE %s(\n%s\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;' 
 ALTER_TABLE  = 'ALTER TABLE %s %s;' # table name, ADD column TYPE
 INSERT_STR = 'INSERT INTO %s VALUES %s;\n'
+REPLACE_STR = 'REPLACE INTO %s VALUES %s;\n'
 """
 INSERT_SELECT_STR = ''
 insert into plants (id, location_id) select NULL, locations.id from locations where locations.limsid = 1111;
@@ -152,7 +151,7 @@ def format_entry(entry):
     # return '(%s)' % ','.join(map(str, formatted))
     return formatted
 
-def prepare_sql_table(data, columns_d):
+def prepare_sql_table(data, columns_d, add_id=False):
     rows = []
     for dobj in data:
         row = []
@@ -168,26 +167,30 @@ def prepare_sql_table(data, columns_d):
             else:
                 row.append(val[:-1] + (str, 'NULL'))
                 pass
-        row = [(-1, 'id', str, 'NULL')] + row # add the id
+        if add_id:
+            row = [(-1, 'id', str, 'NULL')] + row # add the id
         rows.append(sorted(row))
     return rows
 
 
-def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout):
+def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout, insert=True):
     for row in rows:
         try:       
             formatted = format_entry([x[2](x[3]) for x in row])
             entry = '(%s)' % ','.join(map(str, formatted))
-            out.write(INSERT_STR % (table_name, entry))
+            if insert:
+                out.write(INSERT_STR % (table_name, entry))
+            else:
+                out.write(REPLACE_STR % (table_name, entry))
         except:
             sys.stderr.write('EXC: %s\n' % row)
             sys.exit(1)
     pass
 
 # legacy support
-def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout):
-    write_standard_sql_table(prepare_sql_table(data, columns_d),
-                             table_name=table_name, out=out)
+def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, add_id=False, insert=True):
+    write_standard_sql_table(prepare_sql_table(data, columns_d, add_id),
+                             table_name=table_name, out=out, insert=insert)
     pass
   
 def write_update_sql(): pass

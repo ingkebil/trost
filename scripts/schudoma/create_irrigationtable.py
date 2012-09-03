@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
-import glob
+import argparse
 
 import sql
 import process_xls as p_xls
@@ -37,13 +35,15 @@ extra_column_names = [ 'Kontrolle', 'Trockenstress', '50_%_nFK', '30_%_nFK' ]
 
 ###
 def main(argv):
+
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('-c', '--create_table', action='store_true', default=False, dest='create_table')
+    parser.add_argument('files', nargs='+')
+    args = parser.parse_args(argv)
     
-    if len(argv) == 0:
-        sys.stderr.write('Missing input file.\nUsage: python create_irrigationtable.py <dir>\n')
-        sys.exit(1)
-    
-    sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
-    for fn in argv:
+    if args.create_table:
+        sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
+    for fn in args.files:
         data, headers  = p_xls.read_xls_data(fn)
 
         # find the right treatment columns: intersect two lists 
@@ -54,7 +54,7 @@ def main(argv):
                 dobj.treatment_id = sql.get_value_id(column.replace('_', ' '))
             columns_d_extra = columns_d.copy()
             columns_d_extra[ column ] = (3, 'value', float)
-            sql.write_sql_table(data, columns_d_extra, table_name=TABLE_NAME)   
+            sql.write_sql_table(data, columns_d_extra, table_name=TABLE_NAME, add_id=True)
 
     return None
 

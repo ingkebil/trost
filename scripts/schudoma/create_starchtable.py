@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
 import glob
+import argparse
 
 import sql
 import process_xls as p_xls
@@ -45,29 +44,20 @@ default_values = {
     'Staerkeertrag_kg_Parzelle': 0.0             
     }
 
-
-def annotate_locations(data):
-    locations = sql.get_locations()
-    for dobj in data:
-        dobj.Standort = locations[dobj.Standort]
-    return data
-    
-
-
 ###
 def main(argv):
+
+    parser = argparse.ArgumentParser(description='')
+    parser.add_argument('-c', '--create_table', action='store_true', dest='create_table', default=False)
+    parser.add_argument('files', nargs='+')
+    args = parser.parse_args(argv)
     
-    if len(argv) == 0:
-        sys.stderr.write('Missing input file.\nUsage: python create_starchtable.py <dir>\n')
-        sys.exit(1)
-    
-    sql.write_sql_header(DB_NAME, YIELD_TABLE_NAME, YIELD_TABLE)
+    if args.create_table:
+        sql.write_sql_header(DB_NAME, YIELD_TABLE_NAME, YIELD_TABLE)
     sheet_index=p_xls.DEFAULT_PARCELLE_INDEX 
-    dir_name = argv[0]
-    for fn in glob.glob('%s/%s'% (dir_name, 'TROST_Knollenernte*.xls')):
+    for fn in args.files:
         data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index)
-        data = annotate_locations(data)
-        sql.write_sql_table(data, columns_d, table_name=YIELD_TABLE_NAME)
+        sql.write_sql_table(data, columns_d, table_name=YIELD_TABLE_NAME, insert=True, add_id=True)
     
 
     return None

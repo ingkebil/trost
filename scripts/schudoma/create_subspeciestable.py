@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
-import glob
+import argparse
 
 import sql
 import process_xls as p_xls
@@ -43,19 +41,22 @@ def annotate_locations(data):
 
 ###
 def main(argv):
+
+    parser = argparse.ArgumentParser(description='Process an xls table with the subspecies information')
+    parser.add_argument('-c', '--ceate_table', action='store_true', dest='create_table', help='If set, creates a table definition as well', default=False)
+    parser.add_argument('file')
+    args = parser.parse_args(argv)
+
     
-    if len(argv) == 0:
-        sys.stderr.write('Missing input file.\nUsage: python create_subspeciestable.py <dir>\n')
-        sys.exit(1)
-    
-    sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
-    dir_name = argv[0]
-    fn = '%s/%s' % (dir_name, 'TROSTSorten20120217.xls')
-    data, headers  = p_xls.read_xls_data(fn)
+    if args.create_table:
+        sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
+
+    data, headers  = p_xls.read_xls_data(args.file)
     for dobj in data:
         dobj.species = DEFAULT_POTATO_ID
-    sql.write_sql_table(data, columns_d, table_name=TABLE_NAME)   
+    sql.write_sql_table(data, columns_d, table_name=TABLE_NAME, insert=False)   
 
-    return None
+    pass
+
 
 if __name__ == '__main__': main(sys.argv[1:])

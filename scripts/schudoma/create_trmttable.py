@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
-import glob
+import argparse
 
 import process_xls as p_xls
 import sql
@@ -26,19 +24,19 @@ columns_d = {'Name': (0, 'name', str),
     
 ###
 def main(argv):
-    
-    if len(argv) == 0:
-        sys.stderr.write('Missing input file.\nUsage: python create_trmttable.py <filename>\n')
-        sys.exit(1)
 
-    sql.write_sql_header(DB_NAME, TREATMENT_TABLE_NAME, TREATMENT_TABLE)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c', '--create_table', action='store_true', default=False, dest='create_table')
+    parser.add_argument('file')
+    args = parser.parse_args(argv)
+
+    if args.create_table:
+        sql.write_sql_header(DB_NAME, TREATMENT_TABLE_NAME, TREATMENT_TABLE)
+
     sheet_index=p_xls.DEFAULT_TREATMENT_ALIQUOT_INDEX
 
-    fn = argv[0]
-    data, headers  = p_xls.read_xls_data(fn, sheet_index=sheet_index) 
-    # return None
-    sql.write_sql_table(data, columns_d, 
-                        table_name=TREATMENT_TABLE_NAME)
+    data, headers  = p_xls.read_xls_data(args.file, sheet_index=sheet_index) 
+    sql.write_sql_table(data, columns_d, table_name=TREATMENT_TABLE_NAME, add_id=True, insert=True)
     return None
 
 if __name__ == '__main__': main(sys.argv[1:])
