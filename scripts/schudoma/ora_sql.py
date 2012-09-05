@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import os
 import sys
-import math
 import datetime
 
 import login
@@ -44,13 +42,13 @@ SELECT u_culture FROM aliquot_user WHERE aliquot_id = :aliquot_id
 """.strip()
 
 subspecies_q = """
-select sample_user.u_subspecies_id, aliquot.aliquot_id, aliquot.name, aliquot_user.u_culture
-from aliquot
-join aliquot_user on aliquot.aliquot_id = aliquot_user.aliquot_id
+select sample_user.u_subspecies_id, a.aliquot_id, a.name, aliquot_user.u_culture, a.description, a.location_id, a.sample_id as line_id
+from aliquot a
+join aliquot_user on a.aliquot_id = aliquot_user.aliquot_id
 join study_user on study_user.study_id = aliquot_user.u_culture
-left join sample_user on sample_user.sample_id = aliquot.sample_id
+left join sample_user on sample_user.sample_id = a.sample_id
 where study_user.u_project = 'TROST'
-AND aliquot.aliquot_id = :aliquot_id
+AND a.aliquot_id = :aliquot_id
 """.strip()
 
 pedigree_subspecies_q = """
@@ -97,6 +95,19 @@ join STUDY ON study.study_id = study_user.study_id
 where su.u_project = 'TROST' and a.aliquot_type = 'Plant'
 """
 
+# looks up all information of a culture
+culture_info_q = """
+select distinct study.study_id as Study_Id, description as Description, u_location_id as location_id, study.name as Name, u_condition as condition 
+from aliquot a
+join sample s on s.sample_id = a.sample_id
+join sample_user su on su.sample_id = s.sample_id
+join aliquot_user au on au.aliquot_id = a.aliquot_id
+join STUDY_USER on study_user.study_id = au.u_culture
+join STUDY ON study.study_id = study_user.study_id
+where su.u_project = 'TROST' and a.aliquot_type = 'Plant'
+and study.study_id = :study_id
+"""
+
 # following q is supposed to fetch all cultures of TROST, but it doesn't  :/
 #old_cultures_q = """
 #select study.study_id as Study_Id, description as Description, u_location_id as location_id, study.name as Name, u_condition as condition from STUDY_USER
@@ -123,9 +134,9 @@ def _format_entry(entry):
 """
 check if a certain ID exists in the DB
 """
-def exists(table, id, id_name = 'id'):
+def exists(table, id, id_name = 'id', q = "SELECT count(*) FROM %s WHERE %s = :id"):
     c = _odb.cursor()
-    c.execute("SELECT count(*) FROM %s WHERE %s = :id" % (table, id_name), {'id': id})
+    c.execute(q % (table, id_name), {'id': id})
     rows = c.fetchall()
     if len(rows) > 0:
         if rows[0][0] > 0:
@@ -167,17 +178,22 @@ def get_all_plants_info():
     return _fetch_assoc(all_plant_info_q)
 
 def get_plant_information(aliquot_id):
-    c = _odb.cursor()
-    c.execute(subspecies_q, dict(aliquot_id=aliquot_id))
-    row = c.fetchall()
-    if len(row) > 0:
-        return {
-            'name'          : row[0][2],
-            'aliquot_id'    : row[0][1],
-            'subspecies_id' : row[0][0],
-            'culture_id'    : row[0][3],
-        }
-    return None
+    rs = _fetch_assoc(q=subspecies_q, aliquot_id=aliquot_id)
+    if rs != None and len(rs) > 0:
+        return rs[0]
+    return rs
+
+def get_culture_information(study_id):
+    rs = _fetch_assoc(q=culture_info_q, study_id=study_id)
+    if rs != None and len(rs) > 0:
+        return rs[0]
+    return rs
+
+def get_subspecies_information(subspecies_id):
+    rs = _fetch_assoc(q='SELECT name, description FROM u_subspecies', subspecies_id=subspecies_id)
+    if rs != None and len(rs) > 0:
+        return rs[0]
+    return rs
 
 def get_pedigree_plant_information(aliquot_id):
     c = _odb.cursor()

@@ -124,7 +124,27 @@ def get_plants_culivar_of(cultivar):
     rs   = [d[0] for d in data]
     return rs
 
+def insert(table, params):
+    c = the_db.cursor()
+    
+    q = """INSERT INTO `%s` (`%s`) VALUES (%s);""" % (table, '`,`'.join(params.keys()), ','.join([ '%s' for x in xrange(len(params)) ]) )
+    return c.execute(q, params.values())
 
+#def lastrowid():
+#    return the_db.cursor().lastrowid
+
+def commit():
+    the_db.commit()
+
+def exists(table, id, id_key = 'id'):
+    c = the_db.cursor()
+    q = 'select count(*) from %s where %s = ' % (table, id_key)
+    c.execute(q + '%s', (id,))
+    d = c.fetchall()
+    if len(d) > 0:
+        if d[0][0] > 0:
+            return True
+    return False
 
 """ Output """
 

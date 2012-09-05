@@ -47,7 +47,6 @@ def main(argv):
     parser.add_argument('file')
     args = parser.parse_args(argv)
 
-    
     if args.create_table:
         sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
 
