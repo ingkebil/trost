@@ -98,6 +98,46 @@ def get_plants():
 def get_locations():
     return _get_table(location_query, 'limsid')
 
+def get_raws():
+    return _get_table("SELECT * FROM raws", 'filename', 'data')
+
+def get_plants_of_file(raw_id):
+    #q = """select distinct plants.aliquot from raws
+    #join phenotype_raws on phenotype_raws.raw_id = raws.id
+    #join phenotypes on phenotypes.id = phenotype_raws.phenotype_id
+    #join samples on samples.id = phenotypes.sample_id
+    #join plants on plants.id = samples.plant_id
+    #where raws.id = %s"""
+    q = """select distinct samples.plants_id from phenotype_raws
+    join phenotypes on phenotypes.id = phenotype_raws.phenotype_id
+    join samples on samples.id = phenotypes.sample_id
+    where phenotype_raws.raw_id = %s
+    """
+    c = the_db.cursor()
+    c.execute(q, (raw_id,) )
+    data = c.fetchall()
+    plant_ids = []
+    if len(data) > 0:
+        plant_ids = [ d[0] for d in data ]
+    return plant_ids
+
+def get_samples_of_file(raw_id):
+    #q = """select distinct samples.name from raws
+    #join phenotype_raws on phenotype_raws.raw_id = raws.id
+    #join phenotypes on phenotypes.id = phenotype_raws.phenotype_id
+    #join samples on samples.id = phenotypes.sample_id
+    #where raws.id = %s"""
+    q = """select distinct phenotypes.sample_id from phenotype_raws
+    join phenotypes on phenotypes.id = phenotype_raws.phenotype_id
+    where phenotype_raws.raw_id = %s"""
+    c = the_db.cursor()
+    c.execute(q, (raw_id,) )
+    data = c.fetchall()
+    ids = []
+    if len(data) > 0:
+        ids = [ d[0] for d in data ]
+    return ids
+
 def get_values():
     query = the_db.query(value_query)
     data = the_db.store_result().fetch_row(how=1, maxrows=200)
@@ -130,8 +170,9 @@ def insert(table, params):
     q = """INSERT INTO `%s` (`%s`) VALUES (%s);""" % (table, '`,`'.join(params.keys()), ','.join([ '%s' for x in xrange(len(params)) ]) )
     return c.execute(q, params.values())
 
-#def lastrowid():
-#    return the_db.cursor().lastrowid
+def lastrowid():
+    return the_db.insert_id()
+    #return the_db.cursor().lastrowid
 
 def commit():
     the_db.commit()
@@ -145,6 +186,67 @@ def exists(table, id, id_key = 'id'):
         if d[0][0] > 0:
             return True
     return False
+
+def fetch(table, id, id_key='id'):
+    c = the_db.cursor()
+    q = 'select * from %s where %s = ' % (table, id_key)
+    c.execute(q + '%s', (id,))
+    rows = c.fetchall()
+    desc = [d[0] for d in c.description]
+    if len(rows) > 0:
+        return [dict(zip(desc, row)) for row in rows][0]
+    return False
+
+def fetch_all(table, where):
+    c = the_db.cursor()
+    where_params = ','.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+    q = 'select * from %s where %s' % (table, where_params)
+    c.execute(q, where.values())
+    rows = c.fetchall()
+    desc = [d[0] for d in c.description]
+    if len(rows) > 0:
+        return [dict(zip(desc, row)) for row in rows]
+    return False
+
+def count(table, where = None):
+    c = the_db.cursor()
+    where_str = ''
+    if where:
+        where_str = " where %s" % ' and '.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+    q = "select count(*) from `%s`%s" % (table, where_str)
+    if where:
+        c.execute(q, where.values())
+    else:
+        c.execute(q)
+
+    rs = c.fetchone()
+    if rs:
+        return rs[0]
+    else:
+        return None
+
+def get_tables():
+    c = the_db.cursor()
+    q = 'show tables from %s' % login.DB_NAME
+    c.execute(q)
+    rows = c.fetchall()
+    if len(rows) > 0:
+        return [ row[0] for row in rows ]
+    return False
+
+"""
+table: table name
+where: { attr: value }
+params: { attr: value }
+"""
+def update(table, where, params):
+    c = the_db.cursor()
+    # ok, it is a bit annoying that the MySQL driver required %s as placeholders
+    where_params = ','.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+    set_params   = ' and '.join([ '%s=%s' % (k, '%s') for k in params.keys() ])
+    q = 'update %s set %s where %s' % ( table, set_params, where_params)
+    return c.execute(q, params.values() + where.values())
+
 
 """ Output """
 

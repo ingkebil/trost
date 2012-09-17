@@ -73,14 +73,40 @@ where su.u_project = 'TROST'
 and  a.aliquot_type = 'Plant'
 """
 
+#all_aliquot_info_q = """
+#select a.aliquot_id, au.u_aliquot_link_a as plant_id, a.created_on, a.amount, au.u_i_amount, au.u_organ
+#from aliquot a
+#join sample s on s.sample_id = a.sample_id
+#join sample_user su on su.sample_id = s.sample_id
+#join aliquot_user au on au.aliquot_id = a.aliquot_id
+#where su.u_project = 'TROST'
+#and  a.aliquot_type = 'MS Component' 
+#"""
+
 all_aliquot_info_q = """
-select a.aliquot_id, au.u_aliquot_link_a as plant_id, a.created_on, a.amount, au.u_i_amount, au.u_organ
-from aliquot a
-join sample s on s.sample_id = a.sample_id
-join sample_user su on su.sample_id = s.sample_id
-join aliquot_user au on au.aliquot_id = a.aliquot_id
-where su.u_project = 'TROST'
-and  a.aliquot_type = 'MS Component' 
+select distinct test_aliquot.aliquot_id as aliquot,
+test_aliquot.amount,
+test_aliquot.unit_id,
+component_user.u_aliquot_link_a as plant,
+component_user.u_organ as organ,
+plant.name,
+plant_line.u_subspecies_id as subspecies_id,
+component_user.u_sampled_on
+from sample_user plant_line,
+aliquot plant,
+aliquot_user component_user,
+aliquot Component,
+aliquot test_aliquot,
+sample_user trost_sample
+where trost_sample.u_project = 'TROST'
+and Component.aliquot_type = 'MS Component'
+and Component.sample_id = test_aliquot.sample_id
+and Component.aliquot_id = component_user.aliquot_id
+and component_user.u_aliquot_link_a = plant.aliquot_id
+and plant.sample_id = plant_line.sample_id
+and test_aliquot.sample_id = trost_sample.sample_id
+and Component.sample_id = trost_sample.sample_id
+order by plant, aliquot
 """
 
 # following q selects all cultures from all the plants - it's a combination of old_culture_q and all_plant_info_q
