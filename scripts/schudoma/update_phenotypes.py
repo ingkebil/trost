@@ -247,7 +247,7 @@ def main(argv):
                     #q = """ select sample_user.u_subspecies_id, a.aliquot_id, a.name, aliquot_user.u_culture, a.description, a.location_id, a.sample_id as line_id from %s join aliquot_user on a.aliquot_id = aliquot_user.aliquot_id join study_user on study_user.study_id = aliquot_user.u_culture left join sample_user on sample_user.sample_id = a.sample_id where study_user.u_project = 'TROST' AND %s = :id """
                     #if not ora_sql.exists('aliquot a', line[8], 'a.aliquot_id', q):
                     #    progress(line[8])
-                    #save_sample_plant(sample_id=line[7], plant_id=line[8], date=date)
+                    save_sample_plant(sample_id=line[7], plant_id=line[8], date=date)
                 else:
                     phenotype = format_line(line) # create a readable program
 
