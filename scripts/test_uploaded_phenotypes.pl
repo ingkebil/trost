@@ -20,7 +20,7 @@ sub run {
 
     if (scalar(@files)) {
         #$dbi = DBI->connect('dbi:mysql:database=trost;host=gent', 'trost', 'passwordpas');
-        $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=hal9000', 'TROST_USER', 'kartoffel');
+        $dbi = DBI->connect('dbi:mysql:database=trost_prod;host=localhost', 'root', 'password');
         &test_file_count(\@files);
         my $dbi_counts_of = $dbi->selectall_hashref(q{SELECT lower(filename) as filename, count(*) as phen_samples,  count(distinct phenotypes.sample_id) as uniq_phen_samples FROM raws JOIN phenotype_raws ON raw_id = raws.id join phenotypes on phenotypes.id = phenotype_raws.phenotype_id GROUP BY filename}, 'filename');
         print "FILENAME:\t\t\tDBI\t\t!COMP\t\tBBCH\t\tCOMP\t\tPLANTS\t\tSAMPLES\n";
@@ -78,7 +78,7 @@ sub run {
 
 
             my $dbi_count = defined $dbi_counts_of->{ $file }->{ phen_samples } ? $dbi_counts_of->{ $file }->{ phen_samples } : 0;
-            if ($dbi_count != $counts_of->{ $file }->{ total }) {
+            if ($dbi_count != $counts_of->{ $file }->{ noncomp }) {
                 print '*';
             }
 
@@ -92,10 +92,13 @@ sub run {
         }
 
         print "\n\n";
-        print "# uniq plants = # DBI plants (-1 placeholder)\n";
-        print &count_uniq_plants($counts_of);
+        my $uniq_plants = &count_uniq_plants($counts_of);
+        my $dbi_plants = &count_dbi_plants();
+        my $unconnected_plants = &count_unconnected_plants();
+        print "# uniq plants = # DBI plants (- unconnected plants -1 placeholder)\n";
+        print $uniq_plants;
         print ' = ';
-        print &count_dbi_plants(), " - 1\n";
+        print $dbi_plants, ' - ', $unconnected_plants,' - 1 (', ($dbi_plants - $unconnected_plants - 1), ")\n";
         print "# uniq phen samples = # DBI phen samples\n";
         print &count_uniq_pheno_samples($counts_of);
         print ' = ';
@@ -106,12 +109,14 @@ sub run {
         print &count_uniq_pheno_samples($counts_of);
         print ' + ';
         print &count_unconnected_samples(), "\n";
+        print "# components\n";
+        print &count_lines($counts_of, 'comp'), "\n";
         print "# samples = # uniq samples\n";
         print &count_samples($counts_of);
         print ' = ';
         print &count_uniq_samples($counts_of), "\n";
         print "# lines = # DBI phenotypes = # DBI summed phen\n";
-        print &count_lines($counts_of);
+        print (&count_lines($counts_of) - &count_comp_lines($counts_of));
         print ' = ';
         print &count_dbi_phenotypes();
         print ' = ';
@@ -127,7 +132,9 @@ sub sum_dbi_phen_samples {
 
     my $total = 0;
     for my $file (keys %$dbi_counts_of) {
-        $total += $dbi_counts_of->{ $file }->{ phen_samples };
+        if (exists($dbi_counts_of->{ $file }->{ phen_samples })) {
+            $total += $dbi_counts_of->{ $file }->{ phen_samples };
+        }
     }
 
     return $total;
@@ -150,17 +157,32 @@ sub count_dbi_phenotypes {
 
 sub count_lines {
     my $counts_of = $_[0];
+    my $type = $_[1] || 'total';
 
     my $total = 0;
     for my $file (keys %$counts_of) {
-        $total += $counts_of->{ $file }->{ total };
+        if (exists($counts_of->{ $file }->{ $type })) {
+            $total += $counts_of->{ $file }->{ $type };
+        }
     }
 
     return $total;
 }
 
+sub count_bbch_lines {
+    return &count_lines($_[0], 'bbch');
+}
+
+sub count_comp_lines {
+    return &count_lines($_[0], 'comp');
+}
+
 sub count_unconnected_samples {
     return $dbi->selectrow_arrayref(q{SELECT count(*) from samples left join phenotypes on samples.id = phenotypes.sample_id where phenotypes.id is null;})->[0];
+}
+
+sub count_unconnected_plants {
+    return $dbi->selectrow_arrayref(q{SELECT count(distinct plants.id) from plants left join samples on plants.id = samples.plant_id where samples.id is null;})->[0];
 }
 
 sub count_plants {
@@ -238,9 +260,10 @@ sub list_uniq_pheno_samples {
         for my $phen (keys %{ $counts_of->{ $file }->{ bbch_samples } }) {
             $uniq->{ $phen } += 1;
         }
-        for my $phen (keys %{ $counts_of->{ $file }->{ comp_samples } }) {
-            $uniq->{ $phen } += 1;
-        }
+        # don't store these as phenotypes no-more
+        #for my $phen (keys %{ $counts_of->{ $file }->{ comp_samples } }) {
+        #    $uniq->{ $phen } += 1;
+        #}
     }
 
     my @uniq_samples = keys %$uniq;
@@ -249,7 +272,7 @@ sub list_uniq_pheno_samples {
 
 sub diff_dbi_samples {
     my $counts_of = $_[0];
-    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.name FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'name');
+    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.id FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'id');
     my $uniq_phen_samples = &list_uniq_pheno_samples($counts_of);
 
     my @not_found = ();
@@ -270,7 +293,7 @@ sub diff_dbi_samples {
 
 sub diff_samples {
     my $counts_of = $_[0];
-    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.name FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'name');
+    my $dbi_uniq_phen_samples = $dbi->selectall_hashref(q{SELECT distinct samples.id FROM samples JOIN phenotypes ON phenotypes.sample_id = samples.id}, 'id');
     my $uniq_phen_samples = &list_uniq_pheno_samples($counts_of);
 
     my @not_found = ();
@@ -292,11 +315,11 @@ sub diff_samples {
 sub list_samples_not_db {
     my $uniq_samples = $_[0];
 
-    return $dbi->selectall_arrayref(q{select sample_id from phenotypes join samples on samples.id = phenotypes.sample_id where samples.name not in (} . join(',', @$uniq_samples) . q{)});
+    return $dbi->selectall_arrayref(q{select sample_id from phenotypes join samples on samples.id = phenotypes.sample_id where samples.id not in (} . join(',', @$uniq_samples) . q{)});
 }
 
 sub count_uniq_pheno_dbi_samples {
-    return $dbi->selectrow_arrayref(q{select count(distinct samples.name) from phenotypes join samples on samples.id = phenotypes.sample_id})->[0];
+    return $dbi->selectrow_arrayref(q{select count(distinct samples.id) from phenotypes join samples on samples.id = phenotypes.sample_id})->[0];
 }
 
 =head1
@@ -310,6 +333,13 @@ sub test_file_count {
     my $file_count = scalar(@{$_[0]});
 
     my $raw_count = $dbi->selectrow_arrayref(q{SELECT count(*) FROM `raws`})->[0];
+    my $raw_files = $dbi->selectall_hashref(q{SELECT filename FROM `raws`}, 'filename');
+
+    for my $file (@{$_[0]}) {
+        if (not exists $raw_files->{ $file }) {
+            print "$file\n"
+        }
+    }
 
     if ($file_count != $raw_count) {
         ### RAW: $raw_count
