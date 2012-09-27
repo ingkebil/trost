@@ -24,6 +24,7 @@ class PeopleController extends AppController {
 
     function logout() {
         $this->Auth->logout();
+        $this->Session->delete('BO.started'); # just in case we log out in the backOffice, we should still see a menu
         $this->redirect('/');
     }
 
