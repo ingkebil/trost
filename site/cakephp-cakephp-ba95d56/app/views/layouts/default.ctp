@@ -101,7 +101,7 @@
                 <h3><?php __('Menu'); ?></h3>
                 <ul id="normal_menu">
                 <li><?php echo $html->link(__('Home', true), '/'); ?></li>
-                <li><?php echo $html->link(__('Upload scanner file', true), '/phenotypes/upload'); ?></li>
+                <li><?php echo $html->link(__('Upload scanner file', true), '/dis/abled'); ?></li>
                 <li><?php echo $html->link(__('Upload file', true), '/ufiles/upload'); ?></li>
                 <li><?php echo $html->link(__('Enter climate data', true), '/temps/erature'); ?></li>
                 <li><hr style="margin: 20px;" /></li>

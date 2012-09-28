@@ -299,9 +299,10 @@ class PhenotypesController extends AppController {
         $programs[0] = 'autodetect';
         ksort($programs);
         $experiments = $this->Experiment->find('list'); # actually, leave this out as it is not necesary right now.
-        if ($_SERVER['SERVER_NAME'] != 'trost.mpimp-golm.mpg.de') { # there is a problem with the oracle driver on this production machine, so skip this 
-            $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
-        }
+        # this is not necessary no more, as this is now updated through scripts/schudoma/update_cultures.py
+#        if ($_SERVER['SERVER_NAME'] != 'trost.mpimp-golm.mpg.de') { # there is a problem with the oracle driver on this production machine, so skip this 
+#            $this->_get_cultures(); # check the LIMS to add the right amount of cultures ;)
+#        }
         $cultures = $this->Culture->find('list'); # fill them all, eventhough this should be filled dynamically after selecting an experiment
 		$this->set(compact('programs', 'experiments', 'cultures'));
         $this->data['Culture']['experiment_id'] = 1; # TODO un-hardcode!
@@ -315,13 +316,13 @@ class PhenotypesController extends AppController {
         $line_parts = $this->_split_fastscore($line);
         # get/add the plant
         $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
-            'aliquot' => $line_parts[8],
+            'id' => $line_parts[8],
         )));
         if (empty($plant)) {
             $this->Phenotype->Sample->Plant->create();
             $plant = $this->Phenotype->Sample->Plant->save(array(
                 'Plant' => array(
-                    'aliquot' => $line_parts[8],
+                    'id' => $line_parts[8],
                     'culture_id' => $this->data['Plant']['culture_id']
                 ),
             ));
@@ -891,7 +892,8 @@ AND i18n2.locale = '$locale'
 			$this->Session->setFlash(__('Invalid phenotype', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$phenotype = $this->Phenotype->read(null, $id);
+		$phenotype = $this->Phenotype->find('first', array('recursive' => 1, 'conditions' => array('id' => $id)));
+        pr( $phenotype);
         $this->redirect(array(
             'action' => 'manualupload',
             'p' => $phenotype['Phenotype']['program_id'],

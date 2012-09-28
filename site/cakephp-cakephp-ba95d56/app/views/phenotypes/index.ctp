@@ -40,7 +40,7 @@
 		<td><?php echo $phenotype['Phenotype']['date']; ?>&nbsp;</td>
 		<td><?php echo $phenotype['Phenotype']['time']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($phenotype['Sample']['name'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample']['id'])); ?>
+			<?php echo $this->Html->link($phenotype['Sample']['id'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample']['id'])); ?>
 		</td>
 		<td><?php echo $phenotype['Entity'][0]['name'];?></td>
 		<td><?php echo $phenotype['Value'][0]['attribute'];?></td>

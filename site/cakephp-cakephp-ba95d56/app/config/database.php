@@ -8,7 +8,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'trost',
 		'password' => 'passwordpas',
-		'database' => 'trost_test',
+		'database' => 'trost_fornow',
 		'encoding' => 'utf8_general_ci'
 	);
 

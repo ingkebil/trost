@@ -3,7 +3,6 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('plant_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
@@ -18,7 +17,6 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $sample['Sample']['id']; ?>&nbsp;</td>
-		<td><?php echo $sample['Sample']['name']; ?>&nbsp;</td>
 		<td><?php echo $sample['Sample']['created']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($sample['Plant']['name'], array('controller' => 'plants', 'action' => 'view', $sample['Plant']['id'])); ?>

@@ -47,7 +47,9 @@
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+    Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/dis/abled', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/:lang/dis/abled', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 
     #Router::connect('/de-de/:controller/:action/*', array('lang' => 'de-de'));
     #Router::connect('/en-us/:controller/:action/*', array('lang' => 'en-us'));

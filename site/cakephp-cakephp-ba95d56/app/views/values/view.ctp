@@ -43,7 +43,7 @@
 		<th><?php __('Program Id'); ?></th>
 		<th><?php __('Date'); ?></th>
 		<th><?php __('Time'); ?></th>
-		<th><?php __('Plant Id'); ?></th>
+		<th><?php __('Sample Id'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -61,7 +61,7 @@
 			<td><?php echo $phenotype['program_id'];?></td>
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
-			<td><?php echo $phenotype['plant_id'];?></td>
+			<td><?php echo $phenotype['sample_id'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotypes', 'action' => 'view', $phenotype['id'])); ?>
                 <?php if ($this->Session->check('user')): ?>

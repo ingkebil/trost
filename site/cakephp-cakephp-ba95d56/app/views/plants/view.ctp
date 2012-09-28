@@ -11,11 +11,6 @@
 			<?php echo $plant['Plant']['name']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Aliquot'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plant['Plant']['aliquot']; ?>
-			&nbsp;
-		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Culture Id'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plant['Plant']['culture_id']; ?>
@@ -33,7 +28,6 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
-		<th><?php __('Name'); ?></th>
 		<th><?php __('Created'); ?></th>
 		<th><?php __('Plant Id'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
@@ -48,7 +42,6 @@
 		?>
 		<tr<?php echo $class;?>>
 			<td><?php echo $sample['id'];?></td>
-			<td><?php echo $sample['name'];?></td>
 			<td><?php echo $sample['created'];?></td>
 			<td><?php echo $sample['plant_id'];?></td>
 			<td class="actions">
