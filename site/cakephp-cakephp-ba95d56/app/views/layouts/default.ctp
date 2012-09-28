@@ -109,8 +109,6 @@
                 <li><?php echo $html->link(__('List files', true), '/ufiles/index'); ?></li>
                 <li><?php echo $html->link(__('Search files', true), '/ufiles/search'); ?></li>
                 <li><?php echo $html->link(__('List temperatures', true), '/temps/index'); ?></li>
-                <li><hr style="margin: 20px;" /></li>
-                <li><?php echo $html->link(__('FAQ', true), '/faqs/index'); ?></li>
                 <?php if ($admin): ?>
                 <li><hr style="margin: 20px;" /></li>
                 </ul>
