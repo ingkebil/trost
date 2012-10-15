@@ -213,6 +213,7 @@ class UfilesController extends AppController {
 	function index() {
         $this->paginate['Ufile'] = array(
             'contain' => array('Keyword', 'Person', 'Person.Location'),
+            'order'   => array('created' => 'desc')
         );
 		$this->set('ufiles', $this->paginate('Ufile'));
 	}
