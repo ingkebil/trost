@@ -199,7 +199,7 @@ def fetch(table, id, id_key='id'):
 
 def fetch_all(table, where):
     c = the_db.cursor()
-    where_params = ','.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+    where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
     q = 'select * from %s where %s' % (table, where_params)
     c.execute(q, where.values())
     rows = c.fetchall()

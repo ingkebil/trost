@@ -15,6 +15,8 @@ SPECIES_ID = 1
 DUMMY_CULTURE_ID    = 1
 DUMMY_SUBSPECIES_ID = 1
 DUMMY_PLANT_ID      = 1
+DUMMY_ENTITY_ID     = -12345
+DUMMY_VALUE_ID      = -12345
 
 
 def get_program_id(line, program_key = 2):
@@ -86,6 +88,38 @@ def preprocess_line(line):
     return line
 
 def save_sample_plant(sample_id, plant_id, date):
+    if add_plant(plant_id): progress('Plant %d added' % plant_id)
+
+    if not sql.exists('samples', sample_id):
+        sample = {
+            'id': sample_id,
+            'created': date,
+        }
+        if sql.insert('samples', sample):
+            progress('Sample %d added' % sample['id'])
+            sample_plants = {
+                'sample_id': sample_id,
+                'plant_id': plant_id
+            }
+            if sql.insert('sample_plants', sample_plants):
+                progress('Sample_plants (%d, %d) added' % (sample_id, plant_id))
+    else:
+        # check if there is already a link between sample and plant
+        samples = sql.fetch_all('sample_plants', { 'sample_id': sample_id, 'plant_id': plant_id })
+        if samples:
+            for sample in samples:
+                if sample['plant_id'] == 1:
+                    if sql.update('sample_plants', { 'sample_id': sample_id }, { 'plant_id': plant_id }):
+                        progress('Updated %d sample plant_id from %d to %d' % (sql.lastrowid(), 1, plant_id))
+        else:
+            sample_plants = {
+                'sample_id': sample_id,
+                'plant_id': plant_id
+            }
+            if sql.insert('sample_plants', sample_plants):
+                progress('Sample_plants (%d, %d) added' % (sample_id, plant_id))
+
+def add_plant(plant_id):
     if not sql.exists('plants', plant_id):
         ora_sql.set_formatting(False)
         plant = ora_sql.get_plant_information(plant_id)
@@ -130,21 +164,8 @@ def save_sample_plant(sample_id, plant_id, date):
                 subspecies = { 'species_id': SPECIES_ID, 'id': plant['subspecies_id'] }
                 if sql.insert('subspecies', subspecies): progress('Subspecies %d added' % subspecies['id'])
 
-        if sql.insert('plants', plant): progress('Plant %d added' % plant_id)
+        return sql.insert('plants', plant)
     # TODO: check if the plant is connected to a DUMMY culture and look it up again?
-
-    if not sql.exists('samples', sample_id):
-        sample = {
-            'id': sample_id,
-            'created': date,
-            'plant_id': plant_id
-        }
-        if sql.insert('samples', sample): progress('Sample %d added' % sample['id'])
-    else:
-        sample = sql.fetch('samples', sample_id)
-        if sample['plant_id'] == 1:
-            if sql.update('samples', { 'id': sample_id }, { 'plant_id': plant_id }):
-                progress('Updated %d sample plant_id from %d to %d' % (sql.lastrowid(), 1, plant_id))
 
 def progress(s):
     #sys.stdout.write('\r%s' % s)
@@ -158,6 +179,9 @@ def format_line(line):
         'version': line[0],
         'object' : line[1],
         'program_id': program_id,
+        'entity_id': DUMMY_ENTITY_ID,
+        'value_id': DUMMY_VALUE_ID,
+        'number' : None
     }
 
     if program_id == 1:
@@ -251,14 +275,7 @@ def main(argv):
                 else:
                     phenotype = format_line(line) # create a readable program
 
-                    if not sql.exists('samples', phenotype['sample_id']):
-                        sample = {
-                            'id': phenotype['sample_id'],
-                            'created': phenotype['date'],
-                            'plant_id': DUMMY_PLANT_ID
-                        }
-                        if sql.insert('samples', sample): print 'Sample %d added' % sample['id']
-
+                    # add the actual phenotype
                     phenotype_id = None
                     if sql.insert('phenotypes', {
                         'version': phenotype['version'],
@@ -266,15 +283,27 @@ def main(argv):
                         'program_id': phenotype['program_id'],
                         'date': phenotype['date'],
                         'time': phenotype['time'],
-                        'sample_id': phenotype['sample_id']
+                        'entity_id': phenotype['entity_id'],
+                        'value_id': phenotype['value_id'],
+                        'number': phenotype['number']
                     }):
                         phenotype_id = sql.lastrowid()
                         progress('Added %d to phenotype' % phenotype_id)
 
-                    sql.insert('phenotype_raws'  , { 'phenotype_id': phenotype_id, 'raw_id': raw_id, 'line_nr': line_nr })
-                    if program_id != 3:
-                        sql.insert('phenotype_entities', { 'phenotype_id': phenotype_id, 'entity_id': phenotype['entity_id'] })
-                        sql.insert('phenotype_values', { 'phenotype_id': phenotype_id, 'value_id': phenotype['value_id'], 'number': phenotype['number']})
+                    # depending on the object type, add it to the correct table
+                    if phenotype['object'] == 'LIMS-Aliquot':
+                        if add_plant(phenotype['sample_id']): print 'Plant %d added' % phenotype['sample_id']
+                        sql.insert('phenotype_plants', { 'phenotype_id': phenotype_id, 'plant_id': phenotype['sample_id'] })
+                    elif phenotype['object'] == 'LIMS-Sample':
+                        if not sql.exists('samples', phenotype['sample_id']):
+                            sample = {
+                                'id': phenotype['sample_id'],
+                                'created': phenotype['date'],
+                            }
+                            if sql.insert('samples', sample): print 'Sample %d added' % sample['id']
+                        sql.insert('phenotype_samples', { 'phenotype_id': phenotype_id, 'sample_id': phenotype['sample_id'] })
+
+                    sql.insert('phenotype_raws'   , { 'phenotype_id': phenotype_id, 'raw_id': raw_id, 'line_nr': line_nr })
                     if program_id > 1:
                         sql.insert('phenotype_bbches', { 'phenotype_id': phenotype_id, 'bbch_id': phenotype['bbch_id']})
         except:
