@@ -47,10 +47,16 @@ class UfilesController extends AppController {
             if ($this->Ufile->validates($this->data)) {
                 if ($this->FileUpload->success) {
                     $success = true;
-                    foreach ($this->FileUpload->uploadedFiles as $uploaded_file) {
+                    foreach ($this->FileUpload->uploadedFiles as $idx => $uploaded_file) {
                         if ($uploaded_file['name'] && ! $uploaded_file['error']) {
                             $this->Ufile->create();
-                            $this->data['Ufile']['name'] = $uploaded_file['name'];
+
+                            # it seems the plugin appends a number to make the file unique but fails to change the $uploaded_file['name']
+                            $file_name = $uploaded_file['name'];
+                            if ($this->FileUpload->finalFiles[$idx]) {
+                                $file_name = $this->FileUpload->finalFiles[$idx];
+                            }
+                            $this->data['Ufile']['name'] = $file_name;
 
                             if (! $this->Ufile->save($this->data)) {
                                 $success = false;
