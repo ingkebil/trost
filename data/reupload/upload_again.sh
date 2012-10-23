@@ -21,6 +21,11 @@ db_upload () {
     mysql -u $db_user -p$db_pass -h $db_host $db_name < $1
 }
 
+# create the DB
+echo "Creating db ... "
+db_upload $data_dir/trost_prod.sql
+echo "done."
+
 # bbches depends on species, load this first
 echo "Logistics ... "
 db_upload $data_dir/120816/programs.sql
@@ -89,4 +94,8 @@ db_upload $data_dir/120831/treatments.sql
 db_upload $data_dir/120831/temps.sql
 
 # upload all the scanner files
-python $script_dir/update_phenotypes.py $data_dir/120907/*
+#python $script_dir/update_phenotypes.py $data_dir/120907/*
+
+# upload all the scanner files
+# had to check these out manually because of a weird entity Id in there. just added a dummy entity: -12345
+#python $script_dir/update_phenotypes.py $data_dir/120907/problems/*
