@@ -5,11 +5,11 @@ class DATABASE_CONFIG {
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'trost',
-		'password' => 'passwordpas',
-		'database' => 'trost_fornow',
-		'encoding' => 'utf8_general_ci'
+		'host' => 'cosmos',
+		'login' => 'trost_prod',
+		'password' => 'passwordpa',
+		'database' => 'trost_prod',
+		'encoding' => 'utf8'
 	);
 
     ## alternative after prod db went down

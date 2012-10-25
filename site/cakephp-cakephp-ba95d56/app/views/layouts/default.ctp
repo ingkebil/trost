@@ -135,6 +135,7 @@
             <?php
                 $lang = Configure::read('Config.language');
             ?>
+            <?php echo $html->link('imprint', 'http://mpimp.iwww.mpg.de/2278/impress'); ?>
             <?php 
             $url = 'http://www.mpg.de';
             if ($lang == 'en-us') {
@@ -157,12 +158,6 @@
             echo $this->Html->link(
 					$this->Html->image('mpimp_logo_150x69.png', array('alt'=> __('Max Plank Institute for Molekular Plant Physiology', true), 'border' => '0')),
                     $url,
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
-					'http://www.cakephp.org/',
 					array('target' => '_blank', 'escape' => false)
 				);
 			?>
