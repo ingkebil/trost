@@ -63,5 +63,14 @@ class ufile extends AppModel {
 
     var $actsAs = array('Containable');
 
+    function find_duplicates() {
+        $q = "select * from ufiles UFile
+            join (select id, name from ufiles where invalid is NULL or invalid = 0) as f2
+            where UFile.name = f2.name
+            and UFile.id > f2.id
+            and (UFile.invalid is NULL or UFile.invalid = 0)";
+        return $this->query($q);
+    }
+
 }
 ?>

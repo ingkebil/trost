@@ -13,13 +13,13 @@ class UfilesController extends AppController {
 
         # some settings for the automatic upload handling
         # change the upload dir when we actually are uploading something
-        if ($this->action == 'upload' && ! empty($this->data)) {
+        #if ($this->action == 'upload' && ! empty($this->data)) {
             $person = $this->Session->read('Auth.Person');
             $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir') . $person['name'] . $person['id']);
-        }
-        else {
-            $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
-        }
+        #}
+        #else {
+        #    $this->FileUpload->uploadDir(Configure::read('FileUpload.uploadDir'));
+        #}
         $this->FileUpload->forceWebroot(false);
         $this->FileUpload->fileModel(null);
         $this->FileUpload->allowedTypes(array(
@@ -216,6 +216,7 @@ class UfilesController extends AppController {
             $this->redirect('/', 500);
         }
     }
+
 	function index() {
         $this->paginate['Ufile'] = array(
             'contain' => array('Keyword', 'Person', 'Person.Location'),
