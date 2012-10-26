@@ -13,26 +13,6 @@ class Phenotype extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'sample_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'version' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -45,9 +25,16 @@ class Phenotype extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Sample' => array(
-			'className' => 'Sample',
-			'foreignKey' => 'sample_id',
+		'Entity' => array(
+			'className' => 'Entity',
+			'foreignKey' => 'entity_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Value' => array(
+			'className' => 'Value',
+			'foreignKey' => 'value_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -68,8 +55,8 @@ class Phenotype extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'PhenotypeEntity' => array(
-			'className' => 'PhenotypeEntity',
+		'PhenotypePlants' => array(
+			'className' => 'PhenotypePlant',
 			'foreignKey' => 'phenotype_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -94,8 +81,8 @@ class Phenotype extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'PhenotypeValue' => array(
-			'className' => 'PhenotypeValue',
+		'PhenotypeSample' => array(
+			'className' => 'PhenotypeSample',
 			'foreignKey' => 'phenotype_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -110,11 +97,11 @@ class Phenotype extends AppModel {
 	);
 
     var $hasAndBelongsToMany = array(
-        'Entity' => array(
-            'className' => 'Entity',
-            'joinTable' => 'phenotype_entities',
+        'Plant' => array(
+            'className' => 'Plant',
+            'joinTable' => 'phenotype_plants',
             'foreignKey' => 'phenotype_id',
-            'associationForeignKey' => 'entity_id',
+            'associationForeignKey' => 'plant_id',
             'unique' => true,
             'conditions' => '',
             'fields' => '',
@@ -124,11 +111,11 @@ class Phenotype extends AppModel {
             'finderQuery' => '',
             'deleteQuery' => '',
             'insertQuery' => ''),
-       'Value' => array(
-            'className' => 'Value',
-            'joinTable' => 'phenotype_values',
+       'Sample' => array(
+            'className' => 'Sample',
+            'joinTable' => 'phenotype_samples',
             'foreignKey' => 'phenotype_id',
-            'associationForeignKey' => 'value_id',
+            'associationForeignKey' => 'sample_id',
             'unique' => true,
             'conditions' => '',
             'fields' => '',

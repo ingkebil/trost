@@ -8,7 +8,9 @@
 		echo $this->Form->input('program_id');
 		echo $this->Form->input('date');
 		echo $this->Form->input('time');
-		echo $this->Form->input('sample_id');
+        echo $this->Form->input('entity_id');
+        echo $this->Form->input('value_id');
+        echo $this->Form->input('number');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

@@ -214,6 +214,7 @@ class PhenotypesController extends AppController {
     }
 
     function upload() {
+        # DISABLED! Please use the CLI scripts instead
 		if (!empty($this->data)) {
 
             # init
@@ -308,304 +309,304 @@ class PhenotypesController extends AppController {
         $this->data['Culture']['experiment_id'] = 1; # TODO un-hardcode!
     }
 
-    function _is_sample_plant($entity_id, $attribute_id) {
-        return $entity_id == 808 && $attribute_id == 178;
-    }
+#    function _is_sample_plant($entity_id, $attribute_id) {
+#        return $entity_id == 808 && $attribute_id == 178;
+#    }
 
-    function _save_sample_plant($line) {
-        $line_parts = $this->_split_fastscore($line);
-        # get/add the plant
-        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
-            'id' => $line_parts[8],
-        )));
-        if (empty($plant)) {
-            $this->Phenotype->Sample->Plant->create();
-            $plant = $this->Phenotype->Sample->Plant->save(array(
-                'Plant' => array(
-                    'id' => $line_parts[8],
-                    'culture_id' => $this->data['Plant']['culture_id']
-                ),
-            ));
-            if (empty($plant)) {
-                return false;
-            }
-            else {
-                $plant['Plant']['id'] = $this->Phenotype->Sample->Plant->getLastInsertID();
-            }
-        }
+#    function _save_sample_plant($line) {
+#        $line_parts = $this->_split_fastscore($line);
+#        # get/add the plant
+#        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
+#            'id' => $line_parts[8],
+#        )));
+#        if (empty($plant)) {
+#            $this->Phenotype->Sample->Plant->create();
+#            $plant = $this->Phenotype->Sample->Plant->save(array(
+#                'Plant' => array(
+#                    'id' => $line_parts[8],
+#                    'culture_id' => $this->data['Plant']['culture_id']
+#                ),
+#            ));
+#            if (empty($plant)) {
+#                return false;
+#            }
+#            else {
+#                $plant['Plant']['id'] = $this->Phenotype->Sample->Plant->getLastInsertID();
+#            }
+#        }
+#
+#        # get/add the sample
+#        $conds = array(
+#            'name' => $line_parts[7],
+#            'created' => $this->_convert_date($line_parts[9]) . ' ' . $line_parts[10],
+#            'plant_id' => $plant['Plant']['id'],
+#        );
+#        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array(
+#            'Sample.name' => $line_parts[7],
+#        )));
+#        if (empty($sample)) {
+#            $this->Phenotype->Sample->create();
+#        }
+#        else {
+#            $conds['id'] = $sample['Sample']['id'];
+#        }
+#
+#        # save/update the sample. It might be that the sample got connected with the a generic plant; it's better to update
+#        $sample = $this->Phenotype->Sample->save(array(
+#            'Sample' => $conds
+#        ));
+#
+#        if (empty($sample)) {
+#            return false;
+#        }
+#
+#        return true;
+#    }
 
-        # get/add the sample
-        $conds = array(
-            'name' => $line_parts[7],
-            'created' => $this->_convert_date($line_parts[9]) . ' ' . $line_parts[10],
-            'plant_id' => $plant['Plant']['id'],
-        );
-        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array(
-            'Sample.name' => $line_parts[7],
-        )));
-        if (empty($sample)) {
-            $this->Phenotype->Sample->create();
-        }
-        else {
-            $conds['id'] = $sample['Sample']['id'];
-        }
+#    function _split_fastscore($line) {
+#        return preg_split('/;|\t/', $line);
+#    }
 
-        # save/update the sample. It might be that the sample got connected with the a generic plant; it's better to update
-        $sample = $this->Phenotype->Sample->save(array(
-            'Sample' => $conds
-        ));
+#    /**
+#        Detects the phenotyping program used.
+#        Gets the entity and attribute id so we can determine if this is a true phenotyping file or a logistics file
+#     */
+#    function _preprocess_line($line, $program_id) {
+#        # split the line according to the program
+#        list($version, $object, $program, $entity_id, $attribute_id) = preg_split('/;|\t/', $line);
+#        switch (strtolower($program)) {
+#            case 'fast score' : $program_id = 1; break;
+#            case 'phenotyping': $program_id = 2; break;
+#            case 'bbch'       : $program_id = 3; break;
+#            default           : $program_id = 0;
+#        }
+#
+#        return array($program_id, $entity_id, $attribute_id);
+#    }
 
-        if (empty($sample)) {
-            return false;
-        }
+#    function _save_upload($line, $program_id, $raw_id, $line_nr) {
+#        #init
+#        $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $sample_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
+#
+#        if ($program_id == 1) { # FastScore
+#            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $sample_id, $attribute_number, $date, $time) = $this->_split_fastscore($line);
+#        }
+#        elseif ($program_id == 2) { # Phenotyping
+#            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
+#        }
+#        elseif ($program_id == 3) { # BBCH
+#            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time) = preg_split('/;|\t/', $line);
+#        }
+#        $date = $this->_convert_date($date);
+#        $attribute_number = str_replace(',', '.', $attribute_number); # Germanify the number (this should be done easier somehow)
+#
+#        # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
+#        # actually wouldn't work! We need to look up each model id or it will be saved as a new entry
+#
+#        $sample = $this->_get_sample($sample_id);
+#        $phenotype = $this->_save_phenotype(am(array('sample_id' => $sample['Sample']['id']), compact('program_id', 'version', 'object', 'date', 'time' )));
+#        $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
+#        if ($program_id != 3) {
+#            $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
+#            $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
+#        }
+#
+#        if ($program_id != 1) { # only add BBCH if it ain't fastscore
+#            $this->_save_bbch($bbch_id, $phenotype['Phenotype']['id']);
+#        }
+#
+#        return $this->Phenotype->getLastInsertID();
+#    }
 
-        return true;
-    }
+#    function _save_bbch($bbch_id, $ph_id, $species_id = 1) {
+#        # look the right code up (as bbch_id != bbch.id)
+#        $bbch = $this->Phenotype->PhenotypeBbch->Bbch->find('first', array('conditions' => array('bbch' => $bbch_id)));
+#        if (empty($bbch)) { # oops. Let's create a placeholder instead
+#            $this->Phenotype->PhenotypeBbch->Bbch->save(array(
+#                'Bbch' => array(
+#                    'name' => 'Placeholder',
+#                    'bbch' => $bbch_id,
+#                    'species_id' => $species_id,
+#                ),
+#            ));
+#        }
+#        $this->Phenotype->PhenotypeBbch->create();
+#        $ph_bbch = $this->Phenotype->PhenotypeBbch->save(array(
+#            'PhenotypeBbch' => array(
+#                'phenotype_id' => $ph_id,
+#                'bbch_id' => $bbch['Bbch']['id'],
+#            )
+#        ));
+#    }
+#
+#    function _save_value($attribute_id, $attribute_number = null, $ph_id) {
+#        # first make sure we have a Value to link to
+#        $this->_spawn_model('Value', $attribute_id, array('attribute' => 'placeholder', 'value' => 'placeholder'));
+#        # save the attribute info
+#        $this->Phenotype->PhenotypeValue->create();
+#        $attribute_number = ! is_null($attribute_number) ? $attribute_number : null;
+#        if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
+#            'PhenotypeValue' => array(
+#                'phenotype_id' => $this->Phenotype->getLastInsertID(),
+#                'value_id' => $attribute_id,
+#                'number' => $attribute_number,
+#            )
+#        )))) {
+#            $this->Phenotype->rollback();
+#            $this->error_msg = 'Failed to create PhenotypeValue!';
+#            return false;
+#        }
+#    }
+#
+#    function _save_entity($entity_id, $ph_id) {
+#        # save the entity info # TODO check if entity ID exists and matches!
+#        # well, it errors when it doesn't ;)
+#        # different tactic: if it doesn't exist: just add the Value as a 'please fill in'
+#        $this->Phenotype->PhenotypeEntity->create();
+#        if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
+#            'PhenotypeEntity' => array(
+#                'phenotype_id' => $ph_id,
+#                'entity_id' => $entity_id,
+#            )
+#        )))) {
+#            $this->Phenotype->rollback();
+#            $this->error_msg = 'Failed to create PhenotypeEntity!';
+#            return false;
+#        }
+#
+#    }
+#
+#    function _save_raw($raw_id, $ph_id, $line_nr) {
+#        # connect this line with the raw file
+#        $this->Phenotype->PhenotypeRaw->create();
+#        if( ! ($ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
+#            'PhenotypeRaw' => array(
+#                'raw_id' => $raw_id,
+#                'phenotype_id' => $ph_id,
+#                'line_nr' => $line_nr,
+#            )
+#        )))) {
+#            $this->Phenotype->rollback();
+#            $this->error_msg = 'Failed to create phenotyeRaw!';
+#            return false;
+#        }
+#
+#        return $ph_raw;
+#    }
+#
+#    function _save_phenotype($tuples) {
+#        # save the phenotyping info
+#        $this->Phenotype->create();
+#        #$date = implode('-', array_reverse(explode('-', $date)));
+#        $phenotype = $this->Phenotype->save(array(
+#            'Phenotype' => $tuples, # version, object, program_id, date, time, sample_id
+#        ));
+#        if (empty($phenotype)) {
+#            $this->Phenotype->rollback();
+#            $this->error_msg = 'Failed to create Phenotype!';
+#            return false;
+#        }
+#        else {
+#            $phenotype['Phenotype']['id'] = $this->Phenotype->getLastInsertID();
+#        }
+#
+#        return $phenotype;
+#    }
 
-    function _split_fastscore($line) {
-        return preg_split('/;|\t/', $line);
-    }
+#    function _get_sample($sample_id) {
+#        # insert the sample info
+#        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array('Sample.name' => $sample_id)));
+#        if (empty($sample)) {
+#            $gen_plant_id = $this->_get_generic_plant();
+#            $this->Phenotype->Sample->create();
+#            $sample = $this->Phenotype->Sample->save(array(
+#                'Sample' => array(
+#                    'name' => $sample_id,
+#                    'plant_id' => $gen_plant_id, # will get connected once the propper component_id file is uploaded
+#                )
+#            ));
+#            if (empty($sample)) {
+#                $this->Phenotype->rollback();
+#                $this->error_msg = 'No sample found!';
+#                return false;
+#            }
+#            $sample['Sample']['id'] = $this->Phenotype->Sample->getLastInsertID();
+#        }
+#
+#        return $sample;
+#    }
 
-    /**
-        Detects the phenotyping program used.
-        Gets the entity and attribute id so we can determine if this is a true phenotyping file or a logistics file
-     */
-    function _preprocess_line($line, $program_id) {
-        # split the line according to the program
-        list($version, $object, $program, $entity_id, $attribute_id) = preg_split('/;|\t/', $line);
-        switch (strtolower($program)) {
-            case 'fast score' : $program_id = 1; break;
-            case 'phenotyping': $program_id = 2; break;
-            case 'bbch'       : $program_id = 3; break;
-            default           : $program_id = 0;
-        }
+#    /**
+#     * checks if a certain tuple exists, and if not, creates one
+#     * @param $model string model name
+#     * @param $id int id of the tuple to look up
+#     * @param $attributes array when tuple doesn't 
+#     */
+#    function _spawn_model($model, $id, $attributes) {
+#        $tuple = $this->$model->find('first', array('conditions' => array(
+#            "$model.id" => $id
+#        )));
+#
+#        if (empty($tuple)) {
+#            $this->$model->create();
+#            $tuple = $this->$model->save(array(
+#                $model => am(compact('id'), $attributes)
+#            ));
+#            $tuple[$model]['id'] = $this->$model->getLastInsertID();
+#        }
+#
+#        return $tuple[$model]['id'];
+#    }
 
-        return array($program_id, $entity_id, $attribute_id);
-    }
+#    function _get_generic_plant() {
+#        $plant_id = 1;
+#        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
+#            'Plant.id' => $plant_id
+#        )));
+#
+#        if (empty($plant)) {
+#            $this->Phenotype->Sample->Plant->create();
+#            $plant = $this->Phenotype->Sample->Plant->save(array(
+#                'Plant' => array(
+#                    'id' => $plant_id,
+#                    'aliquot' => 'placeholder',
+#                    'culture_id' => 1
+#                ),
+#            ));
+#        }
+#
+#        return $plant_id;
+#    }
 
-    function _save_upload($line, $program_id, $raw_id, $line_nr) {
-        #init
-        $version = $object = $program = $entity_id = $attribute_id = $attribute_name = $attribute_state = $sample_id = $attribute_value = $date = $time = $bbch_id = $bbch_name = $entity_name = null;
-
-        if ($program_id == 1) { # FastScore
-            list($version, $object, $program, $entity_id, $attribute_id, $attribute_name, $attribute_state, $sample_id, $attribute_number, $date, $time) = $this->_split_fastscore($line);
-        }
-        elseif ($program_id == 2) { # Phenotyping
-            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time, $entity_id, $enity_name, $attribute_id, $attribute_state, $attribute_value, $attribute_number) = preg_split('/;|\t/', $line);
-        }
-        elseif ($program_id == 3) { # BBCH
-            list($version, $object, $program, $sample_id, $bbch_id, $bbch_name, $date, $time) = preg_split('/;|\t/', $line);
-        }
-        $date = $this->_convert_date($date);
-        $attribute_number = str_replace(',', '.', $attribute_number); # Germanify the number (this should be done easier somehow)
-
-        # TODO maybe it could be easier to create the correct array to save instead of saving each model individually; Oh man, why again didn't I do this??
-        # actually wouldn't work! We need to look up each model id or it will be saved as a new entry
-
-        $sample = $this->_get_sample($sample_id);
-        $phenotype = $this->_save_phenotype(am(array('sample_id' => $sample['Sample']['id']), compact('program_id', 'version', 'object', 'date', 'time' )));
-        $this->_save_raw($raw_id, $phenotype['Phenotype']['id'], $line_nr);
-        if ($program_id != 3) {
-            $entity = $this->_save_entity($entity_id, $phenotype['Phenotype']['id']);
-            $value = $this->_save_value($attribute_id, $attribute_number, $phenotype['Phenotype']['id']);
-        }
-
-        if ($program_id != 1) { # only add BBCH if it ain't fastscore
-            $this->_save_bbch($bbch_id, $phenotype['Phenotype']['id']);
-        }
-
-        return $this->Phenotype->getLastInsertID();
-    }
-
-    function _save_bbch($bbch_id, $ph_id, $species_id = 1) {
-        # look the right code up (as bbch_id != bbch.id)
-        $bbch = $this->Phenotype->PhenotypeBbch->Bbch->find('first', array('conditions' => array('bbch' => $bbch_id)));
-        if (empty($bbch)) { # oops. Let's create a placeholder instead
-            $this->Phenotype->PhenotypeBbch->Bbch->save(array(
-                'Bbch' => array(
-                    'name' => 'Placeholder',
-                    'bbch' => $bbch_id,
-                    'species_id' => $species_id,
-                ),
-            ));
-        }
-        $this->Phenotype->PhenotypeBbch->create();
-        $ph_bbch = $this->Phenotype->PhenotypeBbch->save(array(
-            'PhenotypeBbch' => array(
-                'phenotype_id' => $ph_id,
-                'bbch_id' => $bbch['Bbch']['id'],
-            )
-        ));
-    }
-
-    function _save_value($attribute_id, $attribute_number = null, $ph_id) {
-        # first make sure we have a Value to link to
-        $this->_spawn_model('Value', $attribute_id, array('attribute' => 'placeholder', 'value' => 'placeholder'));
-        # save the attribute info
-        $this->Phenotype->PhenotypeValue->create();
-        $attribute_number = ! is_null($attribute_number) ? $attribute_number : null;
-        if (! ($ph_attribute = $this->Phenotype->PhenotypeValue->save(array(
-            'PhenotypeValue' => array(
-                'phenotype_id' => $this->Phenotype->getLastInsertID(),
-                'value_id' => $attribute_id,
-                'number' => $attribute_number,
-            )
-        )))) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create PhenotypeValue!';
-            return false;
-        }
-    }
-
-    function _save_entity($entity_id, $ph_id) {
-        # save the entity info # TODO check if entity ID exists and matches!
-        # well, it errors when it doesn't ;)
-        # different tactic: if it doesn't exist: just add the Value as a 'please fill in'
-        $this->Phenotype->PhenotypeEntity->create();
-        if (! ($ph_entity = $this->Phenotype->PhenotypeEntity->save(array(
-            'PhenotypeEntity' => array(
-                'phenotype_id' => $ph_id,
-                'entity_id' => $entity_id,
-            )
-        )))) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create PhenotypeEntity!';
-            return false;
-        }
-
-    }
-
-    function _save_raw($raw_id, $ph_id, $line_nr) {
-        # connect this line with the raw file
-        $this->Phenotype->PhenotypeRaw->create();
-        if( ! ($ph_raw = $this->Phenotype->PhenotypeRaw->save(array(
-            'PhenotypeRaw' => array(
-                'raw_id' => $raw_id,
-                'phenotype_id' => $ph_id,
-                'line_nr' => $line_nr,
-            )
-        )))) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create phenotyeRaw!';
-            return false;
-        }
-
-        return $ph_raw;
-    }
-
-    function _save_phenotype($tuples) {
-        # save the phenotyping info
-        $this->Phenotype->create();
-        #$date = implode('-', array_reverse(explode('-', $date)));
-        $phenotype = $this->Phenotype->save(array(
-            'Phenotype' => $tuples, # version, object, program_id, date, time, sample_id
-        ));
-        if (empty($phenotype)) {
-            $this->Phenotype->rollback();
-            $this->error_msg = 'Failed to create Phenotype!';
-            return false;
-        }
-        else {
-            $phenotype['Phenotype']['id'] = $this->Phenotype->getLastInsertID();
-        }
-
-        return $phenotype;
-    }
-
-    function _get_sample($sample_id) {
-        # insert the sample info
-        $sample = $this->Phenotype->Sample->find('first', array('conditions' => array('Sample.name' => $sample_id)));
-        if (empty($sample)) {
-            $gen_plant_id = $this->_get_generic_plant();
-            $this->Phenotype->Sample->create();
-            $sample = $this->Phenotype->Sample->save(array(
-                'Sample' => array(
-                    'name' => $sample_id,
-                    'plant_id' => $gen_plant_id, # will get connected once the propper component_id file is uploaded
-                )
-            ));
-            if (empty($sample)) {
-                $this->Phenotype->rollback();
-                $this->error_msg = 'No sample found!';
-                return false;
-            }
-            $sample['Sample']['id'] = $this->Phenotype->Sample->getLastInsertID();
-        }
-
-        return $sample;
-    }
-
-    /**
-     * checks if a certain tuple exists, and if not, creates one
-     * @param $model string model name
-     * @param $id int id of the tuple to look up
-     * @param $attributes array when tuple doesn't 
-     */
-    function _spawn_model($model, $id, $attributes) {
-        $tuple = $this->$model->find('first', array('conditions' => array(
-            "$model.id" => $id
-        )));
-
-        if (empty($tuple)) {
-            $this->$model->create();
-            $tuple = $this->$model->save(array(
-                $model => am(compact('id'), $attributes)
-            ));
-            $tuple[$model]['id'] = $this->$model->getLastInsertID();
-        }
-
-        return $tuple[$model]['id'];
-    }
-
-    function _get_generic_plant() {
-        $plant_id = 1;
-        $plant = $this->Phenotype->Sample->Plant->find('first', array('conditions' => array(
-            'Plant.id' => $plant_id
-        )));
-
-        if (empty($plant)) {
-            $this->Phenotype->Sample->Plant->create();
-            $plant = $this->Phenotype->Sample->Plant->save(array(
-                'Plant' => array(
-                    'id' => $plant_id,
-                    'aliquot' => 'placeholder',
-                    'culture_id' => 1
-                ),
-            ));
-        }
-
-        return $plant_id;
-    }
-
-    /**
-     * Tries to detect and convert dates to yyyy-mm-dd format.
-     */
-    function _convert_date($date) {
-        list($year, $month, $day) = preg_split('/[^0-9]/', $date);
-        if (strlen($day) == 4) { # switch day and year if they seem to be reversed
-            $x = $year;
-            $year = $day;
-            $day = $x;
-        }
-        # it seems dates are sometimes given as '06-03-11' which is TOTALLY AMbIGUOUS!
-        # anyway, check if all dates are above 2011
-        elseif ($year < 2010) {
-            $x = $year;
-            $year = $day;
-            $day = $x;
-        }
-
-        # quick hack so that those ungly US noted dates are uploaded
-        #$x = $month;
-        #$month = $day;
-        #$day = $x;
-
-        #if ($day < 10) $day = "0$day";
-        #if ($month < 10) $month = "0$month";
-        if ($year == 11) $year = 2011;
-
-        return "$year-$month-$day";
-    }
+#    /**
+#     * Tries to detect and convert dates to yyyy-mm-dd format.
+#     */
+#    function _convert_date($date) {
+#        list($year, $month, $day) = preg_split('/[^0-9]/', $date);
+#        if (strlen($day) == 4) { # switch day and year if they seem to be reversed
+#            $x = $year;
+#            $year = $day;
+#            $day = $x;
+#        }
+#        # it seems dates are sometimes given as '06-03-11' which is TOTALLY AMbIGUOUS!
+#        # anyway, check if all dates are above 2011
+#        elseif ($year < 2010) {
+#            $x = $year;
+#            $year = $day;
+#            $day = $x;
+#        }
+#
+#        # quick hack so that those ungly US noted dates are uploaded
+#        #$x = $month;
+#        #$month = $day;
+#        #$day = $x;
+#
+#        #if ($day < 10) $day = "0$day";
+#        #if ($month < 10) $month = "0$month";
+#        if ($year == 11) $year = 2011;
+#
+#        return "$year-$month-$day";
+#    }
     function _get_cultures() {
         $this->loadModel('Study');
         $studies = $this->Study->find('list',
@@ -850,8 +851,7 @@ AND i18n2.locale = '$locale'
         }
         $phenotype = $this->Phenotype->read(null, $id);
         $phenotype['Phenotype']['invalid'] = $phenotype['Phenotype']['invalid'] == 1 ? 0 : 1;
-        if ($this->Phenotype->save($phenotype)) {
-        } else {
+        if (! $this->Phenotype->save($phenotype)) {
             $this->redirect('/', 500);
         }
     }
@@ -883,37 +883,42 @@ AND i18n2.locale = '$locale'
 			}
 		}
 		$programs = $this->Phenotype->Program->find('list');
-		$samples = $this->Phenotype->Sample->find('list');
-		$this->set(compact('programs', 'samples'));
+		$entities = $this->Phenotype->Entity->find('list');
+		$values   = $this->Phenotype->Value->find('list', array('fields' => array('id', 'value', 'attribute')));
+		$this->set(compact('programs', 'entities', 'values'));
 	}
 
-	function edit($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid phenotype', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$phenotype = $this->Phenotype->find('first', array('recursive' => 1, 'conditions' => array('id' => $id)));
-        pr( $phenotype);
-        $this->redirect(array(
-            'action' => 'manualupload',
-            'p' => $phenotype['Phenotype']['program_id'],
-            'c' => $phenotype['Plant']['culture_id'],
-            'e' => $phenotype['Culture']['experiment_id'],
-            'id' => $phenotype['Phenotype']['id']
-        ));
-	}
+    # DISABLE edit, use invalidate instead (and then add your new phenotype)
+    function edit($id = null) {}
+	#function edit($id = null) {
+	#	if (!$id) {
+	#		$this->Session->setFlash(__('Invalid phenotype', true));
+	#		$this->redirect(array('action' => 'index'));
+	#	}
+	#	$phenotype = $this->Phenotype->find('first', array('recursive' => 1, 'conditions' => array('id' => $id)));
+    #    pr( $phenotype);
+    #    $this->redirect(array(
+    #        'action' => 'manualupload',
+    #        'p' => $phenotype['Phenotype']['program_id'],
+    #        'c' => $phenotype['Plant']['culture_id'],
+    #        'e' => $phenotype['Culture']['experiment_id'],
+    #        'id' => $phenotype['Phenotype']['id']
+    #    ));
+	#}
 
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for phenotype', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->Phenotype->delete($id)) {
-			$this->Session->setFlash(__('Phenotype deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Phenotype was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
+    # DISABLE delete, use invalidate instead
+    function delete($id = null) {}
+	#function delete($id = null) {
+	#	if (!$id) {
+	#		$this->Session->setFlash(__('Invalid id for phenotype', true));
+	#		$this->redirect(array('action'=>'index'));
+	#	}
+	#	if ($this->Phenotype->delete($id)) {
+	#		$this->Session->setFlash(__('Phenotype deleted', true));
+	#		$this->redirect(array('action'=>'index'));
+	#	}
+	#	$this->Session->setFlash(__('Phenotype was not deleted', true));
+	#	$this->redirect(array('action' => 'index'));
+	#}
 }
 ?>

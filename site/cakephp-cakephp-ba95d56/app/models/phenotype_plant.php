@@ -1,8 +1,8 @@
 <?php
-class PhenotypeEntity extends AppModel {
-	var $name = 'PhenotypeEntity';
+class PhenotypePlant extends AppModel {
+	var $name = 'PhenotypePlant';
 	var $validate = array(
-		'phenotype_id' => array(
+		'plant_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -12,7 +12,7 @@ class PhenotypeEntity extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'entity_id' => array(
+		'phenotype_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -26,16 +26,16 @@ class PhenotypeEntity extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Phenotype' => array(
-			'className' => 'Phenotype',
-			'foreignKey' => 'phenotype_id',
+		'Plant' => array(
+			'className' => 'Plant',
+			'foreignKey' => 'plant_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Entity' => array(
-			'className' => 'Entity',
-			'foreignKey' => 'entity_id',
+		'Phenotype' => array(
+			'className' => 'Phenotype',
+			'foreignKey' => 'phenotype_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

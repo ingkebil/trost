@@ -9,14 +9,14 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
+			<th><?php echo $this->Paginator->sort('version');?></th>
+			<th><?php echo $this->Paginator->sort('object');?></th>
 			<th><?php echo $this->Paginator->sort('program_id');?></th>
 			<th><?php echo $this->Paginator->sort('date');?></th>
 			<th><?php echo $this->Paginator->sort('time');?></th>
-			<th><?php echo $this->Paginator->sort('sample_id');?></th>
-            <th><?php __('Entity'); ?></th>
-            <th><?php __('Attribute'); ?></th>
-            <th><?php __('Value'); ?></th>
-            <th><?php __('Number'); ?></th>
+			<th><?php echo $this->Paginator->sort('entity_id');?></th>
+			<th><?php echo $this->Paginator->sort('value_id');?></th>
+			<th><?php echo $this->Paginator->sort('number');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -34,18 +34,16 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $phenotype['Phenotype']['id']; ?>&nbsp;</td>
+		<td><?php echo $phenotype['Phenotype']['version']; ?>&nbsp;</td>
+		<td><?php echo $phenotype['Phenotype']['object']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($phenotype['Program']['name'], array('controller' => 'programs', 'action' => 'view', $phenotype['Program']['id'])); ?>
 		</td>
 		<td><?php echo $phenotype['Phenotype']['date']; ?>&nbsp;</td>
 		<td><?php echo $phenotype['Phenotype']['time']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($phenotype['Sample']['id'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample']['id'])); ?>
-		</td>
-		<td><?php echo $phenotype['Entity'][0]['name'];?></td>
-		<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
-		<td><?php echo $phenotype['Value'][0]['value'];?></td>
-		<td><?php echo $phenotype['Value'][0]['PhenotypeValue']['number'];?></td>
+		<td><?php echo $this->Html->link($phenotype['Entity']['name'], array('controller' => 'entities', 'action' => 'view', $phenotype['Entity']['id']));?></td>
+		<td><?php echo $this->Html->link($phenotype['Value']['attribute'] .': '. $phenotype['Value']['value'], array('controller' => 'entities', 'action' => 'view', $phenotype['Value']['id']));?></td>
+		<td><?php echo $phenotype['Phenotype']['number'];?></td>
 		<td class="actions">
             <?php echo $this->Ajax->link(
                 __('Invalidate', true),
