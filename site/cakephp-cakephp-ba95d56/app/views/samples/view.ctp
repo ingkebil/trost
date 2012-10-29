@@ -12,8 +12,6 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="related">
 	<h3><?php __('Related Phenotypes');?></h3>
 	<?php if (!empty($sample['Phenotype'])):?>
 	<table cellpadding = "0" cellspacing = "0">
@@ -54,8 +52,6 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-</div>
-<div class="related">
 	<h3><?php __('Related Plants');?></h3>
 	<?php if (!empty($sample['Plant'])):?>
 	<table cellpadding = "0" cellspacing = "0">

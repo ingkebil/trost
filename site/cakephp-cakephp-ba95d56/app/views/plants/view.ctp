@@ -37,8 +37,6 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="related">
 	<h3><?php __('Related Phenotypes');?></h3>
 	<?php if (!empty($plant['Phenotype'])):?>
 	<table cellpadding = "0" cellspacing = "0">
@@ -79,8 +77,6 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-</div>
-<div class="related">
 	<h3><?php __('Related Samples');?></h3>
 	<?php if (!empty($plant['Sample'])):?>
 	<table cellpadding = "0" cellspacing = "0">
