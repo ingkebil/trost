@@ -38,10 +38,11 @@
             <?php if (array_key_exists(0, $phenotype['Sample'])):
                 foreach ($phenotype['Sample'] as $sample): ?>
                     Sample:
-                    <?php echo $this->Html->link($phenotype['Sample'][0]['id'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample'][0]['id'])); ?> 
+                    <?php echo $this->Html->link($sample['id'], array('controller' => 'samples', 'action' => 'view', $sample['id'])); ?> 
                 <?php endforeach;
             elseif (array_key_exists(0, $phenotype['Plant'])): ?>
-			    <?php echo $phenotype['Sample'][0]['id'];?></td>
+                Plant:
+			    <?php echo $this->Html->link($phenotype['Plant'][0]['id'], array('controller' => 'plants', 'action' => 'view', $phenotype['Plant'][0]['id']));?></td>
             <?php endif ?>
 			&nbsp;
 		</dd>
