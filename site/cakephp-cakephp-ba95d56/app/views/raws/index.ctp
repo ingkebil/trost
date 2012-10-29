@@ -4,11 +4,10 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('date', 'Raw.date');?></th>
-            <th># <?php __('samples'); ?></td>
+            <th># <?php __('lines'); ?></td>
             <th># <?php __('entities'); ?></td>
             <th># <?php __('values'); ?></td>
             <th># <?php __('bbches'); ?></td>
-            <th># <?php __('new samples'); ?></td>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -32,11 +31,10 @@
             echo __('No lines found', true);
         } ?>&nbsp;
         </td>
-        <td><?php echo $raw['Phenotype']['count']['sample']; ?></td>
+        <td><?php echo $raw['Phenotype']['count']['lines']; ?></td>
         <td><?php echo $raw['Phenotype']['count']['entity']; ?></td>
         <td><?php echo $raw['Phenotype']['count']['value']; ?></td>
         <td><?php echo $raw['Phenotype']['count']['bbch']; ?></td>
-        <td><?php echo $raw['Phenotype']['count']['new_sample']; ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $raw['Raw']['id'])); ?>
             <?php if ($this->Session->check('user')): ?>

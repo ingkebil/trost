@@ -31,39 +31,6 @@ class Raw extends AppModel {
         )
     );
 
-    function contains_sampleplant($raw_id) {
-        $raws = $this->PhenotypeRaw->find('count', array(
-            'joins' => array(
-                array(
-                    'table' => 'phenotypes',
-                    'alias' => 'Phenotype',
-                    'type' => 'left',
-                    'conditions' => array('PhenotypeRaw.phenotype_id = Phenotype.id'),
-                ),
-                array(
-                    'table' => "phenotype_entities",
-                    'alias' => "PhenotypeEntity",
-                    'type' => 'LEFT',
-                    'conditions' => array("PhenotypeEntity.phenotype_id = Phenotype.id"),
-                ),
-                array(
-                    'table' => "phenotype_values",
-                    'alias' => "PhenotypeValue",
-                    'type' => 'LEFT',
-                    'conditions' => array("PhenotypeValue.phenotype_id = Phenotype.id"),
-                ),
-            ),
-            'conditions' => array(
-                'PhenotypeEntity.entity_id' => 808,
-                'PhenotypeValue.value_id' => 178,
-                'PhenotypeRaw.raw_id' => $raw_id
-            ),
-            'contain' => false
-        ));
-
-        return $raws;
-    }
-
     function find_phenotype_daterange($raw_id) {
         $daterange = $this->PhenotypeRaw->find('first', array(
             'conditions' => array(
@@ -108,11 +75,26 @@ class Raw extends AppModel {
     }
 
     function count_entity($raw_id) {
-        return $this->_count_table('Entity', $raw_id);
+        return $this->PhenotypeRaw->find('count', array(
+            'contain' => array('Phenotype'),
+            'conditions' => array('PhenotypeRaw.raw_id' => $raw_id, array('not' => array('entity_id' => null))),
+        ));
     }
 
     function count_value($raw_id) {
-        return $this->_count_table('Value', $raw_id);
+        return $this->PhenotypeRaw->find('count', array(
+            'contain' => array('Phenotype'),
+            'conditions' => array('PhenotypeRaw.raw_id' => $raw_id, array('not' => array('value_id' => null))),
+        ));
+    }
+
+    function count_lines($raw_id) {
+        return $this->PhenotypeRaw->find('count', array(
+            'conditions' => array(
+                'PhenotypeRaw.raw_id' => $raw_id,
+            ),
+            'contains' => false
+        ));
     }
 
     function count_sample($raw_id) {

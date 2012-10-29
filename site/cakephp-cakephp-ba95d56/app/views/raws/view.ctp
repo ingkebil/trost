@@ -11,5 +11,5 @@
             <pre><?php echo $raw['Raw']['data']; ?> &nbsp;</pre>
 		</dd>
 	</dl>
-    <?php echo $this->element('raws/related', array('phenotypes' => $raw['Phenotype'])); ?>
+    <?php echo $this->element('raws/related', array('phenotypes' => $raw['Phenotype'], 'programs' => $programs)); ?>
 </div>

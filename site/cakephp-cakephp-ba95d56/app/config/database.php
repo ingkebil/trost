@@ -20,7 +20,7 @@ class DATABASE_CONFIG {
 	#	'login' => 'trost',
     #    'password' => 'passwordpas',
 	#	'database' => 'db_billiau_trost',
-	#	'encoding' => 'utf8_general_ci'
+	#	'encoding' => 'utf8'
 	#);
 
     # only following params are taken into account: database, connect, driver, login, password and prefix

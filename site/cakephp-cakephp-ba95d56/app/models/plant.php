@@ -1,5 +1,4 @@
 <?php
-
 class Plant extends AppModel {
 	var $name = 'Plant';
 	var $validate = array(
@@ -23,22 +22,46 @@ class Plant extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Subspecies' => array(
+			'className' => 'Subspecies',
+			'foreignKey' => 'subspecies_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
-	var $hasMany = array(
-		'Sample' => array(
-			'className' => 'Sample',
+	var $hasAndBelongsToMany = array(
+		'Phenotype' => array(
+			'className' => 'Phenotype',
+			'joinTable' => 'phenotype_plants',
 			'foreignKey' => 'plant_id',
-			'dependent' => false,
+			'associationForeignKey' => 'phenotype_id',
+			'unique' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
 			'offset' => '',
-			'exclusive' => '',
 			'finderQuery' => '',
-			'counterQuery' => ''
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
+		'Sample' => array(
+			'className' => 'Sample',
+			'joinTable' => 'sample_plants',
+			'foreignKey' => 'plant_id',
+			'associationForeignKey' => 'sample_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 

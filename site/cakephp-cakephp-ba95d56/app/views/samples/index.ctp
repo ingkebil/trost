@@ -4,7 +4,6 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('plant_id');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -18,9 +17,6 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $sample['Sample']['id']; ?>&nbsp;</td>
 		<td><?php echo $sample['Sample']['created']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($sample['Plant']['name'], array('controller' => 'plants', 'action' => 'view', $sample['Plant']['id'])); ?>
-		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $sample['Sample']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $sample['Sample']['id'])); ?>
@@ -42,4 +38,16 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
+</div>
+<div class="actions">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('New Sample', true), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Sample Plants', true), array('controller' => 'sample_plants', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Sample Plant', true), array('controller' => 'sample_plants', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Phenotypes', true), array('controller' => 'phenotypes', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Phenotype', true), array('controller' => 'phenotypes', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Plants', true), array('controller' => 'plants', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Plant', true), array('controller' => 'plants', 'action' => 'add')); ?> </li>
+	</ul>
 </div>

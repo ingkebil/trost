@@ -2,7 +2,7 @@
 class RawsController extends AppController {
 
 	var $name = 'Raws';
-    var $uses = array('Raw', 'PhenotypeRaw');
+    var $uses = array('Raw', 'PhenotypeRaw', 'Program');
     var $helpers = array('Javascript', 'Ajax');
 
 	function index() {
@@ -17,11 +17,10 @@ class RawsController extends AppController {
         $dates = array(); # to get a date range
         foreach ($raws as &$raw) {
             $raw['Phenotype']['count']['bbch']   = $this->Raw->count_bbch($raw['Raw']['id']);
-            $raw['Phenotype']['count']['sample'] = $this->Raw->count_sample($raw['Raw']['id']);
+            $raw['Phenotype']['count']['lines'] = $this->Raw->count_lines($raw['Raw']['id']);
             $raw['Phenotype']['count']['value']  = $this->Raw->count_value($raw['Raw']['id']);
             $raw['Phenotype']['count']['entity'] = $this->Raw->count_entity($raw['Raw']['id']);
             $raw['Phenotype']['daterange'] = $this->Raw->find_phenotype_daterange($raw['Raw']['id']);
-            $raw['Phenotype']['count']['new_sample'] = $this->Raw->contains_sampleplant($raw['Raw']['id']);
         }
         $this->set(compact('raws'));
 	}
@@ -31,7 +30,8 @@ class RawsController extends AppController {
 			$this->Session->setFlash(__('Invalid raw', true));
 			$this->redirect(array('action' => 'index'));
 		}
-        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Sample', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch'))));
+        $this->set('programs', $this->Program->find('list'));
+        $this->set('raw', $this->Raw->find('first', array('conditions' => array('id' => $id), 'contain' => array('Phenotype', 'Phenotype.Sample', 'Phenotype.Plant', 'Phenotype.Bbch', 'Phenotype.Entity', 'Phenotype.Value'))));
 	}
 
 	function add() {

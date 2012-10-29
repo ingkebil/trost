@@ -33,6 +33,18 @@
 			<?php echo $phenotype['Phenotype']['time']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Connection'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+            <?php if (array_key_exists(0, $phenotype['Sample'])):
+                foreach ($phenotype['Sample'] as $sample): ?>
+                    Sample:
+                    <?php echo $this->Html->link($phenotype['Sample'][0]['id'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample'][0]['id'])); ?> 
+                <?php endforeach;
+            elseif (array_key_exists(0, $phenotype['Plant'])): ?>
+			    <?php echo $phenotype['Sample'][0]['id'];?></td>
+            <?php endif ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Entity'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $this->Html->link($phenotype['Entity']['name'], array('controller' => 'entities', 'action' => 'view', $phenotype['Entity']['id'])); ?>

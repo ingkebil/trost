@@ -1,44 +1,11 @@
 <?php
 class Sample extends AppModel {
 	var $name = 'Sample';
-    var $actsAs = array('Containable');
-	var $validate = array(
-		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'plant_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
-		'Plant' => array(
-			'className' => 'Plant',
-			'foreignKey' => 'plant_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
-
 	var $hasMany = array(
-		'Phenotype' => array(
-			'className' => 'Phenotype',
+		'SamplePlant' => array(
+			'className' => 'SamplePlant',
 			'foreignKey' => 'sample_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -50,6 +17,40 @@ class Sample extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		)
+	);
+
+
+	var $hasAndBelongsToMany = array(
+		'Phenotype' => array(
+			'className' => 'Phenotype',
+			'joinTable' => 'phenotype_samples',
+			'foreignKey' => 'sample_id',
+			'associationForeignKey' => 'phenotype_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
+		'Plant' => array(
+			'className' => 'Plant',
+			'joinTable' => 'sample_plants',
+			'foreignKey' => 'sample_id',
+			'associationForeignKey' => 'plant_id',
+			'unique' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		),
 	);
 
 }

@@ -10,10 +10,12 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Id'); ?></th>
+		<th><?php __('Version'); ?></th>
+		<th><?php __('Object'); ?></th>
 		<th><?php __('Program Id'); ?></th>
 		<th><?php __('Date'); ?></th>
 		<th><?php __('Time'); ?></th>
-		<th><?php __('Plant'); ?></th>
+		<th><?php __('Connection'); ?></th>
 <?php if ($phenotypes[0]['program_id'] != 3): ?>
 		<th><?php __('Entity'); ?></th>
 		<th><?php __('Attribute'); ?></th>
@@ -44,15 +46,25 @@
 		?>
 		<tr<?php echo $class;?>>
 			<td><?php echo $phenotype['id'];?></td>
-			<td><?php echo $phenotype['program_id'];?></td>
+			<td><?php echo $phenotype['version'];?></td>
+			<td><?php echo $phenotype['object'];?></td>
+			<td><?php echo $programs[ $phenotype['program_id'] ];?></td>
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
-			<td><?php echo $phenotype['Sample']['id'];?></td>
+<?php if (array_key_exists(0, $phenotype['Sample'])): ?>
+            <td>Sample: 
+<?php foreach ($phenotype['Sample'] as $sample):
+echo $this->Html->link($phenotype['Sample'][0]['id'], array('controller' => 'samples', 'action' => 'view', $phenotype['Sample'][0]['id'])); ?><br />
+<?php endforeach; ?>
+</td>
+<?php elseif (array_key_exists(0, $phenotype['Plant'])): ?>
+			<td>Plant: <?php echo $phenotype['Sample'][0]['id'];?></td>
+<?php endif ?>
 <?php if ($phenotype['program_id'] != 3): ?>
-			<td><?php echo $phenotype['Entity'][0]['name'];?></td>
-			<td><?php echo $phenotype['Value'][0]['attribute'];?></td>
-			<td><?php echo $phenotype['Value'][0]['value'];?></td>
-			<td><?php printf('%.3f', $phenotype['Value'][0]['PhenotypeValue']['number']);?></td>
+			<td><?php echo $phenotype['Entity']['name'];?></td>
+			<td><?php echo $phenotype['Value']['attribute'];?></td>
+			<td><?php echo $phenotype['Value']['value'];?></td>
+			<td><?php printf('%.3f', $phenotype['number']);?></td>
 <?php endif ?>
 <?php if ($phenotype['program_id'] == 2): ?>
 			<td><?php echo $phenotype['Bbch'][0]['name'];?></td>
