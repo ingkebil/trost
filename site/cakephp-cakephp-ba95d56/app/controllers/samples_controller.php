@@ -13,7 +13,11 @@ class SamplesController extends AppController {
 			$this->Session->setFlash(__('Invalid sample', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('sample', $this->Sample->read(null, $id));
+		#$this->set('sample', $this->Sample->read(null, $id));
+        $this->set('sample', $this->Sample->find('first', array(
+            'conditions' => array('Sample.id' => $id),
+            'contain' => array('Plant', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Program')
+        )));
 	}
 
 	function add() {

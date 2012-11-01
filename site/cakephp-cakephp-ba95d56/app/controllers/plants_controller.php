@@ -13,7 +13,11 @@ class PlantsController extends AppController {
 			$this->Session->setFlash(__('Invalid plant', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('plant', $this->Plant->read(null, $id));
+		#$this->set('plant', $this->Plant->read(null, $id));
+        $this->set('plant', $this->Plant->find('first', array(
+            'conditions' => array('Plant.id' => $id),
+            'contain' => array('Sample', 'Culture', 'Subspecies', 'Phenotype', 'Phenotype.Program', 'Phenotype.Entity', 'Phenotype.Value', 'Phenotype.Bbch')
+        )));
 	}
 
 	function add() {

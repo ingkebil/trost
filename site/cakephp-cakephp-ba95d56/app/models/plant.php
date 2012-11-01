@@ -1,6 +1,7 @@
 <?php
 class Plant extends AppModel {
 	var $name = 'Plant';
+    var $actsAs = array('Containable');
 	var $validate = array(
 		'culture_id' => array(
 			'numeric' => array(

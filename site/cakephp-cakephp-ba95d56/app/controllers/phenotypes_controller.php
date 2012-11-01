@@ -865,7 +865,10 @@ AND i18n2.locale = '$locale'
 			$this->Session->setFlash(__('Invalid phenotype', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$phenotype = $this->Phenotype->read(null, $id);
+        $phenotype = $this->Phenotype->find('first', array(
+            'conditions' => array('Phenotype.id' => $id),
+            'contain' => array('Program', 'Entity', 'Bbch', 'Value', 'Sample', 'Plant')
+        ));
 		if ($phenotype['Phenotype']['invalid'] == 1) {
 			$this->Session->setFlash(__('This entry has been marked as invalid!', true));
 		}

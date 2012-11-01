@@ -1,3 +1,11 @@
+<?php echo $javascript->link('jquery-1.5.1.min', false); ?>
+<?php echo $javascript->codeBlock('
+    function strike(id) {
+        $(".row"+id).toggleClass("invalid");
+    }
+');
+
+?>
 <div class="plants view">
 <h2><?php  __('Plant');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
@@ -44,31 +52,36 @@
 		<th><?php __('Id'); ?></th>
 		<th><?php __('Version'); ?></th>
 		<th><?php __('Object'); ?></th>
-		<th><?php __('Program Id'); ?></th>
+		<th><?php __('Program'); ?></th>
 		<th><?php __('Date'); ?></th>
 		<th><?php __('Time'); ?></th>
-		<th><?php __('Entity Id'); ?></th>
-		<th><?php __('Value Id'); ?></th>
+		<th><?php __('Entity'); ?></th>
+		<th><?php __('Value'); ?></th>
 		<th><?php __('Number'); ?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 		$i = 0;
 		foreach ($plant['Phenotype'] as $phenotype):
-			$class = null;
+			$class = array();
 			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
+				$class[] = '"altrow"';
 			}
+            if ($phenotype['invalid'] == 1) {
+                $class[] = 'invalid';
+            }
+            $class = implode(' ', $class);
+            $class = " class='$class'";
 		?>
 		<tr<?php echo $class;?>>
 			<td><?php echo $phenotype['id'];?></td>
 			<td><?php echo $phenotype['version'];?></td>
 			<td><?php echo $phenotype['object'];?></td>
-			<td><?php echo $phenotype['program_id'];?></td>
+			<td><?php echo $phenotype['Program']['name'];?></td>
 			<td><?php echo $phenotype['date'];?></td>
 			<td><?php echo $phenotype['time'];?></td>
-			<td><?php echo $phenotype['entity_id'];?></td>
-			<td><?php echo $phenotype['value_id'];?></td>
+			<td><?php echo $phenotype['Entity']['name'];?></td>
+			<td><?php echo $phenotype['Value']['attribute'] . ': '. $phenotype['Value']['value'];?></td>
 			<td><?php echo $phenotype['number'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View', true), array('controller' => 'phenotypes', 'action' => 'view', $phenotype['id'])); ?>
