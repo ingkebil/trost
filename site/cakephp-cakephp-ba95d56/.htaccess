@@ -1,12 +1,15 @@
-#ErrorDocument 403 "Maintanance"
+#ErrorDocument 403 "Maintanance, will be back in an hour. Wir sind wieder zurueck in einer Stunde."
 #
 #Order deny,allow
 #Deny from all
-#Allow from 141.14.245.195
+#Allow from 141.14.245.209
 #Allow from 127.0.0.1
 #Satisfy All
 
-php_value max_execution_time 300
+php_value upload_max_filesize 128M
+php_value post_max_size 140M
+php_value memory_limit 160M
+#php_value max_execution_time 300
 
 AddType	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet       xlsx
 
