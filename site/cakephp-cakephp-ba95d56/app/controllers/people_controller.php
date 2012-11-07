@@ -3,10 +3,14 @@ class PeopleController extends AppController {
 
 	var $name = 'People';
     var $helpers = array('Html', 'Form');
+    var $uses = array('Person', 'PwCode');
+    var $components = array('Email');
 
     function beforeFilter() {
         parent::beforeFilter();
         #$this->Auth->allow('add', 'edit');
+        $this->Auth->allow('forgotpassword');
+        $this->Auth->allow('reenterpassword');
 
         if ($this->action == 'add' || $this->action == 'edit') {
             $this->Auth->authenticate = $this->Person;
@@ -93,6 +97,80 @@ class PeopleController extends AppController {
                 $this->Person->commit();
             }
         }
+    }
+
+    function forgotpassword() {
+        if ( ! empty($this->data)) {
+            $person = $this->Person->find('first', array(
+                'conditions' => array('username' => $this->data['Person']['username']),
+                'contain' => false
+            ));
+            if (! empty($person)) {
+                $code = md5($this->_randomPassword());
+                $data = array(
+                    'PwCode' => array(
+                        'person_id' => $person['Person']['id'],
+                        'code'    => $code,
+                    )   
+                );
+                if ($this->PwCode->save($data)) {
+                    $this->Email->sendAs = 'text';
+                    $this->Email->replyTo = 'billiau@mpimp-golm.mpg.de';
+                    $this->Email->from = 'billiau@mpimp-golm.mpg.de';
+                    $this->Email->to = $person['Person']['email'];
+                    $this->Email->subject = 'TROST';
+                    $this->Email->template = 'default';
+                    $this->Email->lineLength = 0;
+                    $text = sprintf(__('Dear,\rplease follow belowmentioned link to reset your password\r\r%s\r\rwith kind regards,\rthe TROST team.', true), "http://trost.mpimp-golm.mpg.de/database/de-de/reenterpassword/$code");
+                    if ($this->Email->send($text)) {
+                        $this->Session->setFlash(__('Check your email for the new code!', true));
+                    }   
+                    else {
+                        $this->Session->setFlash(__('There was a problem trying to send you an email.', true));
+                    }   
+                    $this->Email->reset();    
+                }   
+            }   
+        }   
+    }
+
+    function _randomPassword() {
+        $chars = 'abcdefghijkmnopqrstuvwxyz023456789';
+        $i = 0;
+        $pass = '';
+
+        while ($i <= 7) {
+            $num = rand() % 33;
+            $tmp = substr($chars, $num, 1);
+            $pass = $pass . $tmp;
+            $i++;
+        }
+
+        return $pass;
+    }    
+
+    function reenterpassword($token = null) {
+        $code = $this->PwCode->find('first', array(
+            'conditions' => array('code' => $token),
+        ));
+        if (! empty($code)) {
+            if (! empty($this->data)) {
+                $this->data = array('Person' => am($code['Person'], $this->data['Person']));
+                if ($this->Person->save($this->data)) {
+                    $this->PwCode->delete($code['PwCode']['id'], false); # doesn't work?
+                    $this->Session->setFlash(__('Your new password has been set. You can try to login now.'));
+                    $this->redirect(array('action' => 'login'));
+                }
+                else {
+                    $this->Session->setFlash('Arg, error!');
+                }
+            }
+        }
+        else {
+            $this->Session->setFlash(__('Invalid code given!', true));
+        }
+
+        $this->set(compact('token'));
     }
 
 	function view($id = null) {

@@ -81,6 +81,7 @@ class Person extends AppModel {
 
 
     function matchPasswords($data) {
+        pr($this->data);
         if ($data['password'] == $this->data['Person']['password_confirm']) {
             return true;
         }
