@@ -49,6 +49,11 @@ def is_sample_plant(line):
         return line[ keys['entity_id_key'] ] == 808 and line[ keys['value_id_key'] ] == 178
     return False
 
+def is_freshweight_between(line, fr_min = 30.0, fr_max = 100.0):
+    return 'freshweight' in line[5] and \
+        line[6] == 'mg' and \
+        fr_min <= float(line[8]) <= fr_max
+
 def homogenize_date(date):
     (year, month, day) = [ int(x) for x in re.split(r'[^0-9]', date) ]
 
@@ -169,8 +174,9 @@ def add_plant(plant_id):
 
 def progress(s):
     #sys.stdout.write('\r%s' % s)
-    sys.stdout.write('%s' % s)
-    sys.stdout.flush()
+    #sys.stdout.write('%s' % s)
+    #sys.stdout.flush()
+    pass
 
 def format_line(line):
     program_id = get_program_id(line)
@@ -222,6 +228,21 @@ def format_line(line):
 
     return None
 
+def write_lims_lines(lines, fn, max_lines=1000):
+    # print '>>>', fn, 
+    fnout = fn.rstrip('.txt').rstrip('.TXT')
+    p = 0
+    f_index = 1
+    while p < len(lines):
+        new_fn = '%s.%02i.lims.txt' % (fnout, f_index)
+        fo = open(new_fn, 'w')
+        for line in lines[p:p+max_lines]:
+            fo.write('%s\n' % line)
+        fo.close()
+        p += max_lines
+        f_index += 1
+        print 'written %s' % new_fn
+
 def main(argv):
     argparser = argparse.ArgumentParser(description='')
     argparser.add_argument('files', nargs='+')
@@ -259,6 +280,9 @@ def main(argv):
         if not sql.exists('plants'  , 1): sql.insert('plants'  , {'id': DUMMY_PLANT_ID, 'name': 'placeholder', 'culture_id': DUMMY_CULTURE_ID })
         if not sql.exists('subspecies'  , 1): sql.insert('subspecies'  , {'id': DUMMY_SUBSPECIES_ID, 'species_id': SPECIES_ID })
 
+        # some lines need to be sent back to LIMS, this is where we store them
+        lims_lines = []
+
         # save!
         line_nr = 0
         try:
@@ -272,6 +296,10 @@ def main(argv):
                     #if not ora_sql.exists('aliquot a', line[8], 'a.aliquot_id', q):
                     #    progress(line[8])
                     save_sample_plant(sample_id=line[7], plant_id=line[8], date=date)
+
+                    lims_lines.append("\t".join([ str(item) for item in line ]))
+                elif program_id == 1 and is_freshweight_between(line):
+                    lims_lines.append("\t".join([ str(item) for item in line ]))
                 else:
                     phenotype = format_line(line) # create a readable program
 
@@ -309,6 +337,9 @@ def main(argv):
         except:
             progress("%d: %s" % (line_nr, line))
             raise
+        
+        # save the current saved lines for LIMS
+        write_lims_lines(lims_lines, fn)
 
     sql.commit()
 
