@@ -60,7 +60,7 @@ PutEnv('ORACLE_BASE=/usr/lib/oracle/xe/app/oracle/product/10.2.0');
 PutEnv('ORACLE_HOME=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server');
 PutEnv('ORACLE_BASE=/usr/lib/oracle/xe/app/oracle/product/10.2.0/server/lib');
 
-Configure::write('FileUpload.uploadDir', dirname(dirname(__FILE__)) . '/webroot/files/');
+Configure::write('FileUpload.uploadDir', dirname(dirname(__FILE__)) . '/webroot/sfiles/');
 Configure::write('FileUpload.viewDir', '/files/');
 Configure::write('default.password', 'passwo');
 

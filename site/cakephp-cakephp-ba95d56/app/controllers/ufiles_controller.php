@@ -82,6 +82,23 @@ class UfilesController extends AppController {
         $this->set(compact('keywords'));
     }
 
+    function download($username, $filename) {
+        $file = Configure::read('FileUpload.uploadDir') . '/' . $username . '/' . $filename;
+        if (file_exists($file)) {
+            header('Content-type: ' . mime_content_type($file));
+            header('Content-lenght: ' . filesize($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Content-disposition: attachment; filename="' . $filename);
+            readfile($file);
+            exit();
+        }
+        else {
+            $this->Session->setFlash(__('File not found', true));
+        }
+    }
+
     function __add_keywords($kw) {
         $keywords = explode(',', $kw);
         $keywords = array_map('trim', $keywords);

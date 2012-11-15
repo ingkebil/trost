@@ -53,6 +53,12 @@
 	Router::connect('/:lang/phenotypes/edit/:id', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/phenotypes/delete', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 
+    # connect the file downloading
+    Router::connect('/files', array('controller' => 'ufiles', 'action' => 'index'));
+    Router::connect('/:lang/files', array('controller' => 'ufiles', 'action' => 'index'));
+    Router::connect('/files/*', array('controller' => 'ufiles', 'action' => 'download'));
+    Router::connect('/:lang/files/*', array('controller' => 'ufiles', 'action' => 'download'));
+
     #Router::connect('/de-de/:controller/:action/*', array('lang' => 'de-de'));
     #Router::connect('/en-us/:controller/:action/*', array('lang' => 'en-us'));
     # explicitly attach all the indexes
