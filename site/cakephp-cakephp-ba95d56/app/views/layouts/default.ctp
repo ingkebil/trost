@@ -88,6 +88,8 @@
                 <li><?php echo $this->Html->link(__('Change password', true), array('controller' => 'people', 'action' => 'edit', $person['id'])); ?></li>
                 <li><?php echo $this->Html->link(__('Logout', true), array('controller' => 'people', 'action' => 'logout')); ?></li>
                 </ul>
+            <?php else: ?>
+                <?php echo $this->Html->link(__('Login', true), array('controller' => 'people', 'action' => 'login')); ?>
             <?php endif ?>
             </span>
 		</div>
