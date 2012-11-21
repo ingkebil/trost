@@ -1,9 +1,9 @@
 data_dir=~/svn/trost/trunk/data
-backup_file=$data_dir/backups/trost_prod_`date +%F`.sql
+backup_file=$data_dir/backups/trost_prod_`date +%F`.sql.gz
 plants_file=$data_dir/backups/plants_`date +%F`.sql
 
 echo -n "Making backup ..."
-mysqldump -u backup -ppasswordpassw -h cosmos --default-character-set=latin1 --skip-set-charset trost_prod > $backup_file
+mysqldump -u backup -ppasswordpassw -h cosmos --default-character-set=latin1 --skip-set-charset trost_prod | pigz -9 > $backup_file
 echo "done."
 echo -n "Generating new plants ..."
 echo "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;" > $plants_file
