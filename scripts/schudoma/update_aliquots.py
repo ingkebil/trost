@@ -8,18 +8,21 @@ DB_NAME = 'trost_prod'
 TABLE_NAME = 'aliquots'
 """
 
+def format(*params):
+    return "REPLACE into `aliquots` VALUES (%s, %s, %s, %s, %s, %s);" % params
+
 def main(argv):
 
     aliquots = ora_sql.get_all_aliquots_info()
 
     for aliquot in aliquots:
-        print ','.join(str(x) for x in [
-            aliquot['ALIQUOT_ID'],
-            aliquot['PLANT_ID'],
-            aliquot['CREATED_ON'],
+        print format(
+            aliquot['ALIQUOT'],
+            aliquot['PLANT'],
+            aliquot['U_SAMPLED_ON'],
             aliquot['AMOUNT'],
-            aliquot['U_I_AMOUNT'],
-            aliquot['U_ORGAN'] ]
+            aliquot['UNIT_ID'],
+            aliquot['ORGAN']
         )
 
 if __name__ == '__main__': main(sys.argv[1:])
