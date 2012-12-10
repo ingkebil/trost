@@ -4,7 +4,7 @@ backup_file=$data_dir/trost_prod_`date +%F_%X`.sql.gz
 plants_file=$data_dir/${table}_`date +%F_%X`.sql
 
 # get the previous $table file
-prev_plants_file=(`ls -t $data_dir/$table_*`)
+prev_plants_file=(`ls -t $data_dir/${table}_*`)
 prev_plants_file=$prev_plants_file[1]
 echo "Found old $table: $prev_plants_file"
 
