@@ -94,8 +94,12 @@ db_upload $data_dir/120831/treatments.sql
 db_upload $data_dir/120831/temps.sql
 
 # upload all the scanner files
-#python $script_dir/update_phenotypes.py $data_dir/120907/*
+python $script_dir/update_phenotypes.py $data_dir/120907/*
 
 # upload all the scanner files
 # had to check these out manually because of a weird entity Id in there. just added a dummy entity: -12345
-#python $script_dir/update_phenotypes.py $data_dir/120907/problems/*
+python $script_dir/update_phenotypes.py $data_dir/120907/problems/*
+
+# it seems I am wasting my time making interfaces no-one uses
+python $script_dir/import_climate_kaltenber.py $data_dir/121210/EingabeKlimadaten.xls > $data_dir/121210/temps.sql
+db_upload $data_dir/121210/temps.sql
