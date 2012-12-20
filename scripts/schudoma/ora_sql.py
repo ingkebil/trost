@@ -63,14 +63,53 @@ all_ext_aliquot_info_q = """
 select au.aliquot_id, au.u_aliquot_link_a, au.u_organ, a.created_on, a.amount, au.u_i_amount, a.amount from lims.aliquot_user au right join lims.aliquot a on au.aliquot_id = a.aliquot_id where a.aliquot_id = :aliquot_id
 """.strip()
 
+# finally got a working query from Juergen - 121210
 all_plant_info_q = """
-select a.aliquot_id as plant_id, a.sample_id as line_id, a.location_id, a.name, su.u_subspecies_id, a.description, au.u_culture as culture_id
-from aliquot a
-join sample s on s.sample_id = a.sample_id
-join sample_user su on su.sample_id = s.sample_id
-join aliquot_user au on au.aliquot_id = a.aliquot_id
+select a.aliquot_id, a.name as aliquot, au.u_culture as culture,
+a.sample_id as line, sau.u_subspecies_id as subspecies_id, a.created_on
+from aliquot a, aliquot_user au, study s, study_user su, sample_user sau
 where su.u_project = 'TROST'
-and  a.aliquot_type = 'Plant'
+and au.u_culture = su.study_id
+and su.study_id = s.study_id
+and au.aliquot_id = a.aliquot_id
+and sau.sample_id = a.sample_id
+order by s.study_id desc,
+a.aliquot_id desc
+"""
+
+plant_count_q = """
+select count(*)
+from aliquot a, aliquot_user au, study s, study_user su, sample_user sau
+where su.u_project = 'TROST'
+and au.u_culture = su.study_id
+and su.study_id = s.study_id
+and au.aliquot_id = a.aliquot_id
+and sau.sample_id = a.sample_id
+and a.aliquot_id = :aliquot_id
+"""
+
+all_dead_plant_info_q = """
+select mapc.aliquot_id, a.name as aliquot, s.study_id as culture, 
+mapc.old_culture as study_id, a.sample_id as line, su.u_subspecies_id as subspecies_id, a.created_on
+from mpi_au_plant_c mapc, study s, aliquot a, sample_user su 
+where old_culture in (select study_id from study_user where u_project = 'TROST') 
+and new_culture is null
+and s.study_id = mapc.old_culture
+and a.aliquot_id = mapc.aliquot_id
+and su.sample_id = a.sample_id
+order by s.study_id desc,
+a.aliquot_id desc
+"""
+
+dead_plant_count_q = """
+select count(*)
+from mpi_au_plant_c mapc, study s, aliquot a, sample_user su 
+where old_culture in (select study_id from study_user where u_project = 'TROST') 
+and new_culture is null
+and s.study_id = mapc.old_culture
+and a.aliquot_id = mapc.aliquot_id
+and su.sample_id = a.sample_id
+and mapc.aliquot_id = :aliquot_id
 """
 
 #all_aliquot_info_q = """
@@ -109,16 +148,16 @@ and Component.sample_id = trost_sample.sample_id
 order by plant, aliquot
 """
 
-# following q selects all cultures from all the plants - it's a combination of old_culture_q and all_plant_info_q
+# following q selects all cultures from all the plants - it's a rewrite of all_plant_info_q
 all_cultures_q = """
-select distinct study.study_id as Study_Id, description as Description, u_location_id as location_id, study.name as Name, u_condition as condition 
-from aliquot a
-join sample s on s.sample_id = a.sample_id
-join sample_user su on su.sample_id = s.sample_id
-join aliquot_user au on au.aliquot_id = a.aliquot_id
-join STUDY_USER on study_user.study_id = au.u_culture
-join STUDY ON study.study_id = study_user.study_id
-where su.u_project = 'TROST' and a.aliquot_type = 'Plant'
+select distinct s.study_id, s.description, su.u_location_id as location_id, s.name, su.u_condition as condition
+from aliquot a, aliquot_user au, study s, study_user su, sample_user sau
+where su.u_project = 'TROST'
+and au.u_culture = su.study_id
+and su.study_id = s.study_id
+and au.aliquot_id = a.aliquot_id
+and sau.sample_id = a.sample_id
+order by s.study_id;
 """
 
 # looks up all information of a culture
@@ -197,11 +236,26 @@ def get_sample_description_of(aliquot):
 def get_ext_sample_description_of(aliquot):
     return _fetch_assoc(all_ext_aliquot_info_q, {'aliquot_id': aliquot})
 
+def is_plant(id):
+    c = _odb.cursor()
+    c.execute(plant_count_q, { 'aliquot_id': id })
+    exists = c.fetchone()
+    return exists != None and exists[0] > 0
+
+def was_plant(id):
+    c = _odb.cursor()
+    c.execute(dead_plant_count_q, { 'aliquot_id': id })
+    exists = c.fetchone()
+    return exists != None and exists[0] > 0
+
 def get_all_aliquots_info():
     return _fetch_assoc(all_aliquot_info_q)
 
 def get_all_plants_info():
     return _fetch_assoc(all_plant_info_q)
+
+def get_all_dead_plants_info():
+    return _fetch_assoc(all_dead_plant_info_q)
 
 def get_plant_information(aliquot_id):
     rs = _fetch_assoc(q=subspecies_q, aliquot_id=aliquot_id)
