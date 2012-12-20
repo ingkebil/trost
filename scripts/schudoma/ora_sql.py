@@ -150,14 +150,10 @@ order by plant, aliquot
 
 # following q selects all cultures from all the plants - it's a rewrite of all_plant_info_q
 all_cultures_q = """
-select distinct s.study_id, s.description, su.u_location_id as location_id, s.name, su.u_condition as condition
-from aliquot a, aliquot_user au, study s, study_user su, sample_user sau
-where su.u_project = 'TROST'
-and au.u_culture = su.study_id
-and su.study_id = s.study_id
-and au.aliquot_id = a.aliquot_id
-and sau.sample_id = a.sample_id
-order by s.study_id;
+select distinct su.study_id, s.description, su.u_location_id as location_id, s.name, su.u_condition as condition
+from study_user su
+join study s on s.study_id = su.study_id
+where u_project = 'TROST'
 """
 
 # looks up all information of a culture
