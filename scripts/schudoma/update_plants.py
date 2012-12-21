@@ -19,21 +19,23 @@ def format(*params):
         params[2] = culture_id_of[ params[3] ]
         params = tuple(params)
     return "REPLACE into `plants` VALUES (%s, %s, %s, %s, %s, %s, %s);" % (params)
+#    return params[0:2]
 
 def main(argv):
 
-    plants = ora_sql.get_all_plants_info()
+    plants = ora_sql.get_all_plants_info() + ora_sql.get_all_dead_plants_info()
+    #plants = ora_sql.get_all_dead_plants_info()
 
     for plant in plants:
         #print ','.join(str(x) for x in [ 
         print format(
-            plant['PLANT_ID'],
-            plant['NAME'],
-            plant['CULTURE_ID'],
-            plant['U_SUBSPECIES_ID'],
-            'NULL',
-            plant['LINE_ID'],
-            plant['DESCRIPTION']
+            plant['ALIQUOT_ID'], # id
+            plant['ALIQUOT'],    # name
+            plant['CULTURE'],    # culture_id
+            plant['SUBSPECIES_ID'], # subspecies_id
+            plant['CREATED_ON'], # created
+            plant['LINE'],       # lineid
+            'NULL'
         )
 
 if __name__ == '__main__': main(sys.argv[1:])

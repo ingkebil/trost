@@ -197,10 +197,11 @@ def fetch(table, id, id_key='id'):
         return [dict(zip(desc, row)) for row in rows][0]
     return False
 
-def fetch_all(table, where):
+def fetch_all(table, where, q=None):
     c = the_db.cursor()
-    where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
-    q = 'select * from %s where %s' % (table, where_params)
+    if q==None:
+        where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+        q = 'select * from %s where %s' % (table, where_params)
     c.execute(q, where.values())
     rows = c.fetchall()
     desc = [d[0] for d in c.description]

@@ -112,6 +112,25 @@ and su.sample_id = a.sample_id
 and mapc.aliquot_id = :aliquot_id
 """
 
+all_samples_info_q = """
+select a.sample_id, created_on, au.u_aliquot_link_a as plant_id
+from aliquot a
+join aliquot_user au on au.aliquot_id = a.aliquot_id
+join sample_user  su on su.sample_id  = a.sample_id
+where a.aliquot_type = 'MS Component'
+and su.u_project = 'TROST'
+"""
+
+sample_count_q = """
+select count(*)
+from aliquot a
+join aliquot_user au on au.aliquot_id = a.aliquot_id
+join sample_user  su on su.sample_id  = a.sample_id
+where a.aliquot_type = 'MS Component'
+and su.u_project = 'TROST'
+and a.sample_id = :aliquot_id
+"""
+
 #all_aliquot_info_q = """
 #select a.aliquot_id, au.u_aliquot_link_a as plant_id, a.created_on, a.amount, au.u_i_amount, au.u_organ
 #from aliquot a
@@ -244,6 +263,12 @@ def was_plant(id):
     exists = c.fetchone()
     return exists != None and exists[0] > 0
 
+def is_sample(id):
+    c = _odb.cursor()
+    c.execute(sample_count_q, { 'aliquot_id': id })
+    exists = c.fetchone()
+    return exists != None and exists[0] > 0;
+
 def get_all_aliquots_info():
     return _fetch_assoc(all_aliquot_info_q)
 
@@ -252,6 +277,9 @@ def get_all_plants_info():
 
 def get_all_dead_plants_info():
     return _fetch_assoc(all_dead_plant_info_q)
+
+def get_all_samples_info():
+    return _fetch_assoc(all_samples_info_q)
 
 def get_plant_information(aliquot_id):
     rs = _fetch_assoc(q=subspecies_q, aliquot_id=aliquot_id)

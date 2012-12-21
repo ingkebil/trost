@@ -165,7 +165,6 @@ def add_plant(plant_id):
             if plant['subspecies_id'] == None:
                 plant['subspecies_id'] = DUMMY_SUBSPECIES_ID
             if not sql.exists('subspecies', plant['subspecies_id']):
-                print plant
                 subspecies = { 'species_id': SPECIES_ID, 'id': plant['subspecies_id'] }
                 if sql.insert('subspecies', subspecies): progress('Subspecies %d added' % subspecies['id'])
 
@@ -291,11 +290,7 @@ def main(argv):
                 program_id = get_program_id(line)
                 if is_sample_plant(line):
                     line[8] = int(line[8]) # plant_id is still str
-                    date = '%s %s' % (line[9], line[10])
-                    #q = """ select sample_user.u_subspecies_id, a.aliquot_id, a.name, aliquot_user.u_culture, a.description, a.location_id, a.sample_id as line_id from %s join aliquot_user on a.aliquot_id = aliquot_user.aliquot_id join study_user on study_user.study_id = aliquot_user.u_culture left join sample_user on sample_user.sample_id = a.sample_id where study_user.u_project = 'TROST' AND %s = :id """
-                    #if not ora_sql.exists('aliquot a', line[8], 'a.aliquot_id', q):
-                    #    progress(line[8])
-                    save_sample_plant(sample_id=line[7], plant_id=line[8], date=date)
+                    #save_sample_plant(sample_id=line[7], plant_id=line[8], date=date) # skipped because made redundant when preloading all samples/plants
 
                     lims_lines.append("\t".join([ str(item) for item in line ]))
                 elif program_id == 1 and is_freshweight_between(line):
@@ -318,18 +313,13 @@ def main(argv):
                         phenotype_id = sql.lastrowid()
                         progress('Added %d to phenotype' % phenotype_id)
 
-                    # depending on the object type, add it to the correct table
-                    if phenotype['object'] == 'LIMS-Aliquot':
-                        if add_plant(phenotype['sample_id']): print 'Plant %d added' % phenotype['sample_id']
+                    # if plant, add it to plants, otherwise to samples
+                    if ora_sql.is_plant(phenotype['sample_id']) or ora_sql.was_plant(phenotype['sample_id']):
                         sql.insert('phenotype_plants', { 'phenotype_id': phenotype_id, 'plant_id': phenotype['sample_id'] })
-                    elif phenotype['object'] == 'LIMS-Sample':
-                        if not sql.exists('samples', phenotype['sample_id']):
-                            sample = {
-                                'id': phenotype['sample_id'],
-                                'created': phenotype['date'],
-                            }
-                            if sql.insert('samples', sample): print 'Sample %d added' % sample['id']
+                    elif ora_sql.is_sample(phenotype['sample_id']):
                         sql.insert('phenotype_samples', { 'phenotype_id': phenotype_id, 'sample_id': phenotype['sample_id'] })
+                    else:
+                        print "%s NOT found!!" % phenotype['sample_id']
 
                     sql.insert('phenotype_raws'   , { 'phenotype_id': phenotype_id, 'raw_id': raw_id, 'line_nr': line_nr })
                     if program_id > 1:
