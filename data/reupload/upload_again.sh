@@ -14,7 +14,7 @@ data_dir=$wd/data/reupload
 db_user=root
 db_pass=password
 db_host=localhost
-db_name=trost_prod
+db_name=trost_prod_plants
 
 db_upload () {
     echo $1
@@ -103,3 +103,18 @@ python $script_dir/update_phenotypes.py $data_dir/120907/problems/*
 # it seems I am wasting my time making interfaces no-one uses
 python $script_dir/import_climate_kaltenber.py $data_dir/121210/EingabeKlimadaten.xls > $data_dir/121210/temps.sql
 db_upload $data_dir/121210/temps.sql
+
+# and here it comes again - also, be aware that this file seems to create three extra NULL entries and will most like fail to import
+python $script_dir/import_climate_petersgroden.py $data_dir/130117/EingabeKlimadaten_5543_18_38KW_2012_updated_columns.xls > $data_dir/130117/temps.sql
+db_upload $data_dir/130117/temps.sql
+python $script_dir/import_climate_petersgroden.py $data_dir/130118/Klimadaten 2012 Schrobenhausen_updated_columns.xls > $data_dir/130118/temps.sql
+db_upload $data_dir/130118/temps.sql
+
+python $script_dir/import_climate_leusewitz.py $data_dir/130128/Kopie\ von\ Wetter\ 2012\ \(Köhl\).xls > temps.sql
+db_upload $data_dir/130128/temps.sql
+
+python $script_dir/import_climate_boehlendorf.py $data_dir/130128/Boehlendorf/TROST\ Klimadaten\ 2012.xls > temps.sql
+db_upload $data_dir/130128/Boehlendorf/temps.sql
+
+python $script_dir/import_climate_LWK.py $data_dir/130128/LWK/LWK\ NDS\ -\ TROST\ -\ Klimadaten\ 2012.xls | grep -v NULL,NULL,NULL,NULL,NULL > temps.sql
+db_upload $data_dir/130128/LWK/temps.sql
