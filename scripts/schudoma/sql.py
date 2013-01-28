@@ -279,7 +279,9 @@ def prepare_sql_table(data, columns_d, add_id=False):
     for dobj in data:
         row = []
         for key, val in columns_d.items():
-            if hasattr(dobj, key) and getattr(dobj, key) != '':
+            if len(val) == 4: # it has a lookup function, use it
+                row.append( val[:-1] + val[3](dobj, key) )
+            elif hasattr(dobj, key) and getattr(dobj, key) != '':
 #                if len(val) == 4: # ok, it has a lookup function for the value, so use it
 #                    if val[3] == 'custom':
 #                        val = val[:3]
@@ -289,7 +291,6 @@ def prepare_sql_table(data, columns_d, add_id=False):
                 row.append(val + (getattr(dobj, key),))
             else:
                 row.append(val[:-1] + (str, 'NULL'))
-                pass
         if add_id:
             row = [(-1, 'id', str, 'NULL')] + row # add the id
         rows.append(sorted(row))

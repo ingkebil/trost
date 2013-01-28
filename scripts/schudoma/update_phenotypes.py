@@ -24,8 +24,7 @@ def get_program_id(line, program_key = 2):
         'fast score': 1,
         'phenotype' : 2,
         'bbch'      : 3,
-    }
-
+    
     try:
         return programs[ line[ program_key ].lower() ]
     except KeyError:
