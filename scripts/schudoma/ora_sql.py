@@ -131,6 +131,25 @@ and su.u_project = 'TROST'
 and a.sample_id = :aliquot_id
 """
 
+aliquot_count_q = """
+select count(*)
+from sample_user plant_line,
+aliquot plant,
+aliquot_user component_user,
+aliquot Component,
+aliquot test_aliquot,
+sample_user trost_sample
+where trost_sample.u_project = 'TROST'
+and Component.aliquot_type = 'MS Component'
+and Component.sample_id = test_aliquot.sample_id
+and Component.aliquot_id = component_user.aliquot_id
+and component_user.u_aliquot_link_a = plant.aliquot_id
+and plant.sample_id = plant_line.sample_id
+and test_aliquot.sample_id = trost_sample.sample_id
+and Component.sample_id = trost_sample.sample_id
+and test_aliquot.aliquot_id = :aliquot_id
+"""
+
 #all_aliquot_info_q = """
 #select a.aliquot_id, au.u_aliquot_link_a as plant_id, a.created_on, a.amount, au.u_i_amount, au.u_organ
 #from aliquot a
@@ -266,6 +285,12 @@ def was_plant(id):
 def is_sample(id):
     c = _odb.cursor()
     c.execute(sample_count_q, { 'aliquot_id': id })
+    exists = c.fetchone()
+    return exists != None and exists[0] > 0;
+
+def is_aliquot(id):
+    c = _odb.cursor()
+    c.execute(aliquot_count_q, { 'aliquot_id': id })
     exists = c.fetchone()
     return exists != None and exists[0] > 0;
 

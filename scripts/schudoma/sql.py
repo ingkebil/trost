@@ -168,7 +168,18 @@ def insert(table, params):
     c = the_db.cursor()
     
     q = """INSERT INTO `%s` (`%s`) VALUES (%s);""" % (table, '`,`'.join(params.keys()), ','.join([ '%s' for x in xrange(len(params)) ]) )
-    return c.execute(q, params.values())
+    #c.execute('set profiling = 1')
+    #try:
+    #    rs = c.execute(q, params.values())
+    #except Exception:
+    #    c.execute('show profiles')
+    #    for r in c:
+    #        print r
+    #finally:
+    #    c.execute('set profiling = 0')
+
+    rs = c.execute(q, params.values())
+    return rs
 
 def lastrowid():
     return the_db.insert_id()
@@ -199,10 +210,11 @@ def fetch(table, id, id_key='id'):
 
 def fetch_all(table, where, q=None):
     c = the_db.cursor()
+    keys = where.keys()
     if q==None:
-        where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in where.keys() ])
+        where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in keys ])
         q = 'select * from %s where %s' % (table, where_params)
-    c.execute(q, where.values())
+    c.execute(q, [ where[ key ] for key in keys ] )
     rows = c.fetchall()
     desc = [d[0] for d in c.description]
     if len(rows) > 0:

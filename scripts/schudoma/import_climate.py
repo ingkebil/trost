@@ -30,10 +30,11 @@ def main(argv):
 
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('files', nargs='+')
+    parser.add_argument('--pages', default=1)
     args = parser.parse_args(argv)
     
     for fn in args.files:
-        for page in range(2): 
+        for page in range(args.pages): 
             data, headers  = p_xls.read_xls_data(fn, page)
             sql.write_sql_table(data, columns_d, table_name=TABLE_NAME, add_id=True)
 

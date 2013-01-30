@@ -24,6 +24,7 @@ def get_program_id(line, program_key = 2):
         'fast score': 1,
         'phenotype' : 2,
         'bbch'      : 3,
+    }
     
     try:
         return programs[ line[ program_key ].lower() ]
@@ -292,8 +293,8 @@ def main(argv):
                     #save_sample_plant(sample_id=line[7], plant_id=line[8], date=date) # skipped because made redundant when preloading all samples/plants
 
                     lims_lines.append("\t".join([ str(item) for item in line ]))
-                elif program_id == 1 and is_freshweight_between(line):
-                    lims_lines.append("\t".join([ str(item) for item in line ]))
+                #elif program_id == 1 and is_freshweight_between(line):
+                #    lims_lines.append("\t".join([ str(item) for item in line ]))
                 else:
                     phenotype = format_line(line) # create a readable program
 
@@ -317,6 +318,8 @@ def main(argv):
                         sql.insert('phenotype_plants', { 'phenotype_id': phenotype_id, 'plant_id': phenotype['sample_id'] })
                     elif ora_sql.is_sample(phenotype['sample_id']):
                         sql.insert('phenotype_samples', { 'phenotype_id': phenotype_id, 'sample_id': phenotype['sample_id'] })
+                    elif ora_sql.is_aliquot(phenotype['sample_id']):
+                        sql.insert('phenotype_aliquots', { 'phenotype_id': phenotype_id, 'aliquot_id': phenotype['sample_id'] })
                     else:
                         print "%s NOT found!!" % phenotype['sample_id']
 
