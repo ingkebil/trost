@@ -153,7 +153,7 @@ class UfilesController extends AppController {
             }
         }
         else {
-            $keywords = $this->Ufile->Keyword->find('list');
+            $keywords = $this->Ufile->Keyword->find('list', array('order' => array('Keyword.name' => 'asc')));
             $person = $this->Ufile->Person->find('all', array('fields' => array('Person.id', 'Person.name', 'Location.name'), 'contain' => array('Location'))); # get all people with their locations
             $people = Set::combine($person, '{n}.Person.id', '{n}.Person.name', '{n}.Location.name'); # reformat the array so it's grouped on locations
             $locations = $this->Ufile->Person->Location->find('list');
