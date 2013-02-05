@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf8 -*-
 
 import os
 import sys
@@ -33,7 +34,7 @@ def read_xls_data(fn, sheet_index=0):
     data = []
     book = xlrd.open_workbook(fn)
     sheet = book.sheet_by_index(sheet_index)    
-    col_headers = [str(cell.value).replace(' ', '_')
+    col_headers = [str(cell.value.encode('utf8')).replace(' ', '_')
                    for cell in sheet.row(0)]
     for i in xrange(1, sheet.nrows):
         row = []

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf8 -*-
 
 import sys
 
@@ -288,9 +289,13 @@ def format_entry(entry):
 
 def prepare_sql_table(data, columns_d, add_id=False):
     rows = []
+    # as we check the attr of a DO, we need to make sure we _ the attr we're looking for
+    columns_d_ = {}
+    for key,value in columns_d.items():
+        columns_d_[ key.replace(' ', '_') ] = columns_d[ key ]
     for dobj in data:
         row = []
-        for key, val in columns_d.items():
+        for key, val in columns_d_.items():
             if len(val) == 4: # it has a lookup function, use it
                 row.append( val[:-1] + val[3](dobj, key) )
             elif hasattr(dobj, key) and getattr(dobj, key) != '':
