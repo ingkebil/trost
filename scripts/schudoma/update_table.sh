@@ -3,6 +3,10 @@ data_dir=~/svn/trost/trunk/data/backups
 backup_file=$data_dir/trost_prod_`date +%F_%X`.sql.gz
 plants_file=$data_dir/${table}_`date +%F_%X`.sql
 
+database=trost_prod_reimport
+server=cosmos
+
+
 # get the previous $table file
 prev_plants_file=(`ls -t $data_dir/${table}_*`)
 prev_plants_file=$prev_plants_file[1]
@@ -20,10 +24,10 @@ diff=`diff -q $prev_plants_file $plants_file`
 if [[ $? -eq 0 || $? -eq 1 ]]; then
     if [[ -n $diff ]]; then
         echo -n "Making backup ..."
-        mysqldump -u backup -ppasswordpassw -h cosmos --default-character-set=latin1 --skip-set-charset trost_prod | pigz -9 > $backup_file
+        mysqldump -u backup -ppasswordpassw -h $server --default-character-set=latin1 --skip-set-charset $database | pigz -9 > $backup_file
         echo "done."
         echo -n "Updating $table ..."
-        mysql -u billiau -ppassword -h cosmos trost_prod < $plants_file
+        mysql -u billiau -ppassword -h $server $database < $plants_file
         echo "done."
     else
         echo -n "No changes found, removing $plants_file ..."
