@@ -3,7 +3,7 @@ data_dir=~/svn/trost/trunk/data/backups
 backup_file=$data_dir/trost_prod_`date +%F_%X`.sql.gz
 plants_file=$data_dir/${table}_`date +%F_%X`.sql
 
-database=trost_prod_reimport
+database=trost_prod
 server=cosmos
 
 
