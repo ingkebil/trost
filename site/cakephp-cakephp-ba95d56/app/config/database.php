@@ -5,9 +5,9 @@ class DATABASE_CONFIG {
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'trost',
-		'password' => 'passwordpas',
+		'host' => 'cosmos',
+		'login' => 'trost_prod',
+		'password' => 'passwordpa',
 		'database' => 'trost_prod',
 		'encoding' => 'utf8'
 	);
