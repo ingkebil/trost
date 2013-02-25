@@ -16,23 +16,10 @@ class Entity extends AppModel {
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasAndBelongsToMany = array(
-		'Phenotype' => array(
-			'className' => 'Phenotype',
-			'joinTable' => 'phenotype_entities',
-			'foreignKey' => 'entity_id',
-			'associationForeignKey' => 'phenotype_id',
-			'unique' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-			'deleteQuery' => '',
-			'insertQuery' => ''
-		)
-	);
+    var $belongsTo = array(
+        'Entity'
+    );
+
 
 }
 ?>
