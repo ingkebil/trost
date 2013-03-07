@@ -52,6 +52,8 @@ CREATE TABLE `cultures` (
   `terminated` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_cultures_experiments1` (`experiment_id`),
+  KEY `fk_cultures_locations1` (`location_id`),
+  CONSTRAINT `fk_cultures_locations1` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_cultures_experiments1` FOREIGN KEY (`experiment_id`) REFERENCES `experiments` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=60320 DEFAULT CHARSET=utf8;
 
@@ -187,9 +189,11 @@ CREATE TABLE `phenotype_aliquots` (
   `aliquot_id` int(11) NOT NULL,
   `phenotype_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `aliquot_id` (`aliquot_id`),
-  KEY `phenotype_id` (`phenotype_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3653 DEFAULT CHARSET=latin1;
+  KEY `fk_phenotype_aliquots_aliquots1` (`aliquot_id`),
+  KEY `fk_phenotype_aliquots_phenotypes1` (`phenotype_id`),
+  CONSTRAINT `fk_phenotype_aliquots_aliquots1` FOREIGN KEY (`aliquot_id`) REFERENCES `aliquots` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_phenotype_aliquots_phenotypes1` FOREIGN KEY (`phenotype_id`) REFERENCES `phenotypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3653 DEFAULT CHARSET=latin1;
 
 
 DROP TABLE IF EXISTS `phenotype_bbches`;
