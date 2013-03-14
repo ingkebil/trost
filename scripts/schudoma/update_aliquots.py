@@ -37,6 +37,17 @@ def format(aliquot):
         aliquot['PLANT']
     )
 
+    rs += """
+    INSERT INTO `aliquot_samples` (aliquot_id, sample_id)
+    VALUES (%s, %s)
+    ON DUPLICATE KEY UPDATE
+    aliquot_id=VALUES(aliquot_id),
+    sample_id=VALUES(sample_id);
+    """ % (
+        aliquot['ALIQUOT'],
+        aliquot['MS_SAMPLE']
+    )
+
     return rs
 
 def main(argv):

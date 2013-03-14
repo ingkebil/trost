@@ -168,7 +168,8 @@ component_user.u_aliquot_link_a as plant,
 component_user.u_organ as organ,
 plant.name,
 plant_line.u_subspecies_id as subspecies_id,
-component_user.u_sampled_on
+component_user.u_sampled_on,
+trost_sample.sample_id as MS_Sample
 from sample_user plant_line,
 aliquot plant,
 aliquot_user component_user,

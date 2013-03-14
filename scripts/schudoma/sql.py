@@ -220,7 +220,7 @@ def fetch_all(table, where, q=None):
     desc = [d[0] for d in c.description]
     if len(rows) > 0:
         return [dict(zip(desc, row)) for row in rows]
-    return False
+    return []
 
 def count(table, where = None):
     c = the_db.cursor()

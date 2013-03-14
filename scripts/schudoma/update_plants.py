@@ -38,4 +38,7 @@ def main(argv):
             'NULL'
         )
 
+    # make sure some Desiree plants are added with the right subspecies
+    print "update plants set subspecies_id = 382 where subspecies_id is NULL and name like '%St.D.%';"
+
 if __name__ == '__main__': main(sys.argv[1:])
