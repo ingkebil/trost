@@ -9,13 +9,22 @@ TABLE_NAME = 'plants'
 """
 
 def format(*params):
-    return "REPLACE into `samples` VALUES (%s, %s); REPLACE into `sample_plants` VALUES (NULL, %s, %s);" % (
-            params[0],
-            params[1],
-            params[0],
-            params[2]
-    )
+    rs = """
+    INSERT INTO `samples` (id, created)
+    VALUES (%s, %s)
+    ON DUPLICATE KEY UPDATE
+    created=VALUES(created);
+    """ % (params[0], params[1])
 
+    rs += """
+    INSERT INTO `sample_plants` (sample_id, plant_id)
+    VALUES (%s, %s)
+    ON DUPLICATE KEY UPDATE
+    sample_id=VALUES(sample_id),
+    plant_id=VALUES(plant_id);
+    """ % (params[0], params[2])
+
+    return rs
 
 def main(argv):
 

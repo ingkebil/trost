@@ -18,13 +18,21 @@ def format(*params):
         params = list(params)
         params[2] = culture_id_of[ params[3] ]
         params = tuple(params)
-    return "REPLACE into `plants` VALUES (%s, %s, %s, %s, %s, %s, %s);" % (params)
-#    return params[0:2]
+    return """
+        INSERT INTO `plants` (id, name, culture_id, subspecies_id, created, lineid, description)
+        VALUES (%s,%s,%s,%s,%s,%s,%s)
+        ON DUPLICATE KEY UPDATE
+        name=VALUES(name),
+        culture_id=VALUES(culture_id),
+        subspecies_id=VALUES(subspecies_id),
+        created=VALUES(created),
+        lineid=VALUES(lineid),
+        description=VALUES(description);
+        """ % (params)
 
 def main(argv):
 
     plants = ora_sql.get_all_plants_info() + ora_sql.get_all_dead_plants_info()
-    #plants = ora_sql.get_all_dead_plants_info()
 
     for plant in plants:
         #print ','.join(str(x) for x in [ 
