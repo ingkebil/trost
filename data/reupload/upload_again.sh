@@ -139,3 +139,5 @@ python $script_dir/assign_temps_filename.py --pages=5 $data_dir/130201/LWK\ NDS\
 python $script_dir/import_climate_unicode.py $data_dir/130205/120912\ EingabeKlimadaten.xls > $data_dir/130205/temps.sql
 db_upload $data_dir/130205/temps.sql
 python $script_dir/assign_temps_filename.py $data_dir/130205/120912\ EingabeKlimadaten.xls
+
+python $script_dir/update_phenotypes.py $data_dir/130325/*
