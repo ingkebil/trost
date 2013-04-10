@@ -53,6 +53,10 @@
 	Router::connect('/:lang/phenotypes/edit/:id', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/phenotypes/delete', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 
+    # connect the singular named gmd page
+    Router::connect('/gmd', array('controller' => 'gmd'));
+    Router::connect('/:lang/gmd', array('controller' => 'gmd'));
+
     # connect the file downloading
     Router::connect('/files', array('controller' => 'ufiles', 'action' => 'index'));
     Router::connect('/:lang/files', array('controller' => 'ufiles', 'action' => 'index'));

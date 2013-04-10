@@ -12,17 +12,6 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8'
 	);
 
-    ## alternative after prod db went down
-	#var $default = array(
-	#	'driver' => 'mysql',
-	#	'persistent' => false,
-	#	'host' => 'gent',
-	#	'login' => 'trost',
-    #    'password' => 'passwordpas',
-	#	'database' => 'db_billiau_trost',
-	#	'encoding' => 'utf8'
-	#);
-
     # only following params are taken into account: database, connect, driver, login, password and prefix
     var $lims_aliquot = array(
 		'driver' => 'oracle',
