@@ -23,35 +23,52 @@ class GmdController extends AppController {
              'Reproducibility QC 1st' => '135E180C-3A77-4736-80C9-ED241668E536',
              'Calibration Volume 2' =>   '1FE678D1-CE61-4464-9FC1-FE83712B03E9'
         );
-        $formats = array(
+        $grouped_formats = array(
             'Metabolite' => array(
-                'Metabolite Normalized',
-                'Metabolite Raw'
+                0 => 'MetaboliteNorm',
+                1 => 'MetaboliteRaw'
             ),
             'Analyte' => array(
-                'Analyte Normalized',
-                'Analyte Raw'
+                2 => 'AnalyteNorm',
+                3 => 'AnalyteRaw'
             ),
             'MST' => array(
-                'MST '
+                4 => 'Mst '
             ),
         );
 
         if (!empty($this->data)) {
-            App::import('Core', 'HttpSocket');
-            $hs = new HttpSocket();
-
             $tagfileid = $this->data['Gmd']['name'];
             if ( ! array_key_exists($tagfileid, $tagfileids)) {
                 $this->Session->setFlash(__('Weird! the provided name does not appear in our database'));
             }
             else {
+                # import the URL 'get' functionality
+                App::import('Core', 'HttpSocket');
+                $hs = new HttpSocket();
+
+                # get the right tagfileid
                 $tagfileid = $tagfileids[ $tagfileid ];
-                # TODO whitelist these values ?
-                $format    = $this->data['Gmd']['format'];
+
+                # flatten the formats array struct for easy key-based lookup
+                $formats = call_user_func_array('array_merge', $grouped_formats);
+                $format  = $formats[ $this->data['Gmd']['format'] ];
+
                 # TODO put url in settings
-                $content = $hs->get("http://hanna/download.test.php?tagfileid=$tagfileid&format=$format");
-                pr($content);
+                $content = $hs->get("http://gmd.mpimp-golm.mpg.de/webservices/GetTagFileProfile.ashx?TagListId=$tagfileid&ProfileType=$format");
+                #$content_local = $hs->get("http://hanna/download.test.php?TagListId=$tagfileid&ProfileType=$format");
+                #pr($hs->response);
+                #pr($content);
+
+                $this->layout = 'ajax';
+                header('Content-type: ' . $hs->response['header']['Content-Type']);
+                header('Content-lenght: ' . strlen($content));
+                #header('Content-Transfer-Encoding: binary');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Content-disposition: ' . $hs->response['header']['Content-Disposition']);
+                print($content);
+                exit();
             }
         }
 
@@ -59,7 +76,7 @@ class GmdController extends AppController {
         sort($tags);
         $tags = array_combine($tags, $tags);
         $this->set('tags', $tags);
-        $this->set('formats', $formats);
+        $this->set('formats', $grouped_formats);
     }
 
 }
