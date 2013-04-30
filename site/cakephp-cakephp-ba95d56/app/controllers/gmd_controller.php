@@ -25,15 +25,15 @@ class GmdController extends AppController {
         );
         $grouped_formats = array(
             'Metabolite' => array(
-                0 => 'Metabolite_Norm',
-                1 => 'Metabolite_Raw'
+                0 => 'MetaboliteNorm',
+                1 => 'MetaboliteRaw'
             ),
             'Analyte' => array(
-                2 => 'Analyte_Norm',
-                3 => 'Analyte_Raw'
+                2 => 'AnalyteNorm',
+                3 => 'AnalyteRaw'
             ),
             'MST' => array(
-                4 => 'Mst_Intensities'
+                4 => 'MstIntensities'
             ),
         );
 
