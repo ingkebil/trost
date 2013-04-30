@@ -25,15 +25,15 @@ class GmdController extends AppController {
         );
         $grouped_formats = array(
             'Metabolite' => array(
-                0 => 'MetaboliteNorm',
-                1 => 'MetaboliteRaw'
+                0 => 'Metabolite_Norm',
+                1 => 'Metabolite_Raw'
             ),
             'Analyte' => array(
-                2 => 'AnalyteNorm',
-                3 => 'AnalyteRaw'
+                2 => 'Analyte_Norm',
+                3 => 'Analyte_Raw'
             ),
             'MST' => array(
-                4 => 'Mst '
+                4 => 'Mst_Intensities'
             ),
         );
 
@@ -55,20 +55,27 @@ class GmdController extends AppController {
                 $format  = $formats[ $this->data['Gmd']['format'] ];
 
                 # TODO put url in settings
-                $content = $hs->get("http://gmd.mpimp-golm.mpg.de/webservices/GetTagFileProfile.ashx?TagListId=$tagfileid&ProfileType=$format");
+                $content = $hs->get("http://gmd.mpimp-golm.mpg.de/webservices/GetTagFileProfile.ashx?TagFileId=$tagfileid&ProfileType=$format");
                 #$content_local = $hs->get("http://hanna/download.test.php?TagListId=$tagfileid&ProfileType=$format");
                 #pr($hs->response);
                 #pr($content);
-
-                $this->layout = 'ajax';
-                header('Content-type: ' . $hs->response['header']['Content-Type']);
-                header('Content-lenght: ' . strlen($content));
-                #header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-                header('Content-disposition: ' . $hs->response['header']['Content-Disposition']);
-                print($content);
-                exit();
+                if ($hs->response['status']['code'] != 200) {
+                    $this->Session->setFlash($hs->response['raw']['status-line']);
+                    if (Configure::read('debug') > 0) {
+                        debug($hs->response);
+                    }
+                }
+                else {
+                    $this->layout = 'ajax';
+                    header('Content-type: ' . $hs->response['header']['Content-Type']);
+                    header('Content-lenght: ' . strlen($content));
+                    #header('Content-Transfer-Encoding: binary');
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                    header('Content-disposition: ' . $hs->response['header']['Content-Disposition']);
+                    print($content);
+                    exit();
+                }
             }
         }
 
