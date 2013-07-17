@@ -63,8 +63,8 @@ class AppController extends Controller {
      * Works together with the Auth component, when that component is set to Auth::authorize='controller'.
      */
     function isAuthorized() {
-        # disable delete site wide after login
-        if ($this->action == 'delete') return false;
+        if ($this->action == 'delete') return false; # disable delete site wide after login
+        #if ($this->Auth->user('role') == 'disabled' && $this->action != 'logout') return false;
 
         if ($this->Auth->user('role') == 'admin') {
             return true;
@@ -81,6 +81,15 @@ class AppController extends Controller {
         $this->Auth->deny('delete'); # disable this action explicitely before login sitewide
         $admin = $this->Auth->user('role') == 'admin' ? true : false;
         $this->set(compact('admin'));
+
+        # make sure disabled accounts can only see that their account is disabled.
+        if ($this->Auth->user('role') == 'disabled'
+            && $this->params['pass'][0] != 'person_disabled'
+            && $this->action != 'logout'
+        ) {
+            # if the person account is disabled and we are not already on the /view/pages/person_disabled.ctp page ...
+            $this->redirect('/people/disabled');
+        }
 
         # if no language is set in the url, check the session, if no language is set in the session, default to German.
         if (!isset($this->params['lang'])) {

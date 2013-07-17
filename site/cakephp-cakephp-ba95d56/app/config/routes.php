@@ -50,6 +50,8 @@
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/dis/abled', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/dis/abled', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/people/disabled', array('controller' => 'pages', 'action' => 'display', 'person_disabled'));
+	Router::connect('/:lang/people/disabled', array('controller' => 'pages', 'action' => 'display', 'person_disabled'));
 	Router::connect('/:lang/phenotypes/edit/:id', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/phenotypes/delete', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 
