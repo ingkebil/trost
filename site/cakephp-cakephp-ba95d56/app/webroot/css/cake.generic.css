@@ -186,6 +186,9 @@ table tr.lastinsertrow:nth-child(2n) td {
 table .altrow td {
 	background: #f5f5f5;
 }
+table tr.disabled td {
+    color: #ddd;
+}
 td.actions {
 	text-align: center;
 	white-space: nowrap;

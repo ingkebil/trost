@@ -178,7 +178,11 @@ class PeopleController extends AppController {
 			$this->Session->setFlash(__('Invalid person', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('person', $this->Person->read(null, $id));
+        $person = $this->Person->read(null, $id);
+        if ($person['Person']['role'] == 'disabled') {
+            $this->Session->setFlash(__("This account has been disabled", true));
+        }
+		$this->set('person', $person);
 	}
 
 	function add() {
@@ -192,7 +196,7 @@ class PeopleController extends AppController {
 			}
 		}
 		$locations = $this->Person->Location->find('list');
-        $roles = array('admin' => 'admin', 'normal' => 'normal');
+        $roles = array('admin' => 'admin', 'normal' => 'normal', 'disabled' => 'disabled');
 		$this->set(compact('locations', 'roles'));
 	}
 
@@ -216,7 +220,7 @@ class PeopleController extends AppController {
 			$this->data = $this->Person->read(null, $id);
 		}
 		$locations = $this->Person->Location->find('list');
-        $roles = array('admin' => 'admin', 'normal' => 'normal');
+        $roles = array('admin' => 'admin', 'normal' => 'normal', 'disabled' => 'disabled');
 		$this->set(compact('locations', 'roles'));
 	}
 

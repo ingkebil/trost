@@ -11,10 +11,17 @@
 	<?php
 	$i = 0;
 	foreach ($people as $person):
-		$class = null;
+		$classes = array(); # the set of classes
+        $class = ''; # the actial string represenation of the classes added to the tr-element
 		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
+			$classes[] = 'altrow';
 		}
+        if ($person['Person']['role'] == 'disabled') {
+            $classes[] = 'disabled';
+        }
+        if ($classes) {
+           $class = ' class="' . implode(" ", $classes) . '"';
+        }
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $person['Person']['id']; ?>&nbsp;</td>
