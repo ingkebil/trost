@@ -10,6 +10,7 @@ TABLE_NAME = 'aliquots'
 
 def format(aliquot):
 
+    # add the aliquot information
     rs = """
     INSERT INTO `aliquots` (id, sample_date, amount, amount_unit, organ)
     VALUES (%s, %s, %s, %s, %s)
@@ -26,6 +27,7 @@ def format(aliquot):
         aliquot['ORGAN']
     )
 
+    # connect this aliquot to its plants
     rs += """
     INSERT INTO `aliquot_plants` (aliquot_id, plant_id)
     VALUES (%s, %s)
@@ -37,6 +39,7 @@ def format(aliquot):
         aliquot['PLANT']
     )
 
+    # connect this aliquot to its samples
     rs += """
     INSERT INTO `aliquot_samples` (aliquot_id, sample_id)
     VALUES (%s, %s)
@@ -48,15 +51,36 @@ def format(aliquot):
         aliquot['MS_SAMPLE']
     )
 
+    # add the 'amount' information to the phenotypes table
+    # Also, removed the VALUES() part of the UPDATE, so that no rows would be affected on duplication.
+    # http://stackoverflow.com/questions/2366813/on-duplicate-key-ignore
+    #rs += """
+    #INSERT INTO `phenotypes` (program_id, date, time, entity_id, value_id, number)
+    #VALUES (%s,%s,%s,%s,%s,%s)
+    #ON DUPLICATE KEY UPDATE
+    #program_id=program_id,
+    #date=date,
+    #time=time,
+    #entity_id=entity_id,
+    #value_id=value_id,
+    #number=number;
+    #""" % (
+    #    5,
+    #    aliquot['U_SAMPLED_ON'],
+    #    aliquot[''],
+    #    aliquot[''],
+    #    aliquot[''],
+    #    aliquot[''],
+    #)
+
     return rs
 
 def main(argv):
 
     aliquots = ora_sql.get_all_aliquots_info()
 
-    print "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;"
+    #print "INSERT INTO `programs` (id, name) VALUES (5, 'Imported from LIMS') ON DUPLICATE KEY IGNORE;"
     for aliquot in aliquots:
         print format(aliquot)
-    print "/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;"
 
 if __name__ == '__main__': main(sys.argv[1:])
