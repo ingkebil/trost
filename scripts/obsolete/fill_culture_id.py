@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
-import os
 import sys
 
 import sql
 import ora_sql
-import data_objects 
 
 ###
 def main(argv):

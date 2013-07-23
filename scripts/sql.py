@@ -54,11 +54,12 @@ subspecies_q = """
 SELECT limsid, id FROM subspecies
 """.strip()
 
-missing_plants_q = """
-select aliquotid from starch_yield where aliquotid not in (select 
-aliquotid from starch_yield, plants where location_id=%s AND 
-aliquotid=plants.aliquot order by cultivar) AND location_id=%s;
-""".strip()
+# obsolete after august 2012 rewrite - subspecies_id is now lims' subspecies_id
+#missing_plants_q = """
+#select aliquotid from starch_yield where aliquotid not in (select 
+#aliquotid from starch_yield, plants where location_id=%s AND 
+#aliquotid=plants.aliquot order by cultivar) AND location_id=%s;
+#""".strip()
 
 get_value_id_q = """
 SELECT id FROM `values` WHERE value=%s;
@@ -68,11 +69,12 @@ starch_yield_plants_q = """
 select aliquotid from starch_yield where cultivar = %s;
 """.strip()
 
-def get_missing_plants(location_id):
-    q    = the_db.query(missing_plants_q % (location_id, location_id))
-    data = the_db.store_result().fetch_row(how=0, maxrows=0)
-    rs   = [d[0] for d in data]
-    return rs
+# obsolete after august 2012 rewrite - subspecies_id is now lims' subspecies_id
+#def get_missing_plants(location_id):
+#    q    = the_db.query(missing_plants_q % (location_id, location_id))
+#    data = the_db.store_result().fetch_row(how=0, maxrows=0)
+#    rs   = [d[0] for d in data]
+#    return rs
 
 def _get_table(query, key_key, pk_key='id'):
     query = the_db.query(query)
@@ -87,8 +89,9 @@ def _get_table(query, key_key, pk_key='id'):
         rs[d[key_key]] = d[pk_key]
     return rs
 
-def get_subspecies():
-    return _get_table(subspecies_q, 'limsid')
+# obsolete after august 2012 rewrite - subspecies_id is now lims' subspecies_id
+#def get_subspecies():
+#    return _get_table(subspecies_q, 'limsid')
 
 def get_cultures():
     return _get_table(cultures_q, 'limsstudyid')
