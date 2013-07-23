@@ -1,0 +1,12 @@
+upload_phenotype.py: obsolote since the august 2012 rewrite to python.
+upload_xlsx_phenotype.py: could not find any usage of this script back since August 2012. This script would still upload to the website, which is not necessary anymore after the August 202 rewrite to python.
+xlsx2csv.py: used by upload_xlsx_phenotype
+fill_culture_id.py: solved once we started importing plant information from LIMS directly
+fill_missing_plants.py: solved once started importing plant information from LIMS directly
+fill_missing_starch_yield_plants.py: ?
+fill_subspecies_id.py: solved once started importing plant information from LIMS directly
+upgrade_sample_plant.pl: old drop table script
+update_plants_table.py: solved once started importing plant information from LIMS directly
+create_aliquotstable.py: solved once started importing aliquot information from LIMS directly
+add_missing_aliquots.py: solved once started importing aliquot information from LIMS directly
+

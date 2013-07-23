@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# TODO this should seriously be replaced by a script that pulls this information from LIMS instead of an outdated xls file
+
 import sys
 import ora_sql
 
