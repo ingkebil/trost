@@ -19,21 +19,32 @@ python update_$table.py >> $plants_file
 echo "/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;" >> $plants_file
 echo "done: $plants_file"
 
-# compare new plants with old plants
-diff=`diff -q $prev_plants_file $plants_file`
-if [[ $? -eq 0 || $? -eq 1 ]]; then
-    if [[ -n $diff ]]; then
-        echo -n "Making backup ..."
-        mysqldump -u backup -ppasswordpassw -h $server --default-character-set=latin1 --skip-set-charset $database | pigz -9 > $backup_file
-        echo "done."
-        echo -n "Updating $table ..."
-        mysql -u billiau -ppassword -h $server $database < $plants_file
-        echo "done."
+
+update() {
+    echo -n "Making backup ..."
+    mysqldump -u backup -ppasswordpassw -h $server --default-character-set=latin1 --skip-set-charset $database | pigz -9 > $backup_file
+    echo "done."
+    echo -n "Updating $table ..."
+    mysql -u billiau -ppassword -h $server $database < $plants_file
+    echo "done."
+}
+
+
+
+if [[ ! -e $prev_plants_file ]]; then # first time run
+    update;
+else # compare new plants with old plants
+    diff=`diff -q $prev_plants_file $plants_file`
+    if [[ $? -eq 0 || $? -eq 1 ]]; then
+        if [[ -n $diff ]]; then
+            update;
+        else
+            echo -n "No changes found, removing $plants_file ..."
+            `rm $plants_file`
+            echo "done."
+        fi
     else
-        echo -n "No changes found, removing $plants_file ..."
-        `rm $plants_file`
-        echo "done."
+        echo "ERR: $diff"
     fi
-else
-    echo "ERR: $diff"
 fi
+
