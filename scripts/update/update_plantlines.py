@@ -27,10 +27,13 @@ def format(aliquot):
 
 def main(argv):
 
-    plantlines = ora_sql.get_all_plantlines()
+    projects = [ 'TROST', 'TROST2' ]
 
-    #print "INSERT INTO `programs` (id, name) VALUES (5, 'Imported from LIMS') ON DUPLICATE KEY IGNORE;"
-    for line in plantlines:
-        print format(line)
+    for project in projects:
+        plantlines = ora_sql.get_all_plantlines(project)
+
+        #print "INSERT INTO `programs` (id, name) VALUES (5, 'Imported from LIMS') ON DUPLICATE KEY IGNORE;"
+        for line in plantlines:
+            print format(line)
 
 if __name__ == '__main__': main(sys.argv[1:])

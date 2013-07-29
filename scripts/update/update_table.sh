@@ -1,5 +1,6 @@
 table=$1
-data_dir=~/svn/trost/trunk/data/backups
+data_dir=/home/billiau/svn/trost/trunk/data/backups
+script_dir=/home/billiau/svn/trost/trunk/scripts/update
 backup_file=$data_dir/trost_prod_`date +%F_%X`.sql.gz
 plants_file=$data_dir/${table}_`date +%F_%X`.sql
 
@@ -15,7 +16,7 @@ echo "Found old $table: $prev_plants_file"
 # generate the new plants
 echo -n "Generating new $table ..."
 echo "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;" > $plants_file
-python update_$table.py >> $plants_file
+python $script_dir/update_$table.py >> $plants_file
 echo "/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;" >> $plants_file
 echo "done: $plants_file"
 
