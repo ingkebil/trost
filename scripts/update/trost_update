@@ -1,11 +1,11 @@
 #!/bin/bash
 
 script=/home/billiau/svn/trost/trunk/scripts/update/update_table.sh
-tables=('plants' 'samples' 'aliquots' 'plantlines');
+tables=('plants' 'samples' 'aliquots' 'plantlines' 'entities' 'values');
 
 [ -e $script ] || exit 0
 
 for table in "${tables[@]}"; do
     date &>> /tmp/trost.update
-    zsh $script $table &>> /tmp/trost.update 
+    zsh $script $table &>> /tmp/trost.update
 done
