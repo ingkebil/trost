@@ -14,7 +14,7 @@ def main(argv):
 #"""
 
     q = """
-SELECT ValueID, attribut_D, wert_D FROM test_mpiscore_values
+SELECT ValueID, attribut_D, wert_D, attribut_E, `value` FROM test_mpiscore_values
 """
     db.query(q)
     rows = db.store_result().fetch_row(how=0, maxrows=0)
@@ -26,13 +26,26 @@ SELECT ValueID, attribut_D, wert_D FROM test_mpiscore_values
             stripped_data.append(d)
 
         data = _format_entry(stripped_data)
-        rs = """
-        INSERT INTO `values` (id, attribute, `value`)
-        VALUES (%s, %s, %s)
-        ON DUPLICATE KEY UPDATE
-        attribute = VALUES(attribute),
-        `value` = VALUES(`value`);
+        rs = """ INSERT INTO `values` (id, attribute, `value`) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE attribute = VALUES(attribute), `value` = VALUES(`value`);
         """ % (data[0], data[1], data[2])
+
+        # there is a unique constraint on local,model,foreign_key,field
+        # meaning that when that is found, only content should be updated
+        rs += """
+        INSERT INTO `i18n` (locale, model, foreign_key, field, content) VALUES ('en_us', 'Value', %s, 'attribute', %s) ON DUPLICATE KEY UPDATE content=VALUES(content);
+        """ % (data[0], data[3])
+
+        rs += """
+        INSERT INTO `i18n` (locale, model, foreign_key, field, content) VALUES ('de_de', 'Value', %s, 'attribute', %s) ON DUPLICATE KEY UPDATE content=VALUES(content);
+        """ % (data[0], data[1])
+
+        rs += """
+        INSERT INTO `i18n` (locale, model, foreign_key, field, content) VALUES ('en_us', 'Value', %s, 'value', %s) ON DUPLICATE KEY UPDATE content=VALUES(content);
+        """ % (data[0], data[4])
+
+        rs += """
+        INSERT INTO `i18n` (locale, model, foreign_key, field, content) VALUES ('de_de', 'Value', %s, 'value', %s) ON DUPLICATE KEY UPDATE content=VALUES(content);
+        """ % (data[0], data[2])
 
         print rs.encode('utf-8')
 
