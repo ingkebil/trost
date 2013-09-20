@@ -75,11 +75,25 @@ def format(aliquot):
 
     return rs
 
+def format_unit(unit):
+    return """
+    INSERT INTO `units` (id, name)
+    VALUES (%s, %s)
+    ON DUPLICATE KEY UPDATE
+    name=VALUES(name);
+    """ % (
+            unit['UNIT_ID'],
+            unit['NAME']
+            )
+
 def main(argv):
 
     aliquots = ora_sql.get_all_aliquots_info()
+    units = ora_sql._fetch_assoc("SELECT unit_id, name FROM unit")
 
     #print "INSERT INTO `programs` (id, name) VALUES (5, 'Imported from LIMS') ON DUPLICATE KEY IGNORE;"
+    for unit in units:
+        print format_unit(unit)
     for aliquot in aliquots:
         print format(aliquot)
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 script=/home/billiau/svn/trost/trunk/scripts/update/update_table.sh
-tables=('plants' 'samples' 'aliquots' 'plantlines' 'entities' 'values' 'cultures');
+tables=('plants' 'samples' 'aliquots' 'plantlines' 'entities' 'values');
 
 [ -e $script ] || exit 0
 
