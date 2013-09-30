@@ -216,6 +216,16 @@ and study.study_id = :study_id
 #and u_location_id > 4000
 #"""
 
+all_plantlines_q = """
+select sample_id, name, description from sample
+where sample.sample_id IN
+( SELECT aliquot.sample_id from aliquot,
+        aliquot_user, study_user
+        where aliquot.aliquot_id = aliquot_user.aliquot_id
+        AND aliquot_user .u_culture  = study_user.study_id
+        and study_user.u_project = :project)
+"""
+
 def _format_entry(entry):
     """ This is a really really ugly workaround... 
     """
@@ -224,6 +234,8 @@ def _format_entry(entry):
         if x == None:
             formatted.append("NULL")
         elif isinstance(x, str):
+            formatted.append("'%s'" % x)
+        elif isinstance(x, unicode):
             formatted.append("'%s'" % x)
         elif isinstance(x, datetime.datetime):
             formatted.append("'%s'" % x)
@@ -297,6 +309,9 @@ def is_aliquot(id):
 
 def get_all_aliquots_info():
     return _fetch_assoc(all_aliquot_info_q)
+
+def get_all_plantlines(project):
+    return _fetch_assoc(all_plantlines_q, project=project)
 
 def get_all_plants_info():
     return _fetch_assoc(all_plant_info_q)
@@ -373,6 +388,21 @@ def get_aliquots_trost():
         rs = [dict(zip(desc, _format_entry(row))) for row in rows]
         return rs
     return None
+
+def get_locations(ids=None):
+    c = _odb.cursor()
+    q = " SELECT LOCATION_ID, NAME, ELEVATION FROM location "
+    if ids != None:
+        q += " WHERE LOCATION_ID IN (%s) " % (",".join([ str(id) for id in ids ]))
+
+    c.execute(q)
+    rows = c.fetchall()
+    desc = [ d[0] for d in c.description ]
+    if len(rows) > 0:
+        rs = [ dict(zip(desc, _format_entry(row))) for row in rows ]
+        return rs
+    return None
+
 
 ###
 def main(argv):

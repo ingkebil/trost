@@ -2,8 +2,8 @@
 # -*- coding: utf8 -*-
 
 import sys
-
 import login
+
 the_db = login.get_db()
 
 USE_DB = 'USE %s;'
