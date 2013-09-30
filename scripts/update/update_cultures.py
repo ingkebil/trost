@@ -36,7 +36,32 @@ def format_location(*params):
 
 def main(argv):
 
-    cultures = ora_sql.get_all_cultures()
+    #cultures = ora_sql.get_all_cultures()
+
+    cultures = ora_sql._fetch_assoc("""
+select distinct st.study_id, st.description, l.location_id, 
+l.name as location_name, st.name, stu.u_condition as condition
+from study st
+join study_user stu on stu.study_id = st.study_id
+left join
+(select s.entry_date as e_date, s.study_id as culture,
+  /*get the newest location change (except the change to 'void')*/
+  first_value(s.new_location) over (partition by study_id) as last_location
+  from 
+  /*culture audit table - contains all location changes*/
+  (
+    select entry_date, study_id, new_location from mpi_au_culture_l macl
+    join location loc on loc.location_id = macl.new_location
+    where loc.name not like ('void%')
+    order by macl.study_id, macl.entry_date desc
+  ) s
+)  audits
+on audits.culture = stu.study_id
+/*retrieve location name/location id if there is any*/
+left join location l on l.location_id = audits.last_location
+where stu.u_project = 'TROST'
+order by st.study_id desc
+    """)
 
     # sometimes a new location has been added, so we should update those first
     location_ids = set([ culture['LOCATION_ID'] for culture in cultures ]);
