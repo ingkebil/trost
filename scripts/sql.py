@@ -212,13 +212,18 @@ def fetch(table, id, id_key='id'):
         return [dict(zip(desc, row)) for row in rows][0]
     return False
 
-def fetch_all(table, where, q=None):
+def fetch_all(table, where=None, q=None):
     c = the_db.cursor()
-    keys = where.keys()
-    if q==None:
-        where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in keys ])
-        q = 'select * from %s where %s' % (table, where_params)
-    c.execute(q, [ where[ key ] for key in keys ] )
+    if where != None:
+        keys = where.keys()
+        if q==None:
+            where_params = ' and '.join([ '%s=%s' % (k, '%s') for k in keys ])
+            q = 'select * from %s where %s' % (table, where_params)
+        c.execute(q, [ where[ key ] for key in keys ] )
+    else:
+        if q==None:
+            q = 'select * from %s' % table
+        c.execute(q)
     rows = c.fetchall()
     desc = [d[0] for d in c.description]
     if len(rows) > 0:
