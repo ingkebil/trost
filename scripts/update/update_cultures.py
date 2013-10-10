@@ -2,6 +2,7 @@
 
 import sys
 import ora_sql
+import sql
 
 """
 DB_NAME = 'trost_prod'
@@ -84,5 +85,13 @@ order by st.study_id desc
             c['DESCRIPTION'],
             c['LOCATION_ID'],
         )
+
+    # 13/10/10 - LIMS update changes Golm location name. This sets it back to 'Golm'
+    print """
+    INSERT INTO `locations` (id, name)
+    VALUES (%s, %s)
+    ON DUPLICATE KEY UPDATE
+    name=VALUES(name);
+    """ % (4537, "'" + sql.escape_string("Golm") + "'")
 
 if __name__ == '__main__': main(sys.argv[1:])
