@@ -168,9 +168,13 @@ class UfilesController extends AppController {
 
         $keywords = @$this->params['named']['keyword'];
         $location_ids = @$this->params['named']['location_id'];
-        unset($this->params['named']['keyword']);
-        unset($this->params['named']['location_id']);
+
         $conditions = $this->params['named'];
+        unset($conditions['page']);
+        unset($conditions['sort']);
+        unset($conditions['direction']);
+        unset($conditions['keyword']);
+        unset($conditions['location_id']);
         $this->params['named']['keyword']     = $keywords;
         $this->params['named']['location_id'] = $location_ids;
 
@@ -211,7 +215,6 @@ class UfilesController extends AppController {
         $ufile_ids = Set::extract('/Ufile/id', $ufile_ids);
 
         $this->paginate['Ufile'] = array(
-            'group' => array('Ufile.id'),
             'contain' => array('Keyword', 'Person'),
             'conditions' => array('Ufile.id' => array_unique($ufile_ids)),
         );
