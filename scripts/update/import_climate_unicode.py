@@ -35,7 +35,7 @@ def main(argv):
     args = parser.parse_args(argv)
 
     for fn in args.files:
-        for page in range(args.pages): 
+        for page in range(int(args.pages)): 
             data, headers  = p_xls.read_xls_data(fn, page)
             sql.write_sql_table(data, columns_d, table_name=TABLE_NAME, add_id=True)
 

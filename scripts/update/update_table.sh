@@ -26,7 +26,7 @@ update() {
     mysqldump -u backup -ppasswordpassw -h $server --default-character-set=latin1 --skip-set-charset $database | pigz -9 > $backup_file
     echo "done."
     echo -n "Updating $table ..."
-    mysql -u billiau -ppassword -h $server $database < $plants_file
+    mysql -u billiau -ppassword -h $server --default-character-set=utf8 $database < $plants_file
     echo "done."
 }
 

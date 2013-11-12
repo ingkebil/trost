@@ -145,3 +145,11 @@ python $script_dir/update_phenotypes.py $data_dir/130325/*
 python $script_dir/import_climate_unicode.py $data_dir/130904/EingabeKlimadaten_Golm2013.xls > temps.sql
 db_upload $data_dir/130904/temps.sql
 
+python $script_dir/upload/update_phenotypes.py $data_dir/130930/*
+
+python $script_dir/maintanance/update_phenotypes.py $data_dir/130930/update/*
+# did not test the next statement. Needed because in trost_2012_06_05_3.TXT has a an entry corrected to NULL
+echo "UPDATE phenotypes p JOIN phenotype_plants pp where pp.phenotype_id = p.id SET p.entity_id = 810 WHERE pp.plant_id = 1166737 and p.entity_id = -12345;" | mysql -u $db_user -p$db_pass -h $db_host $db_name
+
+python $script_dir/update/import_climate_unicode.py --pages=5 $data_dir/131112/LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > $data_dir/131112/temps.sql
+db_upload $data_dir/131112/temps.sql
