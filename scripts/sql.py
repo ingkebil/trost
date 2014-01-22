@@ -295,26 +295,24 @@ def format_entry(entry):
     # return '(%s)' % ','.join(map(str, formatted))
     return formatted
 
-def prepare_sql_table(data, columns_d, add_id=False):
-    rows = []
+def sanitize_columns(columns_d):
     # as we check the attr of a DO, we need to make sure we _ the attr we're looking for
     columns_d_ = {}
     for key,value in columns_d.items():
         columns_d_[ key.replace(' ', '_') ] = columns_d[ key ]
+    return columns_d_
+
+def prepare_sql_table(data, columns_d, add_id=False):
+    rows = []
+    columns_d_ = sanitize_columns(columns_d)
     for dobj in data:
         row = []
         for key, val in columns_d_.items():
             if len(val) == 4: # it has a lookup function, use it
-                row.append( val[:-1] + val[3](dobj, key) )
-            elif hasattr(dobj, key) and getattr(dobj, key) != '':
-#                if len(val) == 4: # ok, it has a lookup function for the value, so use it
-#                    if val[3] == 'custom':
-#                        val = val[:3]
-#                    else:
-#                        print locals()[ val[3] ]( getattr(dobj, key) )
-#                        val = val[:3] + locals()[ val[3] ]( getattr(dobj, key) )
+                row.append( val[:-2] + val[3](dobj, key) )
+            elif hasattr(dobj, key) and getattr(dobj, key) != '': # column found, get value
                 row.append(val + (getattr(dobj, key),))
-            else:
+            else: # no column found, add NULL
                 row.append(val[:-1] + (str, 'NULL'))
         if add_id:
             row = [(-1, 'id', str, 'NULL')] + row # add the id
@@ -343,6 +341,9 @@ def write_sql_table(data, columns_d, table_name='DUMMY', out=sys.stdout, add_id=
     pass
   
 def write_update_sql(): pass
+
+def escape_string(string):
+    return the_db.escape_string(string)
   
 
 ###

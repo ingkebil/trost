@@ -18,7 +18,7 @@ TABLE_NAME = 'temps'
 columns_d = {
     'Datum': (0, 'datum', str),
     'Regen': (1, 'percipitation', float),
-    'Bewaesserung': (2, 'irrigation', float),
+    'Bewaesserung': (2, 'irrigation', float),# lambda x: 0 if x == 'NULL' or x == '' else x),
     'Tmin': (3, 'tmin', float),
     'Tmax': (4, 'tmax', float),
     'StandortID': (5, 'location_id', int),
