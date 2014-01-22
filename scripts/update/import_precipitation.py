@@ -34,13 +34,11 @@ def main(argv):
             data_to_keep = []
             for d in data: # skip empty values
                 amount = getattr(d, 'Regen_(mm)')
-                if amount == None or amount == 0:
+                if amount == None or amount == 0 or amount == '':
                     continue
-                data_to_keep.append(d)
-
-            if args.standortid != None:
-                for d in data_to_keep:
+                if args.standortid != None:
                     setattr(d, 'StandortID', args.standortid)
+                data_to_keep.append(d)
 
             sql.write_sql_table(data_to_keep, columns_d, table_name=TABLE_NAME, add_id=True)
 

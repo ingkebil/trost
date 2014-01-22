@@ -25,6 +25,7 @@ def main(argv):
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('files', nargs='+')
     parser.add_argument('--pages', default=1)
+    parser.add_argument('--standortid', type=int)
     args = parser.parse_args(argv)
 
     for fn in args.files:
@@ -37,6 +38,8 @@ def main(argv):
                 tmax = getattr(d, 'Tmax_(°C)')
                 if tmin != None and tmin != '' and tmax != None and tmax != '':
                     data_to_keep.append(d)
+                if args.standortid != None:
+                    setattr(d, 'StandortID', args.standortid)
 
             sql.write_sql_table(data_to_keep, columns_d, table_name=TABLE_NAME, add_id=True)
 
