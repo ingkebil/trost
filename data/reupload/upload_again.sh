@@ -2,7 +2,7 @@
 
 # dirs
 wd=~/svn/trost/trunk
-script_dir=$wd/scripts/schudoma
+script_dir=$wd/scripts/update
 data_dir=$wd/data/reupload
 
 # db data
@@ -153,3 +153,37 @@ echo "UPDATE phenotypes p JOIN phenotype_plants pp where pp.phenotype_id = p.id 
 
 python $script_dir/update/import_climate_unicode.py --pages=5 $data_dir/131112/LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > $data_dir/131112/temps.sql
 db_upload $data_dir/131112/temps.sql
+
+python $script_dir/update/import_climate_unicode.py --pages=2 $data_dir/131120/Klimadaten_Erntedaten_JKI-RS.xls > $data_dir/131120/temps.sql
+db_upload $data_dir/131120/temps.sql
+
+# needed to remove a file and entries that had absolute dryweight but were meant to be absolute freshweight.
+echo "delete pr, p, ps from phenotype_raws pr join phenotypes p on p.id = pr.phenotype_id join phenotype_samples ps on ps.phenotype_id = p.id join raws r on r.id = ps.raw_id where r.filename = 'trost_280711_7.txt'" | mysql -u $db_user -p$db_pass -h $db_host $db_name
+# added the right file this time
+python update_phenotypes.py $data_dir/131210/trost_2011_07_28_6.txt
+
+python $script_dir/import_climate_unicode.py $data_dir/140117/EingabeKlimadaten_Golm2012.xls > $data_dir/140117/temps.sql
+db_upload $data_dir/140117/temps.sql
+
+python $script_dir/import_precipitation.py $data_dir/140120/Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > $data_dir/140120/precipitation_JKI.sql
+db_upload $data_dir/140117/precipitation_JKI.sql
+
+python $script_dir/../maintanance/add_triggers.py > $data_dir/140120/triggers.sql
+db_upload $data_dir/140120/triggers.sql
+
+
+
+python ../../../../scripts/upload/import_irrigation_golm.py $data_dir/140122/4537\ Golm/*_columns.xls > irrigation_golm.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/4537\ Golm/*_columns.xls > precipitation_golm.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/4537\ Golm/*_columns.xls > temperatures_golm.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5540\ Kaltenberg/*.xls > precipitation_kaltenberg.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5540\ Kaltenberg/*.xls > temperatures_kaltenberg.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5541\ Böhlendorf/EingabeKlimadaten_Böhlendorf.xls > precipitation_boehlendorf.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5541\ Böhlendorf/EingabeKlimadaten_Böhlendorf.xls > temperatures_boehlendorf.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5542\ Norika/EingabeKlimadaten_NORIKA.xls > precipitation_norika.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5542\ Norika/EingabeKlimadaten_NORIKA.xls > temperatures_norika.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5543\ Petersgroden/EingabeKlimadaten_Petersgroden.xls > precipitation_petersgroden.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5543\ Petersgroden/EingabeKlimadaten_Petersgroden.xls > temperatures_petersgroden.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > precipidation_windeby.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > temperatures_windeby.sql
+
