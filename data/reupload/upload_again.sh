@@ -186,4 +186,25 @@ python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/554
 python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5543\ Petersgroden/EingabeKlimadaten_Petersgroden.xls > temperatures_petersgroden.sql
 python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > precipidation_windeby.sql
 python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > temperatures_windeby.sql
+python ../../../../scripts/upload/create_irrigationtable.py EingabeKlimadaten_Dethlingen_columns.xls > irrigation_dethlingen.sql
+
+python ../../../../scripts/update/import_precipitation.py EingabeKlimadaten_Kaltenberg_2012.xls > precipitation_akltenberg_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py EingabeKlimadaten_Kaltenberg_2012.xls > temperatures_kaltenberg_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py EingabeKlimadaten_5543_18_38KW_2012_updated_columns.xls > temp_petersgroden_2012.sql
+python ../../../../scripts/update/import_precipitation.py EingabeKlimadaten_5543_18_38KW_2012_updated_columns.xls >prec_ptersgroden_2012.sql
+python ../../../../scripts/update/import_precipitation.py  Klimadaten\ 2012\ Schrobenhausen_updated_columns.xls > prec_schorbenhausen_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py Klimadaten\ 2012\ Schrobenhausen_updated_columns.xls > temps_schrobehausen_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py --standortid=5506 Klimadaten_leusewitz_2012.xls > temps_leusewits_2012.sql
+python ../../../../scripts/update/import_precipitation.py --standortid=5506 Klimadaten_leusewitz_2012.xls > prec_leusewitz_2012.sql
+python ../../../../scripts/upload/create_irrigationtable.py --pages=5 LWK\ NDS\ -\ TROST\ -\ Klimadaten\ 2012.xls > irri_dethlingen_2012.sql
+python ../../../../scripts/update/import_precipitation.py --pages=5 LWK\ NDS\ -\ TROST\ -\ Klimadaten\ 2012.xls > prec_dethlingen_2012.sql 
+python ../../../../scripts/update/import_climate_unicode.py --pages=5 LWK\ NDS\ -\ TROST\ -\ Klimadaten\ 2012.xls > temps_dethlingen_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py EingabeKlimadaten_NORIKA_2012.xls > temps_norika_2012.sql
+python ../../../../scripts/update/import_precipitation.py EingabeKlimadaten_NORIKA_2012.xls > prec_norika_2012.sql
+python ../../../../scripts/update/import_climate_unicode.py --pages=5 LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > temps_dethlingen_2013.sql     
+python ../../../../scripts/update/import_precipitation.py --pages=5 LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > prec_dethlingen_2013.sql 
+python ../../../../scripts/upload/create_irrigationtable.py --pages=5 LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > irri_dethlingen_2013.sql
+python ../../../../scripts/update/import_climate_unicode.py  --standort=5506 Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > temps_leusewitz_2013.sql
+python ../../../../scripts/update/import_precipitation.py Klimadaten_Boehlendorf_2012.xls > prec_boehlendorf_2012.sql
+ python ../../../../scripts/update/import_precipitation.py --standortid=5506 Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > prec_leusewitz_2013.sql 
 
