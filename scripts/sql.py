@@ -105,6 +105,20 @@ def get_locations():
 def get_raws():
     return _get_table("SELECT * FROM raws", 'filename', 'data')
 
+def get_tables_with_column(*column_names):
+    c = the_db.cursor()
+    c.execute("""
+        SELECT DISTINCT TABLE_NAME FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE COLUMN_NAME IN (%s)
+        AND TABLE_SCHEMA='trost_prod'
+        """,
+        column_names)
+    data = c.fetchall()
+    if len(data) > 0:
+        return [ d[0] for d in data ]
+    return []
+
+
 def get_plants_of_file(raw_id):
     #q = """select distinct plants.aliquot from raws
     #join phenotype_raws on phenotype_raws.raw_id = raws.id

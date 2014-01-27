@@ -42,39 +42,42 @@ def main(argv):
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-c', '--create_table', action='store_true', default=False, dest='create_table')
     parser.add_argument('files', nargs='+')
+    parser.add_argument('--pages', default=1)
     args = parser.parse_args(argv)
     
     if args.create_table:
         sql.write_sql_header(DB_NAME, TABLE_NAME, TABLE)
     for fn in args.files:
-        data, headers  = p_xls.read_xls_data(fn)
+        for page in range(int(args.pages)): 
+            data, headers  = p_xls.read_xls_data(fn, page)
 
-        # find the right treatment columns: intersect two lists 
-        treatment_column_names = [item for item in headers if item in extra_column_names]
+            # find the right treatment columns: intersect two lists 
+            treatment_column_names = [item for item in headers if item in extra_column_names]
 
-        for column in treatment_column_names:
-            data_to_keep = []
-            for dobj in data:
-                if not hasattr(dobj, column): continue
-                amount = getattr(dobj, column)
-                if amount == None or amount == 0: continue
-                dobj.treatment_id = sql.get_value_id(column.replace('_', ' '))
+            for column in treatment_column_names:
+                data_to_keep = []
+                for dobj in data:
+                    if not hasattr(dobj, column): continue
+                    amount = getattr(dobj, column)
+                    if amount == None or amount == 0 or amount == '': continue
+                    dobj.treatment_id = sql.get_value_id(column.replace('_', ' '))
 
-                cur_date = datetime.strptime(dobj.Datum, '%Y-%m-%d')
-                if cur_date.year == 2011:
-                    setattr(dobj, 'Culture', 46150)
-                elif cur_date.year == 2012:
-                    setattr(dobj, 'Culture', 56877)
-                elif cur_date.year == 2013:
-                    setattr(dobj, 'Culture', 62328)
-                else:
-                    print "Date not in range: %s" % dobj.Datum
+                    if dobj.StandortID == 4537: # auto fill the culture information for Golm
+                        cur_date = datetime.strptime(dobj.Datum, '%Y-%m-%d')
+                        if cur_date.year == 2011:
+                            setattr(dobj, 'Culture', 46150)
+                        elif cur_date.year == 2012:
+                            setattr(dobj, 'Culture', 56877)
+                        elif cur_date.year == 2013:
+                            setattr(dobj, 'Culture', 62328)
+                        else:
+                            print "Date not in range: %s" % dobj.Datum
 
-                data_to_keep.append(dobj)
+                    data_to_keep.append(dobj)
 
-            columns_d_extra = columns_d.copy()
-            columns_d_extra[ column ] = (3, 'amount', float)
-            sql.write_sql_table(data_to_keep, columns_d_extra, table_name=TABLE_NAME, add_id=True)
+                columns_d_extra = columns_d.copy()
+                columns_d_extra[ column ] = (3, 'amount', float)
+                sql.write_sql_table(data_to_keep, columns_d_extra, table_name=TABLE_NAME, add_id=True)
 
     return None
 
