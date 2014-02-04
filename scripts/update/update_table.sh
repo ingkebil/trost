@@ -16,8 +16,10 @@ echo "Found old $table: $prev_plants_file"
 # generate the new plants
 echo -n "Generating new $table ..."
 echo "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;" > $plants_file
+echo "call memaybe('Automatic update of $table from LIMS');" >> $plants_file
 python $script_dir/update_$table.py >> $plants_file
 echo "/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;" >> $plants_file
+echo "call menot();" >> $plants_file
 echo "done: $plants_file"
 
 
