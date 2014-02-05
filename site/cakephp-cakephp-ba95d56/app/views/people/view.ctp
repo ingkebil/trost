@@ -11,6 +11,11 @@
 			<?php echo $person['Person']['name']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Lastname'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $person['Person']['username']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Location'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $this->Html->link($person['Location']['name'], array('controller' => 'locations', 'action' => 'view', $person['Location']['id'])); ?>

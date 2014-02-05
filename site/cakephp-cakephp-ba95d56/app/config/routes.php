@@ -52,8 +52,14 @@
 	Router::connect('/:lang/dis/abled', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/people/disabled', array('controller' => 'pages', 'action' => 'display', 'person_disabled'));
 	Router::connect('/:lang/people/disabled', array('controller' => 'pages', 'action' => 'display', 'person_disabled'));
+	Router::connect('/:lang/phenotypes/', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/:lang/phenotypes/index', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/:lang/phenotypes/upload', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/:lang/phenotypes/manualupload', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/phenotypes/edit/:id', array('controller' => 'pages', 'action' => 'display', 'disabled'));
 	Router::connect('/:lang/phenotypes/delete', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+	Router::connect('/:lang/temps/erature', array('controller' => 'pages', 'action' => 'display', 'disabled'));
+
 
     # connect the singular named gmd page
     Router::connect('/gmd', array('controller' => 'gmd'));
