@@ -69,6 +69,9 @@ class AppController extends Controller {
         if ($this->Auth->user('role') == 'admin') {
             return true;
         }
+        elseif ($this->action == 'edit' && $this->params['pass'][0] == $this->Auth->user('id')) {
+            return true; # enalbe the user to change his/her password
+        }
         elseif (in_array($this->action, array('edit', 'add', 'delete'))) {
             return false;
         }
