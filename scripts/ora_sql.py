@@ -13,6 +13,7 @@ aliquots_q = """
 SELECT aliquot_id, u_culture from aliquot_user where u_culture = :study_id
 """.strip()
 
+# TODO please review this piece of code .. is it stil necessary?
 aliquots_trost_q = """
 select au.aliquot_id, au.u_aliquot_link_a, au.u_organ, a.created_on, a.amount, au.u_i_amount, a.amount
 from lims.aliquot_user au, lims.aliquot a
@@ -55,9 +56,9 @@ pedigree_subspecies_q = """
 select plant_subspecies_id_single(a.aliquot_id) as subspecies_id, a.aliquot_id, a.name, au.u_culture from aliquot a, aliquot_user au, sample_user sau, study_user stu where a.aliquot_id = au.aliquot_id and sau.sample_id = a.sample_id and au.u_culture = stu.study_id and stu.u_project = 'TROST' and a.aliquot_id = :aliquot_id
 """.strip()
 
-all_aliquot_info_q = """
-SELECT * FROM aliquot WHERE aliquot_id = :aliquot_id
-""".strip()
+#all_aliquot_info_q = """
+#SELECT * FROM aliquot WHERE aliquot_id = :aliquot_id
+#""".strip()
 
 all_ext_aliquot_info_q = """
 select au.aliquot_id, au.u_aliquot_link_a, au.u_organ, a.created_on, a.amount, au.u_i_amount, a.amount from lims.aliquot_user au right join lims.aliquot a on au.aliquot_id = a.aliquot_id where a.aliquot_id = :aliquot_id
@@ -68,7 +69,7 @@ all_plant_info_q = """
 select a.aliquot_id, a.name as aliquot, au.u_culture as culture,
 a.sample_id as line, sau.u_subspecies_id as subspecies_id, a.created_on
 from aliquot a, aliquot_user au, study s, study_user su, sample_user sau
-where su.u_project = 'TROST'
+where su.u_project in ('TROST', 'TROST2')
 and au.u_culture = su.study_id
 and su.study_id = s.study_id
 and au.aliquot_id = a.aliquot_id
@@ -92,7 +93,7 @@ all_dead_plant_info_q = """
 select mapc.aliquot_id, a.name as aliquot, s.study_id as culture, 
 mapc.old_culture as study_id, a.sample_id as line, su.u_subspecies_id as subspecies_id, a.created_on
 from mpi_au_plant_c mapc, study s, aliquot a, sample_user su 
-where old_culture in (select study_id from study_user where u_project = 'TROST') 
+where old_culture in (select study_id from study_user where u_project in ('TROST', 'TROST2')) 
 and new_culture is null
 and s.study_id = mapc.old_culture
 and a.aliquot_id = mapc.aliquot_id
@@ -104,7 +105,7 @@ a.aliquot_id desc
 dead_plant_count_q = """
 select count(*)
 from mpi_au_plant_c mapc, study s, aliquot a, sample_user su 
-where old_culture in (select study_id from study_user where u_project = 'TROST') 
+where old_culture in (select study_id from study_user where u_project in ('TROST', 'TROST2')) 
 and new_culture is null
 and s.study_id = mapc.old_culture
 and a.aliquot_id = mapc.aliquot_id
@@ -118,7 +119,7 @@ from aliquot a
 join aliquot_user au on au.aliquot_id = a.aliquot_id
 join sample_user  su on su.sample_id  = a.sample_id
 where a.aliquot_type = 'MS Component'
-and su.u_project = 'TROST'
+and su.u_project in ('TROST', 'TROST2')
 """
 
 sample_count_q = """
@@ -176,7 +177,7 @@ aliquot_user component_user,
 aliquot Component,
 aliquot test_aliquot,
 sample_user trost_sample
-where trost_sample.u_project = 'TROST'
+where trost_sample.u_project in ('TROST', 'TROST2')
 and Component.aliquot_type = 'MS Component'
 and Component.sample_id = test_aliquot.sample_id
 and Component.aliquot_id = component_user.aliquot_id

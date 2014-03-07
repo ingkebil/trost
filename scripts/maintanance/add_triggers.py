@@ -3,7 +3,7 @@
 import sys
 import sql
 
-
+SCHEMA = 'trost_prod';
 LOG_TABLE_NAME = '__log'
 
 insert = """
@@ -48,7 +48,8 @@ delimiter //
 create trigger %(table)s_update_trigger after update on `%(table)s`
 for each row
 begin
-    if (OLD.invalid != NEW.invalid OR (OLD.invalid IS NULL AND NEW.invalid = 1)) THEN
+    set @has_column = (SELECT count(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '%(schema)s' AND TABLE_NAME = '%(table)s' AND COLUMN_NAME = 'invalid');
+    if (@has_column > 0 AND (OLD.invalid != NEW.invalid OR (OLD.invalid IS NULL AND NEW.invalid = 1))) THEN
         set @action = 'invalidated';
         if (NEW.invalid = 0 OR NEW.invalid IS NULL) THEN
             set @action = 'validated';
@@ -61,6 +62,9 @@ begin
             select id into @last_log_id from __log where `user` = user() and `table` = '%(table)s' and `action` = @action and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
             insert into __log_logmessages (log_id, msg_id) VALUES (@last_log_id, @last_msg_id);
         end if;
+    else
+        insert into %(log)s (`date`, `user`, `table`, `action`,affected_id)
+        values (now(), user(), '%(table)s', 'updated', OLD.id);
     end if;
 end //
 delimiter ;
@@ -109,11 +113,12 @@ def main(argv):
         print insert % { 'table': table, 'log': LOG_TABLE_NAME }
         print delete % { 'table': table, 'log': LOG_TABLE_NAME }
 
-    # get all tables with 'invalid' column name and add an update trigger to those
+    # get all tables with 'invalid' column name and add an update trigger to those.
+    # As we update the plants, aliquots, samples and connecting tables from LIMS, we need to add the right triggers as well.
     invalid_tables = sql.get_tables_with_column('invalid')
     for table in invalid_tables:
         if table in blacklist: continue
-        print update % { 'table': table, 'log': LOG_TABLE_NAME }
+        print update % { 'table': table, 'log': LOG_TABLE_NAME, 'schema': SCHEMA }
 
     print log_proc;
     

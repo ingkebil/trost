@@ -38,7 +38,7 @@ def main(argv):
             sample['PLANT_ID'], # connected to what plant?
         )
 
-        # added on 13/10/02 on Heike's suggestion; needs to be removed when the errr is fixed in LIMS
-        print "DELETE FROM `sample_plants` WHERE `sample_id` = '863742' AND `plant_id` = '1021550';"
+    # added on 13/10/02 on Heike's suggestion; needs to be removed when the errr is fixed in LIMS
+    print "DELETE FROM `sample_plants` WHERE `sample_id` = '863742' AND `plant_id` = '1021550';"
 
 if __name__ == '__main__': main(sys.argv[1:])
