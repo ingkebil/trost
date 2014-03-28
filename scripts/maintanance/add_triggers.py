@@ -42,7 +42,7 @@ end //
 delimiter ;
 """
 
-update = """
+update_invalid = """
 drop trigger if exists %(table)s_update_trigger;
 delimiter //
 create trigger %(table)s_update_trigger after update on `%(table)s`
@@ -66,6 +66,18 @@ begin
         insert into %(log)s (`date`, `user`, `table`, `action`,affected_id)
         values (now(), user(), '%(table)s', 'updated', OLD.id);
     end if;
+end //
+delimiter ;
+"""
+
+update_id = """
+drop trigger if exists %(table)s_update_trigger;
+delimiter //
+create trigger %(table)s_update_trigger after update on `%(table)s`
+for each row
+begin
+    insert into %(log)s (`date`, `user`, `table`, `action`,affected_id)
+    values (now(), user(), '%(table)s', 'updated', OLD.id);
 end //
 delimiter ;
 """
@@ -107,18 +119,23 @@ def main(argv):
     # get all tables from the DB that contain an 'id' column, as we are going to monitor that.
     tables = sql.get_tables_with_column('id')
 
-    # add two triggers to each table
+    # add insert/delete triggers to each table
     for table in tables:
         if table in blacklist: continue
         print insert % { 'table': table, 'log': LOG_TABLE_NAME }
         print delete % { 'table': table, 'log': LOG_TABLE_NAME }
 
-    # get all tables with 'invalid' column name and add an update trigger to those.
-    # As we update the plants, aliquots, samples and connecting tables from LIMS, we need to add the right triggers as well.
-    invalid_tables = sql.get_tables_with_column('invalid')
-    for table in invalid_tables:
+    # add the update trigger for tables with an invalid column
+    tables_invalid = sql.get_tables_with_column('invalid')
+    for table in tables_invalid:
         if table in blacklist: continue
-        print update % { 'table': table, 'log': LOG_TABLE_NAME, 'schema': SCHEMA }
+        print update_invalid % { 'table': table, 'log': LOG_TABLE_NAME, 'schema': SCHEMA }
+
+    # add the updte trigger for tables without an invalid column
+    tables_id = list(set(tables) - set(tables_invalid))
+    for table in tables_id:
+        if table in blacklist: continue
+        print update_id % { 'table': table, 'log': LOG_TABLE_NAME }
 
     print log_proc;
     
