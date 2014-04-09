@@ -35,7 +35,7 @@ begin
 
     select id into @last_msg_id from __logmessages where active = 1 and `user` = USER() order by `date` DESC limit 1;
     if @last_msg_id IS NOT NULL then
-        select id into @last_log_id from __log where `user` = user() and `table` = '%(table)s' and `action` = 'delete' and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
+        select id into @last_log_id from %(log)s where `user` = user() and `table` = '%(table)s' and `action` = 'delete' and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
         insert into __log_logmessages (log_id, msg_id) VALUES (@last_log_id, @last_msg_id);
     end if;
 end //
@@ -59,12 +59,19 @@ begin
 
         select id into @last_msg_id from __logmessages where active = 1 and `user` = USER() order by `date` DESC limit 1;
         if @last_msg_id IS NOT NULL then
-            select id into @last_log_id from __log where `user` = user() and `table` = '%(table)s' and `action` = @action and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
+            select id into @last_log_id from %(log)s where `user` = user() and `table` = '%(table)s' and `action` = @action and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
             insert into __log_logmessages (log_id, msg_id) VALUES (@last_log_id, @last_msg_id);
         end if;
     else
+        set @action = 'updated';
         insert into %(log)s (`date`, `user`, `table`, `action`,affected_id)
-        values (now(), user(), '%(table)s', 'updated', OLD.id);
+        values (now(), user(), '%(table)s', @action, OLD.id);
+
+        select id into @last_msg_id from __logmessages where active = 1 and `user` = USER() order by `date` DESC limit 1;
+        if @last_msg_id IS NOT NULL then
+            select id into @last_log_id from %(log)s where `user` = user() and `table` = '%(table)s' and `action` = @action and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
+            insert into __log_logmessages (log_id, msg_id) VALUES (@last_log_id, @last_msg_id);
+        end if;
     end if;
 end //
 delimiter ;
@@ -76,8 +83,15 @@ delimiter //
 create trigger %(table)s_update_trigger after update on `%(table)s`
 for each row
 begin
+    set @action = 'updated';
     insert into %(log)s (`date`, `user`, `table`, `action`,affected_id)
-    values (now(), user(), '%(table)s', 'updated', OLD.id);
+    values (now(), user(), '%(table)s', @action, OLD.id);
+
+    select id into @last_msg_id from __logmessages where active = 1 and `user` = USER() order by `date` DESC limit 1;
+    if @last_msg_id IS NOT NULL then
+        select id into @last_log_id from %(log)s where `user` = user() and `table` = '%(table)s' and `action` = @action and affected_id = OLD.id ORDER BY `date` DESC LIMIT 1;
+        insert into __log_logmessages (log_id, msg_id) VALUES (@last_log_id, @last_msg_id);
+    end if;
 end //
 delimiter ;
 """

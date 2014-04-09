@@ -30,6 +30,9 @@ update() {
     echo -n "Updating $table ..."
     mysql -u billiau -ppassword -h $server --default-character-set=utf8 $database < $plants_file
     echo "done."
+    echo -n "Zipping previous archive $prev_plants_file ..."
+    pigz -9 $prev_plants_file
+    echo "done."
 }
 
 
