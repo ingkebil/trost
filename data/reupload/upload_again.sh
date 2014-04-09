@@ -186,6 +186,8 @@ python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/554
 python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5543\ Petersgroden/EingabeKlimadaten_Petersgroden.xls > temperatures_petersgroden.sql
 python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > precipidation_windeby.sql
 python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5545\ Windeby/EingabeKlimadaten_Windeby.xls > temperatures_windeby.sql
+python ../../../../scripts/update/import_precipitation.py   $data_dir/140122/5546\ Buetow/EingabeKlimadaten_Bütow.xls > precipitation_buetow.sql
+python ../../../../scripts/update/import_climate_unicode.py $data_dir/140122/5546\ Buetow/EingabeKlimadaten_Bütow.xls > temperatures_buetow.sql
 python ../../../../scripts/upload/create_irrigationtable.py EingabeKlimadaten_Dethlingen_columns.xls > irrigation_dethlingen.sql
 
 python ../../../../scripts/update/import_precipitation.py EingabeKlimadaten_Kaltenberg_2012.xls > precipitation_akltenberg_2012.sql
@@ -193,7 +195,7 @@ python ../../../../scripts/update/import_climate_unicode.py EingabeKlimadaten_Ka
 python ../../../../scripts/update/import_climate_unicode.py EingabeKlimadaten_5543_18_38KW_2012_updated_columns.xls > temp_petersgroden_2012.sql
 python ../../../../scripts/update/import_precipitation.py EingabeKlimadaten_5543_18_38KW_2012_updated_columns.xls >prec_ptersgroden_2012.sql
 python ../../../../scripts/update/import_precipitation.py  Klimadaten\ 2012\ Schrobenhausen_updated_columns.xls > prec_schorbenhausen_2012.sql
-python ../../../../scripts/update/import_climate_unicode.py Klimadaten\ 2012\ Schrobenhausen_updated_columns.xls > temps_schrobehausen_2012.sql
+python ../../../../scripts/update/import_precipitation.py  Klimadaten\ 2012\ Schrobenhausen_updated_columns.xls > temps_schorbenhausen_2012.sql
 python ../../../../scripts/update/import_climate_unicode.py --standortid=5506 Klimadaten_leusewitz_2012.xls > temps_leusewits_2012.sql
 python ../../../../scripts/update/import_precipitation.py --standortid=5506 Klimadaten_leusewitz_2012.xls > prec_leusewitz_2012.sql
 python ../../../../scripts/upload/create_irrigationtable.py --pages=5 LWK\ NDS\ -\ TROST\ -\ Klimadaten\ 2012.xls > irri_dethlingen_2012.sql
@@ -206,5 +208,30 @@ python ../../../../scripts/update/import_precipitation.py --pages=5 LWK\ NDS\ -\
 python ../../../../scripts/upload/create_irrigationtable.py --pages=5 LWK\ NDS\ -\ TROST\ Klimadaten\ 2013.xls > irri_dethlingen_2013.sql
 python ../../../../scripts/update/import_climate_unicode.py  --standort=5506 Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > temps_leusewitz_2013.sql
 python ../../../../scripts/update/import_precipitation.py Klimadaten_Boehlendorf_2012.xls > prec_boehlendorf_2012.sql
- python ../../../../scripts/update/import_precipitation.py --standortid=5506 Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > prec_leusewitz_2013.sql 
+python ../../../../scripts/update/import_precipitation.py --standortid=5506 Klimadaten_Erntedaten_JKI-RS_vollstaendig.xls > prec_leusewitz_2013.sql 
+
+# inserted missing temperatures from the temps table
+"insert into temperatures (datum, location_id, tmin, tmax) select temps.datum, temps.location_id, temps.tmin, temps.tmax from temps
+left join temperatures t on (t.datum = temps.datum and t.location_id = temps.location_id)
+where t.id IS NULL
+and (temps.tmin IS NOT NULL OR temps.tmax IS NOT NULL)
+and (temps.invalid != 1 OR temps.invalid IS NULL)"
+
+# inserted missing irrigation from the temps table
+"insert into irrigation (datum, location_id, amount, treatment_id, culture_id)
+select temps.datum, temps.location_id, temps.irrigation, 171, 62328 from temps
+    left join irrigation t on (t.datum = temps.datum and t.location_id = temps.location_id)
+    where t.id IS NULL
+    and temps.irrigation IS NOT NULL
+    and temps.irrigation != 0
+    and (temps.invalid != 1 OR temps.invalid IS NULL)"
+
+# inserted the missing precipitation from the temps table
+"insert into precipitation (datum, location_id, amount)
+select temps.datum, temps.location_id, temps.precipitation from temps
+    left join precipitation t on (t.datum = temps.datum and t.location_id = temps.location_id)
+    where t.id IS NULL
+    and temps.precipitation IS NOT NULL
+    and temps.precipitation != 0
+    and (temps.invalid != 1 OR temps.invalid IS NULL)"
 
