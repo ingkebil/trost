@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
 import sys
+import sql
+import process_xls
 
 # the columns of all the qpcr table
-c_sample_aliquot_pool = {
+qpcr_sample_pool = {
     'sample_id' : (0, 'sample_id', int),
     'aliquot_id' : (1, 'aliquot_id', int),
     'pool_id' : (2, 'pool_id', int),
 }
 
-c_pools = {
-    'id' : (0, 'id', int),
+qpcr_pool_info = {
+    'pool_id' : (0, 'id', int),
     'measurement_id' : (0, 'measurement_id', int),
     '96well_plate_id' : (1, '96well_plate_id', int),
     '96well_plate_well' : (2, '96well_plate_well', int),
@@ -28,7 +30,7 @@ c_pools = {
     'measurement_time' : (14, 'measurement_time', str),
 }
 
-c_primer_96well_plates = {
+qpcr_primer_96well_plate = {
     '96well_primer_plate_well' : (0, '96well_primer_plate_well', int),
     '96well_primer_plate_row' : (1, '96well_primer_plate_row', str),
     '96well_primer_plate_column' : (2, '96well_primer_plate_column', int),
@@ -36,7 +38,7 @@ c_primer_96well_plates = {
     'primer_name' : (4, 'primer_name', int),
 }
 
-c_primer_384well_plates = {
+qpcr_primer_384well_plate = {
     '384well_primer_plate_well' : (0, '384well_primer_plate_well', int),
     '384well_primer_plate_row' : (1, '384well_primer_plate_row', str),
     '384well_primer_plate_column' : (2, '384well_primer_plate_column', int),
@@ -44,7 +46,7 @@ c_primer_384well_plates = {
     'primer_name' : (4, 'primer_name', str),
 }
 
-c_primers = {
+qpcr_primer_info = {
     'primer_name' : (0, 'primer_name', str),
     'order_date' : (1, 'order_date', str),
     'fw_primer_name' : (2, 'fw_primer_name', str),
@@ -72,7 +74,7 @@ c_primers = {
     'd_5ptoend' : (24, 'd_5ptoend', int),
 }
 
-c_measurements = {
+qpcr_measurements = {
     '385well_plate_id' : (0, '385well_plate_id', int),
     '385well_plate_well' : (1, '385well_plate_well', int),
     '385well_plate_row' : (2, '385well_plate_row', str),
@@ -83,17 +85,38 @@ c_measurements = {
     'tm_value' : (7, 'tm_value', float),
 }
 
-exell_pages = [ 'qpcr_sample_pool', 'qpcr_pool_info', 'qpcr_384well_plate_sector', 'qpcr_primer_info', 'qpcr_primer_96well_plate', 'qpcr_primer_384well_plate', 'qpcr_measurements' ]
+excel_pages = [ 'qpcr_sample_pool', 'qpcr_pool_info', 'qpcr_384well_plate_sector', 'qpcr_primer_info', 'qpcr_primer_96well_plate', 'qpcr_primer_384well_plate', 'qpcr_measurements' ]
+tablename_of = {
+        'qpcr_sample_pool': 'qpcr_sample_aliquot_pools',
+        'qpcr_pool_info': 'qpcr_pools', # TODO: None, # special case, we need to merge qpcr_384well_plate_sector with this one
+        'qpcr_384well_plate_sector': None,
+        'qpcr_primer_info': 'qpcr_primers',
+        'qpcr_primer_96well_plate': 'qpcr_primer_96well_plates',
+        'qpcr_primer_384well_plate': 'qpcr_primer_384well_plates',
+        'qpcr_measurements': None
+}
 
 def main(args):
     fn = args[0] # get the filename
 
-    # fill tables from the exell table
-    for page in len(exell_pages):
-        data, headers = p_xls.read_xls_data(fn, page)
+    # fill tables from the excel table
+    for page_nr in xrange(len(excel_pages)):
+        data, headers = process_xls.read_xls_data(fn, page_nr)
+        page_name = excel_pages[ page_nr ]
+        table_name = tablename_of[ page_name ]
 
-    pass
+        if (table_name is not None): # skip the pages we don't need
+            sql.write_sql_table(data,
+                globals()[page_name], # get the array with the column based on the page name
+                table_name=table_name)
+        if table_name == 'qpcr_pools':
+            print dir(data[0])
 
-if __name__ == '__main__': main(sys.args[1:])
+        # TODO:special case: calculte the positions of the 384well_plate wells to connect them to the 96well_plates
+        sys.stdin.read(1)
 
-# Only one argument expected: the filename of the exell document
+
+
+if __name__ == '__main__': main(sys.argv[1:])
+
+# Only one argument expected: the filename of the excel document
