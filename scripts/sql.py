@@ -337,6 +337,8 @@ def prepare_sql_table(data, columns_d, add_id=False):
 def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout, insert=True):
     for row in rows:
         try:       
+            if table_name == 'qpcr_primer_384well_plates':
+                print row[0][3]
             formatted = format_entry([x[2](x[3]) for x in row])
             entry = '(%s)' % ','.join(map(str, formatted))
             if insert:
@@ -344,6 +346,8 @@ def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout, insert=Tr
             else:
                 out.write(REPLACE_STR % (table_name, entry))
         except:
+            import traceback
+            traceback.print_exc()
             sys.stderr.write('EXC: %s\n' % row)
             sys.exit(1)
     pass

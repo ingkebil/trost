@@ -30,7 +30,7 @@ DEFAULT_TREATMENT_ALIQUOT_INDEX = 0
 
 
 #
-def read_xls_data(fn, sheet_index=0):
+def read_xls_data(fn, sheet_index=0, include_time=False):
     data = []
     book = xlrd.open_workbook(fn)
     sheet = book.sheet_by_index(sheet_index)    
@@ -43,7 +43,10 @@ def read_xls_data(fn, sheet_index=0):
                 # print 'DATE', cell.value
                 # print xlrd.xldate_as_tuple(cell.value, book.datemode)
                 cell_date = xlrd.xldate_as_tuple(cell.value, book.datemode)
-                row.append('%4i-%02i-%02i' % cell_date[:3])
+                if not include_time:
+                    row.append('%4i-%02i-%02i ' % cell_date[:3])
+                else:
+                    row.append('%4i-%02i-%02i %02i:%02i:%02i' % (cell_date[:3] + cell_date[-3:]))
             else:
                 row.append(CAST_FUNC[cell.ctype](cell.value))
         # row = [CAST_FUNC[cell.ctype](cell.value) for cell in sheet.row(i)]
