@@ -337,8 +337,6 @@ def prepare_sql_table(data, columns_d, add_id=False):
 def write_standard_sql_table(rows, table_name='DUMMY', out=sys.stdout, insert=True):
     for row in rows:
         try:       
-            if table_name == 'qpcr_primer_384well_plates':
-                print row[0][3]
             formatted = format_entry([x[2](x[3]) for x in row])
             entry = '(%s)' % ','.join(map(str, formatted))
             if insert:

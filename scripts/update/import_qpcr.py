@@ -121,9 +121,6 @@ def main(args):
                 table_name=table_name)
 
         # TODO:special case: calculte the positions of the 384well_plate wells to connect them to the 96well_plates
-        sys.stdin.read(1)
-
-
 
 if __name__ == '__main__': main(sys.argv[1:])
 
