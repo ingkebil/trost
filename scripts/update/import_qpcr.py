@@ -47,7 +47,7 @@ qpcr_primer_384well_plate = {
 }
 
 qpcr_primer_info = {
-    'primer_name' : (0, 'primer_name', str),
+    'primer_name' : (0, 'primer_name', lambda x: str(x) if isinstance(x, str) else str(int(x))),
     'order_date' : (1, 'order_date', str),
     'fw_primer_name' : (2, 'fw_primer_name', str),
     'fw_primer_sequence' : (3, 'fw_primer_sequence', str),
