@@ -25,7 +25,7 @@ qpcr_pool_info = {
     '384well_plate_row' : (9, '384well_plate_row', str),
     '384well_plate_column' : (10, '384well_plate_column', int),
     '384well_plate_position' : (11, '384well_plate_position', str),
-    'machine_nr' : (12, 'machine_nr', int),
+    'machine_number' : (12, 'machine_nr', int),
     'measurement_date' : (13, 'measurement_date', str),
     'measurement_time' : (14, 'measurement_time', str),
 }
@@ -100,6 +100,7 @@ def main(args):
     fn = args[0] # get the filename
 
     # fill tables from the excel table
+    print "set foreign_key_checks=0;"
     for page_nr in xrange(len(excel_pages)):
         page_name = excel_pages[ page_nr ]
         table_name = tablename_of[ page_name ]
@@ -120,7 +121,8 @@ def main(args):
                 globals()[page_name], # get the array with the column based on the page name
                 table_name=table_name)
 
-        # TODO:special case: calculte the positions of the 384well_plate wells to connect them to the 96well_plates
+    print "set foreign_key_checks=1;"
+    # TODO:special case: calculte the positions of the 384well_plate wells to connect them to the 96well_plates
 
 if __name__ == '__main__': main(sys.argv[1:])
 
